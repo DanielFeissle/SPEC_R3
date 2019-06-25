@@ -5,6 +5,41 @@ using UnityEngine;
 public class scenes : MonoBehaviour {
 
     public bool packageLoad = false;
+    System.Random blarg = new System.Random();
+    System.Random randomDirection = new System.Random();
+
+    void  interiorShip(float moveX, float moveY, float width4)
+    {
+
+        Sprite pauseSprite = Resources.Load<Sprite>("interhull_faded(256x64)");
+
+
+        GameObject dershi = Instantiate(Resources.Load("dertypShips\\interhullA")) as GameObject;
+        dershi.name = "interiorWall(" + moveX + "," + moveY + ")";
+        dershi.transform.position = new Vector2((moveX), (moveY - width4/2));
+        Debug.Log("Wiedth is " + width4);
+
+
+
+
+        int directionChoice = randomDirection.Next(0, 37);
+        Debug.Log("SystemRand degreeCnt" + directionChoice);
+        int rotCnt = (blarg.Next(0, 36));
+        Debug.Log("Rand degreeCnt" + rotCnt);
+        float degreeCnt = 0;
+        for (int i = 0; i < directionChoice; i++)
+        {
+            degreeCnt = degreeCnt + 10.0f;
+        }
+        float yRotation = degreeCnt;
+        //   Renderer[] renderers = GetComponentsInChildren<Renderer>();
+       
+        Renderer renderers = dershi.GetComponent<Renderer>();
+        //  gameObject.GetComponent<Renderer>().material.color = Color.green;
+
+        dershi.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, yRotation);
+
+    }
 
     // Use this for initialization
     void Start () {
@@ -90,6 +125,12 @@ public class scenes : MonoBehaviour {
             shipTest.transform.position = new Vector2(moveX, moveY);
             posXarr[x] = moveX;
             posYarr[stupY] = moveY;
+
+            var renderer4 = shipTest.GetComponent<Renderer>();
+            float width4 = renderer4.bounds.size.x;
+            interiorShip(moveX, moveY, width4);
+
+
             //we decide if this is the end (left or right)
             //  if (x==0)
             //*  {
@@ -165,6 +206,10 @@ public class scenes : MonoBehaviour {
                 GameObject shipTest2 = Instantiate(Resources.Load("dertypShips\\genericBack")) as GameObject;
                 shipTest2.name = "genericBack(" + stupX + "," + stupY + ")";
                 shipTest2.transform.position = new Vector2(moveX, moveY);
+
+             //we only need the size of one box, since all the shapes are uniform It won't matter as much
+                interiorShip(moveX, moveY, width4);
+
                 posXarr[x] = moveX;
                 posYarr[stupY] = moveY;
                 if (vertl == true)
@@ -326,9 +371,28 @@ public class scenes : MonoBehaviour {
          //  }
         }
 
+
+        //6-17-19 we want to add junk  
+        //  ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+        int herder=UnityEngine.Random.Range(10, 20); //we get the count of how many random objects we want to put in
+        
+        for (int i=0; i< herder;i++)
+        {
+            //zero always exists , it is where the package is
+            float derptyX, derptyY;
+            derptyX= UnityEngine.Random.Range(posXarr[0]-1.75f, posXarr[shipX-1] + 1.75f);
+            derptyY = UnityEngine.Random.Range(posYarr[0]-1.75f, posYarr[shipY-1] + 1.75f);
+
+            GameObject dershi = Instantiate(Resources.Load("shipDebris\\nucWaste")) as GameObject;
+            dershi.name = "nucWaste(" + derptyX + "," + derptyY + ")";
+            dershi.transform.position = new Vector2((derptyX), (derptyY - .35f));
+
+            
+        }
+        Debug.Log("herder value" + herder);
     }
 
-    // Update is called once per frame
+    // Update is called once per fram
     void Update () {
 		
 	}
