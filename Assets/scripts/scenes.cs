@@ -15,6 +15,8 @@ public class scenes : MonoBehaviour {
 
 
         GameObject dershi = Instantiate(Resources.Load("dertypShips\\interhullA")) as GameObject;
+        objResourceNameHold fudg = dershi.AddComponent<objResourceNameHold>(); //creates a holding script that contains the orignal resource name
+        fudg.objName = "dertypShips\\interhullA";
         dershi.name = "interiorWall(" + moveX + "," + moveY + ")";
         dershi.transform.position = new Vector2((moveX), (moveY - width4/2));
         Debug.Log("Wiedth is " + width4);
@@ -121,7 +123,9 @@ public class scenes : MonoBehaviour {
             }
             stupY = 0;
             GameObject shipTest = Instantiate(Resources.Load("dertypShips\\genericBack")) as GameObject;
-             shipTest.name = "genericBack(" + stupX + "," + stupY +")";
+            objResourceNameHold fudg= shipTest.AddComponent<objResourceNameHold>(); //creates a holding script that contains the orignal resource name
+            fudg.objName = "dertypShips\\genericBack";
+            shipTest.name = "genericBack(" + stupX + "," + stupY +")";
             shipTest.transform.position = new Vector2(moveX, moveY);
             posXarr[x] = moveX;
             posYarr[stupY] = moveY;
@@ -137,6 +141,8 @@ public class scenes : MonoBehaviour {
             if (vertl==true)
             {
                 GameObject fud2 = Instantiate(Resources.Load("dertypShips\\shipHull")) as GameObject;
+                 fudg = fud2.AddComponent<objResourceNameHold>(); //creates a holding script that contains the orignal resource name
+                fudg.objName = "dertypShips\\shipHull";
                 fud2.name = "shipHull(" + stupX + "," + stupY + ")";
                 var renderer2 = shipTest.GetComponent<Renderer>();
                 float width2 = renderer2.bounds.size.x;
