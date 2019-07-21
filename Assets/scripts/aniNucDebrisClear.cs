@@ -32,4 +32,45 @@ public class aniNucDebrisClear : MonoBehaviour {
         }
 
     }
+
+   
+    private void OnTriggerEnter2D(Collider2D collision) //spawn the box enemy and scramble effects (random perhaps?)
+    {
+        if (GameObject.Find(collision.gameObject.name).CompareTag("Player")) //split it with water effects
+        {
+            GameObject sweedy = Instantiate(Resources.Load("sweedishBurp")) as GameObject;
+            sweedy.name = "sweedishBurp";
+            //randomly spawn in using the corner systems
+            sweedy.transform.position = GameObject.Find("WestTrigger").transform.position; //+ collision.transform.right * 2;
+
+
+            //Get the Screen positions of the object
+            Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(sweedy.transform.position);
+
+            //Get the Screen position of the mouse
+            //  Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            Vector2 mouseOnScreen = Camera.main.WorldToViewportPoint(GameObject.Find("PlayerShip").transform.position);
+
+            //Get the angle between the points
+            float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+
+            //Ta Daaa
+            sweedy.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+
+
+
+           // sweedy.transform.localScale = collision.transform.right + collision.transform.right * 2;
+        //    sweedy.transform.localScale = collision.transform.up + collision.transform.up * 2; //load in the hazardous/collision waste 
+        }
+                                                                                     
+        
+      
+    }
+
+
+    float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+    }
+
 }

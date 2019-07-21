@@ -294,13 +294,19 @@
   <ItemGroup>
     <Compile Include="Assets\ex.cs" />
     <Compile Include="Assets\scripts\aniNucDebrisClear.cs" />
+    <Compile Include="Assets\scripts\enemyBataboy.cs" />
+    <Compile Include="Assets\scripts\enemyBoxGas.cs" />
+    <Compile Include="Assets\scripts\enemyDuderia.cs" />
+    <Compile Include="Assets\scripts\enemyUSSPotatoe.cs" />
     <Compile Include="Assets\scripts\Exp2017.cs" />
     <Compile Include="Assets\scripts\HullMove.cs" />
     <Compile Include="Assets\scripts\innerHullMover.cs" />
     <Compile Include="Assets\scripts\MasterController.cs" />
     <Compile Include="Assets\scripts\masterShipEnter.cs" />
+    <Compile Include="Assets\scripts\mastObjMover.cs" />
     <Compile Include="Assets\scripts\objectMove.cs" />
     <Compile Include="Assets\scripts\objResourceNameHold.cs" />
+    <Compile Include="Assets\scripts\Plain_deleteObjectAfterAni.cs" />
     <Compile Include="Assets\scripts\PlayerBulletMove.cs" />
     <Compile Include="Assets\scripts\playerController.cs" />
     <Compile Include="Assets\scripts\scenes.cs" />

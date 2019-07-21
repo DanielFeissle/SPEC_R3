@@ -18,6 +18,7 @@ TagManager:
   - ShipJunk
   - ShipLiquidWaste
   - CaseProtector
+  - Enemy
   layers:
   - Default
   - TransparentFX
