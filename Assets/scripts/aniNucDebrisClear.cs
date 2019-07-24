@@ -40,8 +40,26 @@ public class aniNucDebrisClear : MonoBehaviour {
         {
             GameObject sweedy = Instantiate(Resources.Load("sweedishBurp")) as GameObject;
             sweedy.name = "sweedishBurp";
+            System.Random blarg = new System.Random();
+            int uh = blarg.Next(100);
             //randomly spawn in using the corner systems
-            sweedy.transform.position = GameObject.Find("WestTrigger").transform.position; //+ collision.transform.right * 2;
+         if (uh<25)
+            {
+                sweedy.transform.position = GameObject.Find("WestTrigger").transform.position; //+ collision.transform.right * 2;
+            }
+         else if (uh<50)
+            {
+                sweedy.transform.position = GameObject.Find("NorthTrigger").transform.position; //+ collision.transform.right * 2;
+            }
+         else if (uh<75)
+            {
+                sweedy.transform.position = GameObject.Find("SouthTrigger").transform.position; //+ collision.transform.right * 2;
+            }
+         else
+            {
+                sweedy.transform.position = GameObject.Find("EastTrigger").transform.position; //+ collision.transform.right * 2;
+            }
+           
 
 
             //Get the Screen positions of the object

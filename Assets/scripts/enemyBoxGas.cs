@@ -95,17 +95,6 @@ public class enemyBoxGas : MonoBehaviour {
 
         }
 
-
-
-
-
-
-
-
-
-
-      
-       
     }
 
     //this is default method for screen wrapping as of 7-16-19

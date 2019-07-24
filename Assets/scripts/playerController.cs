@@ -21,6 +21,8 @@ public class playerController : MonoBehaviour {
     Vector3 bla = new Vector3(1,1,1);
     Vector3 bla2 = new Vector3(1,1,1);
     bool insideShip = false;
+
+    Vector3 blastLoc;
     // Use this for initialization
     void Start () {
         DontDestroyOnLoad(gameObject.transform);
@@ -32,7 +34,19 @@ public class playerController : MonoBehaviour {
         Animator shipAni9334 = shipan.GetComponent<Animator>();
         shipAni9334.Rebind();
         shipAni9334.enabled = false;
-      //  shipAni9334.Play("doorAniBlast");
+        //  shipAni9334.Play("doorAniBlast");
+
+
+
+        GameObject blast = GameObject.Find("shipBlast");
+        Transform ff = blast.GetComponent<Transform>();
+        blastLoc = ff.transform.position;
+
+     
+
+
+        ff.GetComponent<SpriteRenderer>().enabled = false;
+        ff.GetComponent<AudioSource>().enabled = false;
 
     }
 	
@@ -44,6 +58,11 @@ public class playerController : MonoBehaviour {
     {
         transform.position = new Vector2(7.6f,-11.2f);
         rb.velocity = Vector3.zero;
+        GameObject blast = GameObject.Find("shipBlast");
+        Transform ff = blast.GetComponent<Transform>();
+        blastLoc = ff.transform.position;
+        ff.GetComponent<SpriteRenderer>().enabled = false;
+        ff.GetComponent<AudioSource>().enabled = false;
     }
     float fartX = 0.0f;
     float fartY = 0.0f;
@@ -231,11 +250,22 @@ public class playerController : MonoBehaviour {
 
                     //   Debug.Log("Write "+transform.position);
 
+                    GameObject blast = GameObject.Find("shipBlast");
+                    Transform ff = blast.GetComponent<Transform>();
+                  
 
-
+                    var renderer2 = this.GetComponent<Renderer>();
+                    float heighth = renderer2.bounds.size.y;
+                    //   ExpDust.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+                    //////////       ff.transform.position = new Vector3(this.transform.position.x,heighth,0.0f);
+                    // ff.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, this.transform.rotation.z));
+                    ///////////    ff.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, ((this.transform.rotation.z)*100) - 90.0f));
                     //rb.AddForce((movement * speed) * 2);
-
+                    //     ff.transform.position = blastLoc;
                     //  transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
+
+                    ff.GetComponent<SpriteRenderer>().enabled = true;
+                    ff.GetComponent<AudioSource>().enabled = true;
                 }
                 else if (Input.GetAxis("Vertical") < 0)
                 {
@@ -245,6 +275,18 @@ public class playerController : MonoBehaviour {
                     rb.AddForce(-transform.up * 2);
                     //  Debug.Log(totspeed);
 
+                }
+                else
+                {
+                    //no keypress
+
+                    GameObject blast = GameObject.Find("shipBlast");
+                    Transform ff = blast.GetComponent<Transform>();
+                    
+                    ff.GetComponent<SpriteRenderer>().enabled = false;
+                    ff.GetComponent<AudioSource>().enabled = false;
+
+                    //  ff.transform.position = new Vector2(100,100);
                 }
 
                 //     rb.AddForce((this.transform.TransformVector(Vector3.forward) * speed) *2);
