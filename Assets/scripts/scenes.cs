@@ -121,6 +121,11 @@ public class scenes : MonoBehaviour {
             {
                 ShipRight = moveX;
             }
+            if (x == 0)
+            {
+                ShipLeft = moveX;
+                //     shipTop = moveY;
+            }
             stupY = 0;
             GameObject shipTest = Instantiate(Resources.Load("dertypShips\\genericBack")) as GameObject;
             objResourceNameHold fudg= shipTest.AddComponent<objResourceNameHold>(); //creates a holding script that contains the orignal resource name
@@ -146,8 +151,14 @@ public class scenes : MonoBehaviour {
                 fud2.name = "shipHull(" + stupX + "," + stupY + ")";
                 var renderer2 = shipTest.GetComponent<Renderer>();
                 float width2 = renderer2.bounds.size.x;
+                if (x == 0)
+                {
+                    ShipLeft = moveX;
+                    //     shipTop = moveY;
+                }
                 if (x == shipX - 1)
                 {
+                    ShipRight = moveX;
                     fud2.transform.position = new Vector2((moveX + width2 / 2), moveY);
                     if (shipX==1)//only one column
                     {
@@ -172,6 +183,7 @@ public class scenes : MonoBehaviour {
                 float width2 = renderer2.bounds.size.y;
                 if (stupY == shipY - 1)
                 {
+                    shipTop = moveY;
                     fud2.transform.position = new Vector2((moveX), (moveY + width2 / 2));
                     if (shipY == 1)//only one column
                     {
@@ -190,7 +202,18 @@ public class scenes : MonoBehaviour {
             }
             if (x == shipX - 1)
             {
+                ShipRight = moveX;
            //     shipTop = moveY;
+            }
+            if (x == 0)
+            {
+                ShipLeft = moveX;
+                //     shipTop = moveY;
+            }
+
+            if (stupY==0)
+            {
+                shipBottom = moveY;
             }
 
             Debug.Log("shipY" + shipY);
@@ -224,9 +247,15 @@ public class scenes : MonoBehaviour {
                     fud.name = "shipHull(" + stupX + "," + stupY + ")";
                     var renderer = shipTest2.GetComponent<Renderer>();
                     float width = renderer.bounds.size.x;
+                    if (x == 0)
+                    {
+                        ShipLeft = moveX;
+                        //     shipTop = moveY;
+                    }
                     //we decide if this is the end (left or right)
                     if (x == shipX - 1)
                     {
+                        ShipRight = moveX;
                         fud.transform.position = new Vector2((moveX + width / 2), (moveY));
                         if (shipX == 1)//only one column
                         {
@@ -255,11 +284,14 @@ public class scenes : MonoBehaviour {
                     //we decide if this is the end (left or right)
                     if (y==0)
                     {
+                      
+                            shipBottom = moveY;
+                        
                         dumbnut2 = fud.transform.position.y; //bottom
                     }
                     if (y == shipY - 1)
                     {
-                      
+                        shipTop = moveY;
                         fud.transform.position = new Vector2((moveX ), (moveY + width / 2));
                         dumbnut = fud.transform.position.y; //top
                         if (shipY == 1)//only one column
@@ -269,11 +301,13 @@ public class scenes : MonoBehaviour {
                             fud3.transform.position = new Vector2((moveX), (moveY - width / 2));
                             posX = fud3.transform.position.x;
                             posY = fud3.transform.position.y;
-                           
+                            shipTop = moveY;
+
                         }
                     }
-                    else
+                    else if(x == shipX - 1)
                     {
+                        ShipLeft = moveX;
                         fud.transform.position = new Vector2((moveX ), (moveY + width / 2));
                     }
                     if (stupY == 1 && packageLoad==false)
@@ -286,17 +320,22 @@ public class scenes : MonoBehaviour {
 
                     shipTest2.transform.parent = fud.transform; //how do I put a parent with a child prefab, this is how!
                 }
-            
-                moveY = shipTest2.GetComponent<Renderer>().bounds.size.y + moveY;
-
-                if (y == shipY - 1)
+                if (y == shipY-1) //- 1)
                 {
                     shipTop = moveY;
                 }
+                if (y == 0)
+                {
+                    shipBottom = moveY;
+                }
+
+                moveY = shipTest2.GetComponent<Renderer>().bounds.size.y + moveY;
+
+              
               
                 Debug.Log("shipY" + shipY);
               
-               
+                
             
                // GameObject LeftDoor = GameObject.Find("genericBack(" + stupX + "," + stupY + ")");
                // Transform LeftFound = LeftDoor.GetComponent<Transform>();
@@ -317,7 +356,7 @@ public class scenes : MonoBehaviour {
         {
             GameObject shipTestTop = Instantiate(Resources.Load("dertypShips\\shipTop")) as GameObject;
             shipTestTop.name = "shipTop";
-            shipTestTop.transform.position = new Vector2(ShipRight+ shipTestTop.GetComponent<Renderer>().bounds.size.x, (shipTop-shipBottom/2));
+            shipTestTop.transform.position = new Vector2(ShipRight+ shipTestTop.GetComponent<Renderer>().bounds.size.x, (UnityEngine.Random.Range(shipBottom, shipTop)));//  shipTestTop.transform.position = new Vector2(ShipRight+ shipTestTop.GetComponent<Renderer>().bounds.size.x, (shipTop-shipBottom/2)); //(shipTop-shipBottom/2)
             shipTestTop.transform.Rotate(0, 0, -90 * 1);
         
             GameObject LeftDoor = GameObject.Find("shipHull(1" + "," + "0)");
@@ -325,11 +364,32 @@ public class scenes : MonoBehaviour {
             float width = renderer.bounds.size.x;
             GameObject shipbehind = Instantiate(Resources.Load("dertypShips\\shipBack")) as GameObject;
             shipbehind.name = "shipbut";
-            shipbehind.transform.position = new Vector2(LeftDoor.transform.position.x - width, (shipTop - shipBottom / 2));
+            shipbehind.transform.position = new Vector2(LeftDoor.transform.position.x - width, (UnityEngine.Random.Range(shipBottom, shipTop))); //   shipbehind.transform.position = new Vector2(LeftDoor.transform.position.x - width, (shipTop - shipBottom / 2));
             shipbehind.transform.Rotate(0, 0, -90 * 1);
+            //new random size for tops/bottoms 7-28-19
+            float herdir = UnityEngine.Random.Range(-.05f, 0.5f); //  float herdir=  UnityEngine.Random.Range(shipBottom, shipTop);
+            shipbehind.transform.localScale += new Vector3(herdir, 0, 0);
+            shipTestTop.transform.localScale += new Vector3(herdir, 0, 0);
         }
      else if (shipY>shipX) //vertical ship
         {
+            GameObject shipTestTop = Instantiate(Resources.Load("dertypShips\\shipTop")) as GameObject;
+            shipTestTop.name = "shipTop";
+            shipTestTop.transform.position = new Vector2(UnityEngine.Random.Range(ShipLeft, ShipRight), shipTop + shipTestTop.GetComponent<Renderer>().bounds.size.y); //   shipTestTop.transform.position = new Vector2(Mathf.Abs((ShipRight - ShipLeft) / 2), shipTop + shipTestTop.GetComponent<Renderer>().bounds.size.y);
+
+            GameObject LeftDoor = GameObject.Find("shipHull(1" + "," + "0)");
+            var renderer = LeftDoor.GetComponent<Renderer>();
+            float width = renderer.bounds.size.y;
+            GameObject shipbehind = Instantiate(Resources.Load("dertypShips\\shipBack")) as GameObject;
+            shipbehind.name = "shipbut";
+            shipbehind.transform.position = new Vector2((UnityEngine.Random.Range(ShipLeft, ShipRight)), LeftDoor.transform.position.y - width);  // shipbehind.transform.position = new Vector2((ShipRight - ShipLeft / 2), LeftDoor.transform.position.y - width);
+
+            //new random size for tops/bottoms 7-28-19
+            float herdir = UnityEngine.Random.Range(-.05f, 0.5f); // float herdir = UnityEngine.Random.Range(ShipLeft, ShipRight);
+            shipbehind.transform.localScale += new Vector3(herdir, 0, 0);
+            shipTestTop.transform.localScale += new Vector3(herdir, 0, 0);
+
+            /*
             GameObject shipTestTop = Instantiate(Resources.Load("dertypShips\\shipTop")) as GameObject;
             shipTestTop.name = "shipTop";
             shipTestTop.transform.position = new Vector2((ShipRight-ShipLeft/2), shipTop);
@@ -341,20 +401,28 @@ public class scenes : MonoBehaviour {
             GameObject shipbehind = Instantiate(Resources.Load("dertypShips\\shipBack")) as GameObject;
             shipbehind.name = "shipbut";
             shipbehind.transform.position = new Vector2((ShipRight - ShipLeft / 2), LeftDoor.transform.position.y-width);
-          
+            */
+
         }
      else //they are equal and does not matter where
         {
             GameObject shipTestTop = Instantiate(Resources.Load("dertypShips\\shipTop")) as GameObject;
             shipTestTop.name = "shipTop";
-            shipTestTop.transform.position = new Vector2(((ShipRight - ShipLeft) / 2), shipTop+ shipTestTop.GetComponent<Renderer>().bounds.size.y);
+            shipTestTop.transform.position = new Vector2(UnityEngine.Random.Range(ShipLeft, ShipRight), shipTop+ shipTestTop.GetComponent<Renderer>().bounds.size.y); // shipTestTop.transform.position = new Vector2(((ShipRight - ShipLeft) / 2), shipTop+ shipTestTop.GetComponent<Renderer>().bounds.size.y);
 
             GameObject LeftDoor = GameObject.Find("shipHull(1" +  "," +  "0)");
             var renderer = LeftDoor.GetComponent<Renderer>();
             float width = renderer.bounds.size.y;
             GameObject shipbehind = Instantiate(Resources.Load("dertypShips\\shipBack")) as GameObject;
             shipbehind.name = "shipbut";
-            shipbehind.transform.position = new Vector2((ShipRight - ShipLeft / 2), LeftDoor.transform.position.y - width);
+            shipbehind.transform.position = new Vector2(UnityEngine.Random.Range(ShipLeft, ShipRight), LeftDoor.transform.position.y - width);  //  shipbehind.transform.position = new Vector2(Mathf.Abs(ShipRight - ShipLeft / 2), LeftDoor.transform.position.y - width);
+
+
+
+            //new random size for tops/bottoms 7-28-19
+            float herdir = UnityEngine.Random.Range(-.05f, 0.5f); //    float herdir = UnityEngine.Random.Range(ShipLeft, ShipRight);
+            shipbehind.transform.localScale += new Vector3(herdir, 0, 0);
+            shipTestTop.transform.localScale += new Vector3(herdir, 0, 0);
         }
 
         if ( packageLoad == false)
@@ -395,7 +463,67 @@ public class scenes : MonoBehaviour {
 
             
         }
-        Debug.Log("herder value" + herder);
+        //  Debug.Log("herder value" + herder);
+
+        //now we want to put angle'd ship stuff in
+
+
+
+     
+      
+
+
+        GameObject shipbehind44 = Instantiate(Resources.Load("dertypShips\\diag")) as GameObject;
+        var renderer44 = shipbehind44.GetComponent<Renderer>();
+        float width44 = renderer44.bounds.size.x;
+        float height44 = renderer44.bounds.size.y;
+        shipbehind44.name = "dertypShips\\diag";
+        // shipbehind44.transform.position = new Vector2((ShipRight - ShipLeft / 2), LeftDoor44.transform.position.y - width44);
+        shipbehind44.transform.position = new Vector2(ShipRight+(width44), shipTop+(height44));
+
+        //ship back/bottom top or if horizantal- up left
+        GameObject shipbehind544 = Instantiate(Resources.Load("dertypShips\\diag")) as GameObject;
+        var renderer544 = shipbehind544.GetComponent<Renderer>();
+        float width544 = renderer544.bounds.size.x;
+        float height544 = renderer544.bounds.size.y;
+        shipbehind544.name = "dertypShips\\diagLEFT";
+        shipbehind544.transform.position = new Vector2(ShipLeft - (width544), shipTop + (height544*1.25f));
+
+
+        GameObject shipbehind344 = Instantiate(Resources.Load("dertypShips\\diag")) as GameObject;
+        var renderer344 = shipbehind344.GetComponent<Renderer>();
+        float width344 = renderer344.bounds.size.x;
+        float height344 = renderer344.bounds.size.y;
+        shipbehind344.name = "dertypShips\\diagRIGHT";
+        shipbehind344.transform.position = new Vector2(ShipRight + (width344), shipBottom - (height344));
+
+
+
+
+        GameObject shipbehind244 = Instantiate(Resources.Load("dertypShips\\diag")) as GameObject;
+        var renderer244 = shipbehind344.GetComponent<Renderer>();
+        float width244 = renderer244.bounds.size.x;
+        float height244 = renderer244.bounds.size.y;
+        shipbehind244.name = "dertypShips\\diagumIdontKnow";
+        shipbehind244.transform.position = new Vector2(ShipLeft - (width244), shipBottom - (height244*1.25f));
+
+        shipbehind44.transform.rotation = Quaternion.Euler(new Vector3(0f,180.0f, 0.0f));
+
+        shipbehind344.transform.rotation = Quaternion.Euler(new Vector3(0f, 0.0f, 180.0f));
+
+        shipbehind244.transform.rotation = Quaternion.Euler(new Vector3(0f, 0.0f, 0.0f));
+        //if vertl is false, then we are wide and laying down otherwise if true then we are vertical
+        if (vertl == false)
+        {
+            shipbehind44.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -90.0f));
+
+            shipbehind544.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 270.0f));
+
+            shipbehind344.transform.rotation = Quaternion.Euler(new Vector3(0f, 180.0f, 270.0f));
+
+            shipbehind244.transform.rotation = Quaternion.Euler(new Vector3(0f, 180.0f, -90.0f));
+        }
+
     }
 
     // Update is called once per fram
