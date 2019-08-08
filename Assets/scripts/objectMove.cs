@@ -92,7 +92,7 @@ public class objectMove : MonoBehaviour {
         {
             if (collision.gameObject.tag!="PlayerShot")
             {
-                Debug.Log("TOo FAST");
+                //Debug.Log("TOo FAST");
                 //below is a copy from the playerbullet move, if fast objects collide then they should be shurnk down
 
 

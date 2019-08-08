@@ -47,7 +47,7 @@ public class tprollSpawn : MonoBehaviour {
             //  {
             //   if (m_Renderer.isVisible)
             {
-                Debug.Log("Object is visible");
+                //debug.log("object is visible");
             }
             else
             {

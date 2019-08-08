@@ -53,10 +53,36 @@ public class scenes : MonoBehaviour {
         MasterController backEnd = MastCont.GetComponent<MasterController>();
         for (int i = 0; i < backEnd.level; i++)
         {
-            GameObject ExpDust = Instantiate(Resources.Load("AstMan2019")) as GameObject;
-            ExpDust.name = "AstMan2019";
-            ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
-            ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
+            int fundas = UnityEngine.Random.Range(0, 100);
+            if (fundas<25)
+            {
+                GameObject ExpDust = Instantiate(Resources.Load("AstMan2019")) as GameObject;
+                ExpDust.name = "AstMan2019";
+                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
+            }
+            else if (fundas<50)
+            {
+                GameObject ExpDust = Instantiate(Resources.Load("Asteroid2017")) as GameObject;
+                ExpDust.name = "Asteroid2017";
+                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
+            }
+            else if (fundas<75)
+            {
+                GameObject ExpDust = Instantiate(Resources.Load("blueWallJunk")) as GameObject;
+                ExpDust.name = "blueWallJunk";
+                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 2), UnityEngine.Random.Range(1, 2));
+            }
+            else if (fundas<100)
+            {
+                GameObject ExpDust = Instantiate(Resources.Load("StdWall")) as GameObject;
+                ExpDust.name = "StdWall";
+                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 3), UnityEngine.Random.Range(1, 2));
+            }
+          
         }
         /*
         GameObject MastCont = GameObject.Find(gameObject.name);
@@ -523,6 +549,112 @@ public class scenes : MonoBehaviour {
 
             shipbehind244.transform.rotation = Quaternion.Euler(new Vector3(0f, 180.0f, -90.0f));
         }
+        //   GameObject MastCont = GameObject.Find("PlayerShip");
+        //   MasterController backEnd = MastCont.GetComponent<MasterController>();
+        //descide how many special enemies should be spawned in
+        //these enemies are described as
+        //baderang      4
+        //nutdude       7
+        //usspotetoe    1
+        int baderang = 0;
+        int nutdud = 0;
+        int usspotetoe = 0;
+      int enemyApperanceChance=  UnityEngine.Random.Range(0, backEnd.level);
+        int howmanyenemies= UnityEngine.Random.Range(1, 15); //we will only let 12 different aggressive enemies be on screen at a given time in addition to the asteroids/stuff
+        if (enemyApperanceChance>(backEnd.level/2)) //+5
+        {
+            //boom you got random enemies spawning in
+            for (int i=0;i<howmanyenemies;i++)
+            {
+                GameObject smrtEnemy;
+                int randEnemyType = UnityEngine.Random.Range(0, 100);
+                if (randEnemyType<33 && usspotetoe<1)
+                {
+                    usspotetoe++;
+                     smrtEnemy = Instantiate(Resources.Load("kusspottetoe")) as GameObject;
+                    smrtEnemy.name = "dertypShips\\usspoteto";
+                    smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
+                    smrtEnemy.transform.position = new Vector2(0, 0);
+                }
+                else if (randEnemyType<66 && baderang<4)
+                {
+                    baderang++;
+                     smrtEnemy = Instantiate(Resources.Load("faterang")) as GameObject;
+                    smrtEnemy.name = "dertypShips\\baderang";
+                    smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
+                    smrtEnemy.transform.position = new Vector2(0, 0);
+                }
+                else
+                {
+                    nutdud++;
+                     smrtEnemy = Instantiate(Resources.Load("dud")) as GameObject;
+                    smrtEnemy.name = "dertypShips\\dud";
+                    smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
+                    smrtEnemy.transform.position = new Vector2(0, 0);
+                }
+
+              
+                Vector3 spawnPoint = smrtEnemy.transform.position;
+                //    var hitColliders = Physics.OverlapSphere(spawnPoint, 1);//1 is purely chosen arbitrarly
+                // var hitf = Physics2D.OverlapArea(spawnPoint, 2.0f);
+
+                // Find all colliders that overlap
+                PolygonCollider2D myCollider = smrtEnemy.GetComponent<PolygonCollider2D>();
+                Collider2D[] otherColliders = Physics2D.OverlapAreaAll(myCollider.bounds.min, myCollider.bounds.max);
+
+                // Check for any colliders that are on top
+                bool isUnderneath = false;
+              //  foreach (var otherCollider in otherColliders)
+                //{
+                    
+                    if (otherColliders.Length>1) //    if (otherCollider.transform.position.z < smrtEnemy.transform.position.z)
+                    {
+                        isUnderneath = true;
+                        while ((isUnderneath)) //You have someone with a collider here
+                        {
+                            smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
+                        if (otherColliders.Length > 1)//  if (otherCollider.transform.position.z < smrtEnemy.transform.position.z)
+                        {
+                                isUnderneath = false;
+                            }
+                        }
+                     //   break;
+                    }
+                //}
+
+                // Take the appropriate action
+                /*    if (!isUnderneath)
+                    {
+                        Debug.Log("HOORAY!");
+                        Destroy(this.gameObject);
+                    }
+                    else
+                    {
+                        Debug.Log("OOPS!");
+                    }
+                    */
+
+                /*
+                                while ((isUnderneath)) //You have someone with a collider here
+                                {
+                                     isUnderneath = false;
+                                    //regenerate 
+                                    Debug.Log("FFFFFFFFFFFFFFFFFFFFFFFFFRegenerate spawn location at" + Time.time.ToString());
+                                    smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
+                                    foreach (var otherCollider in otherColliders)
+                                    {
+                                        if (otherCollider.transform.position.z < this.transform.position.z)
+                                        {
+                                            isUnderneath = true;
+
+                                        }
+                                    }
+                                } */
+            }
+
+            //   sweedy.transform.position = GameObject.Find("WestTrigger").transform.position;
+        }
+
 
     }
 

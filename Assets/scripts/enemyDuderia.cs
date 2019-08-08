@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class enemyDuderia : MonoBehaviour {
     private Rigidbody2D rb;
-
+    public AudioClip burp;
 
     float nextUsage;
     float delay = 0.25f; //only half delay
@@ -59,13 +59,13 @@ public class enemyDuderia : MonoBehaviour {
         GetComponent<PolygonCollider2D>().enabled = false;
         for (int i = 0; i < 8; i++)
         {
-
+            AudioSource.PlayClipAtPoint(burp, new Vector3(0.0f, 0.0f, 0.0f));
 
             // StartCoroutine(Example(angle));
-            
+
             // Example(angle);
-   
-        Debug.Log("CorTime"+Time.time);
+
+            Debug.Log("CorTime"+Time.time);
      
         System.Random blarg = new System.Random();
         GameObject ExpDust = Instantiate(Resources.Load("tproll")) as GameObject;
@@ -104,7 +104,7 @@ public class enemyDuderia : MonoBehaviour {
             //  {
             //   if (m_Renderer.isVisible)
             {
-                Debug.Log("Object is visible");
+             //   //debug.log("object is visible");
             }
             else
             {

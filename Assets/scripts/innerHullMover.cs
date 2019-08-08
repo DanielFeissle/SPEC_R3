@@ -59,7 +59,7 @@ public class innerHullMover : MonoBehaviour {
           //  {
             //   if (m_Renderer.isVisible)
             {
-                 Debug.Log("Object is visible");
+                 //debug.log("object is visible");
             }
             else
             {
@@ -129,7 +129,7 @@ public class innerHullMover : MonoBehaviour {
         {
             if (collision.gameObject.tag!="PlayerShot")
             {
-                Debug.Log("TOo FAST");
+                //Debug.Log("TOo FAST");
                 //below is a copy from the playerbullet move, if fast objects collide then they should be shurnk down
 
 

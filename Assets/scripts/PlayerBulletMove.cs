@@ -17,7 +17,7 @@ public class PlayerBulletMove : MonoBehaviour {
         //  rb.AddForce((movement * speed) * 2);
         Vector3 fff = Fun1.transform.up;
        // Debug.Log("FFF:" + fff);
-         rb.AddRelativeForce(fff * 12 * speed);
+         rb.AddRelativeForce(fff * 17 * speed);
    //     Debug.Log(gameObject.name);
     }
     public float torque;

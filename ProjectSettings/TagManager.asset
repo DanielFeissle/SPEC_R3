@@ -19,6 +19,7 @@ TagManager:
   - ShipLiquidWaste
   - CaseProtector
   - Enemy
+  - IndestShot
   layers:
   - Default
   - TransparentFX

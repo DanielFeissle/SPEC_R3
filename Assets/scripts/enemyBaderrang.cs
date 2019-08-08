@@ -5,18 +5,107 @@ using UnityEngine;
 
 public class enemyBaderrang : MonoBehaviour {
     private Rigidbody2D rb;
+    float nextUsage;
+    float delay = 0.25f; //only half delay
+    bool runForest = false;
     // Use this for initialization
     void Start () {
+        //decide when we will bring the baderang in. scenes.cs will handle spawning the count. this will handle the delay
+        System.Random blarg = new System.Random();
+        int badStart = UnityEngine.Random.Range(5,60);
+        runForest = false;
         rb = GetComponent<Rigidbody2D>();
+        nextUsage = Time.time + delay+ badStart; //it is on display
+        GetComponent<AudioSource>().enabled = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
 
 
 
+
+
+        if (Time.time > nextUsage && runForest==false) //delete otherwise
+        {
+            GetComponent<AudioSource>().enabled = true;
+            //   this.transform.localScale = transform.localScale * 2;
+            runForest = true;
+         //   transform.localScale = new Vector2(transform.localScale.x + 0.1f, transform.localScale.y + 0.1f);
+         //  nextUsage = Time.time + delay; //it is on display
+
+        }
+
+        if (runForest==true)
+        {
+            if (this.rb.velocity.magnitude<77)
+            {
+                rb.AddRelativeForce(Vector3.left * 15 * Time.deltaTime * 100);
+            }
+        
+            //Get the Screen positions of the object
+            Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(this.transform.position);
+
+            //Get the Screen position of the mouse
+            //  Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            Vector2 mouseOnScreen = Camera.main.WorldToViewportPoint(GameObject.Find("PlayerShip").transform.position);
+            //Get the angle between the points
+            float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+            this.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        }
+    }
+
+    float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (Time.time > nextUsage && runForest == true) //delete otherwise
+        {
+        //    Debug.Log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBADERANG COLLISION MAGJ:" + collision.relativeVelocity.magnitude.ToString());
+            if (collision.relativeVelocity.magnitude > 14 || rb.velocity.magnitude < .25f || rb.velocity.magnitude > 3)
+            {
+                // if (collision.gameObject.tag != "PlayerShot")
+                {
+                    //Debug.Log("TOo FAST");
+                    //below is a copy from the playerbullet move, if fast objects collide then they should be shurnk down
+
+
+                    try
+                    {
+                        System.Random blarg = new System.Random();
+                        GameObject ExpDust = Instantiate(Resources.Load("Exp2017")) as GameObject;
+                        ExpDust.name = "EXPLOSION";
+                        ExpDust.transform.position = collision.transform.position + collision.transform.right;
+                        ExpDust.transform.localScale = collision.transform.localScale + collision.transform.right * 4;
+
+
+                        GameObject sweedy = Instantiate(Resources.Load("swissCheese")) as GameObject;
+                        sweedy.name = "swissCheese";
+                        //randomly spawn in using the corner systems
+                        sweedy.transform.position = this.transform.position; //+ collision.transform.right * 2;
+
+
+
+
+
+                        Destroy(this.gameObject);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.Log(ex);
+                        Debug.Log("Your value:" + this.gameObject.name);
+                    }
+
+
+                }
+
+            }
+        }
+
+    }
 
     //this is default method for screen wrapping as of 7-16-19
     //older version does exist relying on even further out collision points
@@ -36,7 +125,7 @@ public class enemyBaderrang : MonoBehaviour {
             //  {
             //   if (m_Renderer.isVisible)
             {
-                Debug.Log("Object is visible");
+                ////debug.log("object is visible");
             }
             else
             {

@@ -11,7 +11,7 @@ public class playerController : MonoBehaviour {
     Renderer m_Renderer;
     float nextUsage;
     float nextUsage2=-10;
-    float delay = 0.25f; //only half delay
+    float delay = 0.15f; //only half delay
     bool clearToLeave = false;
     float lerpTime = 0;
     public AudioClip exp5;
@@ -295,7 +295,7 @@ public class playerController : MonoBehaviour {
                 //check if the player is completly gone, if so return to the screen
                 if (m_Renderer.isVisible)
                 {
-                    //  Debug.Log("Object is visible");
+                    //  //debug.log("object is visible");
                 }
                 else
                 {
@@ -351,7 +351,7 @@ public class playerController : MonoBehaviour {
         {
             if (m_Renderer.isVisible)
             {
-                //  Debug.Log("Object is visible");
+                //  //debug.log("object is visible");
             }
             else
             {
