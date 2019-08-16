@@ -17,7 +17,7 @@ public class shotKoPoo : MonoBehaviour {
         if (this.rb.velocity.magnitude < 377)
         {
             rb.AddRelativeForce(Vector3.down * 250 * Time.deltaTime * 100);
-            Debug.Log("KOSHOT "+ rb.velocity.magnitude);
+          //  Debug.Log("KOSHOT "+ rb.velocity.magnitude);
         }
 
         GameObject MastCont = GameObject.Find("PlayerShip");
@@ -100,7 +100,7 @@ public class shotKoPoo : MonoBehaviour {
                 {
                     transform.position = new Vector2(fartX, fartY);
                     screenWrapCount++;
-                    if (screenWrapCount>1)
+                    if (screenWrapCount>2)
                     {
                         Destroy(this.gameObject);
                     }
@@ -130,7 +130,7 @@ public class shotKoPoo : MonoBehaviour {
     //always update this section with the master found in playerbulletmove.cs 8-7-19
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((!collision.gameObject.CompareTag("PlayerShot"))|| (!collision.gameObject.CompareTag("IndestShot")))
+        if ((!collision.gameObject.CompareTag("PlayerShot"))|| (!collision.gameObject.CompareTag("IndestShot")) || (!collision.gameObject.CompareTag("North")) || (!collision.gameObject.CompareTag("South")) || (!collision.gameObject.CompareTag("East")) || (!collision.gameObject.CompareTag("West")))
         {
            
             if (!collision.gameObject.CompareTag("Player"))

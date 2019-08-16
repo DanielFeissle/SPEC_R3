@@ -11,15 +11,54 @@ public class enemyDuderia : MonoBehaviour {
     float delay = 0.25f; //only half delay
 
     bool coStart = false;
+
+
+    float nextUsageDis;
+    float delayDis = 0.25f; //only half delay
+    bool runForest = false;
+
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         nextUsage = Time.time + delay; //it is on display
+
+
+        int badStart = UnityEngine.Random.Range(25, 88);
+        runForest = false;
+        rb = GetComponent<Rigidbody2D>();
+        nextUsageDis = Time.time + delayDis + badStart; //it is on display
+                                                        // GetComponent<AudioSource>().enabled = false;
+        gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (Time.time > nextUsageDis && runForest == false) //delete otherwise
+        {
+            gameObject.SetActive(true);
+            //  GetComponent<AudioSource>().enabled = true;
+            //   this.transform.localScale = transform.localScale * 2;
+            runForest = true;
+            //   transform.localScale = new Vector2(transform.localScale.x + 0.1f, transform.localScale.y + 0.1f);
+            //  nextUsage = Time.time + delay; //it is on display
+
+        }
+
+        if (runForest == true)
+        {
+            if (this.rb.velocity.magnitude < 77)
+            {
+                rb.AddRelativeForce(Vector3.left * 15 * Time.deltaTime * 100);
+            }
+
+            //Get the Screen positions of the object
+            Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(this.transform.position);
+
+        }
+
 
         if (Time.time > nextUsage) //delete otherwise
         {

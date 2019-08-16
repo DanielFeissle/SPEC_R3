@@ -42,10 +42,12 @@ public class masterShipEnter : MonoBehaviour {
             else
             {
                 rb.velocity = Vector3.zero;
+                rb.constraints = RigidbodyConstraints2D.FreezeAll;
             }
             if (openDoor==0)
             {
                 openDoor = 1;
+                rb.constraints = RigidbodyConstraints2D.None;
             }
             if (openDoor==2 && transform.position.y > 6)
             {
@@ -100,6 +102,14 @@ public class masterShipEnter : MonoBehaviour {
         }
           
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
 }

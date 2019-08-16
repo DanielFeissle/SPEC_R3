@@ -572,7 +572,7 @@ public class scenes : MonoBehaviour {
                 {
                     usspotetoe++;
                      smrtEnemy = Instantiate(Resources.Load("kusspottetoe")) as GameObject;
-                    smrtEnemy.name = "dertypShips\\usspoteto";
+                    smrtEnemy.name = "usspoteto_0";
                     smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
                     smrtEnemy.transform.position = new Vector2(0, 0);
                 }

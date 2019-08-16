@@ -250,9 +250,10 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 hp = hp - 1;
              
             }
-            else if (other.gameObject.CompareTag("IndestShot"))
+             if (other.gameObject.CompareTag("IndestShot"))
             {
-                hp = hp - 55;
+                hp = hp - 50;
+                Destroy(other.gameObject);
             }
         }
             try

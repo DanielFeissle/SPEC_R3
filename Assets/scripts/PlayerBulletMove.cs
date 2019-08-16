@@ -34,9 +34,13 @@ public class PlayerBulletMove : MonoBehaviour {
                 if (GameObject.Find(collision.gameObject.name) != null)
             {
                 try
-                {
+
+                    {
+                        GameObject MastCont = GameObject.Find("PlayerShip");
+                        MasterController backEnd = MastCont.GetComponent<MasterController>();
                         if (GameObject.Find(collision.gameObject.name).CompareTag("SpaceJunk")) //split it like a bloody madman
                             {
+                            backEnd.score = backEnd.score + 10;
                             System.Random blarg = new System.Random();
 
                             GameObject ExpDust = Instantiate(Resources.Load("Exp2017")) as GameObject;
@@ -79,6 +83,7 @@ public class PlayerBulletMove : MonoBehaviour {
                         }
                         else if (GameObject.Find(collision.gameObject.name).CompareTag("ShipJunk")) //split it more equally and with less velocity
                         {
+                            backEnd.score = backEnd.score + 50;
                             System.Random blarg = new System.Random();
 
                             GameObject ExpDust = Instantiate(Resources.Load("Exp2017")) as GameObject;
@@ -142,6 +147,7 @@ public class PlayerBulletMove : MonoBehaviour {
                         }
                         else if (GameObject.Find(collision.gameObject.name).CompareTag("ShipLiquidWaste")) //split it with water effects
                         {
+                            backEnd.score = backEnd.score + 25;
                             //load in the hazardous/collision waste 
                             GameObject nucWaste = Instantiate(Resources.Load("nucWasteSplash")) as GameObject;
                             nucWaste.name = "nucWasteSplash";
@@ -152,6 +158,7 @@ public class PlayerBulletMove : MonoBehaviour {
                         }
                         else if (GameObject.Find(collision.gameObject.name).CompareTag("CaseProtector")) //split it with water effects
                         {
+                            backEnd.score = backEnd.score + 100;
                             Destroy(collision.gameObject);
                         }
 

@@ -81,27 +81,35 @@ public class playerController : MonoBehaviour {
             GameObject resetthis = GameObject.Find("transportShip");
             Rigidbody2D respos = resetthis.GetComponent<Rigidbody2D>();
             respos.AddTorque(50);//(new Vector3(0.0f, 50000.0f,0.0f));
-
-            SceneManager.LoadScene("stage"); //reload stage
+            //   SceneManager.LoadScene("stage"); //reload stage
+            SceneManager.LoadScene("scenePicker_arc"); //reload stage
             nextUsage2 = Time.time + 2.0f; //it is on display
         }
 
-        if (Time.time > 1)
+        if (Time.time > 4)
         {
             float moveVertical = Input.GetAxis("Vertical");
 
             float moveHorizantal = Input.GetAxis("Horizontal");
 
+            //if (Input.GetButtonDown("360_RightBumper"))
+            float TriggerRight = Input.GetAxis("Cont_Trigger");
+           //   Debug.Log("Your Value for Trigger is " + TriggerRight);
+            if (TriggerRight!=0) //controller support
+            {
+                moveVertical = TriggerRight*-1;
+            }
+           
             moveHorizantal = moveHorizantal * 2;
             if (moveHorizantal > 0)
             {
-                transform.Rotate(0, 0, -150 * Time.deltaTime);
+                transform.Rotate(0, 0, -188 * Time.deltaTime);
                 //rb.velocity = Vector3.zero;
 
             }
             else if (moveHorizantal < 0)
             {
-                transform.Rotate(0, 0, 150 * Time.deltaTime);
+                transform.Rotate(0, 0, 188 * Time.deltaTime);
                 // rb.velocity = Vector3.zero;
             }
             float rotation = transform.rotation.z;
@@ -110,9 +118,29 @@ public class playerController : MonoBehaviour {
                 rotation = rotation + Time.deltaTime;
             }
             //  transform.Rotate(new Vector3(0.0f, 0.0f, rotation));
-
             GameObject transportShip = GameObject.Find("transportShip");
             masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
+
+            GameObject LeftDoor3 = GameObject.Find("bodyShip(L)");
+            Transform LeftFound2 = LeftDoor3.GetComponent<Transform>();
+            float dist = Vector3.Distance(LeftFound2.position, transform.position);
+            print("Distance to other: " + dist);
+
+            if (dist<3)
+            {
+                introShip.openDoor = 1;
+                doorActive = true;
+            }
+            else
+            {
+                doorActive = false;
+                introShip.openDoor = 0; //door is closed
+                leftOpen = 0;
+            }
+           
+
+
+         
             if (Input.GetButton("Fire1"))
             {
                 if (Time.time > nextUsage) //delete otherwise
@@ -228,7 +256,7 @@ public class playerController : MonoBehaviour {
             //the main reason for this is to ensure the player is in a safe spawn location
             if (introShip.introScene == false) //enable standard game rules
             {
-                if (Input.GetAxis("Vertical") > 0) //moving up so go foward
+                if (moveVertical > 0) //moving up so go foward
                 {
 
                     //   Vector3 movement = transform.position += transform.up * Time.deltaTime * 5;
@@ -266,20 +294,22 @@ public class playerController : MonoBehaviour {
 
                     ff.GetComponent<SpriteRenderer>().enabled = true;
                     ff.GetComponent<AudioSource>().enabled = true;
+                    rb.drag = 0;
                 }
-                else if (Input.GetAxis("Vertical") < 0)
+                else if (moveVertical < 0)
                 {
                     float totspeed = (Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
                     // rb.velocity = Vector3.ClampMagnitude(rb.velocity,1);
 
-                    rb.AddForce(-transform.up * 2);
+                    // rb.AddForce(-transform.up * 2);
+                    rb.drag = 1;
                     //  Debug.Log(totspeed);
 
                 }
                 else
                 {
                     //no keypress
-
+                    rb.drag = 0;
                     GameObject blast = GameObject.Find("shipBlast");
                     Transform ff = blast.GetComponent<Transform>();
                     
