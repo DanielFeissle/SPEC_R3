@@ -21,7 +21,8 @@ public class playerController : MonoBehaviour {
     Vector3 bla = new Vector3(1,1,1);
     Vector3 bla2 = new Vector3(1,1,1);
     bool insideShip = false;
-
+    bool PlayerClose = true;
+    bool doorsOpen = false;
     Vector3 blastLoc;
     // Use this for initialization
     void Start () {
@@ -126,16 +127,20 @@ public class playerController : MonoBehaviour {
             float dist = Vector3.Distance(LeftFound2.position, transform.position);
             print("Distance to other: " + dist);
 
-            if (dist<3)
+            if (dist<3 && leftOpen == 0 && doorsOpen == true) //door should be closed and we want to open the door // doorsOpen==false && 
             {
-                introShip.openDoor = 1;
-                doorActive = true;
+                PlayerClose = true;
+                doorsOpen = true;
+               // introShip.openDoor = 1;
+                //doorActive = true;
             }
-            else
+            else if (dist > 3  && leftOpen==2 && doorsOpen==false) //we want to close the door, the door should be open //&& doorsOpen == true
             {
-                doorActive = false;
-                introShip.openDoor = 0; //door is closed
-                leftOpen = 0;
+                //  doorActive = false;
+                PlayerClose = true;
+                doorsOpen = false;
+            //    introShip.openDoor = 0; //door is closed
+            //    leftOpen = 0;
             }
            
 
@@ -157,7 +162,7 @@ public class playerController : MonoBehaviour {
                 }
 
             }
-            else if (introShip.openDoor==1 || doorActive == true) //(Input.GetButton("Fire2") || doorActive == true)
+            else if (introShip.openDoor==1 || doorActive == true || PlayerClose==true) //(Input.GetButton("Fire2") || doorActive == true)
             {
                 introShip.openDoor = 2; //door is now open
                 //  GameObject CamFind = GameObject.Find("Main Camera");
@@ -218,6 +223,8 @@ public class playerController : MonoBehaviour {
                 {
                     doorActive = false;
                     leftOpen = 2; //door is open
+                    PlayerClose = false;
+                    doorsOpen = false;
                 }
             }
             else if (leftOpen == 3)
@@ -241,6 +248,8 @@ public class playerController : MonoBehaviour {
                 {
                     doorActive = false;
                     leftOpen = 0; //door is closed
+                    PlayerClose = false;
+                    doorsOpen = true;
                 }
             }
 
