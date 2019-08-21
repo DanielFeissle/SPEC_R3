@@ -24,6 +24,8 @@ public class playerController : MonoBehaviour {
     bool PlayerClose = true;
     bool doorsOpen = false;
     Vector3 blastLoc;
+    float random;
+    float random2;
     // Use this for initialization
     void Start () {
         DontDestroyOnLoad(gameObject.transform);
@@ -36,7 +38,8 @@ public class playerController : MonoBehaviour {
         shipAni9334.Rebind();
         shipAni9334.enabled = false;
         //  shipAni9334.Play("doorAniBlast");
-
+        random = UnityEngine.Random.Range(0.0f, 65535.0f);
+        random2 = UnityEngine.Random.Range(0.0f, 65535.0f);
 
 
         GameObject blast = GameObject.Find("shipBlast");
@@ -125,7 +128,7 @@ public class playerController : MonoBehaviour {
             GameObject LeftDoor3 = GameObject.Find("bodyShip(L)");
             Transform LeftFound2 = LeftDoor3.GetComponent<Transform>();
             float dist = Vector3.Distance(LeftFound2.position, transform.position);
-            print("Distance to other: " + dist);
+          //  print("Distance to other: " + dist);
 
             if (dist<3 && leftOpen == 0 && doorsOpen == true) //door should be closed and we want to open the door // doorsOpen==false && 
             {
@@ -141,6 +144,70 @@ public class playerController : MonoBehaviour {
                 doorsOpen = false;
             //    introShip.openDoor = 0; //door is closed
             //    leftOpen = 0;
+            }
+
+            if (leftOpen == 2 || leftOpen == 3) //cause lights to blink (8-18-19)
+            {
+                GameObject LoadingLight = GameObject.Find("LoadingLightA");
+                SpriteRenderer FoundLight = LoadingLight.GetComponent<SpriteRenderer>();
+                float t = Mathf.PingPong(Time.time, 2.0f) / 2.0f;
+                FoundLight.color = Color.LerpUnclamped(Color.clear, Color.red, t);
+                Light FoundFX = LoadingLight.GetComponent<Light>();
+                //  FoundFX.range = RangeAttribute.
+                float noise = Mathf.PerlinNoise(random, Time.time);
+                float fun = Mathf.Lerp(0, 2, noise);
+                FoundFX.intensity = fun*25;
+
+                GameObject LoadingLight2 = GameObject.Find("LoadingLightB");
+                SpriteRenderer FoundLight2 = LoadingLight2.GetComponent<SpriteRenderer>();
+                float t2 = Mathf.PingPong(Time.time, 2.0f) / 2.0f;
+                FoundLight2.color = Color.LerpUnclamped(Color.clear, Color.red, t2);
+                Light FoundFX2 = LoadingLight2.GetComponent<Light>();
+                //  FoundFX.range = RangeAttribute.
+                float noise2 = Mathf.PerlinNoise(random2, Time.time);
+                float fun2 = Mathf.Lerp(0, 2, noise2);
+                FoundFX2.intensity = fun2 * 25;
+            }
+            else if (leftOpen==1 ) //door is closing
+            {
+                
+                GameObject LoadingLight = GameObject.Find("LoadingLightA");
+                SpriteRenderer FoundLight = LoadingLight.GetComponent<SpriteRenderer>();
+                float t = Mathf.PingPong(Time.time, 2.0f) / 2.0f;
+                FoundLight.color = Color.clear;
+                Light FoundFX = LoadingLight.GetComponent<Light>();
+                float noise = Mathf.PerlinNoise(random, Time.time);
+                float fun = Mathf.Lerp(0, 2, noise);
+                FoundFX.intensity = fun * 14;
+
+                GameObject LoadingLight2 = GameObject.Find("LoadingLightB");
+                SpriteRenderer FoundLight2 = LoadingLight2.GetComponent<SpriteRenderer>();
+                float t2 = Mathf.PingPong(Time.time, 2.0f) / 2.0f;
+                FoundLight2.color = Color.clear;
+                Light FoundFX2 = LoadingLight2.GetComponent<Light>();
+                float noise2 = Mathf.PerlinNoise(random, Time.time);
+                float fun2 = Mathf.Lerp(0, 2, noise);
+                FoundFX2.intensity = fun2 * 14;
+            }
+            else if (leftOpen==0) //door is closed
+            {
+                GameObject LoadingLight = GameObject.Find("LoadingLightA");
+                SpriteRenderer FoundLight = LoadingLight.GetComponent<SpriteRenderer>();
+                float t = Mathf.PingPong(Time.time, 2.0f) / 2.0f;
+                FoundLight.color = Color.clear;
+                Light FoundFX = LoadingLight.GetComponent<Light>();
+                float noise = Mathf.PerlinNoise(random, Time.time);
+                float fun = Mathf.Lerp(0, 0, noise);
+                FoundFX.intensity = fun * 14;
+
+                GameObject LoadingLight2 = GameObject.Find("LoadingLightB");
+                SpriteRenderer FoundLight2 = LoadingLight2.GetComponent<SpriteRenderer>();
+                float t2 = Mathf.PingPong(Time.time, 2.0f) / 2.0f;
+                FoundLight2.color = Color.clear;
+                Light FoundFX2 = LoadingLight2.GetComponent<Light>();
+                float noise2 = Mathf.PerlinNoise(random, Time.time);
+                float fun2 = Mathf.Lerp(0, 0, noise);
+                FoundFX2.intensity = fun2 * 14;
             }
            
 

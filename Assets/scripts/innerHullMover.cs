@@ -26,9 +26,9 @@ public class innerHullMover : MonoBehaviour {
         System.Random randomDirection = new System.Random(42);
         
         int directionChoice = randomDirection.Next(0, 37);
-        Debug.Log("SystemRand degreeCnt" + directionChoice);
+     //   Debug.Log("SystemRand degreeCnt" + directionChoice);
         int rotCnt=(blarg.Next(0, 36));
-        Debug.Log("Rand degreeCnt" + rotCnt);
+      //  Debug.Log("Rand degreeCnt" + rotCnt);
         float degreeCnt = 0;
         for (int i=0;i< directionChoice; i++)
         {

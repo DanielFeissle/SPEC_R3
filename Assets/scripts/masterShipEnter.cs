@@ -6,6 +6,7 @@ public class masterShipEnter : MonoBehaviour {
     private Rigidbody2D rb;
     float delay = 5.5f; //only half delay
     float nextUsage;
+    private ParticleSystem ps;
     // Use this for initialization
     void Start () {
        // DontDestroyOnLoad(gameObject.transform);
@@ -13,12 +14,14 @@ public class masterShipEnter : MonoBehaviour {
         nextUsage = Time.time + delay; //it is on display
         openDoor = 0;
         rb.AddForce(transform.up * 15500);
+        ps = GetComponent<ParticleSystem>();
 
-      
 
 
 
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -27,7 +30,14 @@ public class masterShipEnter : MonoBehaviour {
         if (rb.velocity.magnitude < 2000) //max speed is this
         { 
             rb.AddForce(transform.up * 15500);
-    }
+
+            //ParticleSystem party = GetComponent<ParticleSystem>();
+            //  var emission = ps.emission;
+            //    emission.rateOverTime = 50;
+          
+
+            // emission.rate = 15.0f;
+        }
         if (transform.position.y>0 && transform.position.y>-11.3)
         {
             introScene = false;
@@ -43,6 +53,9 @@ public class masterShipEnter : MonoBehaviour {
             {
                 rb.velocity = Vector3.zero;
                 rb.constraints = RigidbodyConstraints2D.FreezeAll;
+              //  var emission = ps.emission;
+           //     emission.rateOverTime = 50;
+                //   emission.rateOverTime = 2.0f;
             }
             if (openDoor==0)
             {

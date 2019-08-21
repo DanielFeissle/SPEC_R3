@@ -31,9 +31,49 @@ public class shotKoPoo : MonoBehaviour {
         {
             rb.AddForce(new Vector2(-5.0f, 0.0f));
         }
-
+       
     }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (rb.velocity.magnitude < .75f || rb.velocity.magnitude > 3)
+        {
+            // if (collision.gameObject.tag != "PlayerShot")
+            {
+                //Debug.Log("TOo FAST");
+                //below is a copy from the playerbullet move, if fast objects collide then they should be shurnk down
 
+
+                try
+                {
+                    //  System.Random blarg = new System.Random();
+                    //    GameObject ExpDust = Instantiate(Resources.Load("Exp2017")) as GameObject;
+                    // ExpDust.name = "EXPLOSION";
+                    //ExpDust.transform.position = collision.transform.position + collision.transform.right;
+                    //ExpDust.transform.localScale = collision.transform.localScale + collision.transform.right * 4;
+
+
+                    // GameObject sweedy = Instantiate(Resources.Load("swissCheese")) as GameObject;
+                    // sweedy.name = "swissCheese";
+                    //randomly spawn in using the corner systems
+                    // sweedy.transform.position = this.transform.position; //+ collision.transform.right * 2;
+
+
+
+
+
+                    Destroy(this.gameObject);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex);
+                    Debug.Log("Your value:" + this.gameObject.name);
+                }
+
+
+            }
+
+        }
+    }
 
 
 
@@ -51,6 +91,8 @@ public class shotKoPoo : MonoBehaviour {
 
         try
         {
+           
+
             //     Vector3 screenPoint = this.leftCamera.WorldToViewportPoint(targetPoint.position);
             // bool onScreen = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 
