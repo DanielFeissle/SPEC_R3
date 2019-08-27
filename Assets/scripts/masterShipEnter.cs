@@ -7,6 +7,7 @@ public class masterShipEnter : MonoBehaviour {
     float delay = 5.5f; //only half delay
     float nextUsage;
     private ParticleSystem ps;
+    public AudioClip door;
     // Use this for initialization
     void Start () {
        // DontDestroyOnLoad(gameObject.transform);
@@ -61,6 +62,8 @@ public class masterShipEnter : MonoBehaviour {
             {
                 openDoor = 1;
                 rb.constraints = RigidbodyConstraints2D.None;
+                AudioSource.PlayClipAtPoint(door, new Vector3(transform.position.x, transform.position.y, 0.0f));
+
             }
             if (openDoor==2 && transform.position.y > 6)
             {

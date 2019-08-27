@@ -6,6 +6,7 @@ using UnityEngine;
 public class shotKoPoo : MonoBehaviour {
     private Rigidbody2D rb;
     int screenWrapCount = 0;
+    public AudioClip exp5;
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
@@ -45,17 +46,13 @@ public class shotKoPoo : MonoBehaviour {
 
                 try
                 {
-                    //  System.Random blarg = new System.Random();
-                    //    GameObject ExpDust = Instantiate(Resources.Load("Exp2017")) as GameObject;
-                    // ExpDust.name = "EXPLOSION";
-                    //ExpDust.transform.position = collision.transform.position + collision.transform.right;
-                    //ExpDust.transform.localScale = collision.transform.localScale + collision.transform.right * 4;
+                     System.Random blarg = new System.Random();
+                        GameObject ExpDust = Instantiate(Resources.Load("pooplosion")) as GameObject;
+                     ExpDust.name = "pooplosion";
+                   ExpDust.transform.position = collision.transform.position + collision.transform.right;
+                    ExpDust.transform.localScale = collision.transform.localScale + collision.transform.right * 4;
 
-
-                    // GameObject sweedy = Instantiate(Resources.Load("swissCheese")) as GameObject;
-                    // sweedy.name = "swissCheese";
-                    //randomly spawn in using the corner systems
-                    // sweedy.transform.position = this.transform.position; //+ collision.transform.right * 2;
+                    AudioSource.PlayClipAtPoint(exp5, new Vector3(transform.position.x, transform.position.y, 0.0f));
 
 
 

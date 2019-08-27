@@ -312,12 +312,17 @@
     <Compile Include="Assets\scripts\Plain_deleteObjectAfterAni.cs" />
     <Compile Include="Assets\scripts\PlayerBulletMove.cs" />
     <Compile Include="Assets\scripts\playerController.cs" />
+    <Compile Include="Assets\scripts\playerMenuController.cs" />
+    <Compile Include="Assets\scripts\poosplosion.cs" />
     <Compile Include="Assets\scripts\scenes.cs" />
     <Compile Include="Assets\scripts\scenes_asteroid.cs" />
     <Compile Include="Assets\scripts\screenWrapper.cs" />
     <Compile Include="Assets\scripts\shipObjectHandle.cs" />
     <Compile Include="Assets\scripts\shotKoPoo.cs" />
+    <Compile Include="Assets\scripts\TitleScreenButtons.cs" />
     <Compile Include="Assets\scripts\tprollSpawn.cs" />
+    <Compile Include="Assets\scripts\UI_Buttons\Pause_Quit.cs" />
+    <Compile Include="Assets\scripts\UI_Buttons\Pause_Resume.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Shaders\CustomSwapTwo.shader" />

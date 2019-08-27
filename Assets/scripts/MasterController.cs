@@ -8,7 +8,7 @@ public class MasterController : MonoBehaviour {
 
     public int level = 0;
     public long score = 0;
-
+    public long hull = 1;
     public Text StageScore;
 
     public Text StageLevel;

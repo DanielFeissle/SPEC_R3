@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 50231670695557598}
   - component: {fileID: 61470179403553966}
   - component: {fileID: 114260315790910178}
+  - component: {fileID: 114797232368619606}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Player
@@ -119,6 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 10
+  score: 0
+  hull: 1
+  StageScore: {fileID: 0}
+  StageLevel: {fileID: 0}
 --- !u!114 &114441895021040460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,6 +140,17 @@ MonoBehaviour:
   suitCase: {fileID: 8300000, guid: f697437bc00377d4e83ab6334cedcd99, type: 3}
   aWidth: 80
   aHeight: 60
+--- !u!114 &114797232368619606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351234675264854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe79227daf6bf6b4796b6b8feb2651db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212649441706840268
 SpriteRenderer:
   m_ObjectHideFlags: 1
