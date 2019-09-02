@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 100001299}
   - component: {fileID: 100001298}
   - component: {fileID: 100001297}
+  - component: {fileID: 100001301}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -294,6 +295,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &100001301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 100001296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654aa02f7ed71dc4baf818f2e268e373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetRatio: 1.7777778
 --- !u!1001 &114246265
 Prefab:
   m_ObjectHideFlags: 0
@@ -1120,7 +1133,7 @@ GameObject:
   - component: {fileID: 458074461}
   m_Layer: 0
   m_Name: backShip
-  m_TagString: Untagged
+  m_TagString: ShipIndest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1321,7 +1334,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 995617004
+  randomSeed: -617959742
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4831,7 +4844,7 @@ Transform:
   m_GameObject: {fileID: 518906450}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -12.919, y: 1.26, z: 0.001203537}
-  m_LocalScale: {x: 1.95663, y: 7.97647, z: 1}
+  m_LocalScale: {x: 2.62, y: 7.97647, z: 1}
   m_Children: []
   m_Father: {fileID: 1802865188}
   m_RootOrder: 1
@@ -10414,7 +10427,7 @@ GameObject:
   - component: {fileID: 1473135475}
   m_Layer: 0
   m_Name: headShip(256x256_SINGLE)
-  m_TagString: Untagged
+  m_TagString: ShipIndest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10554,7 +10567,7 @@ Transform:
   m_GameObject: {fileID: 1502500670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.531, y: 0.89, z: 0.001203537}
-  m_LocalScale: {x: 1.956634, y: 7.976466, z: 1}
+  m_LocalScale: {x: 2.69, y: 7.976466, z: 1}
   m_Children: []
   m_Father: {fileID: 1802865188}
   m_RootOrder: 0

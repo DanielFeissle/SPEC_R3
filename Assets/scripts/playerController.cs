@@ -455,6 +455,9 @@ public class playerController : MonoBehaviour {
         //the main reason for this is to ensure the player is in a safe spawn location
        if (introShip.introScene==false) //enable standard game rules
         {
+            int updown = 0;
+            int leftright = 0;
+            bool dasMoved = false;
             if (m_Renderer.isVisible)
             {
                 //  //debug.log("object is visible");
@@ -478,27 +481,177 @@ public class playerController : MonoBehaviour {
             {
                 fartX = -(transform.position.x - .75f);
                 fartY = (transform.position.y);
+                leftright = 1;
             }
             else if (rb.velocity.x < 0 && other.gameObject.CompareTag("West"))//going back
             {
                 fartX = -(transform.position.x + .75f);
                 fartY = (transform.position.y);
+                leftright = 2;
             }
             if (rb.velocity.y > 0 && other.gameObject.CompareTag("North")) //moving up
             {
                 fartY = -(transform.position.y - .25f);
                 fartX = (transform.position.x);
+                 updown = 1;
             }
             else if (rb.velocity.y < 0 && other.gameObject.CompareTag("South"))//going down
             {
                 fartY = -(transform.position.y + .25f);
                 fartX = (transform.position.x);
+                 updown = 2;
             }
             //   transform.position = new Vector2(fartX, fartY);
 
             if (fartX != 0 || fartY != 0)
             {
+
                 transform.position = new Vector2(fartX, fartY);
+                //9-1-19 This should protect the player during screen transisitions. To prevent them from getting stuck inside of another object that is already there'
+                //personally i do not like this try/catch collision system idea... but for now it works. really should figure out a way to get this dynamically
+                //--------------------------------
+                try
+                {
+                    GameObject smrtEnemy = this.gameObject;
+
+                    PolygonCollider2D myCollider = smrtEnemy.GetComponent<PolygonCollider2D>();
+                    Collider2D[] otherColliders = Physics2D.OverlapAreaAll(myCollider.bounds.min, myCollider.bounds.max);
+
+                    // Check for any colliders that are on top
+                    bool isUnderneath = false;
+                    //  foreach (var otherCollider in otherColliders)
+                    //{
+
+                    if (otherColliders.Length > 1) //    if (otherCollider.transform.position.z < smrtEnemy.transform.position.z)
+                    {
+
+                        int collideLocation = 0;
+                        //we want to get the colliding object
+                        for (int i = 0; i < otherColliders.Length; i++)
+                        {
+                            if (otherColliders[i].gameObject.CompareTag("ShipIndest"))
+                            {
+                                collideLocation = i;
+                                break;
+                            }
+                        }
+                        isUnderneath = true;
+                        while ((isUnderneath)) //You have someone with a collider here
+                        {
+                            if (fartX != 0)
+                            {
+                                var renderer2 = otherColliders[collideLocation].GetComponent<Renderer>(); //we always want the first object of the array ;/
+                                float width2 = renderer2.bounds.size.x;
+                                if (transform.position.x > 0)
+                                {
+                                    width2 = width2 * -1; //we want to move left if we are above zero
+                                }
+                                //  smrtEnemy.transform.position = smrtEnemy.transform.position + new Vector3(smrtEnemy.transform.position.x + width2, smrtEnemy.transform.position.y, 0.0f);
+                                if (leftright!=0)
+                                {
+                                    fartX = fartX + width2;
+                                }
+                            
+                            }
+                            if (fartY != 0)
+                            {
+                                
+                                var renderer2 = otherColliders[collideLocation].GetComponent<Renderer>(); //we always want the first object of the array ;/
+                                float width2 = renderer2.bounds.size.y;
+                                if (transform.position.y > 0)
+                                {
+                                    width2 = width2 * -1; //we want to move down if we are above zero
+                                }
+                                if (updown != 0)
+                                {
+                                    fartY = fartY + width2;
+                                }
+                                   
+                                // smrtEnemy.transform.position = smrtEnemy.transform.position + new Vector3(smrtEnemy.transform.position.x, smrtEnemy.transform.position.y + width2, 0.0f);
+                            }
+                            //   smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
+                            if (otherColliders.Length > 1)//  if (otherCollider.transform.position.z < smrtEnemy.transform.position.z)
+                            {
+                                isUnderneath = false;
+                            }
+                        }
+                        //   break;
+                    }
+                }
+                catch
+                {
+                    GameObject smrtEnemy = this.gameObject;
+
+                    BoxCollider2D myCollider = smrtEnemy.GetComponent<BoxCollider2D>();
+                    Collider2D[] otherColliders = Physics2D.OverlapAreaAll(myCollider.bounds.min, myCollider.bounds.max);
+
+                    // Check for any colliders that are on top
+                    bool isUnderneath = false;
+                    //  foreach (var otherCollider in otherColliders)
+                    //{
+
+                    if (otherColliders.Length > 1) //    if (otherCollider.transform.position.z < smrtEnemy.transform.position.z)
+                    {
+                        int collideLocation = 0;
+                        //we want to get the colliding object
+                        for (int i=0;i<otherColliders.Length;i++)
+                        {
+                            if (otherColliders[i].gameObject.CompareTag("ShipIndest"))
+                            {
+                                collideLocation = i;
+                                break;
+                            }
+                        }
+                        isUnderneath = true;
+                        while ((isUnderneath)) //You have someone with a collider here
+                        {
+                            if (fartX != 0)
+                            {
+                                var renderer2 = otherColliders[collideLocation].GetComponent<Renderer>(); //we always want the first object of the array ;/
+                                float width2 = renderer2.bounds.size.x;
+                                if (transform.position.x > 0)
+                                {
+                                    width2 = width2 * -1; //we want to move left if we are above zero
+                                }
+                                if (leftright != 0)
+                                {
+                                    fartX = fartX + width2;
+                                    dasMoved = true;
+                                }
+                                  
+                                // smrtEnemy.transform.position = smrtEnemy.transform.position + new Vector3(smrtEnemy.transform.position.x + width2, smrtEnemy.transform.position.y, 0.0f);
+                            }
+                            if (fartY != 0)
+                            {
+
+                                var renderer2 = otherColliders[collideLocation].GetComponent<Renderer>(); //we always want the first object of the array ;/
+                                float width2 = renderer2.bounds.size.y;
+                                if (transform.position.y > 0)
+                                {
+                                    width2 = width2 * -1; //we want to move down if we are above zero
+                                }
+                                if (updown != 0)
+                                {
+                                    fartY = fartY + width2;
+                                    dasMoved = true;
+                                }
+                                   
+                                //  smrtEnemy.transform.position = smrtEnemy.transform.position + new Vector3(smrtEnemy.transform.position.x, smrtEnemy.transform.position.y + width2, 0.0f);
+                            }
+                            //   smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
+                            if (otherColliders.Length > 1)//  if (otherCollider.transform.position.z < smrtEnemy.transform.position.z)
+                            {
+                                isUnderneath = false;
+                            }
+                        }
+                        //   break;
+                    }
+                }
+                if (dasMoved==true)
+                {
+                    transform.position = new Vector2(fartX, fartY); //adjust position based on what we calculated above
+                }
+             
 
                 // transform.position = new Vector2(Mathf.Repeat(transform.position.x, aWidth), Mathf.Repeat(transform.position.y, aHeight));
             }

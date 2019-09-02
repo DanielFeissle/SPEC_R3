@@ -323,6 +323,7 @@
     <Compile Include="Assets\scripts\tprollSpawn.cs" />
     <Compile Include="Assets\scripts\UI_Buttons\Pause_Quit.cs" />
     <Compile Include="Assets\scripts\UI_Buttons\Pause_Resume.cs" />
+    <Compile Include="Assets\scripts\VertMinusCameraFOV.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Shaders\CustomSwapTwo.shader" />
