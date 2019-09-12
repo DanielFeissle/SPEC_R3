@@ -46,8 +46,8 @@ public class playerController : MonoBehaviour {
         Transform ff = blast.GetComponent<Transform>();
         blastLoc = ff.transform.position;
 
-     
 
+        nextUsage2 = -10;
 
         ff.GetComponent<SpriteRenderer>().enabled = false;
         ff.GetComponent<AudioSource>().enabled = false;
@@ -60,6 +60,7 @@ public class playerController : MonoBehaviour {
 	}
     private void OnLevelWasLoaded(int level)
     {
+        Start(); //this runs first before start, so we should call it twice...
         transform.position = new Vector2(7.6f,-11.2f);
         rb.velocity = Vector3.zero;
         GameObject blast = GameObject.Find("shipBlast");
@@ -89,8 +90,9 @@ public class playerController : MonoBehaviour {
             SceneManager.LoadScene("scenePicker_arc"); //reload stage
             nextUsage2 = Time.time + 2.0f; //it is on display
         }
-
-        if (Time.time > 4)
+        GameObject transportShip = GameObject.Find("transportShip");
+        masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
+        if (Time.time > 4 && introShip.introScene == false)
         {
             float moveVertical = Input.GetAxis("Vertical");
 
@@ -122,8 +124,7 @@ public class playerController : MonoBehaviour {
                 rotation = rotation + Time.deltaTime;
             }
             //  transform.Rotate(new Vector3(0.0f, 0.0f, rotation));
-            GameObject transportShip = GameObject.Find("transportShip");
-            masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
+          
 
             GameObject LeftDoor3 = GameObject.Find("bodyShip(L)");
             Transform LeftFound2 = LeftDoor3.GetComponent<Transform>();
@@ -209,10 +210,10 @@ public class playerController : MonoBehaviour {
                 float fun2 = Mathf.Lerp(0, 0, noise);
                 FoundFX2.intensity = fun2 * 14;
             }
-           
+            //9-8-19 audio mute idea
+           // GameObject.FindWithTag("Steve").audio.mute = true;
 
 
-         
             if (Input.GetButton("Fire1"))
             {
                 if (Time.time > nextUsage) //delete otherwise

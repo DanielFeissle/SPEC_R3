@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class objectMove : MonoBehaviour {
     private Rigidbody2D rb;
-
+   public AudioClip whoosh1;
+    bool AudioReset = false;
     // Use this for initialization
     void Start () {
+        AudioReset = true;
         rb = GetComponent<Rigidbody2D>();
         System.Random blarg = new System.Random();
         int objSpeed = UnityEngine.Random.Range(-250, 250);
@@ -21,8 +23,21 @@ public class objectMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        //9-8-19 gameobject speed sfx
+        //you need to make sure to add audio clips to the prefabs!
+        GameObject WhereEsPlaya = GameObject.Find("PlayerShip");
+        Transform PlayerFound = WhereEsPlaya.GetComponent<Transform>();
+        Rigidbody2D PlayerFoundSpeed = WhereEsPlaya.GetComponent<Rigidbody2D>();
+        float dist = Vector3.Distance(PlayerFound.position, transform.position);
+        if (dist<0.75f && (rb.velocity.magnitude>3 || PlayerFoundSpeed.velocity.magnitude>3) && AudioReset==true)
+        {
+            AudioReset = false;
+            AudioSource.PlayClipAtPoint(whoosh1, new Vector3(transform.position.x, transform.position.y, 0.0f));
+            AudioSource.PlayClipAtPoint(whoosh1, new Vector3(transform.position.x, transform.position.y, 0.0f));
+            AudioSource.PlayClipAtPoint(whoosh1, new Vector3(transform.position.x, transform.position.y, 0.0f));
+        }
+
+    }
     float fartX = 0.0f;
     float fartY = 0.0f;
     private void OnTriggerEnter2D(Collider2D other)
@@ -32,6 +47,7 @@ public class objectMove : MonoBehaviour {
 
         try
         {
+            AudioReset = true;
             GameObject Cam = GameObject.Find("Main Camera");
             Transform ff = Cam.GetComponent<Transform>();
             //   transform.position = new Vector2(ff.position.x, ff.position.y);

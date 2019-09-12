@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class arc_sceneSelector : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    System.Random randStage = new System.Random();
+    // Use this for initialization
+    void Start () {
+      int getNext=  randStage.Next(100);
         //this is used for the score attack/arcade mode
         //plan is for four different enemy stages. they are as follows:
         //1. Derlictr space ship
@@ -14,7 +15,15 @@ public class arc_sceneSelector : MonoBehaviour {
         //3. Rings of saturn (inserrt name)
         //4. Forever falling in atmpsphere (-gravity enabled with objects falling forevear ---hey! space is big. 
         //5. nothing (how org... grab the item and leave...)
-        SceneManager.LoadScene("stage"); //this is the first stage name
+        if (getNext<50)
+        {
+            SceneManager.LoadScene("stage"); //this is the first stage name
+        }
+        else
+        {
+            SceneManager.LoadScene("stage_asteroids"); //this is asteroids stage, with 3 different asteroid functions
+        }
+      
     }
 	
 	// Update is called once per frame
