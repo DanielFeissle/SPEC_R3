@@ -12,9 +12,15 @@ public class playerController : MonoBehaviour {
     float nextUsage;
     float nextUsage2=-10;
     float delay = 0.15f; //only half delay
+    float nextUsage22;
+    float delay2 = 0.10f; //only half delay
     bool clearToLeave = false;
     float lerpTime = 0;
     public AudioClip exp5;
+    public AudioClip exp4;
+    public AudioClip exp3;
+    public AudioClip exp2;
+    public AudioClip exp1;
     int leftOpen = 0; //0-closed, 1-opening, 2-open
     public AudioClip suitCase;
     bool fireed = false;
@@ -53,11 +59,72 @@ public class playerController : MonoBehaviour {
         ff.GetComponent<AudioSource>().enabled = false;
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private int Xbox_One_Controller = 0;
+    private int PS4_Controller = 0;
+    bool controlerUsed = false;
+    // Update is called once per frame
+    void Update () {
+        //this will help limit the speed gaps gained by the new attempt at detecting if an object is inside another (9-14-19)
+        if (rb.velocity.magnitude > 8) //max speed is this
+        {
+            rb.velocity = rb.velocity.normalized * 8;
+        }
+
+
+
+        //https://answers.unity.com/questions/131899/how-do-i-check-what-input-device-is-currently-beei.html
+
+        string[] names = Input.GetJoystickNames();
+        for (int x = 0; x < names.Length; x++)
+        {
+            print(names[x].Length);
+            print(names[x]);
+            if (names[x].Length == 0)
+            {
+                //disconnected, switch back to mouse/keyboard
+                controlerUsed = false;
+                PS4_Controller = 0;
+                Xbox_One_Controller = 0;
+            }
+                if (names[x].Contains("PS"))
+            {
+              //  print("PS* CONTROLLER IS CONNECTED");
+                PS4_Controller = 1;
+                Xbox_One_Controller = 0;
+            }
+            if (names[x].Contains("Xbox"))
+            {
+              //  print("XBOX ONE CONTROLLER IS CONNECTED");
+                //set a controller bool to true
+                PS4_Controller = 0;
+                Xbox_One_Controller = 1;
+
+            }
+        }
+
+        if (names.Length == 0)
+        {
+            //disconnected, switch back to mouse/keyboard
+            controlerUsed = false;
+            PS4_Controller = 0;
+            Xbox_One_Controller = 0;
+        }
+        if (Xbox_One_Controller == 1)
+        {
+            //do something
+            controlerUsed = true;
+        }
+        else if (PS4_Controller == 1)
+        {
+            //do something
+            controlerUsed = true;
+        }
+        else
+        {
+            // assumption of mouse and keyboard
+            controlerUsed = false;
+        }
+    }
     private void OnLevelWasLoaded(int level)
     {
         Start(); //this runs first before start, so we should call it twice...
@@ -94,7 +161,12 @@ public class playerController : MonoBehaviour {
         masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
         if (Time.time > 4 && introShip.introScene == false)
         {
-            float moveVertical = Input.GetAxis("Vertical");
+            float moveVertical=0;
+            Debug.Log("Controller" + controlerUsed);
+            if (controlerUsed==false)
+            {
+                moveVertical = Input.GetAxis("Vertical");
+            }
 
             float moveHorizantal = Input.GetAxis("Horizontal");
 
@@ -218,7 +290,39 @@ public class playerController : MonoBehaviour {
             {
                 if (Time.time > nextUsage) //delete otherwise
                 {
-                    AudioSource.PlayClipAtPoint(exp5, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                    int randSFX= UnityEngine.Random.Range(1, 6);
+                    Debug.Log("Your random sfx"+randSFX);
+                    if (randSFX==1)
+                    {
+                        AudioSource.PlayClipAtPoint(exp5, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                        AudioSource.PlayClipAtPoint(exp5, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                        AudioSource.PlayClipAtPoint(exp5, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                    }
+                    else if (randSFX==2)
+                    {
+                        AudioSource.PlayClipAtPoint(exp4, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                        AudioSource.PlayClipAtPoint(exp4, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                        AudioSource.PlayClipAtPoint(exp4, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                    }
+                    else if (randSFX == 3)
+                    {
+                        AudioSource.PlayClipAtPoint(exp3, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                        AudioSource.PlayClipAtPoint(exp3, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                        AudioSource.PlayClipAtPoint(exp3, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                    }
+                    else if (randSFX == 4)
+                    {
+                        AudioSource.PlayClipAtPoint(exp2, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                        AudioSource.PlayClipAtPoint(exp2, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                        AudioSource.PlayClipAtPoint(exp2, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                    }
+                    else if (randSFX == 5)
+                    {
+                        AudioSource.PlayClipAtPoint(exp1, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                        AudioSource.PlayClipAtPoint(exp1, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                        AudioSource.PlayClipAtPoint(exp1, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                    }
+                    
                     GameObject PoopPEE = Instantiate(Resources.Load("shot")) as GameObject;
                     PoopPEE.name = "playerShot";
 
@@ -671,6 +775,7 @@ public class playerController : MonoBehaviour {
                     MasterController backEnd = MastCont.GetComponent<MasterController>();
 
                     GameObject resetthis = GameObject.Find("transportShip");
+                    
                     Transform respos = resetthis.GetComponent<Transform>();
                     Rigidbody2D fffuuunn = resetthis.GetComponent<Rigidbody2D>();
 
@@ -698,7 +803,7 @@ public class playerController : MonoBehaviour {
                    Rigidbody2D shipGone = shipDash.GetComponent<Rigidbody2D>();
                     
                     shipGone.AddForce(new Vector2(0.0f, 999999));
-
+                    
                 }
             }
             // Debug.Log("Object is no longer visible");
@@ -707,5 +812,46 @@ public class playerController : MonoBehaviour {
             fartY = 0.0f;
         }
       
+    }
+    //9-14-19
+    int colli = 0;
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        colli = 0;
+        
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        colli = 0;
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform.localScale.y>.5f || collision.gameObject.CompareTag("ShipIndest"))
+        {
+            //if it is smaller, the player should not get stuck in it...
+       
+        GameObject transportShip = GameObject.Find("transportShip");
+        masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
+        if (introShip.introScene == false)
+        {
+            // rb.AddRelativeForce(Vector3.up * 25 * Time.deltaTime * speed*-1);
+            if (colli == 10)
+            {
+                rb.velocity = new Vector2(-collision.relativeVelocity.x, -collision.relativeVelocity.y)*3;
+            }
+
+
+            if (colli >11)
+            {
+                Debug.Log("player is stuck");
+                transform.position = new Vector3(transform.position.x + .3f, transform.position.y + .3f);
+            }
+            if (Time.time > nextUsage22) //delete otherwise
+            {
+                colli = colli + 1;
+                nextUsage22 = Time.time + delay2; //it is on display
+            }
+        }
+        }
     }
 }

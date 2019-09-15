@@ -10,19 +10,34 @@ public class HullMove : MonoBehaviour {
     public AudioClip whoosh1;
     float delay = 2.5f; //only half delay
     float nextUsage;
+    public AudioSource AudSrc;
+    System.Random blarg = new System.Random();
+    AudioClip _audio;
+    AudioClip _audio2;
+    AudioClip _audio3;
+    AudioClip _audio4;
+    AudioClip _audio5;
     // Use this for initialization
     void Start () {
-
+        AudioSource AudSrc = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
         m_Renderer = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody2D>();
-        System.Random blarg = new System.Random();
-      //  int objSpeed = UnityEngine.Random.Range(-250, 250);
-      //  int objSpeedY = UnityEngine.Random.Range(-250, 250);
+
+        //  int objSpeed = UnityEngine.Random.Range(-250, 250);
+        //  int objSpeedY = UnityEngine.Random.Range(-250, 250);
         //  Vector3 position = new Vector3(UnityEngine.Random.Range(-10.0f, 10.0f), 0, UnityEngine.Random.Range(-10.0f, 10.0f));
         //int objRotation = UnityEngine.Random.Range(-100, 100);
-       // rb.AddForce(transform.up * objSpeed);
-       // rb.AddForce(transform.up * objSpeedY);
-       // rb.AddTorque(objRotation);
+        // rb.AddForce(transform.up * objSpeed);
+        // rb.AddForce(transform.up * objSpeedY);
+        // rb.AddTorque(objRotation);
+
+
+
+         _audio = Resources.Load<AudioClip>("_FX\\SFX\\hullCrash1");
+         _audio2 = Resources.Load<AudioClip>("_FX\\SFX\\hullCrash2");
+         _audio3 = Resources.Load<AudioClip>("_FX\\SFX\\hullCrash3");
+         _audio4 = Resources.Load<AudioClip>("_FX\\SFX\\hullCrash4");
+         _audio5 = Resources.Load<AudioClip>("_FX\\SFX\\hullCrash5");
     }
 	
 	// Update is called once per frame
@@ -121,6 +136,56 @@ public class HullMove : MonoBehaviour {
 
 
 
+
+    }
+
+    // AudioClip clip2 = Resources.Load<AudioClip>("Sounds/cube_up");
+    //  AudioClip clip3 = Resources.Load("Sounds/cube_onslot", typeof(AudioClip)) as AudioClip;
+    //9-15-19
+    //better method of dynamically calling sound effects viag scripts
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        try
+        {
+            if (collision.gameObject.CompareTag("ShipIndest")) //PlayerShot
+            { //we do not want the player shot to make this noise
+                if (collision.relativeVelocity.magnitude > .5f || this.rb.velocity.magnitude > .5f)
+                {
+                    AudioSource AudSrc = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
+                    AudSrc.volume = .30f;
+                    //  audioSource.PlayOneShot(clip1);
+                    int rando = blarg.Next(100);
+                    if (rando < 20)
+                    {
+                        AudSrc.PlayOneShot(_audio2);
+                    }
+                    else if (rando < 40)
+                    {
+                        AudSrc.PlayOneShot(_audio3);
+                    }
+                    else if (rando < 60)
+                    {
+                        AudSrc.PlayOneShot(_audio4);
+                    }
+                    else if (rando < 80)
+                    {
+                        AudSrc.PlayOneShot(_audio5);
+                    }
+                    else
+                    {
+                        AudSrc.PlayOneShot(_audio);
+                    }
+
+                    // Debug.Log("COLLISION SOUND SHOULD PLAY!!");
+                }
+            }
+
+        }
+       catch (Exception ex)
+        {
+           
+        }
 
     }
 

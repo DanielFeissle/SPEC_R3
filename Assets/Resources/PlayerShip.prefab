@@ -136,7 +136,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  exp5: {fileID: 8300000, guid: 62319c07835e71042a950064ad678bb0, type: 3}
+  exp5: {fileID: 8300000, guid: 5718430d8e38c2345b0b4765e5aa3f74, type: 3}
+  exp4: {fileID: 8300000, guid: 60e10ad58b21d8c4cae1f6f87da355f4, type: 3}
+  exp3: {fileID: 8300000, guid: c242740a1c7c5504b9b8a42b1181c5c2, type: 3}
+  exp2: {fileID: 8300000, guid: 03f81c11a4f88194d92ae0adc83a836a, type: 3}
+  exp1: {fileID: 8300000, guid: 9956e20f55f0c9b4ab838cd315010e49, type: 3}
   suitCase: {fileID: 8300000, guid: f697437bc00377d4e83ab6334cedcd99, type: 3}
   aWidth: 80
   aHeight: 60
@@ -151,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe79227daf6bf6b4796b6b8feb2651db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btn_pauser: -1
 --- !u!212 &212649441706840268
 SpriteRenderer:
   m_ObjectHideFlags: 1

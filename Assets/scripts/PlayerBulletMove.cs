@@ -8,6 +8,12 @@ using UnityEngine;
 public class PlayerBulletMove : MonoBehaviour {
     private Rigidbody2D rb;
     public float speed=50;
+    AudioClip _audio;
+    AudioClip _audio2;
+    AudioClip _audio3;
+    System.Random blarg = new System.Random();
+    float delay = 5; //only half delay
+    float nextUsage;
     // Use this for initialization
     void Start () {
         GameObject dad5 = GameObject.Find("PlayerShip");
@@ -18,15 +24,69 @@ public class PlayerBulletMove : MonoBehaviour {
         Vector3 fff = Fun1.transform.up;
        // Debug.Log("FFF:" + fff);
          rb.AddRelativeForce(fff * 17 * speed);
-   //     Debug.Log(gameObject.name);
+        //     Debug.Log(gameObject.name);
+
+        _audio = Resources.Load<AudioClip>("_FX\\SFX\\generalImpact3");
+        _audio2 = Resources.Load<AudioClip>("_FX\\SFX\\generalImpact4");
+        _audio3 = Resources.Load<AudioClip>("_FX\\SFX\\generalImpact5");
+        delay = 5;
+        nextUsage = Time.time + delay; //it is on display
     }
     public float torque;
     // Update is called once per frame
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void FixedUpdate()
     {
-        if (!collision.gameObject.CompareTag("PlayerShot"))
+
+        /*   GameObject WhereEsPlaya = GameObject.Find("PlayerShip");
+           Transform PlayerFound = WhereEsPlaya.GetComponent<Transform>();
+           Rigidbody2D PlayerFoundSpeed = WhereEsPlaya.GetComponent<Rigidbody2D>();
+           float dist = Vector3.Distance(PlayerFound.position, transform.position);
+           */
+        if (Time.time > nextUsage) //continue scrolling
         {
             Destroy(this.gameObject);
+
+            nextUsage = Time.time + delay; //it is on display
+        }
+
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        try
+        {
+           
+          //since this is directly from the bullet (which will be deleted) we do not want to do checks...
+                    AudioSource AudSrc = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
+                    AudSrc.volume = .4f;
+                    //  audioSource.PlayOneShot(clip1);
+                    int rando = blarg.Next(100);
+                    if (rando < 33)
+                    {
+                        AudSrc.PlayOneShot(_audio2);
+                    }
+                    else if (rando < 66)
+                    {
+                        AudSrc.PlayOneShot(_audio3);
+                    }
+                    else
+                    {
+                        AudSrc.PlayOneShot(_audio);
+                    }
+
+                    // Debug.Log("COLLISION SOUND SHOULD PLAY!!");
+
+
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+        if (!collision.gameObject.CompareTag("PlayerShot"))
+        {
+            // Destroy(this.gameObject);
+            transform.position = new Vector2(100, 100);
             if (!collision.gameObject.CompareTag("Player"))
             {
 

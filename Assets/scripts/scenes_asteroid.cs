@@ -198,7 +198,7 @@ public class scenes_asteroid : MonoBehaviour {
            int objectCount = GameObject.FindGameObjectsWithTag("SpaceJunk").Length;
             Debug.Log("Objects on asteroid screen: " + objectCount);
 
-            if (objectCount<777)
+            if (objectCount<444)
             {
                 GameObject AsteroidBelt = Instantiate(Resources.Load("Asteroid2019")) as GameObject;
                 AsteroidBelt.name = "Asteroid2019";

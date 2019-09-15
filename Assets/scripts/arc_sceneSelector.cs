@@ -15,6 +15,8 @@ public class arc_sceneSelector : MonoBehaviour {
         //3. Rings of saturn (inserrt name)
         //4. Forever falling in atmpsphere (-gravity enabled with objects falling forevear ---hey! space is big. 
         //5. nothing (how org... grab the item and leave...)
+        //6. Large derilict ship hull (this ship itself, in a tight box)
+        //7. Planet side
         if (getNext<50)
         {
             SceneManager.LoadScene("stage"); //this is the first stage name

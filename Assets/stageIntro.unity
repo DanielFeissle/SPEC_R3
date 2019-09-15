@@ -12429,16 +12429,16 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114441895021040460, guid: 89cb05d34939b234a8054d2319dcce66,
-        type: 2}
-      propertyPath: exp5
-      value: 
-      objectReference: {fileID: 8300000, guid: 9744c25e49c2a664ca2ca7a972911ede, type: 3}
     - target: {fileID: 212649441706840268, guid: 89cb05d34939b234a8054d2319dcce66,
         type: 2}
       propertyPath: m_SortingOrder
       value: 133
       objectReference: {fileID: 0}
+    - target: {fileID: 114441895021040460, guid: 89cb05d34939b234a8054d2319dcce66,
+        type: 2}
+      propertyPath: exp5
+      value: 
+      objectReference: {fileID: 8300000, guid: 5718430d8e38c2345b0b4765e5aa3f74, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89cb05d34939b234a8054d2319dcce66, type: 2}
   m_IsPrefabParent: 0
