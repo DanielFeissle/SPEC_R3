@@ -11,6 +11,9 @@ public class PlayerBulletMove : MonoBehaviour {
     AudioClip _audio;
     AudioClip _audio2;
     AudioClip _audio3;
+    AudioClip _audio4;
+    AudioClip _audio5;
+    AudioClip _audio6;
     System.Random blarg = new System.Random();
     float delay = 5; //only half delay
     float nextUsage;
@@ -23,12 +26,15 @@ public class PlayerBulletMove : MonoBehaviour {
         //  rb.AddForce((movement * speed) * 2);
         Vector3 fff = Fun1.transform.up;
        // Debug.Log("FFF:" + fff);
-         rb.AddRelativeForce(fff * 17 * speed);
+         rb.AddRelativeForce(fff * 9 * speed);
         //     Debug.Log(gameObject.name);
 
         _audio = Resources.Load<AudioClip>("_FX\\SFX\\generalImpact3");
         _audio2 = Resources.Load<AudioClip>("_FX\\SFX\\generalImpact4");
         _audio3 = Resources.Load<AudioClip>("_FX\\SFX\\generalImpact5");
+        _audio4 = Resources.Load<AudioClip>("_FX\\SFX\\generalImpact6");
+        _audio5 = Resources.Load<AudioClip>("_FX\\SFX\\generalImpact7");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\generalImpact8");
         delay = 5;
         nextUsage = Time.time + delay; //it is on display
     }
@@ -37,16 +43,20 @@ public class PlayerBulletMove : MonoBehaviour {
     private void FixedUpdate()
     {
 
-        /*   GameObject WhereEsPlaya = GameObject.Find("PlayerShip");
+        GameObject WhereEsPlaya = GameObject.Find("PlayerShip");
            Transform PlayerFound = WhereEsPlaya.GetComponent<Transform>();
            Rigidbody2D PlayerFoundSpeed = WhereEsPlaya.GetComponent<Rigidbody2D>();
            float dist = Vector3.Distance(PlayerFound.position, transform.position);
-           */
+         
         if (Time.time > nextUsage) //continue scrolling
         {
             Destroy(this.gameObject);
 
             nextUsage = Time.time + delay; //it is on display
+        }
+        if (rb.velocity.sqrMagnitude<2 && dist>1)
+        {
+            GameObject.Destroy(this.gameObject);
         }
 
     }
@@ -61,15 +71,27 @@ public class PlayerBulletMove : MonoBehaviour {
                     AudSrc.volume = .4f;
                     //  audioSource.PlayOneShot(clip1);
                     int rando = blarg.Next(100);
-                    if (rando < 33)
+                    if (rando < 16)
                     {
                         AudSrc.PlayOneShot(_audio2);
                     }
-                    else if (rando < 66)
+                    else if (rando < 32)
                     {
                         AudSrc.PlayOneShot(_audio3);
                     }
-                    else
+            else if (rando < 48)
+            {
+                AudSrc.PlayOneShot(_audio4);
+            }
+            else if (rando < 64)
+            {
+                AudSrc.PlayOneShot(_audio5);
+            }
+            else if (rando < 80)
+            {
+                AudSrc.PlayOneShot(_audio6);
+            }
+            else
                     {
                         AudSrc.PlayOneShot(_audio);
                     }
@@ -86,7 +108,27 @@ public class PlayerBulletMove : MonoBehaviour {
         if (!collision.gameObject.CompareTag("PlayerShot"))
         {
             // Destroy(this.gameObject);
-            transform.position = new Vector2(100, 100);
+            //  transform.position = new Vector2(100, 100);
+            //    transform.Rotate(0, 0, 180 * 1);
+          //  rb.velocity = Vector3.zero;
+          try
+            {
+                //     rb.velocity = new Vector2(collision.relativeVelocity.x, collision.relativeVelocity.y) * 0.25f; //+blarg.Next(0,0)
+                //   rrb2.AddForce(-transform.up * 250);
+             //////        rb.velocity = Vector3.zero;
+                //   rb.transform.rotation = new Vector3(0.0f, 0.0f, 180);
+            ///////      transform.Rotate(0, 0, blarg.Next(45,135) * -1);
+             ////////////         rb.AddForce(transform.up * 2.25f);
+               rb.velocity = new Vector2(collision.relativeVelocity.x+blarg.Next(-30,30), collision.relativeVelocity.y+blarg.Next(-30,30)) * 0.05f;
+                this.transform.localScale = this.transform.localScale / 2;
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex);
+            }
+         
+        //    transform.Rotate(0, 0, blarg.Next(180));
+            // rb.velocity = new Vector2(-collision.relativeVelocity.x, -collision.relativeVelocity.y) * 3;
             if (!collision.gameObject.CompareTag("Player"))
             {
 

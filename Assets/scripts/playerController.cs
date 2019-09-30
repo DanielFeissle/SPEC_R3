@@ -140,10 +140,20 @@ public class playerController : MonoBehaviour {
     float fartY = 0.0f;
     bool doorActive = false;
     float timeOpne = 0;
-  
+
+
+    Scene m_Scene;
+    string sceneName;
+
     private void FixedUpdate()
     {
-        if (Time.time > nextUsage2 && insideShip== true) //delete otherwise
+        m_Scene = SceneManager.GetActiveScene();
+        sceneName = m_Scene.name;
+        if (sceneName.Contains("stage"))
+        {
+
+
+        if (Time.time > nextUsage2 && insideShip == true) //delete otherwise
         {
             Debug.Log(nextUsage2);
             clearToLeave = false;
@@ -161,9 +171,9 @@ public class playerController : MonoBehaviour {
         masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
         if (Time.time > 4 && introShip.introScene == false)
         {
-            float moveVertical=0;
+            float moveVertical = 0;
             Debug.Log("Controller" + controlerUsed);
-            if (controlerUsed==false)
+            if (controlerUsed == false)
             {
                 moveVertical = Input.GetAxis("Vertical");
             }
@@ -172,12 +182,12 @@ public class playerController : MonoBehaviour {
 
             //if (Input.GetButtonDown("360_RightBumper"))
             float TriggerRight = Input.GetAxis("Cont_Trigger");
-           //   Debug.Log("Your Value for Trigger is " + TriggerRight);
-            if (TriggerRight!=0) //controller support
+            //   Debug.Log("Your Value for Trigger is " + TriggerRight);
+            if (TriggerRight != 0) //controller support
             {
-                moveVertical = TriggerRight*-1;
+                moveVertical = TriggerRight * -1;
             }
-           
+
             moveHorizantal = moveHorizantal * 2;
             if (moveHorizantal > 0)
             {
@@ -196,27 +206,27 @@ public class playerController : MonoBehaviour {
                 rotation = rotation + Time.deltaTime;
             }
             //  transform.Rotate(new Vector3(0.0f, 0.0f, rotation));
-          
+
 
             GameObject LeftDoor3 = GameObject.Find("bodyShip(L)");
             Transform LeftFound2 = LeftDoor3.GetComponent<Transform>();
             float dist = Vector3.Distance(LeftFound2.position, transform.position);
-          //  print("Distance to other: " + dist);
+            //  print("Distance to other: " + dist);
 
-            if (dist<3 && leftOpen == 0 && doorsOpen == true) //door should be closed and we want to open the door // doorsOpen==false && 
+            if (dist < 3 && leftOpen == 0 && doorsOpen == true) //door should be closed and we want to open the door // doorsOpen==false && 
             {
                 PlayerClose = true;
                 doorsOpen = true;
-               // introShip.openDoor = 1;
+                // introShip.openDoor = 1;
                 //doorActive = true;
             }
-            else if (dist > 3  && leftOpen==2 && doorsOpen==false) //we want to close the door, the door should be open //&& doorsOpen == true
+            else if (dist > 3 && leftOpen == 2 && doorsOpen == false) //we want to close the door, the door should be open //&& doorsOpen == true
             {
                 //  doorActive = false;
                 PlayerClose = true;
                 doorsOpen = false;
-            //    introShip.openDoor = 0; //door is closed
-            //    leftOpen = 0;
+                //    introShip.openDoor = 0; //door is closed
+                //    leftOpen = 0;
             }
 
             if (leftOpen == 2 || leftOpen == 3) //cause lights to blink (8-18-19)
@@ -229,7 +239,7 @@ public class playerController : MonoBehaviour {
                 //  FoundFX.range = RangeAttribute.
                 float noise = Mathf.PerlinNoise(random, Time.time);
                 float fun = Mathf.Lerp(0, 2, noise);
-                FoundFX.intensity = fun*25;
+                FoundFX.intensity = fun * 25;
 
                 GameObject LoadingLight2 = GameObject.Find("LoadingLightB");
                 SpriteRenderer FoundLight2 = LoadingLight2.GetComponent<SpriteRenderer>();
@@ -241,9 +251,9 @@ public class playerController : MonoBehaviour {
                 float fun2 = Mathf.Lerp(0, 2, noise2);
                 FoundFX2.intensity = fun2 * 25;
             }
-            else if (leftOpen==1 ) //door is closing
+            else if (leftOpen == 1) //door is closing
             {
-                
+
                 GameObject LoadingLight = GameObject.Find("LoadingLightA");
                 SpriteRenderer FoundLight = LoadingLight.GetComponent<SpriteRenderer>();
                 float t = Mathf.PingPong(Time.time, 2.0f) / 2.0f;
@@ -262,7 +272,7 @@ public class playerController : MonoBehaviour {
                 float fun2 = Mathf.Lerp(0, 2, noise);
                 FoundFX2.intensity = fun2 * 14;
             }
-            else if (leftOpen==0) //door is closed
+            else if (leftOpen == 0) //door is closed
             {
                 GameObject LoadingLight = GameObject.Find("LoadingLightA");
                 SpriteRenderer FoundLight = LoadingLight.GetComponent<SpriteRenderer>();
@@ -283,22 +293,22 @@ public class playerController : MonoBehaviour {
                 FoundFX2.intensity = fun2 * 14;
             }
             //9-8-19 audio mute idea
-           // GameObject.FindWithTag("Steve").audio.mute = true;
+            // GameObject.FindWithTag("Steve").audio.mute = true;
 
 
             if (Input.GetButton("Fire1"))
             {
                 if (Time.time > nextUsage) //delete otherwise
                 {
-                    int randSFX= UnityEngine.Random.Range(1, 6);
-                    Debug.Log("Your random sfx"+randSFX);
-                    if (randSFX==1)
+                    int randSFX = UnityEngine.Random.Range(1, 6);
+                    Debug.Log("Your random sfx" + randSFX);
+                    if (randSFX == 1)
                     {
                         AudioSource.PlayClipAtPoint(exp5, new Vector3(transform.position.x, transform.position.y, 0.0f));
                         AudioSource.PlayClipAtPoint(exp5, new Vector3(transform.position.x, transform.position.y, 0.0f));
                         AudioSource.PlayClipAtPoint(exp5, new Vector3(transform.position.x, transform.position.y, 0.0f));
                     }
-                    else if (randSFX==2)
+                    else if (randSFX == 2)
                     {
                         AudioSource.PlayClipAtPoint(exp4, new Vector3(transform.position.x, transform.position.y, 0.0f));
                         AudioSource.PlayClipAtPoint(exp4, new Vector3(transform.position.x, transform.position.y, 0.0f));
@@ -322,7 +332,7 @@ public class playerController : MonoBehaviour {
                         AudioSource.PlayClipAtPoint(exp1, new Vector3(transform.position.x, transform.position.y, 0.0f));
                         AudioSource.PlayClipAtPoint(exp1, new Vector3(transform.position.x, transform.position.y, 0.0f));
                     }
-                    
+
                     GameObject PoopPEE = Instantiate(Resources.Load("shot")) as GameObject;
                     PoopPEE.name = "playerShot";
 
@@ -334,7 +344,7 @@ public class playerController : MonoBehaviour {
                 }
 
             }
-            else if (introShip.openDoor==1 || doorActive == true || PlayerClose==true) //(Input.GetButton("Fire2") || doorActive == true)
+            else if (introShip.openDoor == 1 || doorActive == true || PlayerClose == true) //(Input.GetButton("Fire2") || doorActive == true)
             {
                 introShip.openDoor = 2; //door is now open
                 //  GameObject CamFind = GameObject.Find("Main Camera");
@@ -432,8 +442,8 @@ public class playerController : MonoBehaviour {
             //  Vector3 movement = new Vector3(moveHorizantal, moveVertical, 0.0f);
             //  rb.AddForce((movement * speed) * 2);
 
-           // GameObject transportShip = GameObject.Find("transportShip");
-           // masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
+            // GameObject transportShip = GameObject.Find("transportShip");
+            // masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
             //the main reason for this is to ensure the player is in a safe spawn location
             if (introShip.introScene == false) //enable standard game rules
             {
@@ -461,7 +471,7 @@ public class playerController : MonoBehaviour {
 
                     GameObject blast = GameObject.Find("shipBlast");
                     Transform ff = blast.GetComponent<Transform>();
-                  
+
 
                     var renderer2 = this.GetComponent<Renderer>();
                     float heighth = renderer2.bounds.size.y;
@@ -493,7 +503,7 @@ public class playerController : MonoBehaviour {
                     rb.drag = 0;
                     GameObject blast = GameObject.Find("shipBlast");
                     Transform ff = blast.GetComponent<Transform>();
-                    
+
                     ff.GetComponent<SpriteRenderer>().enabled = false;
                     ff.GetComponent<AudioSource>().enabled = false;
 
@@ -521,6 +531,7 @@ public class playerController : MonoBehaviour {
                 }
             }
         }
+    }
 
     }
     private void OnTriggerExit(Collider other)

@@ -295,6 +295,7 @@
     <Compile Include="Assets\ex.cs" />
     <Compile Include="Assets\scripts\aniNucDebrisClear.cs" />
     <Compile Include="Assets\scripts\arc_sceneSelector.cs" />
+    <Compile Include="Assets\scripts\CameraController.cs" />
     <Compile Include="Assets\scripts\enemyBaderrang.cs" />
     <Compile Include="Assets\scripts\enemyBataboy.cs" />
     <Compile Include="Assets\scripts\enemyBoxGas.cs" />
@@ -307,6 +308,8 @@
     <Compile Include="Assets\scripts\MasterController.cs" />
     <Compile Include="Assets\scripts\masterShipEnter.cs" />
     <Compile Include="Assets\scripts\mastObjMover.cs" />
+    <Compile Include="Assets\scripts\obj_falling.cs" />
+    <Compile Include="Assets\scripts\obj_ringsMover.cs" />
     <Compile Include="Assets\scripts\objectMove.cs" />
     <Compile Include="Assets\scripts\objResourceNameHold.cs" />
     <Compile Include="Assets\scripts\onScreenmassChanger.cs" />
@@ -317,6 +320,8 @@
     <Compile Include="Assets\scripts\poosplosion.cs" />
     <Compile Include="Assets\scripts\scenes.cs" />
     <Compile Include="Assets\scripts\scenes_asteroid.cs" />
+    <Compile Include="Assets\scripts\scenes_atmosphere.cs" />
+    <Compile Include="Assets\scripts\scenes_rings.cs" />
     <Compile Include="Assets\scripts\screenWrapper.cs" />
     <Compile Include="Assets\scripts\shipObjectHandle.cs" />
     <Compile Include="Assets\scripts\shotKoPoo.cs" />
@@ -324,6 +329,7 @@
     <Compile Include="Assets\scripts\tprollSpawn.cs" />
     <Compile Include="Assets\scripts\UI_Buttons\Pause_Quit.cs" />
     <Compile Include="Assets\scripts\UI_Buttons\Pause_Resume.cs" />
+    <Compile Include="Assets\scripts\ui_caseArrow.cs" />
     <Compile Include="Assets\scripts\VertMinusCameraFOV.cs" />
   </ItemGroup>
   <ItemGroup>

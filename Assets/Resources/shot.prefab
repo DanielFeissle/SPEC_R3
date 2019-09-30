@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  torque: 0
 --- !u!212 &212174477980418240
 SpriteRenderer:
   m_ObjectHideFlags: 1

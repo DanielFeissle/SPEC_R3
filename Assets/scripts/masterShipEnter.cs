@@ -8,6 +8,7 @@ public class masterShipEnter : MonoBehaviour {
     float nextUsage;
     private ParticleSystem ps;
     public AudioClip door;
+    public int pauseOperations = 0;
     // Use this for initialization
     void Start () {
        // DontDestroyOnLoad(gameObject.transform);
@@ -17,7 +18,7 @@ public class masterShipEnter : MonoBehaviour {
         rb.AddForce(transform.up * 15500);
         ps = GetComponent<ParticleSystem>();
 
-
+        pauseOperations = 0;
 
 
     }
@@ -27,10 +28,22 @@ public class masterShipEnter : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (pauseOperations == 0)
+        {
+
+      
         // transform.localPosition = transform.localPosition + new Vector3(0, .11f, 0);
         if (rb.velocity.magnitude < 2000) //max speed is this
         { 
-            rb.AddForce(transform.up * 15500);
+            if (transform.rotation.z<=.69f)
+            {
+                rb.AddForce(transform.up * 15500);
+            }
+            else //we are flat
+            {
+                rb.AddForce(transform.up *7777);
+            }
+          
 
             //ParticleSystem party = GetComponent<ParticleSystem>();
             //  var emission = ps.emission;
@@ -39,7 +52,8 @@ public class masterShipEnter : MonoBehaviour {
 
             // emission.rate = 15.0f;
         }
-        if (transform.position.y>0 && transform.position.y>-11.3)
+        
+        if (transform.position.y>0 && transform.position.y>-11.3 && this.transform.rotation.z <= .69f)
         {
             introScene = false;
           
@@ -71,10 +85,67 @@ public class masterShipEnter : MonoBehaviour {
             }
           
         }
+        else if (this.transform.rotation.z>=.69f)
+        {
+           
+            if (transform.position.x < 3 )
+            {
+                introScene = false;
+
+               
+                if (Time.time > nextUsage) //continue scrolling
+                {
+                    rb.AddForce(transform.up * 500);
+
+                    nextUsage = Time.time + delay; //it is on display
+                }
+                else
+                {
+                    //we want to drop the player into the atmosphere
+                //   rb.velocity = Vector3.zero;
+              //    rb.constraints = RigidbodyConstraints2D.FreezeAll;
+ 
+                }
+                if (openDoor == 0)
+                {
+                    openDoor = 1;
+                    rb.constraints = RigidbodyConstraints2D.None;
+                    AudioSource.PlayClipAtPoint(door, new Vector3(transform.position.x, transform.position.y, 0.0f));
+
+                }
+                if (openDoor == 2 && transform.position.y >7)
+                {
+                    openDoor = 1; //intiate the closing
+                }
+                rb.AddForce(transform.right * 25000);
+               if (this.transform.position.y>=5)
+                {
+                        pauseOperations = 1;
+                        rb.velocity = Vector3.zero;
+                        
+                        this.transform.position = new Vector2(0, 100);
+                        GameObject shipTest = GameObject.Find("PlayerShip");
+                        GameObject MastCont = GameObject.Find("Main Camera");
+                        shipTest.transform.position = MastCont.transform.position;
+                        CameraController CamControl = MastCont.GetComponent<CameraController>();
+                        CamControl.player = shipTest.gameObject;
+                        // GameObject MastCont = GameObject.Find("PlayerShip");
+                        //   MasterController backEnd = MastCont.GetComponent<MasterController>();
+                        ////       GameObject shipTest = GameObject.Find("PlayerShip");
+                        ////      GameObject fud2 = GameObject.Find("Main Camera");
+                        ////    fud2.transform.parent = shipTest.transform; //how do I put a parent with a child prefab, this is how!
+                        ///
+                    }
+            }
+
+
+            nextUsage = Time.time + delay;
+        }
         else
         {
             nextUsage = Time.time + delay;
          
+        }
         }
     }
     float fartX = 0.0f;
