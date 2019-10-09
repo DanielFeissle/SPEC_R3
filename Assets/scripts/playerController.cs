@@ -172,7 +172,7 @@ public class playerController : MonoBehaviour {
         if (Time.time > 4 && introShip.introScene == false)
         {
             float moveVertical = 0;
-            Debug.Log("Controller" + controlerUsed);
+           // Debug.Log("Controller" + controlerUsed);
             if (controlerUsed == false)
             {
                 moveVertical = Input.GetAxis("Vertical");

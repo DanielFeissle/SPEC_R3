@@ -23,6 +23,8 @@ TagManager:
   - ShipIndest
   - PlayerBlast
   - PlanRing
+  - AtmpLeft
+  - AtmpRight
   layers:
   - Default
   - TransparentFX

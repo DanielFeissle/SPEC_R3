@@ -28,7 +28,7 @@ public class masterShipEnter : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (pauseOperations == 0)
+        if (pauseOperations == 0 )//|| pauseOperations==2)
         {
 
       
@@ -52,7 +52,7 @@ public class masterShipEnter : MonoBehaviour {
 
             // emission.rate = 15.0f;
         }
-        
+       //     Debug.Log("HERE"+ this.transform.rotation.z);
         if (transform.position.y>0 && transform.position.y>-11.3 && this.transform.rotation.z <= .69f)
         {
             introScene = false;
@@ -95,7 +95,7 @@ public class masterShipEnter : MonoBehaviour {
                
                 if (Time.time > nextUsage) //continue scrolling
                 {
-                    rb.AddForce(transform.up * 500);
+                    rb.AddForce(transform.up * 7500);
 
                     nextUsage = Time.time + delay; //it is on display
                 }
@@ -117,7 +117,7 @@ public class masterShipEnter : MonoBehaviour {
                 {
                     openDoor = 1; //intiate the closing
                 }
-                rb.AddForce(transform.right * 25000);
+                rb.AddForce(transform.right * 75000);
                if (this.transform.position.y>=5)
                 {
                         pauseOperations = 1;
