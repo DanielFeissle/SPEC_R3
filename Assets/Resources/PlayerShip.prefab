@@ -141,6 +141,7 @@ MonoBehaviour:
   exp3: {fileID: 8300000, guid: c242740a1c7c5504b9b8a42b1181c5c2, type: 3}
   exp2: {fileID: 8300000, guid: 03f81c11a4f88194d92ae0adc83a836a, type: 3}
   exp1: {fileID: 8300000, guid: 9956e20f55f0c9b4ab838cd315010e49, type: 3}
+  shipShift: {fileID: 8300000, guid: f7001c5630b4d744fb300d48756ff5b6, type: 3}
   suitCase: {fileID: 8300000, guid: f697437bc00377d4e83ab6334cedcd99, type: 3}
   aWidth: 80
   aHeight: 60

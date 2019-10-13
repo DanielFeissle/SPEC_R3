@@ -14,6 +14,8 @@ public class playerController : MonoBehaviour {
     float delay = 0.15f; //only half delay
     float nextUsage22;
     float delay2 = 0.10f; //only half delay
+    float nextUsage222;
+    float delay22 = 0.10f; //only half delay
     bool clearToLeave = false;
     float lerpTime = 0;
     public AudioClip exp5;
@@ -21,6 +23,7 @@ public class playerController : MonoBehaviour {
     public AudioClip exp3;
     public AudioClip exp2;
     public AudioClip exp1;
+    public AudioClip shipShift;
     int leftOpen = 0; //0-closed, 1-opening, 2-open
     public AudioClip suitCase;
     bool fireed = false;
@@ -32,6 +35,7 @@ public class playerController : MonoBehaviour {
     Vector3 blastLoc;
     float random;
     float random2;
+    int engineCnt = 0;
     // Use this for initialization
     void Start () {
         DontDestroyOnLoad(gameObject.transform);
@@ -54,7 +58,7 @@ public class playerController : MonoBehaviour {
 
 
         nextUsage2 = -10;
-
+        engineCnt = 0;
         ff.GetComponent<SpriteRenderer>().enabled = false;
         ff.GetComponent<AudioSource>().enabled = false;
 
@@ -164,6 +168,14 @@ public class playerController : MonoBehaviour {
             Rigidbody2D respos = resetthis.GetComponent<Rigidbody2D>();
             respos.AddTorque(50);//(new Vector3(0.0f, 50000.0f,0.0f));
             //   SceneManager.LoadScene("stage"); //reload stage
+            if (SceneManager.GetActiveScene().name== "stage_atmosphere")
+                {
+                    //10-13-19 we want to return gravity to 0
+                    GameObject MastCont = GameObject.Find("PlayerShip");
+                    
+                    Rigidbody2D playerRigidBody = MastCont.GetComponent<Rigidbody2D>();
+                    playerRigidBody.gravityScale = 0;
+                }
             SceneManager.LoadScene("scenePicker_arc"); //reload stage
             nextUsage2 = Time.time + 2.0f; //it is on display
         }
@@ -459,17 +471,36 @@ public class playerController : MonoBehaviour {
                     {
                         rb.velocity = rb.velocity.normalized * 8;
                     }
-                    // Debug.Log(totspeed);
-                    rb.AddRelativeForce(Vector3.up * 25 * Time.deltaTime * speed);
+                        // Debug.Log(totspeed);
+                        Debug.Log("------------------" + totspeed);
+                        Debug.Log("==================" + rb.velocity.sqrMagnitude);
+                        if (rb.velocity.sqrMagnitude < 32  && engineCnt>10)
+                        {//increase speed, ie faster getup 10-13-19
+                            rb.AddRelativeForce(Vector3.up * 225 * Time.deltaTime * speed);
+                          
+                                  AudioSource.PlayClipAtPoint(shipShift, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                            AudioSource.PlayClipAtPoint(shipShift, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                            AudioSource.PlayClipAtPoint(shipShift, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                            engineCnt = 0;
+                        }
+                        else
+                        {
+                            rb.AddRelativeForce(Vector3.up * 55 * Time.deltaTime * speed);
+                            if (Time.time > nextUsage222) //delete otherwise
+                            {
+                                engineCnt = engineCnt + 1;
+                                nextUsage222 = Time.time + delay22; //it is on display
+                            }
+                             
+                        }
+
+                            // rb.AddRelativeForce(Vector3.right * 6);
+                            ///
 
 
-                    // rb.AddRelativeForce(Vector3.right * 6);
-                    ///
+                            //   Debug.Log("Write "+transform.position);
 
-
-                    //   Debug.Log("Write "+transform.position);
-
-                    GameObject blast = GameObject.Find("shipBlast");
+                            GameObject blast = GameObject.Find("shipBlast");
                     Transform ff = blast.GetComponent<Transform>();
 
 

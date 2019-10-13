@@ -123,6 +123,9 @@ public class objectMove : MonoBehaviour {
 
                     GameObject PoopPEE = Instantiate(Resources.Load(this.gameObject.name)) as GameObject;
                     GameObject PoopPEE2 = Instantiate(Resources.Load(this.gameObject.name)) as GameObject;
+                    //match existing gravity 10-13-19
+                    PoopPEE.GetComponent<Rigidbody2D>().gravityScale =this.gameObject.GetComponent<Rigidbody2D>().gravityScale;
+                    PoopPEE2.GetComponent<Rigidbody2D>().gravityScale = this.gameObject.GetComponent<Rigidbody2D>().gravityScale;
                     PoopPEE.name = this.gameObject.name;
                     PoopPEE2.name = this.gameObject.name;
                     Destroy(this.gameObject);

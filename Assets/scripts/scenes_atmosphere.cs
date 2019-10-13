@@ -3,13 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class scenes_atmosphere : MonoBehaviour {
-    float delay = 1.5f; //only half delay
+    float delay = 0.5f; //only half delay
     float nextUsage;
+    System.Random blarg = new System.Random();
     // Use this for initialization
     void Start () {
+
+        GameObject PlanColor = GameObject.Find("PlanetAtmosphere");
+        Light leColour = PlanColor.GetComponent<Light>();
+        // Color version
+        leColour.range = blarg.Next(100, 200);
+        Color background = new Color(
+            Random.Range(0f, .01f),
+            Random.Range(0f, .3f),
+            Random.Range(0f, 1f)
+        );
+        delay = blarg.Next(2, 5);
+        //  leColour.color = Color.gray;
+        leColour.color = background;
+
+
+
+
+
         GameObject MastCont = GameObject.Find("PlayerShip");
+        MastCont.transform.position = new Vector2(17.65f, -0.37f); //10-13-19-se want to put the player in the correct location
         Rigidbody2D playerRigidBody = MastCont.GetComponent<Rigidbody2D>();
-        playerRigidBody.gravityScale = .01f;
+        playerRigidBody.gravityScale = .11f;
         nextUsage = Time.time + delay; //it is on display
 
 
@@ -104,41 +124,41 @@ public class scenes_atmosphere : MonoBehaviour {
             int objectCount = GameObject.FindGameObjectsWithTag("SpaceJunk").Length;
             Debug.Log("Objects on asteroid screen: " + objectCount);
 
-            if (objectCount < 444)
+            if (objectCount < 1555)
             {
                 int fundas = UnityEngine.Random.Range(0, 100);
                 if (fundas < 25)
                 {
                     GameObject ExpDust = Instantiate(Resources.Load("AstMan2019")) as GameObject;
                     ExpDust.name = "AstMan2019";
-                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-90,70), UnityEngine.Random.Range(30,50));
                     ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
-                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = .5f;
+                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
                 }
                 else if (fundas < 50)
                 {
                     GameObject ExpDust = Instantiate(Resources.Load("Asteroid2017")) as GameObject;
                     ExpDust.name = "Asteroid2017";
-                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-90,70), UnityEngine.Random.Range(30,50));
                     ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
-                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = .5f;
+                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
 
                 }
                 else if (fundas < 75)
                 {
                     GameObject ExpDust = Instantiate(Resources.Load("blueWallJunk")) as GameObject;
                     ExpDust.name = "blueWallJunk";
-                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-90,70), UnityEngine.Random.Range(30,50));
                     ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 2), UnityEngine.Random.Range(1, 2));
-                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = .5f;
+                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
                 }
                 else if (fundas < 100)
                 {
                     GameObject ExpDust = Instantiate(Resources.Load("StdWall")) as GameObject;
                     ExpDust.name = "StdWall";
-                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-90,70), UnityEngine.Random.Range(30,50));
                     ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 3), UnityEngine.Random.Range(1, 2));
-                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = .5f;
+                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
                 }
 
                 //   GameObject AsteroidBelt = Instantiate(Resources.Load("atmp\\cloud2017")) as GameObject;

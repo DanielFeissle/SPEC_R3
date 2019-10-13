@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/stage_rings.unity
     guid: 470fa11091f43344696f2b6814f8b4de
+  - enabled: 1
+    path: Assets/stage_atmosphere.unity
+    guid: a20820a808a8a744687415616166cc3c

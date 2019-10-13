@@ -25,6 +25,7 @@ TagManager:
   - PlanRing
   - AtmpLeft
   - AtmpRight
+  - Cloud
   layers:
   - Default
   - TransparentFX

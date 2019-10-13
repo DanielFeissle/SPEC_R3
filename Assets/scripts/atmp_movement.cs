@@ -59,10 +59,10 @@ public class atmp_movement : MonoBehaviour {
 
                 {//so therefore we want to move it
 
-                    Debug.Log(collision.gameObject.name);
-                    if (collision.gameObject.name == "PlayerShip")
+                  //  Debug.Log(collision.gameObject.name);
+                 //   if (collision.gameObject.name == "PlayerShip")
                     {
-                        Debug.Log("SDFSDFSDF");
+                       // Debug.Log("SDFSDFSDF");
 
                         Rigidbody2D pressF = collision.gameObject.GetComponent<Rigidbody2D>();
                         //   pressF.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(speedDir*12480, 0));
@@ -70,7 +70,7 @@ public class atmp_movement : MonoBehaviour {
 
 
                         //   sdfsdfs
-                        Debug.Log("EXIT OF THAT");
+                   //     Debug.Log("EXIT OF THAT");
                     }
 
                 }

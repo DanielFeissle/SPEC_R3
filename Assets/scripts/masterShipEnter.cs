@@ -199,7 +199,18 @@ public class masterShipEnter : MonoBehaviour {
             {
                 if (!collision.gameObject.CompareTag("North"))
                 {
-                    Destroy(collision.gameObject);
+                    if (!collision.gameObject.CompareTag("East"))
+                    {
+                        if (!collision.gameObject.CompareTag("West"))
+                        {
+                            if (!collision.gameObject.CompareTag("Cloud"))
+                            {
+                                Destroy(collision.gameObject);
+                            }
+                              
+                        }
+                    }
+                       
                 }
             }
            

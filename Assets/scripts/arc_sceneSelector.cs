@@ -17,19 +17,23 @@ public class arc_sceneSelector : MonoBehaviour {
         //5. nothing (how org... grab the item and leave...)
         //6. Large derilict ship hull (this ship itself, in a tight box)
         //7. Planet side
-        if (getNext<33)
+        if (getNext<25)
         {
             SceneManager.LoadScene("stage"); //this is the first stage name
         }
-        else if (getNext<66)
+        else if (getNext<50)
         {
             SceneManager.LoadScene("stage_asteroids"); //this is asteroids stage, with 3 different asteroid functions
         }
-        else
+        else if (getNext<75)
         {
             SceneManager.LoadScene("stage_rings"); //this is sun ring stage, features experiments in shaders/coloring
         }
-      
+          else
+        {
+            SceneManager.LoadScene("stage_atmosphere"); //this is sun ring stage, features experiments in shaders/coloring
+        }
+
     }
 	
 	// Update is called once per frame

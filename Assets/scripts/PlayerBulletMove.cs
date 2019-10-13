@@ -21,10 +21,19 @@ public class PlayerBulletMove : MonoBehaviour {
     void Start () {
         GameObject dad5 = GameObject.Find("PlayerShip");
         Transform Fun1 = dad5.GetComponent<Transform>();
+        Rigidbody2D mainShipSpeed = dad5.GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
+      float basespeed=  mainShipSpeed.velocity.magnitude;
         Vector3 movement = new Vector3(10.0f, 0.0f, 0.0f);
+     
         //  rb.AddForce((movement * speed) * 2);
         Vector3 fff = Fun1.transform.up;
+        if (basespeed>=5) 
+        {
+       //     Debug.Log("BASE SPEED IS " + basespeed);
+            fff = fff * (basespeed / 4);
+        }
+     
        // Debug.Log("FFF:" + fff);
          rb.AddRelativeForce(fff * 9 * speed);
         //     Debug.Log(gameObject.name);
