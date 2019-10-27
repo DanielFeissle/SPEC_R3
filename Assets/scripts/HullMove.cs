@@ -67,12 +67,15 @@ public class HullMove : MonoBehaviour {
     float fartX = 0.0f;
     float fartY = 0.0f;
     // private void OnTriggerEnter2D(Collider2D other)
-   
+
     private void OnTriggerStay2D(Collider2D other)
     {
 
 
+        if (GameObject.Find("Main Camera").transform.position.x == 0 && GameObject.Find("Main Camera").transform.position.y == 0)
+        {
 
+        
         try
         {
             if (m_Renderer.isVisible)
@@ -125,7 +128,7 @@ public class HullMove : MonoBehaviour {
                 fartY = 0.0f;
 
             }
-          
+
         }
         catch (Exception ex)
         {
@@ -133,7 +136,7 @@ public class HullMove : MonoBehaviour {
         }
 
 
-
+    }
 
 
 

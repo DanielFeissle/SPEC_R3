@@ -6192,6 +6192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 8300000, guid: 0631c8bf2832a2b4b9af2aef0498f7c2, type: 3}
+  pauseOperations: 0
   introScene: 1
   openDoor: 0
 --- !u!61 &1166028568
@@ -12277,6 +12278,11 @@ Prefab:
       propertyPath: exp5
       value: 
       objectReference: {fileID: 8300000, guid: 5718430d8e38c2345b0b4765e5aa3f74, type: 3}
+    - target: {fileID: 50231670695557598, guid: 89cb05d34939b234a8054d2319dcce66,
+        type: 2}
+      propertyPath: m_Mass
+      value: 6.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89cb05d34939b234a8054d2319dcce66, type: 2}
   m_IsPrefabParent: 0

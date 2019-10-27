@@ -316,6 +316,8 @@
     <Compile Include="Assets\scripts\objResourceNameHold.cs" />
     <Compile Include="Assets\scripts\onScreenmassChanger.cs" />
     <Compile Include="Assets\scripts\Plain_deleteObjectAfterAni.cs" />
+    <Compile Include="Assets\scripts\PlanetSide_CameraMove.cs" />
+    <Compile Include="Assets\scripts\PlanetSide_scroll.cs" />
     <Compile Include="Assets\scripts\PlayerBulletMove.cs" />
     <Compile Include="Assets\scripts\playerController.cs" />
     <Compile Include="Assets\scripts\playerMenuController.cs" />
@@ -323,6 +325,9 @@
     <Compile Include="Assets\scripts\scenes.cs" />
     <Compile Include="Assets\scripts\scenes_asteroid.cs" />
     <Compile Include="Assets\scripts\scenes_atmosphere.cs" />
+    <Compile Include="Assets\scripts\scenes_interHull.cs" />
+    <Compile Include="Assets\scripts\scenes_plainSpace.cs" />
+    <Compile Include="Assets\scripts\scenes_planetSide.cs" />
     <Compile Include="Assets\scripts\scenes_rings.cs" />
     <Compile Include="Assets\scripts\screenWrapper.cs" />
     <Compile Include="Assets\scripts\shipObjectHandle.cs" />

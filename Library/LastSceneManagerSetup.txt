@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/stageIntro.unity
+- path: Assets/stage_PlainSpace.unity
   isLoaded: 1
   isActive: 1
