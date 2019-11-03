@@ -16,6 +16,8 @@ public class playerController : MonoBehaviour {
     float delay2 = 0.10f; //only half delay
     float nextUsage222;
     float delay22 = 0.10f; //only half delay
+    float nextUsage2222;
+    float delay222 = 2; //only half delay
     bool clearToLeave = false;
     float lerpTime = 0;
     public AudioClip exp5;
@@ -35,6 +37,7 @@ public class playerController : MonoBehaviour {
     Vector3 blastLoc;
     float random;
     float random2;
+    bool readyBoost = true;
     int engineCnt = 0;
     // Use this for initialization
     void Start () {
@@ -68,6 +71,13 @@ public class playerController : MonoBehaviour {
     bool controlerUsed = false;
     // Update is called once per frame
     void Update () {
+        if (Time.time > nextUsage2222 && readyBoost == false) //delete otherwise
+        {
+            readyBoost = true;
+            nextUsage2222 = Time.time + delay222; //it is on display
+        }
+
+
         //this will help limit the speed gaps gained by the new attempt at detecting if an object is inside another (9-14-19)
         if (rb.velocity.magnitude > 8) //max speed is this
         {
@@ -145,6 +155,7 @@ public class playerController : MonoBehaviour {
     bool doorActive = false;
     float timeOpne = 0;
 
+    int moveCount = 0;
 
     Scene m_Scene;
     string sceneName;
@@ -168,7 +179,7 @@ public class playerController : MonoBehaviour {
             Rigidbody2D respos = resetthis.GetComponent<Rigidbody2D>();
             respos.AddTorque(50);//(new Vector3(0.0f, 50000.0f,0.0f));
             //   SceneManager.LoadScene("stage"); //reload stage
-            if (SceneManager.GetActiveScene().name== "stage_atmosphere")
+            if (SceneManager.GetActiveScene().name== "stage_atmosphere" || SceneManager.GetActiveScene().name == "stage_PlanetSide")
                 {
                     //10-13-19 we want to return gravity to 0
                     GameObject MastCont = GameObject.Find("PlayerShip");
@@ -304,11 +315,18 @@ public class playerController : MonoBehaviour {
                 float fun2 = Mathf.Lerp(0, 0, noise);
                 FoundFX2.intensity = fun2 * 14;
             }
-            //9-8-19 audio mute idea
-            // GameObject.FindWithTag("Steve").audio.mute = true;
+                //9-8-19 audio mute idea
+                // GameObject.FindWithTag("Steve").audio.mute = true;
+                //added for all stages 11-3-19
+                if (Input.GetButton("Fire4") && readyBoost == true) //the player boosted
+                {
+                    readyBoost = false;
+                    rb.AddRelativeForce(Vector3.up * 9825 * Time.deltaTime * speed);
+                  
+                    nextUsage2222 = Time.time + delay222; //reset time limit
+                }
 
-
-            if (Input.GetButton("Fire1"))
+                if (Input.GetButton("Fire1"))
             {
                 if (Time.time > nextUsage) //delete otherwise
                 {
@@ -356,7 +374,7 @@ public class playerController : MonoBehaviour {
                 }
 
             }
-            else if (introShip.openDoor == 1 || doorActive == true || PlayerClose == true) //(Input.GetButton("Fire2") || doorActive == true)
+                    else if (introShip.openDoor == 1 || doorActive == true || PlayerClose == true) //(Input.GetButton("Fire2") || doorActive == true)
             {
                 introShip.openDoor = 2; //door is now open
                 //  GameObject CamFind = GameObject.Find("Main Camera");
@@ -461,7 +479,7 @@ public class playerController : MonoBehaviour {
             {
                 if (moveVertical > 0) //moving up so go foward
                 {
-
+                        moveCount++;
                     //   Vector3 movement = transform.position += transform.up * Time.deltaTime * 5;
                     //  rb.transform.position += transform.up * Time.deltaTime * 5;
                     /////  rb.AddForce(transform.position += transform.up * Time.deltaTime * speed);
@@ -474,7 +492,8 @@ public class playerController : MonoBehaviour {
                         // Debug.Log(totspeed);
                         Debug.Log("------------------" + totspeed);
                         Debug.Log("==================" + rb.velocity.sqrMagnitude);
-                        if (rb.velocity.sqrMagnitude < 32  && engineCnt>10)
+                      
+                          if (rb.velocity.x < 32  && engineCnt>10)
                         {//increase speed, ie faster getup 10-13-19
                             rb.AddRelativeForce(Vector3.up * 225 * Time.deltaTime * speed);
                           
@@ -525,9 +544,10 @@ public class playerController : MonoBehaviour {
 
                     // rb.AddForce(-transform.up * 2);
                     rb.drag = 1;
-                    //  Debug.Log(totspeed);
+                        moveCount = 0;
+                        //  Debug.Log(totspeed);
 
-                }
+                    }
                 else
                 {
                     //no keypress
@@ -537,9 +557,9 @@ public class playerController : MonoBehaviour {
 
                     ff.GetComponent<SpriteRenderer>().enabled = false;
                     ff.GetComponent<AudioSource>().enabled = false;
-
-                    //  ff.transform.position = new Vector2(100,100);
-                }
+                        moveCount = 0;
+                        //  ff.transform.position = new Vector2(100,100);
+                    }
 
                 //     rb.AddForce((this.transform.TransformVector(Vector3.forward) * speed) *2);
                 //   Debug.Log(rb.velocity);

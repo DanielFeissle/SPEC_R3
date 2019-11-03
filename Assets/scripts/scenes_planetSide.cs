@@ -24,13 +24,17 @@ public class scenes_planetSide : MonoBehaviour {
         Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
         Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
 
+        GameObject MastCont = GameObject.Find("PlayerShip");
+        MastCont.transform.position = new Vector2(17.65f, -0.37f); //10-13-19-se want to put the player in the correct location
+        Rigidbody2D playerRigidBody = MastCont.GetComponent<Rigidbody2D>();
+        playerRigidBody.gravityScale = .11f;
 
 
         float[] posXarr = new float[3];
         float[] posYarr = new float[3];
 
         packageLoad = false;
-        GameObject MastCont = GameObject.Find("PlayerShip");
+      
         MasterController backEnd = MastCont.GetComponent<MasterController>();
 
 
@@ -38,7 +42,7 @@ public class scenes_planetSide : MonoBehaviour {
 
         //10-27-19 this is where we put tog the screen
         //first decide how many blocks to use
-        int totBlocks = blarg.Next(50, 150);
+        int totBlocks = blarg.Next(30, 60);
 
         GameObject IntialGround = Instantiate(Resources.Load("planetSide\\Ground")) as GameObject;
         IntialGround.name = "IntPlannet";
@@ -98,6 +102,9 @@ public class scenes_planetSide : MonoBehaviour {
                 else if (curTile == 3)
                 {
                     loadName = "Ground";
+                    GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
+                    RepeatGas.name = "RptGas(" + i + ")";
+                    RepeatGas.transform.position = new Vector2(newPost, 0 - 3.15f);
                 }
                 else if (curTile == 4)
                 {
@@ -110,7 +117,15 @@ public class scenes_planetSide : MonoBehaviour {
                 GameObject RepeatGround = Instantiate(Resources.Load("planetSide\\" + loadName + "")) as GameObject;
                 RepeatGround.name = "RptPlannet(" + i + ")";
                 RepeatGround.transform.position = new Vector2(newPost, 0 - 1.15f);
-                oldPos = RepeatGround.transform.position.x;
+
+
+              
+
+
+
+
+
+                    oldPos = RepeatGround.transform.position.x;
                 Debug.Log("DRAWING MAP:" + i);
                 priorTile = curTile;
             }
@@ -123,7 +138,26 @@ public class scenes_planetSide : MonoBehaviour {
                 RepeatGround.transform.position = new Vector2(newPost, 0 - 1.15f);
                 oldPos = RepeatGround.transform.position.x;
                 Debug.Log("DRAWING MAP:" + i);
+
+                if (blarg.Next(100) < 75) //create a cave
+                {
+                    if (i<totBlocks-8 && i > 5) //end zone buffer (no cave in landing zone for transport ship, and begining zone should be clear
+                    {
+                        GameObject RepeatGas2 = Instantiate(Resources.Load("planetSide\\Cave")) as GameObject;
+                        RepeatGas2.name = "RptCave(" + i + ")";
+                        RepeatGas2.transform.localScale = new Vector2(UnityEngine.Random.Range(.5f,2.5f), 1);
+                        RepeatGas2.transform.position = new Vector2(newPost, 0 + 2.5f);
+                    }
+                   
+                }
                 priorTile = curTile;
+
+                if (blarg.Next(100)<50)
+                    {
+                    GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
+                    RepeatGas.name = "RptGas(" + i + ")";
+                    RepeatGas.transform.position = new Vector2(newPost, 0 - 3.15f);
+                }
             }
         }
 
