@@ -39,6 +39,7 @@ public class playerController : MonoBehaviour {
     float random2;
     bool readyBoost = true;
     int engineCnt = 0;
+    public int shipHitDetect=0; //0-nothing 1-something (no duh)---its actually boost, 2-turd is off screen
     // Use this for initialization
     void Start () {
         DontDestroyOnLoad(gameObject.transform);
@@ -73,6 +74,7 @@ public class playerController : MonoBehaviour {
     void Update () {
         if (Time.time > nextUsage2222 && readyBoost == false) //delete otherwise
         {
+           
             readyBoost = true;
             nextUsage2222 = Time.time + delay222; //it is on display
         }
@@ -155,13 +157,18 @@ public class playerController : MonoBehaviour {
     bool doorActive = false;
     float timeOpne = 0;
 
-    int moveCount = 0;
+   public int moveCount = 0;
 
     Scene m_Scene;
     string sceneName;
 
+    private void LateUpdate()
+    {
+      
+    }
     private void FixedUpdate()
     {
+        shipHitDetect = 0;
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
         if (sceneName.Contains("stage"))
@@ -320,6 +327,7 @@ public class playerController : MonoBehaviour {
                 //added for all stages 11-3-19
                 if (Input.GetButton("Fire4") && readyBoost == true) //the player boosted
                 {
+                    shipHitDetect = -2000; //signal we used boost!
                     readyBoost = false;
                     rb.AddRelativeForce(Vector3.up * 9825 * Time.deltaTime * speed);
                   
@@ -572,8 +580,8 @@ public class playerController : MonoBehaviour {
                 else
                 {
 
-                    //stage introductions
-
+                        //stage introductions
+                        shipHitDetect = 2;
                     GameObject Cam = GameObject.Find("Main Camera");
                     Transform ff = Cam.GetComponent<Transform>();
                     transform.position = new Vector2(ff.position.x, ff.position.y);
@@ -595,6 +603,14 @@ public class playerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
+        if (other.gameObject.CompareTag("Fuel"))
+        {
+         
+            moveCount = -1000; //signal we got fuel!
+            Destroy(other.gameObject);
+
+        }
         //     Debug.Log("FF");
         /*
         if (other.gameObject.CompareTag("East"))
@@ -888,6 +904,7 @@ public class playerController : MonoBehaviour {
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
+        shipHitDetect = 3;
         if (collision.transform.localScale.y>.5f || collision.gameObject.CompareTag("ShipIndest"))
         {
             //if it is smaller, the player should not get stuck in it...

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class scenes_planetSide : MonoBehaviour {
     public bool packageLoad = false;
@@ -13,9 +14,9 @@ public class scenes_planetSide : MonoBehaviour {
     private Vector2 _centre = new Vector2(0, 0);
     private float _angle;
 
-    float delay = 2.5f; //only half delay
+    float delay = 0.5f; //only half delay
     float nextUsage;
-
+    int fuel = 100;
     private Camera cam;
     // Use this for initialization
     void Start () {
@@ -29,14 +30,15 @@ public class scenes_planetSide : MonoBehaviour {
         Rigidbody2D playerRigidBody = MastCont.GetComponent<Rigidbody2D>();
         playerRigidBody.gravityScale = .11f;
 
-
+        fuel = 100;
+        locCnt = 0;
         float[] posXarr = new float[3];
         float[] posYarr = new float[3];
 
         packageLoad = false;
       
         MasterController backEnd = MastCont.GetComponent<MasterController>();
-
+        delay = 0.5f;
 
 
 
@@ -235,17 +237,78 @@ public class scenes_planetSide : MonoBehaviour {
 
 
     }
+    int locCnt = 0;
+    string fail = "You ran out of fuel.. Lets try this again!";
+    bool redothisdu = false;
     private void FixedUpdate()
     {
+        GameObject playerFuel = GameObject.Find("PlayerShip");
+        playerController pc1 = playerFuel.GetComponent<playerController>();
+
+      
+
         if (Time.time > nextUsage) //continue scrolling
         {
-          
+         
+            if (pc1.moveCount!=0)
+            {
+                //subtract fuel
+                fuel = fuel - 1;
+            }
+         if (fuel<0)
+            {
+                delay = 0.1f; //lets speed this up eh?
+                GameObject transportShip = GameObject.Find("transportShip");
+                masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
+                introShip.introScene = true;
+                fuel = 0;
+                //wait for if the player is off the screen
+                if (pc1.shipHitDetect==2 || pc1.GetComponent<Rigidbody2D>().velocity.magnitude<8|| redothisdu==true)
+                {
+                    redothisdu = true;
+                        //player is off screen
+
+                        locCnt++;
+                        if (locCnt > fail.Length)
+                        {
+                            Application.LoadLevel(Application.loadedLevel); //this seems to be old but might work :)
+                        }
+                        //the case is gone, retry stage-
+                        GameObject uiAltiText2 = GameObject.Find("txt_Fail");
+                        Text delta21 = uiAltiText2.GetComponent<Text>();
+                        delta21.text = fail.Substring(0, locCnt);
+
+
+                        nextUsage = Time.time + delay; //it is on display
+                    
+                }
+            }
+        
 
             nextUsage = Time.time + delay; //it is on display
         }
+
+        GameObject uiAltiText = GameObject.Find("txt_Fuel");
+        Text delta1 = uiAltiText.GetComponent<Text>();
+        delta1.text = "Fuel: " + fuel + "";
     }
     // Update is called once per frame
     void Update () {
-		
-	}
+        GameObject playerFuel = GameObject.Find("PlayerShip");
+        playerController pc1 = playerFuel.GetComponent<playerController>();
+
+        if (pc1.moveCount == -1000)
+        {
+            fuel = fuel + 25;
+            //player is lucky, can move again!
+            GameObject transportShip = GameObject.Find("transportShip");
+            masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
+            introShip.introScene = false;
+        }
+     else   if (pc1.shipHitDetect == -2000)
+        {
+            fuel = fuel - 15;
+        }
+
+    }
 }

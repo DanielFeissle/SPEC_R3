@@ -34,6 +34,11 @@ public class scenes_interHull : MonoBehaviour {
             fud5323.name = "thePackage(" + 0 + "," + 0 + ")";
             fud5323.transform.position = new Vector2(blarg.Next(-8, 0), blarg.Next(-4, 4));
             packageLoad = true;
+
+            fud5323.AddComponent<Rigidbody2D>();
+            fud5323.AddComponent<BoxCollider2D>();
+
+            
             //  }
         }
 

@@ -26,6 +26,7 @@ TagManager:
   - AtmpLeft
   - AtmpRight
   - Cloud
+  - Fuel
   layers:
   - Default
   - TransparentFX

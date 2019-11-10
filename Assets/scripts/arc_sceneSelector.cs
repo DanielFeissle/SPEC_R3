@@ -29,9 +29,21 @@ public class arc_sceneSelector : MonoBehaviour {
         {
             SceneManager.LoadScene("stage_rings"); //this is sun ring stage, features experiments in shaders/coloring
         }
-          else
+          else if (getNext<100)
         {
             SceneManager.LoadScene("stage_atmosphere"); //this is sun ring stage, features experiments in shaders/coloring
+        }
+        else if (getNext < 125)
+        {
+            SceneManager.LoadScene("stage_interShip"); //this is sun ring stage, features experiments in shaders/coloring
+        }
+        else if (getNext < 150)
+        {
+            SceneManager.LoadScene("stage_PlainSpace"); //this is sun ring stage, features experiments in shaders/coloring
+        }
+        else if (getNext < 175)
+        {
+            SceneManager.LoadScene("stage_PlanetSide"); //this is sun ring stage, features experiments in shaders/coloring
         }
 
     }
