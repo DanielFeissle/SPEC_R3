@@ -174,7 +174,7 @@ public class overworldShip : MonoBehaviour {
             Debug.Log("------------------" + totspeed);
             Debug.Log("==================" + rb.velocity.sqrMagnitude);
 
-            if (rb.velocity.x < 32 && engineCnt > 0)
+            if (rb.velocity.sqrMagnitude < 12 && engineCnt > 0)
             {//increase speed, ie faster getup 10-13-19
                 rb.AddRelativeForce(Vector3.up * 225 * Time.deltaTime * speed);
 
