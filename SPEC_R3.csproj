@@ -326,6 +326,7 @@
     <Compile Include="Assets\scripts\playerController.cs" />
     <Compile Include="Assets\scripts\playerMenuController.cs" />
     <Compile Include="Assets\scripts\poosplosion.cs" />
+    <Compile Include="Assets\scripts\realDeleteAfterPlainAniScript.cs" />
     <Compile Include="Assets\scripts\scenes.cs" />
     <Compile Include="Assets\scripts\scenes_asteroid.cs" />
     <Compile Include="Assets\scripts\scenes_atmosphere.cs" />
@@ -337,6 +338,7 @@
     <Compile Include="Assets\scripts\shipObjectHandle.cs" />
     <Compile Include="Assets\scripts\shotKoPoo.cs" />
     <Compile Include="Assets\scripts\Story_masterControl.cs" />
+    <Compile Include="Assets\scripts\textSortingLayer.cs" />
     <Compile Include="Assets\scripts\title_btn_galaxy.cs" />
     <Compile Include="Assets\scripts\TitleScreenButtons.cs" />
     <Compile Include="Assets\scripts\tprollSpawn.cs" />

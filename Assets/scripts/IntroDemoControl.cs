@@ -41,31 +41,7 @@ public class IntroDemoControl : MonoBehaviour {
 	void Update () {
 
 
-        if (Time.time > nextUsage4) //delete otherwise
-        {
-            GameObject PoopPEE = Instantiate(Resources.Load("poo")) as GameObject;
-            PoopPEE.name = "iPoo";
-            //PoopPEE.transform.position = transform.position + (new Vector3(0.25f, 0.0f));
-            PoopPEE.transform.position = transform.position - (transform.up / 1.35f);
-            PoopPEE.transform.localScale = transform.localScale * 4;
-
-            nextUsage4 = Time.time + delay4; //it is on display
-        }
-
-
-        if (Time.time > nextUsage2222 && readyBoost == false) //delete otherwise
-        {
-
-            readyBoost = true;
-            nextUsage2222 = Time.time + delay222; //it is on display
-        }
-
-
-        //this will help limit the speed gaps gained by the new attempt at detecting if an object is inside another (9-14-19)
-        if (rb.velocity.magnitude > 8) //max speed is this
-        {
-            rb.velocity = rb.velocity.normalized * 8;
-        }
+      
 
 
 
@@ -129,8 +105,39 @@ public class IntroDemoControl : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        //this is for the story scene only!
+        GameObject MastCont = GameObject.Find("TV");
+        Story_masterControl backEnd = MastCont.GetComponent<Story_masterControl>();
 
-        if (Time.time > nextUsage2) //continue scrolling
+        if ( backEnd.IndyWhat == 1)
+        {
+            if (Time.time > nextUsage4) //delete otherwise
+            {
+                GameObject PoopPEE = Instantiate(Resources.Load("poo")) as GameObject;
+                PoopPEE.name = "iPoo";
+                //PoopPEE.transform.position = transform.position + (new Vector3(0.25f, 0.0f));
+                PoopPEE.transform.position = transform.position - (transform.up / 1.35f);
+                PoopPEE.transform.localScale = transform.localScale * 4;
+
+                nextUsage4 = Time.time + delay4; //it is on display
+            }
+
+
+            if (Time.time > nextUsage2222 && readyBoost == false) //delete otherwise
+            {
+
+                readyBoost = true;
+                nextUsage2222 = Time.time + delay222; //it is on display
+            }
+
+
+            //this will help limit the speed gaps gained by the new attempt at detecting if an object is inside another (9-14-19)
+            if (rb.velocity.magnitude > 8) //max speed is this
+            {
+                rb.velocity = rb.velocity.normalized * 8;
+            }
+
+            if (Time.time > nextUsage2 ) //continue scrolling
         {
             int objectCount = GameObject.FindGameObjectsWithTag("SpaceJunk").Length;
             Debug.Log("Objects on asteroid screen: " + objectCount);
@@ -140,7 +147,7 @@ public class IntroDemoControl : MonoBehaviour {
                 int fundas = UnityEngine.Random.Range(0, 100);
                 if (fundas < 25)
                 {
-                    GameObject ExpDust = Instantiate(Resources.Load("AstMan2019")) as GameObject;
+                    GameObject ExpDust = Instantiate(Resources.Load("dogBone")) as GameObject;
                     ExpDust.name = "AstMan2019";
                     ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-3,3), UnityEngine.Random.Range(-1.5f,1.5f));
                     ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
@@ -148,7 +155,7 @@ public class IntroDemoControl : MonoBehaviour {
                 }
                 else if (fundas < 50)
                 {
-                    GameObject ExpDust = Instantiate(Resources.Load("Asteroid2017")) as GameObject;
+                    GameObject ExpDust = Instantiate(Resources.Load("dogLeash")) as GameObject;
                     ExpDust.name = "Asteroid2017";
                     ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-3,3), UnityEngine.Random.Range(-1.5f,1.5f));
                     ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
@@ -157,7 +164,7 @@ public class IntroDemoControl : MonoBehaviour {
                 }
                 else if (fundas < 75)
                 {
-                    GameObject ExpDust = Instantiate(Resources.Load("blueWallJunk")) as GameObject;
+                    GameObject ExpDust = Instantiate(Resources.Load("dogHouse")) as GameObject;
                     ExpDust.name = "blueWallJunk";
                     ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-3,3), UnityEngine.Random.Range(-1.5f,1.5f));
                     ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 2), UnityEngine.Random.Range(1, 2));
@@ -165,7 +172,7 @@ public class IntroDemoControl : MonoBehaviour {
                 }
                 else if (fundas < 100)
                 {
-                    GameObject ExpDust = Instantiate(Resources.Load("StdWall")) as GameObject;
+                    GameObject ExpDust = Instantiate(Resources.Load("dogFriz")) as GameObject;
                     ExpDust.name = "StdWall";
                     ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-3,3), UnityEngine.Random.Range(-1.5f,1.5f));
                     ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 3), UnityEngine.Random.Range(1, 2));
@@ -355,6 +362,6 @@ public class IntroDemoControl : MonoBehaviour {
             //  Debug.Log("Object is no longer visible");
 
         }
-
+        }
     }
 }
