@@ -67,7 +67,6 @@ public class IntroDestroyPoo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-       
       
     }
 
