@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class overworldShip : MonoBehaviour {
     private int Xbox_One_Controller = 0;
@@ -113,11 +114,21 @@ public class overworldShip : MonoBehaviour {
 
 
 
-
+    public Text StageSector;
 
     private void FixedUpdate()
     {
+        //12-12-19: get the pos and display it
+        //     GameObject.Find("txt_POS").GetComponent<TextMesh>().text = "FU";
+        GameObject dad5 = GameObject.Find("txt_POS");
+        StageSector = dad5.GetComponent<Text>();
 
+
+        StageSector.text = "Sector: ("+(Mathf.RoundToInt(this.transform.position.x)/10) + "," + (Mathf.RoundToInt(this.transform.position.y) / 10)+ ")";
+
+
+
+ 
         float moveVertical = 0;
         // Debug.Log("Controller" + controlerUsed);
         if (controlerUsed == false)

@@ -7,7 +7,7 @@ public class arc_sceneSelector : MonoBehaviour {
     System.Random randStage = new System.Random();
     // Use this for initialization
     void Start () {
-      int getNext=  randStage.Next(100);
+      int getNext=  randStage.Next(200);
         //this is used for the score attack/arcade mode
         //plan is for four different enemy stages. they are as follows:
         //1. Derlictr space ship

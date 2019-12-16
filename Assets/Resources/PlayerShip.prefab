@@ -143,6 +143,8 @@ MonoBehaviour:
   exp1: {fileID: 8300000, guid: 9956e20f55f0c9b4ab838cd315010e49, type: 3}
   shipShift: {fileID: 8300000, guid: f7001c5630b4d744fb300d48756ff5b6, type: 3}
   suitCase: {fileID: 8300000, guid: f697437bc00377d4e83ab6334cedcd99, type: 3}
+  shipHitDetect: 0
+  moveCount: 0
   aWidth: 80
   aHeight: 60
 --- !u!114 &114797232368619606
@@ -156,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe79227daf6bf6b4796b6b8feb2651db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn_pauser: -1
+  btn_pauser: 1
 --- !u!212 &212649441706840268
 SpriteRenderer:
   m_ObjectHideFlags: 1

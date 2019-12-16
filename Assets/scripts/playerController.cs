@@ -881,7 +881,7 @@ public class playerController : MonoBehaviour {
                    Rigidbody2D shipGone = shipDash.GetComponent<Rigidbody2D>();
                     
                     shipGone.AddForce(new Vector2(0.0f, 999999));
-                    
+                    this.GetComponent<Rigidbody2D>().gravityScale = 0; //12-15-19- Gravity is now automatically reset after each exit stage to zero
                 }
             }
             // Debug.Log("Object is no longer visible");

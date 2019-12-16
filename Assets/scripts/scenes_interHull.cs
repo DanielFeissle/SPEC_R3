@@ -153,7 +153,7 @@ public class scenes_interHull : MonoBehaviour {
 	void Update () {
 		
 	}
-
+    AudioClip _audio6;
     private void FixedUpdate()
     {
         if (Time.time > nextUsage) //continue scrolling
@@ -161,6 +161,42 @@ public class scenes_interHull : MonoBehaviour {
          if (blarg.Next(100)<50)
             {
                 //boing!
+
+                int tempAud = UnityEngine.Random.Range(0, 100);
+                if (tempAud<33)
+                {
+                    _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\eleSnap1");
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                }
+                else if (tempAud<66)
+                {
+                    _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\eleSnap2");
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                }
+                else
+                {
+                    _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\eleSnap3");
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                }
+               
+
+
+
 
                 GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
                 foreach (GameObject go in allObjects)

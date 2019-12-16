@@ -45,6 +45,11 @@ public class Story_masterControl : MonoBehaviour
     void Update()
     {
 
+        if (Input.GetButton("Cancel"))
+        {
+            //load the stage
+            SceneManager.LoadScene("title");
+        }
     }
 
     private void LateUpdate()
