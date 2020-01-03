@@ -296,6 +296,8 @@
     <Compile Include="Assets\scripts\aniNucDebrisClear.cs" />
     <Compile Include="Assets\scripts\arc_sceneSelector.cs" />
     <Compile Include="Assets\scripts\atmp_movement.cs" />
+    <Compile Include="Assets\scripts\boss\dadbot.cs" />
+    <Compile Include="Assets\scripts\bossStage.cs" />
     <Compile Include="Assets\scripts\CameraController.cs" />
     <Compile Include="Assets\scripts\enemyBaderrang.cs" />
     <Compile Include="Assets\scripts\enemyBataboy.cs" />
@@ -318,6 +320,7 @@
     <Compile Include="Assets\scripts\objectMove.cs" />
     <Compile Include="Assets\scripts\objResourceNameHold.cs" />
     <Compile Include="Assets\scripts\onScreenmassChanger.cs" />
+    <Compile Include="Assets\scripts\overworldJunkPlacer.cs" />
     <Compile Include="Assets\scripts\overworldShip.cs" />
     <Compile Include="Assets\scripts\Plain_deleteObjectAfterAni.cs" />
     <Compile Include="Assets\scripts\PlanetSide_CameraMove.cs" />
@@ -337,6 +340,7 @@
     <Compile Include="Assets\scripts\scenes_planetSide.cs" />
     <Compile Include="Assets\scripts\scenes_rings.cs" />
     <Compile Include="Assets\scripts\screenWrapper.cs" />
+    <Compile Include="Assets\scripts\shipConstructor.cs" />
     <Compile Include="Assets\scripts\shipObjectHandle.cs" />
     <Compile Include="Assets\scripts\shotKoPoo.cs" />
     <Compile Include="Assets\scripts\Story_masterControl.cs" />

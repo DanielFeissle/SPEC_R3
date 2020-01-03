@@ -40,6 +40,7 @@ public class playerController : MonoBehaviour {
     bool readyBoost = true;
     int engineCnt = 0;
     public int shipHitDetect=0; //0-nothing 1-something (no duh)---its actually boost, 2-turd is off screen
+    private Camera cam;
     // Use this for initialization
     void Start () {
         DontDestroyOnLoad(gameObject.transform);
@@ -662,13 +663,24 @@ public class playerController : MonoBehaviour {
             //   transform.position = new Vector2(ff.position.x, ff.position.y);
             if (rb.velocity.x > 0 && other.gameObject.CompareTag("East")) //moving foward
             {
-                fartX = -(transform.position.x - .75f);
-                fartY = (transform.position.y);
+                //         fartX = -(transform.position.x - .75f) + GameObject.Find("Main Camera").GetComponent<Transform>().transform.position.x/2;
+                //1-30-20 improved clipping; keywords: corner system
+                cam = Camera.main;
+                Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
+                Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
+                fartX = p.x + 0.75f;
+                      fartY = (transform.position.y);
                 leftright = 1;
             }
             else if (rb.velocity.x < 0 && other.gameObject.CompareTag("West"))//going back
             {
-                fartX = -(transform.position.x + .75f);
+                //      fartX = -(transform.position.x + .75f - GameObject.Find("Main Camera").GetComponent<Transform>().transform.position.x);
+                //  fartX = -(transform.position.x + .75f 
+                //1-30-20 improved clipping; keywords: corner system ; the above is th eold way, which does not weork well if camera is no longer zero above that is what i was trying
+                cam = Camera.main;
+                Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
+                Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
+                fartX = q.x - 0.75f;
                 fartY = (transform.position.y);
                 leftright = 2;
             }
