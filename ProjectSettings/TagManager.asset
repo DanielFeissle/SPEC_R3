@@ -27,6 +27,9 @@ TagManager:
   - AtmpRight
   - Cloud
   - Fuel
+  - tp
+  - TPDestroyer
+  - wetfart
   layers:
   - Default
   - TransparentFX

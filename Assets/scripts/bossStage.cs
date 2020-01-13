@@ -52,7 +52,7 @@ public class bossStage : MonoBehaviour {
             GameObject.Find("PlayerShip").GetComponent<Transform>().position -= new Vector3(.1f, 0, 0);
             // Debug.Log("00000000000000000000000000000000000000000000000000");
         }
-       // GameObject.Find("transportShip").GetComponent<masterShipEnter>().introScene = false;
-
+        // GameObject.Find("transportShip").GetComponent<masterShipEnter>().introScene = false;
+        GameObject.Find("transportShip").GetComponent<Transform>().position = new Vector2(100, 100);
     }
 }

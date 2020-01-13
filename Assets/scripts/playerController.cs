@@ -41,6 +41,7 @@ public class playerController : MonoBehaviour {
     int engineCnt = 0;
     public int shipHitDetect=0; //0-nothing 1-something (no duh)---its actually boost, 2-turd is off screen
     private Camera cam;
+    int TPGot = 0;
     // Use this for initialization
     void Start () {
         DontDestroyOnLoad(gameObject.transform);
@@ -371,13 +372,30 @@ public class playerController : MonoBehaviour {
                         AudioSource.PlayClipAtPoint(exp1, new Vector3(transform.position.x, transform.position.y, 0.0f));
                         AudioSource.PlayClipAtPoint(exp1, new Vector3(transform.position.x, transform.position.y, 0.0f));
                     }
+                        if (TPGot > 0)
+                        {
+                            GameObject PoopPEE = Instantiate(Resources.Load("tproll")) as GameObject;
+                            PoopPEE.name = "tproll";
+                            PoopPEE.gameObject.tag = "TPDestroyer"; //1-9-20 this is to difer from standard tps
+                            //PoopPEE.transform.position = transform.position + (new Vector3(0.25f, 0.0f));
+                            PoopPEE.transform.position = transform.position + (transform.up / 2);
+                            PoopPEE.transform.localScale = transform.localScale * 4;
+                             
+                            PoopPEE.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, transform.localEulerAngles.z-90)); //1-9-20 this is to get angles, nice and easy :)
+                            // PoopPEE.transform.rotation = this.transform.rotation;
+                            //  PoopPEE.transform.eulerAngles = this.transform.eulerAngles;
+                            TPGot--;
+                        }
+                        else
+                        {
+                            GameObject PoopPEE = Instantiate(Resources.Load("shot")) as GameObject;
+                            PoopPEE.name = "playerShot";
 
-                    GameObject PoopPEE = Instantiate(Resources.Load("shot")) as GameObject;
-                    PoopPEE.name = "playerShot";
-
-                    //PoopPEE.transform.position = transform.position + (new Vector3(0.25f, 0.0f));
-                    PoopPEE.transform.position = transform.position + (transform.up / 2);
-                    PoopPEE.transform.localScale = transform.localScale * 4;
+                            //PoopPEE.transform.position = transform.position + (new Vector3(0.25f, 0.0f));
+                            PoopPEE.transform.position = transform.position + (transform.up / 2);
+                            PoopPEE.transform.localScale = transform.localScale * 4;
+                        }
+                 
 
                     nextUsage = Time.time + delay; //it is on display
                 }
@@ -664,7 +682,7 @@ public class playerController : MonoBehaviour {
             if (rb.velocity.x > 0 && other.gameObject.CompareTag("East")) //moving foward
             {
                 //         fartX = -(transform.position.x - .75f) + GameObject.Find("Main Camera").GetComponent<Transform>().transform.position.x/2;
-                //1-30-20 improved clipping; keywords: corner system
+                //1-3-20 improved clipping; keywords: corner system
                 cam = Camera.main;
                 Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
                 Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
@@ -676,7 +694,7 @@ public class playerController : MonoBehaviour {
             {
                 //      fartX = -(transform.position.x + .75f - GameObject.Find("Main Camera").GetComponent<Transform>().transform.position.x);
                 //  fartX = -(transform.position.x + .75f 
-                //1-30-20 improved clipping; keywords: corner system ; the above is th eold way, which does not weork well if camera is no longer zero above that is what i was trying
+                //1-3-20 improved clipping; keywords: corner system ; the above is th eold way, which does not weork well if camera is no longer zero above that is what i was trying
                 cam = Camera.main;
                 Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
                 Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
@@ -908,6 +926,10 @@ public class playerController : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         colli = 0;
+        if (collision.gameObject.CompareTag("tp"))
+        {
+            TPGot = TPGot + 1;
+        }
         
     }
     private void OnCollisionExit2D(Collision2D collision)
