@@ -24,9 +24,10 @@ GameObject:
   - component: {fileID: 114754805458919054}
   - component: {fileID: 50891879524013678}
   - component: {fileID: 61516139968957330}
+  - component: {fileID: 61410714758766324}
   m_Layer: 0
   m_Name: dad
-  m_TagString: Untagged
+  m_TagString: BOSS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1285673252119166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.0467, y: 0.0741, z: 0}
+  m_LocalPosition: {x: -12.04, y: 0.37, z: 0}
   m_LocalScale: {x: -4.23, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,6 +65,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &61410714758766324
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285673252119166}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0489908, y: -0.5568862}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6271322, y: 0.27542138}
+  m_EdgeRadius: 0
 --- !u!61 &61516139968957330
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -76,7 +102,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.046910644, y: 0.012818575}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -87,7 +113,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 0.6707696, y: 1.0578115}
   m_EdgeRadius: 0
 --- !u!95 &95629471823573800
 Animator:
@@ -118,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
+  ani: {fileID: 0}
 --- !u!212 &212572631415266076
 SpriteRenderer:
   m_ObjectHideFlags: 1

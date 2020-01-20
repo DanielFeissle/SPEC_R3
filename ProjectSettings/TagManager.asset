@@ -30,6 +30,8 @@ TagManager:
   - tp
   - TPDestroyer
   - wetfart
+  - Damage
+  - BOSS
   layers:
   - Default
   - TransparentFX

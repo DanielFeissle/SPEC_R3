@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class dadbot : MonoBehaviour {
 
@@ -11,6 +12,8 @@ public class dadbot : MonoBehaviour {
     public float speed;
     float nextUsage;
     float delay = 0.15f; //only half delay
+    float nextUsage2;
+    float delay2 = 0.05f; //only half delay
     int randoSpeedo = 16;
     //dadttacks
     //1-progress straight accross screen
@@ -35,13 +38,33 @@ public class dadbot : MonoBehaviour {
     int yPos = 1;
     float randoPooRange = -4;
     int SpecAttackPhase = 10;
-  
 
+    int timeTillVun = 0;
 
     // Update is called once per frame
     void Update() {
+
+
         if (stageStart == true)
         {
+            if (ani.GetCurrentAnimatorStateInfo(0).IsName("DadDam") &&
+            ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
+                //we finished burp
+                ani.SetBool("ISDAM", false);
+
+
+
+            }
+
+            if (dadHP<1)
+            {
+                stageStart = false;
+                //return to overworld
+                //  stage_OverSpace - world - duh
+                nextUsage = Time.time + delay; //it is on display
+                ani.SetBool("ISDEAD", true);
+            }
             if (hitEdge == false)
             {
 
@@ -62,9 +85,21 @@ public class dadbot : MonoBehaviour {
 
                 //reset the boss position
                 this.transform.position = new Vector2(p.x - m_Renderer.bounds.size.x, 0.0f);
+                randoAttacko = UnityEngine.Random.Range(1, 6);
                 rb.velocity = Vector3.zero; //we do not want the speed to carry over on next attack
-
-                  randoAttacko = UnityEngine.Random.Range(1, 6);
+                if (timeTillVun>3)
+                {
+                    randoAttacko = 3; //limit the fight plz
+                }
+                if (randoAttacko == 3)
+                {
+                    timeTillVun = 0;
+                }
+                else
+                {
+                    timeTillVun++;
+                }
+              
                 if (randoAttacko==2)
                 {
                     //set bounce rate
@@ -104,6 +139,7 @@ public class dadbot : MonoBehaviour {
                     //set the animator to regular dad
                     ani.SetBool("ISBOUNCE", false);
                 }
+           
 
             }
 
@@ -123,12 +159,15 @@ public class dadbot : MonoBehaviour {
                     yPos = -1;
                      rb.velocity = Vector3.right;
                     rb.AddForce(Vector3.up * 79444 * Time.deltaTime * speed * yPos);
+                    sweedSpanw();
                 }
                 else if (this.transform.position.y- m_Renderer.bounds.size.y / 2 < q.y) //hit bottom, go up
                 {
                     yPos = 1;
                     rb.velocity = Vector3.right;
                     rb.AddForce(Vector3.up * 79444 * Time.deltaTime * speed * yPos);
+
+                    sweedSpanw();
                 }
                 rb.AddForce(Vector3.up * 1444 * Time.deltaTime * speed*yPos);
             }
@@ -209,7 +248,73 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
 
         }
 
+        if (dadHP<1)
+        {
+            //let the animation playout
+            this.transform.position = new Vector2(0, 0);
 
+            if (Time.time > nextUsage2) //delete otherwise
+            {
+                dadHP = -1;
+                cntFin++;
+                Debug.Log("-----------------------------------------------------------SDFSDFSDFSDFSDFSDFSDFSDFSDFSDF"+cntFin.ToString());
+
+
+
+
+
+                GameObject TurdBall17 = Instantiate(Resources.Load("UgMug")) as GameObject;
+                /////     AudioSource.PlayClipAtPoint(MeSoAngy, new Vector3(rb.position.x, rb.position.y, 0.0f));
+                TurdBall17.name = "UgMug";
+                Debug.Log("UgMug spawned");
+                TurdBall17.transform.position = transform.position-new Vector3(0,-1.5f);
+                TurdBall17.transform.localScale = transform.localScale;
+
+                transform.position = new Vector2(0.0f, 0.0f);
+                if (cntFin < 64)
+                {
+                    transform.localScale += new Vector3(0.4F, 0, 0);
+                }
+                else
+                {
+                    transform.localScale += new Vector3(-1.8F, 0, 0);
+                    GameObject PoopPEE = Instantiate(Resources.Load("NutSelaGoop")) as GameObject;
+                    PoopPEE.name = "NutSelaGoop2";
+
+                    PoopPEE.transform.position = transform.position;
+                    PoopPEE.transform.localScale = transform.localScale;
+
+                    transform.localScale += new Vector3(0, -0.4f, 0);
+                }
+
+                rb.AddForce(new Vector2(0.0f, 1700.0f));
+
+                ////     AudioSource.PlayClipAtPoint(HATurd, new Vector3(rb.position.x, rb.position.y, 0.0f));
+                GameObject TurdBall4 = Instantiate(Resources.Load("realpooSplosion")) as GameObject;
+                TurdBall4.name = "Turdy4";
+
+                TurdBall4.transform.position = transform.position - new Vector3(5.0f, 0.0f);
+                TurdBall4.transform.localScale = transform.localScale;
+
+
+
+
+                if (cntFin>85)
+                {
+                    dadHP = -100;
+                }
+
+                
+
+
+                nextUsage2 = Time.time + delay2; //it is on display
+            }
+            if (dadHP==-100)
+            {
+                SceneManager.LoadScene("stage_OverSpace-world-duh"); //this is the overworld
+            }
+
+        }
 
         //check if boss is on stage before we start running
         if (m_Renderer.isVisible && stageStart == false)
@@ -226,9 +331,48 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         }
     }
     int cnt = 0;
+    int cntFin = 0;
     int anotherDelay = 2;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("TPDestroyer"))
+        {
+
+
+
+            GameObject IntialGround = Instantiate(Resources.Load("poosplosion2019")) as GameObject;
+            IntialGround.name = "poosplosion2019";
+            IntialGround.transform.position = collision.transform.position;// new Vector2(UnityEngine.Random.Range(-8, -12), UnityEngine.Random.Range(-4, 4));
+
+
+            Destroy(collision.gameObject);
+            dadHP--;
+            ani.SetBool("ISDAM", true);
+            speed = speed + 100;
+
+        }
+    }
+
+    private void sweedSpanw()
+    {
+        GameObject VBurp = Instantiate(Resources.Load("sweedishBurp")) as GameObject;
+        VBurp.name = "sweedishBurp";
+        if (UnityEngine.Random.Range(1,100)<50)
+        {
+            VBurp.transform.position = this.transform.position + new Vector3(m_Renderer.bounds.size.x / 2, this.transform.position.y);
+        }
+        else
+        {
+            if (UnityEngine.Random.Range(1,100)<50)
+            {
+                VBurp.transform.position = this.transform.position - new Vector3(m_Renderer.bounds.size.x / 2, this.transform.position.y); //m_Renderer.bounds.size.y / 2
+            }
+            
+        }
+      
     }
 }

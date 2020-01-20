@@ -18,6 +18,8 @@ public class playerController : MonoBehaviour {
     float delay22 = 0.10f; //only half delay
     float nextUsage2222;
     float delay222 = 2; //only half delay
+    float nextUsage444;
+    float delay444 = 0.25f; //only quat delay
     bool clearToLeave = false;
     float lerpTime = 0;
     public AudioClip exp5;
@@ -42,13 +44,14 @@ public class playerController : MonoBehaviour {
     public int shipHitDetect=0; //0-nothing 1-something (no duh)---its actually boost, 2-turd is off screen
     private Camera cam;
     int TPGot = 0;
+    int playerHP = 3;
     // Use this for initialization
     void Start () {
         DontDestroyOnLoad(gameObject.transform);
         rb = GetComponent<Rigidbody2D>();
         m_Renderer = GetComponent<Renderer>();
         nextUsage = Time.time + delay; //it is on display
-
+        nextUsage444 = Time.time + delay444; //it is on display
         GameObject shipan = GameObject.Find("transportDoorClosure(256x256)_0");
         Animator shipAni9334 = shipan.GetComponent<Animator>();
         shipAni9334.Rebind();
@@ -166,7 +169,30 @@ public class playerController : MonoBehaviour {
 
     private void LateUpdate()
     {
-      
+        if (Time.time > nextUsage444) //this is to track/keep the ui always on screen
+        {
+            //1-19-20 hp update
+            cam = Camera.main;
+            Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
+            Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
+
+            GameObject HP_UI = GameObject.Find("HP_UI");
+            HP_UI.transform.position = new Vector2((p.x + q.x) / 2 -(HP_UI.GetComponent<Renderer>().bounds.size.x*1) , p.y);
+            for (int i = 0; i < 3; i++)
+            {
+                //   GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar")) as GameObject;
+                GameObject HPF_UI = GameObject.Find("HP_Bar" + i);
+
+                HPF_UI.transform.position = new Vector2((p.x + q.x) / 2 + (HPF_UI.GetComponent<Renderer>().bounds.size.x*(i*2)), p.y);
+              
+            }
+
+            nextUsage444 = Time.time + delay444; //it is on display
+        }
+
+       
+
+
     }
     private void FixedUpdate()
     {
@@ -374,6 +400,7 @@ public class playerController : MonoBehaviour {
                     }
                         if (TPGot > 0)
                         {
+                         
                             GameObject PoopPEE = Instantiate(Resources.Load("tproll")) as GameObject;
                             PoopPEE.name = "tproll";
                             PoopPEE.gameObject.tag = "TPDestroyer"; //1-9-20 this is to difer from standard tps
@@ -388,6 +415,7 @@ public class playerController : MonoBehaviour {
                         }
                         else
                         {
+                        
                             GameObject PoopPEE = Instantiate(Resources.Load("shot")) as GameObject;
                             PoopPEE.name = "playerShot";
 
@@ -396,7 +424,10 @@ public class playerController : MonoBehaviour {
                             PoopPEE.transform.localScale = transform.localScale * 4;
                         }
                  
-
+                        if (TPGot==0) //we used the last one so reset the color 1-13-20
+                        {
+                            this.GetComponent<SpriteRenderer>().color = Color.white;
+                        }
                     nextUsage = Time.time + delay; //it is on display
                 }
 
@@ -928,6 +959,7 @@ public class playerController : MonoBehaviour {
         colli = 0;
         if (collision.gameObject.CompareTag("tp"))
         {
+            this.GetComponent<SpriteRenderer>().color = Color.blue;
             TPGot = TPGot + 1;
         }
         
@@ -936,6 +968,34 @@ public class playerController : MonoBehaviour {
     {
         colli = 0;
     }
+
+
+    //1-19-20
+    //this awake method will be helpful to tell when a new stage is loading
+    private void Awake()
+    {
+      //  Debug.Log("FUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFFUFUFUFUFU");
+      //we will want to instantate the hp bars in
+    
+                cam = Camera.main;
+        Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
+        Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
+        GameObject HPF_UI2 = Instantiate(Resources.Load("HP_UI")) as GameObject;
+        HPF_UI2.name = "HP_UI";
+        HPF_UI2.transform.position = transform.position + (transform.up / 2);
+        for (int i=0;i<3;i++)
+        {
+            GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar")) as GameObject;
+            HPF_UI.name = "HP_Bar"+i;
+            HPF_UI.transform.position = transform.position + (transform.up / 2);
+        }
+
+     
+      
+
+    }
+
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         shipHitDetect = 3;

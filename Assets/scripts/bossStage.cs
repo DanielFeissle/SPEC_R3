@@ -6,6 +6,8 @@ public class bossStage : MonoBehaviour {
     bool bossClear = false;
     Renderer m_Renderer;
     bool calledRot = false;
+    float delay = 2.5f; //only half delay
+    float nextUsage;
     // Use this for initialization
     void Start () {
         m_Renderer = GameObject.Find("transportShip").GetComponent<Renderer>();
@@ -35,8 +37,85 @@ public class bossStage : MonoBehaviour {
           //  }
                
         }
-	}
 
+
+
+
+
+
+
+
+
+
+
+        //thanks overworld stage script -dan 1-15-20
+        //this was added because some REALLY FAST MOVING Objects may escape the screen, we want to remove them
+
+        if (Time.time > nextUsage) //continue scrolling
+        {
+            int objectCount = GameObject.FindGameObjectsWithTag("SpaceJunk").Length;
+            Debug.Log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFObjects on asteroid screen: " + objectCount);
+
+
+
+            foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
+            {
+                if (go.gameObject.layer == 0) //that is the default, which is what I used for all gameobjects pretty much
+                {
+                    if (go.gameObject.transform.position.x > 250)
+                    {
+                       
+                                RemoveThis(go.gameObject);
+                           
+
+                       
+                   
+                    }
+                    else if (go.gameObject.transform.position.x < -250)
+                    {
+                       
+                                RemoveThis(go.gameObject);
+                          
+                        go.transform.position = new Vector2(249.0f, go.transform.position.y);
+                    }
+
+                    //now handle the y
+                    if (go.gameObject.transform.position.y > 250)
+                    {
+                       
+                                RemoveThis(go.gameObject);
+                         
+                        go.transform.position = new Vector2(go.transform.position.x, -249.0f);
+                    }
+                    else if (go.gameObject.transform.position.y < -250)
+                    {
+                       
+                                RemoveThis(go.gameObject);
+                         
+                        go.transform.position = new Vector2(go.transform.position.x, 249.0f);
+                    }
+
+
+                }
+
+            }
+
+            nextUsage = Time.time + delay; //it is on display
+
+        }
+    }
+
+
+    private void RemoveThis(GameObject heredere)
+    {
+      
+      
+             
+                Destroy(heredere);
+            
+       
+    
+    }
 
 
 
