@@ -108,10 +108,18 @@ public class bossStage : MonoBehaviour {
 
     private void RemoveThis(GameObject heredere)
     {
-      
-      
-             
-                Destroy(heredere);
+
+
+        if (heredere.name == "staticPoo1")
+        {
+            heredere.transform.position = new Vector2(100,100);
+            heredere.gameObject.GetComponent<Rigidbody2D>().velocity= Vector3.zero;
+        }
+        else
+        {
+            Destroy(heredere);
+        }
+              
             
        
     

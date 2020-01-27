@@ -41,3 +41,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/stage_Bosses.unity
     guid: d6f4431a2540d704e938399efd2ea85d
+  - enabled: 1
+    path: Assets/stage_PlainSpace.unity
+    guid: 5e387e088a797aa43b19eeaacfb18571

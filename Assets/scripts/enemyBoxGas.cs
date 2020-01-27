@@ -41,7 +41,7 @@ public class enemyBoxGas : MonoBehaviour {
         //Ta Daaa
         ////       transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
 
-        Debug.Log("velL"+rb.velocity.magnitude);
+     //   Debug.Log("velL"+rb.velocity.magnitude);
 
 
       

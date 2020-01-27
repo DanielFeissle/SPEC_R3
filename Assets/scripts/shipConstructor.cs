@@ -24,7 +24,7 @@ public class shipConstructor : MonoBehaviour {
         float[] posXarr = new float[3];
         float[] posYarr = new float[3];
 
-        Debug.Log("HI THERE");
+    //    Debug.Log("HI THERE");
         //deriship spawner 4-28-19
         float startX = truStartX;//-4;
         float startY = truStartY; //-2.5f;
@@ -170,13 +170,13 @@ public class shipConstructor : MonoBehaviour {
                 shipBottom = moveY;
             }
 
-            Debug.Log("shipY" + shipY);
+        //    Debug.Log("shipY" + shipY);
 
             //     }
 
 
             //  moveY = shipTest.GetComponent<Renderer>().bounds.size.y + moveY;
-            Debug.Log("Your MOVE" + shipTest.GetComponent<Renderer>().bounds.size.x);
+         //   Debug.Log("Your MOVE" + shipTest.GetComponent<Renderer>().bounds.size.x);
 
             //old dummy way:
             //  shipTest.GetComponent<Collider2D>().bounds.size.x
@@ -281,7 +281,7 @@ public class shipConstructor : MonoBehaviour {
 
 
 
-                Debug.Log("shipY" + shipY);
+            //    Debug.Log("shipY" + shipY);
 
 
 
@@ -297,7 +297,7 @@ public class shipConstructor : MonoBehaviour {
         //   shipTop = moveY;
         //    moveX = startX;
         //now we want to get the orientation and put the top and bottom parts of the ship togather
-        Debug.Log("Top:" + shipTop + "Bottom:" + shipBottom + "Left:" + ShipLeft + "Right:" + ShipRight);
+      //  Debug.Log("Top:" + shipTop + "Bottom:" + shipBottom + "Left:" + ShipLeft + "Right:" + ShipRight);
 
 
         if (shipX > shipY) //horizontal ship
@@ -490,7 +490,7 @@ public class shipConstructor : MonoBehaviour {
         fudg.objName = "dertypShips\\interhullB";
         dershi.name = "interiorWall(" + moveX + "," + moveY + ")";
         dershi.transform.position = new Vector2((moveX), (moveY - width4 / 2));
-        Debug.Log("Wiedth is " + width4);
+   //     Debug.Log("Wiedth is " + width4);
 
 
 
