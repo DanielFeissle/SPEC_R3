@@ -26,13 +26,23 @@ public class CountTurd : MonoBehaviour {
 	 
 	// Update is called once per frame
 	void Update () {
+        cam = Camera.main;
+        Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
+        Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
 
+        float screnWidth = Mathf.Abs(p.x + q.x);
+
+      //  Debug.Log("Screenwidth" + screnWidth);
+        if (this.transform.position.x<(screnWidth*-2))
+        {
+            transform.position = new Vector2(q.x + this.GetComponent<Renderer>().bounds.size.x / 2, transform.position.y * 0);
+        }
         //check if boss is on stage before we start running
         if (m_Renderer.isVisible && stageStart == false)
         {
             //  //debug.log("object is visible");
             stageStart = true;
-            bossPhase = 1;
+            bossPhase = 0;
         }
         else
         {
@@ -41,6 +51,10 @@ public class CountTurd : MonoBehaviour {
 
 
         }
+        if (stageStart==true)
+        {
+
+         //   Debug.Log("Lets go");
         if (Time.time > nextUsage) //delete otherwise
            {
 
@@ -63,7 +77,7 @@ public class CountTurd : MonoBehaviour {
                {
                   
 
-                   if (timeCounter > 10 &&bossPhase<=2)
+                   if (timeCounter > 10 &&bossPhase<=0)
                    {
                        timeCounter = 0;
                    }
@@ -73,9 +87,10 @@ public class CountTurd : MonoBehaviour {
                        rb.AddForce(new Vector2(-1000f, 0.0f));
 
                    }
-                   if (bossPhase==0&&timeCounter==1) //perform action--toss turd, do nothing else
+                   if (bossPhase==0&&timeCounter>=10) //perform action--toss turd, do nothing else
                    {
-                       AudioSource.PlayClipAtPoint(HATurd, new Vector3(rb.position.x, rb.position.y, 0.0f));
+                        rb.AddForce(new Vector2(-5000f, 0.0f));
+                        AudioSource.PlayClipAtPoint(HATurd, new Vector3(rb.position.x, rb.position.y, 0.0f));
                        GameObject TurdBall = Instantiate(Resources.Load("turdSpawn")) as GameObject;
                        TurdBall.name = "Turdy";
 
@@ -83,10 +98,10 @@ public class CountTurd : MonoBehaviour {
                        TurdBall.transform.localScale = transform.localScale;
                        
                    }
-                   else if (bossPhase==1 &&timeCounter==1) //toss turd, moving leftwards
+                   else if (bossPhase==1 &&timeCounter>=8) //toss turd, moving leftwards
                    {
 
-                       rb.AddForce(new Vector2(-2000f, 0.0f));
+                       rb.AddForce(new Vector2(-8000f, 0.0f));
                        AudioSource.PlayClipAtPoint(HATurd, new Vector3(rb.position.x, rb.position.y, 0.0f));
                        GameObject TurdBall2 = Instantiate(Resources.Load("turdSpawn")) as GameObject;
                        TurdBall2.name = "Turdy2";
@@ -94,10 +109,11 @@ public class CountTurd : MonoBehaviour {
                        TurdBall2.transform.position = transform.position - new Vector3(5.0f, 0.0f);
                        TurdBall2.transform.localScale = transform.localScale;
                    }
-                   else if (bossPhase==2 &&timeCounter==1) //toss turd, moving leftwards and erratic
+                   else if (bossPhase==2 &&timeCounter>=5) //toss turd, moving leftwards and erratic
                    {
-                       rb.AddForce(new Vector2(-3000f, 0.0f));
-                       rb.AddForce(new Vector2(0.0f, 5000.0f));
+                    //    rb.velocity= Vector3.zero;
+                        rb.AddForce(new Vector2(-10000f, 0.0f));
+                       rb.AddForce(new Vector2(0.0f, UnityEngine.Random.Range(-10000,10000)));
                        AudioSource.PlayClipAtPoint(HATurd, new Vector3(rb.position.x, rb.position.y, 0.0f));
                        GameObject TurdBall3 = Instantiate(Resources.Load("turdSpawn")) as GameObject;
                        TurdBall3.name = "Turdy3";
@@ -121,6 +137,8 @@ public class CountTurd : MonoBehaviour {
 
                        TurdBall4.transform.position = transform.position - new Vector3(5.0f, 0.0f);
                        TurdBall4.transform.localScale = transform.localScale;
+                    
+                        this.transform.position = new Vector2((q.x + p.x) / 2, (q.y + p.y) / 2); 
                    }
                 
                    else if (bossPhase==3 &&timeCounter==94)
@@ -137,12 +155,21 @@ public class CountTurd : MonoBehaviour {
                
                nextUsage = Time.time + delay; //it is on display
            }
-    
 
-	}
+        }
+    }
+    int cntWait = 0;
     private void OnTriggerExit2D(Collider2D collision)
     {
-        clearOut = false;
+        if (cntWait==0)
+        {
+            cntWait++;
+        }
+        else
+        {
+            clearOut = false;
+        }
+      
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -151,6 +178,7 @@ public class CountTurd : MonoBehaviour {
         Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
         if (clearOut==false)
         {
+            cntWait = 0;
             if (other.gameObject.CompareTag("West"))
             {
                 //print("west");
@@ -158,18 +186,11 @@ public class CountTurd : MonoBehaviour {
                 invincible = false;
 
 
-                transform.position = new Vector2(q.x + this.GetComponent<Renderer>().bounds.size.x/2, transform.position.y);
+                transform.position = new Vector2(q.x + this.GetComponent<Renderer>().bounds.size.x/2, transform.position.y*0);
                 clearOut = true;
 
             }
-            else if (other.gameObject.CompareTag("North"))
-            {
-                invincible = false;
-                //print("North");
-                transform.position = new Vector3(transform.position.x, q.y/2 - this.GetComponent<Renderer>().bounds.size.y, 0.0f);
-                //    transform.position = new Vector3(transform.position.x, (Screen.height), 0.0f);
-                clearOut = true;
-            }
+           
             else if (other.gameObject.CompareTag("East"))
             {
 
@@ -181,6 +202,7 @@ public class CountTurd : MonoBehaviour {
                 clearOut = true;
 
             }
+            /*
             else if (other.gameObject.CompareTag("South"))
             {
                 invincible = false;
@@ -188,6 +210,15 @@ public class CountTurd : MonoBehaviour {
                 transform.position = new Vector3(transform.position.x, p.y + this.GetComponent<Renderer>().bounds.size.y/2, 0.0f);
                 clearOut = true;
             }
+            else if (other.gameObject.CompareTag("North"))
+            {
+                invincible = false;
+                //print("North");
+                transform.position = new Vector3(transform.position.x, q.y / 2 - this.GetComponent<Renderer>().bounds.size.y, 0.0f);
+                //    transform.position = new Vector3(transform.position.x, (Screen.height), 0.0f);
+                clearOut = true;
+            }
+            */
         }
        
 
@@ -196,14 +227,14 @@ public class CountTurd : MonoBehaviour {
     void OnCollisionStay2D(Collision2D other)
     {
         
-        GameObject CountTu = GameObject.Find("Player_ship");
-        MasterController darg = CountTu.GetComponent<MasterController>();
+    //    GameObject CountTu = GameObject.Find("Player_ship");
+    //    MasterController darg = CountTu.GetComponent<MasterController>();
         if (other.gameObject.CompareTag("Player")&&bossPhase!=3)
         {
-            GameObject MastCont = GameObject.Find("Player_ship");
-            MasterController backEnd = MastCont.GetComponent<MasterController>();
+      //      GameObject MastCont = GameObject.Find("Player_ship");
+       //     MasterController backEnd = MastCont.GetComponent<MasterController>();
 
-            backEnd.hull = backEnd.hull - (int)rb.mass - 1;
+         //   backEnd.hull = backEnd.hull - (int)rb.mass - 1;
             AudioSource.PlayClipAtPoint(TurdPlayerDMG, new Vector3(rb.position.x, rb.position.y, 0.0f));
 
         }
@@ -216,8 +247,8 @@ public class CountTurd : MonoBehaviour {
         
          if (other.gameObject.CompareTag("Damage"))
          {
-             GameObject CountTu = GameObject.Find("Player_ship");
-             MasterController darg = CountTu.GetComponent<MasterController>();
+          //   GameObject CountTu = GameObject.Find("Player_ship");
+           //  MasterController darg = CountTu.GetComponent<MasterController>();
 
              Debug.Log("Damage");
 
@@ -239,12 +270,13 @@ public class CountTurd : MonoBehaviour {
                      TextMesh MeshyTalk = TalkHow.GetComponent<TextMesh>();
                      MeshyTalk.text = "No you turdballs, get the moron!";
                      How.position = new Vector2(-5.0f, 0.0f);
-
-                     bossPhase = 1;
+                    timeCounter = 0;
+                    bossPhase = 1;
                  }
                  else if (bossPhase == 1)
                  {
-                     GameObject TalkHow = GameObject.Find("BossTalks");
+                    timeCounter = 0;
+                    GameObject TalkHow = GameObject.Find("BossTalks");
                      Transform How = TalkHow.GetComponent<Transform>();
                      TextMesh MeshyTalk = TalkHow.GetComponent<TextMesh>();
                      MeshyTalk.text = "hmmmm, clearly this is not that \n hard of a fight...\n PREPARE FOR ULTRA MODE";

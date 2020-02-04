@@ -32,6 +32,8 @@ TagManager:
   - wetfart
   - Damage
   - BOSS
+  - info
+  - Galaxy
   layers:
   - Default
   - TransparentFX

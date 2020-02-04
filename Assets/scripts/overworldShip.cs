@@ -25,19 +25,85 @@ public class overworldShip : MonoBehaviour {
     float delay22 = 0.10f; //only half delay
     float nextUsage2222;
     float delay222 = 2; //only half delay
-
+ public   bool lineOut = false;
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         m_Renderer = GetComponent<Renderer>();
+        lineOut = false;
+
+        ani = GameObject.Find("string").GetComponent<Animator>();
+    }
+
+    public Animator ani;
 
 
+
+    private void LateUpdate()
+    {
+
+        if (Input.GetButton("Fire1") && rb.velocity.magnitude<=2)
+        {
+            if (lineOut==false) //shoot the line out
+            {
+                if (GameObject.Find("string")) //only one fishing line at a time
+                {
+                  
+                }
+                else
+                {
+                    rb.constraints = RigidbodyConstraints2D.FreezeAll; //while fishing you dont move, doi 1-30-20
+                    rb.freezeRotation = true;
+                    GameObject VBurp = Instantiate(Resources.Load("GalLine")) as GameObject;
+                    VBurp.name = "string2";
+                    GameObject.Find("GalLine2").name = "string";
+                    VBurp.transform.position = GameObject.Find("headShip(256x256_SINGLE)").transform.position + new Vector3(m_Renderer.bounds.size.x / 2, VBurp.GetComponent<Renderer>().bounds.size.y);
+                    VBurp.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, this.transform.eulerAngles.z-90));
+              //      VBurp.transform.localEulerAngles = new Vector3(0.0f, 0.0f, this.transform.localEulerAngles.z);
+                    lineOut = true;
+                    ani = GameObject.Find("string").GetComponent<Animator>();
+                }
+               
+            }
+            else
+            {
+                if (ani.GetCurrentAnimatorStateInfo(0).IsName("string") &&
+ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                {
+
+                    if (lineOut == true)
+                    {
+                        //   GameObject.Find("transportShip").GetComponent<overworldShip>().lineOut = false;
+
+                        ani.SetBool("ISRETRACT", true); //retract the line
+                    }
+                    //   Destroy(this.gameObject);
+                }
+            
+            }
+        }
+       
+
+        if ( GameObject.Find("string")) //only one fishing line at a time
+        {
+            if (ani.GetCurrentAnimatorStateInfo(0).IsName("Retract") &&
+ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
+                rb.constraints = RigidbodyConstraints2D.None;
+                rb.freezeRotation = false; //we don't use the rigid body to rotate, we do this manually 
+             //   rb.drag = 0;
+                ani.SetBool("ISRETRACT", false); //retract the line
+                lineOut = false;
+                Destroy(GameObject.Find("string"));
+            }
+        }
+
+       
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
         if (Time.time > nextUsage2222 && readyBoost == false) //delete otherwise
         {
 
@@ -113,7 +179,6 @@ public class overworldShip : MonoBehaviour {
 
 
 
-
     public Text StageSector;
 
     private void FixedUpdate()
@@ -147,23 +212,27 @@ public class overworldShip : MonoBehaviour {
         }
 
         moveHorizantal = moveHorizantal * 2;
-        if (moveHorizantal > 0)
+        if (lineOut==false)
         {
-            transform.Rotate(0, 0, -188 * Time.deltaTime);
-            //rb.velocity = Vector3.zero;
+            if (moveHorizantal > 0)
+            {
+                transform.Rotate(0, 0, -188 * Time.deltaTime);
+                //rb.velocity = Vector3.zero;
 
+            }
+            else if (moveHorizantal < 0)
+            {
+                transform.Rotate(0, 0, 188 * Time.deltaTime);
+                // rb.velocity = Vector3.zero;
+            }
+            float rotation = transform.rotation.z;
+            if (rotation >= 0)
+            {
+                rotation = rotation + Time.deltaTime;
+            }
+            //  transform.Rotate(new Vector3(0.0f, 0.0f, rotation));
         }
-        else if (moveHorizantal < 0)
-        {
-            transform.Rotate(0, 0, 188 * Time.deltaTime);
-            // rb.velocity = Vector3.zero;
-        }
-        float rotation = transform.rotation.z;
-        if (rotation >= 0)
-        {
-            rotation = rotation + Time.deltaTime;
-        }
-        //  transform.Rotate(new Vector3(0.0f, 0.0f, rotation));
+
 
 
 

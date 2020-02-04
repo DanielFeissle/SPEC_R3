@@ -309,6 +309,9 @@
     <Compile Include="Assets\scripts\enemyUSSPotatoe.cs" />
     <Compile Include="Assets\scripts\Exp2017.cs" />
     <Compile Include="Assets\scripts\floorIsLava.cs" />
+    <Compile Include="Assets\scripts\GalaxyPond.cs" />
+    <Compile Include="Assets\scripts\galConstructor.cs" />
+    <Compile Include="Assets\scripts\GalFishing.cs" />
     <Compile Include="Assets\scripts\HullMove.cs" />
     <Compile Include="Assets\scripts\innerHullMover.cs" />
     <Compile Include="Assets\scripts\insultText.cs" />
@@ -332,6 +335,7 @@
     <Compile Include="Assets\scripts\PlayerBulletMove.cs" />
     <Compile Include="Assets\scripts\playerController.cs" />
     <Compile Include="Assets\scripts\playerMenuController.cs" />
+    <Compile Include="Assets\scripts\PoopDest.cs" />
     <Compile Include="Assets\scripts\poosplosion.cs" />
     <Compile Include="Assets\scripts\realDeleteAfterPlainAniScript.cs" />
     <Compile Include="Assets\scripts\scenes.cs" />

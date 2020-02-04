@@ -10,7 +10,16 @@ public class TurdSpawn : MonoBehaviour {
 	void Start () {
         nextUsage = Time.time + delay;
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(-250.0f, 0.0f));
+        rb.AddForce(new Vector2(-450.0f, 0.0f));
+        if (GameObject.Find("CountTurd").GetComponent<CountTurd>().bossPhase>=1)
+        {
+            rb.AddForce(new Vector2(-850.0f, UnityEngine.Random.Range(-1400, 1400)));
+        }
+        else if    (GameObject.Find("CountTurd").GetComponent<CountTurd>().bossPhase >= 2)
+            {
+                rb.AddForce(new Vector2(-1250.0f, 0.0f));
+            rb.AddForce(new Vector2(0, UnityEngine.Random.Range(-1800,1800)));
+        }
 	}
 	
 	// Update is called once per frame
@@ -68,7 +77,8 @@ public class TurdSpawn : MonoBehaviour {
     // 1-north 2-south 3-east 4-west
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+      
+            if (other.gameObject.CompareTag("Player"))
         {
             GameObject CountTu = GameObject.Find("CountTurd");
             CountTurd darg = CountTu.GetComponent<CountTurd>();
@@ -103,6 +113,14 @@ public class TurdSpawn : MonoBehaviour {
    
     void OnTriggerEnter2D(Collider2D other)
     {
+
+        if (other.gameObject.CompareTag("PlayerShot"))
+        {
+            //  rb.AddForce(rb.velocity * -4); //go in the opposite direction
+            rb.AddForce(new Vector2(888, 0));
+            Debug.Log("FFFF");
+        }
+        /*
         if (other.gameObject.CompareTag("West"))
         {
             //print("west");
@@ -136,6 +154,7 @@ public class TurdSpawn : MonoBehaviour {
             //print("South");
             transform.position = new Vector3(transform.position.x, 3.8f, 0.0f);
         }
+        */
     }
      void OnTriggerStay2D(Collider2D other)
     {

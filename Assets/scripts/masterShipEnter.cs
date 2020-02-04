@@ -205,7 +205,11 @@ public class masterShipEnter : MonoBehaviour {
                         {
                             if (!collision.gameObject.CompareTag("Cloud"))
                             {
-                                Destroy(collision.gameObject);
+                                if (!collision.gameObject.CompareTag("Galaxy"))
+                                {
+                                    Destroy(collision.gameObject);
+                                }
+                                  
                             }
                               
                         }
