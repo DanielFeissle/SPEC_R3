@@ -111,8 +111,8 @@ public class playerController : MonoBehaviour {
         string[] names = Input.GetJoystickNames();
         for (int x = 0; x < names.Length; x++)
         {
-            print(names[x].Length);
-            print(names[x]);
+         //   print(names[x].Length);
+          //  print(names[x]);
             if (names[x].Length == 0)
             {
                 //disconnected, switch back to mouse/keyboard

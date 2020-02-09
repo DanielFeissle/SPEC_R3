@@ -33,11 +33,24 @@ public class overworldShip : MonoBehaviour {
         m_Renderer = GetComponent<Renderer>();
         lineOut = false;
 
-        ani = GameObject.Find("string").GetComponent<Animator>();
+    //    ani = GameObject.Find("string").GetComponent<Animator>();
     }
 
     public Animator ani;
 
+    IEnumerator MovePlayerToCentral()
+    {
+       // coRun = true;
+        GameObject CameFind = GameObject.Find("Main Camera");
+        Transform camPos = CameFind.GetComponent<Transform>();
+        while (camPos.GetComponent<Transform>().position.x < 25)
+        {
+            yield return new WaitForSeconds(0.01f);
+            Camera.main.transform.position += new Vector3(.1f, 0, 0);
+            // Debug.Log("00000000000000000000000000000000000000000000000000");
+        }
+       // coRun = false;
+    }
 
 
     private void LateUpdate()
@@ -63,6 +76,8 @@ public class overworldShip : MonoBehaviour {
               //      VBurp.transform.localEulerAngles = new Vector3(0.0f, 0.0f, this.transform.localEulerAngles.z);
                     lineOut = true;
                     ani = GameObject.Find("string").GetComponent<Animator>();
+
+                   
                 }
                
             }
@@ -125,8 +140,8 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         string[] names = Input.GetJoystickNames();
         for (int x = 0; x < names.Length; x++)
         {
-            print(names[x].Length);
-            print(names[x]);
+          //  print(names[x].Length);
+         //   print(names[x]);
             if (names[x].Length == 0)
             {
                 //disconnected, switch back to mouse/keyboard
@@ -254,7 +269,7 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             Debug.Log("------------------" + totspeed);
             Debug.Log("==================" + rb.velocity.sqrMagnitude);
 
-            if (rb.velocity.sqrMagnitude < 12 && engineCnt > 0)
+            if (rb.velocity.sqrMagnitude < 12 && engineCnt > 0 && lineOut==false)
             {//increase speed, ie faster getup 10-13-19
                 rb.AddRelativeForce(Vector3.up * 225 * Time.deltaTime * speed);
 

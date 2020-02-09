@@ -313,6 +313,7 @@
     <Compile Include="Assets\scripts\galConstructor.cs" />
     <Compile Include="Assets\scripts\GalFishing.cs" />
     <Compile Include="Assets\scripts\HullMove.cs" />
+    <Compile Include="Assets\scripts\infoMover.cs" />
     <Compile Include="Assets\scripts\innerHullMover.cs" />
     <Compile Include="Assets\scripts\insultText.cs" />
     <Compile Include="Assets\scripts\IntroDemoControl.cs" />

@@ -4,18 +4,62 @@ using UnityEngine;
 
 public class GalaxyPond : MonoBehaviour {
     public bool containsInfo = false;
-	// Use this for initialization
-	void Start () {
-		
+    bool isFish = false;
 
+    //goal is to  move the gal to the player, then move der back
+    Vector2 intialScale;
+    Vector2 intialPos;
+    // Use this for initialization
+    void Start () {
+
+        intialScale = this.transform.localScale;
+        intialPos = this.transform.position;
         if (UnityEngine.Random.Range(1,100)<50)
         {
             containsInfo = true;
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        isFish = false;
+    }
+
+    //https://gamedev.stackexchange.com/questions/99321/resize-sprite-to-match-camera-width
+    void fitCameraWidth()
+    {
+        SpriteRenderer sr = (SpriteRenderer)GetComponent("Renderer");
+        if (sr == null)
+            return;
+
+        // Set filterMode
+        sr.sprite.texture.filterMode = FilterMode.Point;
+
+        // Get stuff
+        double width = sr.sprite.bounds.size.x;
+        Debug.Log("width: " + width);
+        double worldScreenHeight = Camera.main.orthographicSize * 2.0;
+        double worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
+
+        // Resize
+        transform.localScale = new Vector2(1, 1) * (float)(worldScreenWidth / width);
+    }
+
+    void fitCameraHeight()
+    {
+        SpriteRenderer sr = (SpriteRenderer)GetComponent("Renderer");
+        if (sr == null)
+            return;
+
+        // Set filterMode
+        sr.sprite.texture.filterMode = FilterMode.Point;
+
+        // Get stuff
+        double height = sr.sprite.bounds.size.x;
+        double worldScreenHeight = Camera.main.orthographicSize * 2.0;
+
+        // Resize
+        transform.localScale = new Vector2(1, 1) * (float)(worldScreenHeight / height);
+    }
+
+    // Update is called once per frame
+    void Update () {
 
 
 
@@ -32,16 +76,27 @@ public class GalaxyPond : MonoBehaviour {
         Collider2D[] otherColliders = Physics2D.OverlapAreaAll(myCollider.bounds.min, myCollider.bounds.max);
         
         // Check for any colliders that are on top
-        bool isUnderneath = false;
+      
         foreach (var otherCollider in otherColliders)
         {
-            if (otherCollider.transform.position.z < this.transform.position.z)
+            if (otherCollider.transform.position.z < this.transform.position.z && isFish==false)
             {
-                isUnderneath = true;
+               
 
                 if (otherCollider.gameObject.CompareTag("Fuel"))
                 {
-                    Debug.Log("You Got it!");
+                   if (containsInfo == true)
+                   {
+                        fitCameraHeight();
+                        fitCameraWidth();
+                        transform.position = GameObject.Find("transportShip").transform.position;
+                        GameObject VBurp = Instantiate(Resources.Load("galaxy\\infopod")) as GameObject;
+                        VBurp.name = "superInfo";
+                        VBurp.transform.position = new Vector3(UnityEngine.Random.Range(this.GetComponent<Renderer>().bounds.min.x, this.GetComponent<Renderer>().bounds.max.x), UnityEngine.Random.Range(this.GetComponent<Renderer>().bounds.min.y, this.GetComponent<Renderer>().bounds.max.y));
+                        //    VBurp.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, this.transform.eulerAngles.z - 90));
+                   }
+                    isFish = true;
+                    break;
                 }
 
           //      break;
@@ -64,7 +119,22 @@ public class GalaxyPond : MonoBehaviour {
 
 
 
+        if (GameObject.Find("transportShip").GetComponent<overworldShip>().lineOut==false)
+        {
+            //set the chance back to zero
+            //and delete the gameobject infopod
 
+            isFish = false;
+         if (GameObject.Find("superInfo"))
+            {
+                Destroy(GameObject.Find("superInfo"));
+                //revert back to galaxy position
+                transform.position = intialPos;
+                transform.localScale = intialScale;
+            }
+             
+         
+        }
 
 
 
