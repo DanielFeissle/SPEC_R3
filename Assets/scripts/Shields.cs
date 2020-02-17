@@ -29,6 +29,13 @@ public class Shields : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
+
+      //  IntroIntial();
+
+    }
+
+    private void IntroIntial()
+    {
         nextUsage777 = Time.time + delay777; //begin HP increase
         rb = GetComponent<Rigidbody2D>();
         m_Renderer = GetComponent<Renderer>();
@@ -56,8 +63,6 @@ public class Shields : MonoBehaviour {
             HPF_UI.name = "HP_Bar" + i;
             HPF_UI.transform.position = transform.position + (transform.up / 2);
         }
-
-
     }
 
     public void startupPlan()
@@ -176,33 +181,41 @@ public class Shields : MonoBehaviour {
             //1-19-20 hp update
 
             //1-21-20 i really don't like/want to do this but     ....this is old/established. the is less hard to do. :,...
-            cam = Camera.main;
-            Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
-            Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
-            if (curHP > 0) //this is to prevent errors  from not finding the game object
-            {
-                GameObject HP_UI = GameObject.Find("HP_UI");
-            HP_UI.transform.position = new Vector2((p.x + q.x) / 2 - (HP_UI.GetComponent<Renderer>().bounds.size.x * 1), q.y + HP_UI.GetComponent<Renderer>().bounds.size.y);
-            for (int i = 0; i < totHP; i++)
-            {
-                //   GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar")) as GameObject;
-                GameObject HPF_UI = GameObject.Find("HP_Bar" + i);
+            try
+                {
+                    cam = Camera.main;
+                    Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
+                    Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
+                    if (curHP > 0) //this is to prevent errors  from not finding the game object
+                    {
+                        GameObject HP_UI = GameObject.Find("HP_UI");
+                        HP_UI.transform.position = new Vector2((p.x + q.x) / 2 - (HP_UI.GetComponent<Renderer>().bounds.size.x * 1), q.y + HP_UI.GetComponent<Renderer>().bounds.size.y);
+                        for (int i = 0; i < totHP; i++)
+                        {
+                            //   GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar")) as GameObject;
+                            GameObject HPF_UI = GameObject.Find("HP_Bar" + i);
 
-                HPF_UI.transform.position = new Vector2((p.x + q.x) / 2 + (HPF_UI.GetComponent<Renderer>().bounds.size.x * (i * 2)), q.y);
-
-
-
-            }
-            int hpdam = totHP - curHP;
-            GameObject HPF_UI2 = GameObject.Find("HP_Bar" + (curHP - 1));
+                            HPF_UI.transform.position = new Vector2((p.x + q.x) / 2 + (HPF_UI.GetComponent<Renderer>().bounds.size.x * (i * 2)), q.y);
 
 
-            //    HPF_UI.GetComponent<SpriteRenderer>().enabled = false;
-            //  if (curHP<totHP)
-            //  {
-     
-                HPF_UI2.GetComponent<SpriteRenderer>().color = Color.clear; //now it is hidden wihout being gone
-            }
+
+                        }
+                        int hpdam = totHP - curHP;
+                        GameObject HPF_UI2 = GameObject.Find("HP_Bar" + (curHP - 1));
+
+
+                        //    HPF_UI.GetComponent<SpriteRenderer>().enabled = false;
+                        //  if (curHP<totHP)
+                        //  {
+
+                        HPF_UI2.GetComponent<SpriteRenderer>().color = Color.clear; //now it is hidden wihout being gone
+                    }
+                }
+                catch
+                {
+                    IntroIntial();
+                }
+        
           
                                                                         //  }
 

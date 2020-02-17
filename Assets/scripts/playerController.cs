@@ -41,6 +41,8 @@ public class playerController : MonoBehaviour {
     bool readyBoost = true;
     int engineCnt = 0;
 
+    public int playMode = 0; //0 is arcade, 1 is overworld mode 
+
     public int shipHitDetect=0; //0-nothing 1-something (no duh)---its actually boost, 2-turd is off screen
     private Camera cam;
     int TPGot = 0;
@@ -48,6 +50,14 @@ public class playerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        if (SceneManager.GetActiveScene().name== "stageIntro")
+        {
+            playMode = 0;
+        }
+        else if (SceneManager.GetActiveScene().name== "stage_OverSpace-world-duh")
+        {
+            playMode = 1;
+        }
 
         //  Debug.Log("FUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFUFFUFUFUFUFU");
         //we will want to instantate the hp bars in

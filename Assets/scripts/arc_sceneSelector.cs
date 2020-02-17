@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class arc_sceneSelector : MonoBehaviour {
     System.Random randStage = new System.Random();
     // Use this for initialization
-    void Start () {
-      int getNext=  randStage.Next(200);
+    void Start() {
+        int getNext = randStage.Next(200);
         //this is used for the score attack/arcade mode
         //plan is for four different enemy stages. they are as follows:
         //1. Derlictr space ship
@@ -17,34 +17,42 @@ public class arc_sceneSelector : MonoBehaviour {
         //5. nothing (how org... grab the item and leave...)
         //6. Large derilict ship hull (this ship itself, in a tight box)
         //7. Planet side
-        if (getNext<25)
+        if (GameObject.Find("PlayerShip").GetComponent<playerController>().playMode == 0)
         {
-            SceneManager.LoadScene("stage"); //this is the first stage name
+            if (getNext < 25)
+            {
+                SceneManager.LoadScene("stage"); //this is the first stage name
+            }
+            else if (getNext < 50)
+            {
+                SceneManager.LoadScene("stage_asteroids"); //this is asteroids stage, with 3 different asteroid functions
+            }
+            else if (getNext < 75)
+            {
+                SceneManager.LoadScene("stage_rings"); //this is sun ring stage, features experiments in shaders/coloring
+            }
+            else if (getNext < 100)
+            {
+                SceneManager.LoadScene("stage_atmosphere"); //this is sun ring stage, features experiments in shaders/coloring
+            }
+            else if (getNext < 125)
+            {
+                SceneManager.LoadScene("stage_interShip"); //this is sun ring stage, features experiments in shaders/coloring
+            }
+            else if (getNext < 150)
+            {
+                SceneManager.LoadScene("stage_PlainSpace"); //this is sun ring stage, features experiments in shaders/coloring
+            }
+            else if (getNext < 175)
+            {
+                SceneManager.LoadScene("stage_PlanetSide"); //this is sun ring stage, features experiments in shaders/coloring
+            }
         }
-        else if (getNext<50)
+        else
         {
-            SceneManager.LoadScene("stage_asteroids"); //this is asteroids stage, with 3 different asteroid functions
+            SceneManager.LoadScene("stage_OverSpace-world-duh"); //return back to overworld
         }
-        else if (getNext<75)
-        {
-            SceneManager.LoadScene("stage_rings"); //this is sun ring stage, features experiments in shaders/coloring
-        }
-          else if (getNext<100)
-        {
-            SceneManager.LoadScene("stage_atmosphere"); //this is sun ring stage, features experiments in shaders/coloring
-        }
-        else if (getNext < 125)
-        {
-            SceneManager.LoadScene("stage_interShip"); //this is sun ring stage, features experiments in shaders/coloring
-        }
-        else if (getNext < 150)
-        {
-            SceneManager.LoadScene("stage_PlainSpace"); //this is sun ring stage, features experiments in shaders/coloring
-        }
-        else if (getNext < 175)
-        {
-            SceneManager.LoadScene("stage_PlanetSide"); //this is sun ring stage, features experiments in shaders/coloring
-        }
+       
 
     }
 	

@@ -97,6 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   containsInfo: 0
+  randoVal: 0
+  isX: 0
+  StageSector: {fileID: 0}
 --- !u!212 &212310731865808646
 SpriteRenderer:
   m_ObjectHideFlags: 1

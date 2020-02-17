@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class overworldShip : MonoBehaviour {
@@ -11,29 +12,42 @@ public class overworldShip : MonoBehaviour {
     public float speed;
     private Rigidbody2D rb;
     public AudioClip shipShift;
+    public AudioClip LiftOff;
     public int shipHitDetect = 0; //0-nothing 1-something (no duh)---its actually boost, 2-turd is off screen
     bool readyBoost = true;
     public int moveCount = 0;
     int engineCnt = 0;
-
+    public bool isEnd = false;
     float nextUsage;
     float nextUsage2 = -10;
-    float delay = 0.15f; //only half delay
+    float delay = 0.501f; //only half delay
     float nextUsage22;
     float delay2 = 0.10f; //only half delay
     float nextUsage222;
     float delay22 = 0.10f; //only half delay
     float nextUsage2222;
     float delay222 = 2; //only half delay
- public   bool lineOut = false;
+    public bool gotInfov2 = false;
+    public int randoValX = 0;
+      public int randoValY = 0;
+    public bool lineOut = false;
 
     // Use this for initialization
     void Start () {
+
+        randoValX = UnityEngine.Random.Range(-25, 25);
+        randoValY = UnityEngine.Random.Range(-25, 25);
+
+        GameObject VBurp = Instantiate(Resources.Load("galaxy\\station-jumper")) as GameObject;
+        VBurp.name = "galJump";
+        VBurp.transform.position = new Vector3(randoValX*10,randoValY*10);
+
         rb = GetComponent<Rigidbody2D>();
         m_Renderer = GetComponent<Renderer>();
         lineOut = false;
 
-    //    ani = GameObject.Find("string").GetComponent<Animator>();
+        GameObject.Find("galJump").GetComponent<ParticleSystem>().Stop();
+        //    ani = GameObject.Find("string").GetComponent<Animator>();
     }
 
     public Animator ani;
@@ -99,8 +113,9 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             }
         }
        
-
-        if ( GameObject.Find("string")) //only one fishing line at a time
+ // if (Time.time > nextUsage ) //delete otherwise
+        {
+   if ( GameObject.Find("string")) //only one fishing line at a time
         {
             if (ani.GetCurrentAnimatorStateInfo(0).IsName("Retract") &&
 ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
@@ -110,15 +125,38 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
              //   rb.drag = 0;
                 ani.SetBool("ISRETRACT", false); //retract the line
                 lineOut = false;
-                Destroy(GameObject.Find("string"));
+                    if (GameObject.Find("string").GetComponent<GalFishing>().gotInfo == true || gotInfov2==true)
+                    {
+                        //2-11-20
+                        //this is the improved way of setting the value. Guranteed to work all of the time now!
+                        gotInfov2 = false;
+                        if (UnityEngine.Random.Range(0, 100) < 50)
+                        {
+                            valx = randoValX.ToString();
+                        }
+                        else
+                        {
+                            valy = randoValY.ToString();
+                        }
+                        GameObject dad54 = GameObject.Find("txt_Convention");
+                        StageConv = dad54.GetComponent<Text>();
+                        StageConv.text = "Convention " + valx + "," + valy;
+                    }
+                    Destroy(GameObject.Find("string"));
             }
         }
+             
+            nextUsage = Time.time + delay; //it is on display
+        }
+     
 
        
 
     }
-    // Update is called once per frame
-    void Update () {
+    string valx = "?";
+    string valy = "?";
+   // Update is called once per frame
+   void Update () {
         if (Time.time > nextUsage2222 && readyBoost == false) //delete otherwise
         {
 
@@ -188,11 +226,113 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             controlerUsed = false;
         }
     }
+    IEnumerator MoverCameraRotateUp()
+    {
+       
+        GameObject CameFind = GameObject.Find("Main Camera");
+        Transform camPos = CameFind.GetComponent<Transform>();
+        while (camPos.GetComponent<Transform>().rotation.x > -.54f)
+        {
+            yield return new WaitForSeconds(0.01f);
+            //  Camera.main.transform.position += new Vector3(0, .1f, 0);
+            // Camera.main.transform.rotation.x += 5;//+= new Vector3(0, .1f, 0);
+            //    Camera.main.transform.rotation = Quaternion.Euler(new Vector3(-91f, 0f, 0f));
+
+            Camera.main.transform.Rotate(-10 * Time.deltaTime, 0, 0);
+            Debug.Log("RotLevel: " + camPos.GetComponent<Transform>().rotation.x);
+        }
+    //    StartCoroutine(Example());
+
+    }
+    System.Random randStage = new System.Random();
+    IEnumerator ZoomIn()
+    {
+        
+        GameObject CameFind = GameObject.Find("Main Camera");
+        // CameraController CamControl2 = CameFind2.GetComponent<CameraController>();
+
+        CameraController CamControl = CameFind.GetComponent<CameraController>();
+        while (CameFind.GetComponent<Camera>().fieldOfView >= 0.5f)
+        {
+            yield return new WaitForSeconds(0.001f);
+            Camera.main.fieldOfView -= 0.1f;
+            //  Debug.Log("11111111111111111111111111111111111111111111111");
+        }
+  //      StartCoroutine(MoverCameraRotateUp());
+
+    }
+    IEnumerator Example()
+    {
+
+        for (int i = 0; i < 8; i++)
+        {
+            
+            yield return new WaitForSeconds(0.35f);
+
+            Debug.Log("CorENDTIME" + Time.time);
+        }
+        isEnd = false;
+        Camera.main.orthographic = true; //enmter 3d mode for fun effects and end of cutscene
+        int getNext = randStage.Next(200);
+        //do some other stuff but the end result is to load another level
+        if (getNext < 25)
+        {
+            SceneManager.LoadScene("stage"); //this is the first stage name
+        }
+        else if (getNext < 50)
+        {
+            SceneManager.LoadScene("stage_asteroids"); //this is asteroids stage, with 3 different asteroid functions
+        }
+        else if (getNext < 75)
+        {
+            SceneManager.LoadScene("stage_rings"); //this is sun ring stage, features experiments in shaders/coloring
+        }
+        else if (getNext < 100)
+        {
+            SceneManager.LoadScene("stage_atmosphere"); //this is sun ring stage, features experiments in shaders/coloring
+        }
+        else if (getNext < 125)
+        {
+            SceneManager.LoadScene("stage_interShip"); //this is sun ring stage, features experiments in shaders/coloring
+        }
+        else if (getNext < 150)
+        {
+            SceneManager.LoadScene("stage_PlainSpace"); //this is sun ring stage, features experiments in shaders/coloring
+        }
+        else if (getNext < 175)
+        {
+            SceneManager.LoadScene("stage_PlanetSide"); //this is sun ring stage, features experiments in shaders/coloring
+        }
 
 
+    }
+ 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+      
+     
+        if (collision.CompareTag("station") && lineOut==true)
+        {
+            Debug.Log("STATION!");
 
+            if (collision.name == "galJump" && isEnd == false)
+            {
+                AudioSource.PlayClipAtPoint(LiftOff, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                AudioSource.PlayClipAtPoint(LiftOff, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                AudioSource.PlayClipAtPoint(LiftOff, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                AudioSource.PlayClipAtPoint(LiftOff, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                AudioSource.PlayClipAtPoint(LiftOff, new Vector3(transform.position.x, transform.position.y, 0.0f));
+                GameObject.Find("galJump").GetComponent<ParticleSystem>().Play();
+    isEnd = true;
+                StartCoroutine(ZoomIn());
+                Camera.main.orthographic = false; //enmter 3d mode for fun effects and end of cutscene
+                StartCoroutine(MoverCameraRotateUp());
+                StartCoroutine(Example());
+            }
+        }
+    }
 
-
+    public Text StageConv;
 
     public Text StageSector;
 

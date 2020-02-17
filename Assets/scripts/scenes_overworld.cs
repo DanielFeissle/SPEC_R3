@@ -33,7 +33,7 @@ public class scenes_overworld : MonoBehaviour {
 
 
                 //decide if we create the derilict ship or not
-                if (UnityEngine.Random.Range(0, 100) < 4)
+                if (UnityEngine.Random.Range(0, 100) < 2)
                 {
                     //create the dead ship..
                     float GalPosX = x * 10;
