@@ -44,7 +44,7 @@ public class GalaxyPond : MonoBehaviour {
 
         // Get stuff
         double width = sr.sprite.bounds.size.x;
-        Debug.Log("width: " + width);
+      //  Debug.Log("width: " + width);
         double worldScreenHeight = Camera.main.orthographicSize * 2.0;
         double worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
 

@@ -1,0 +1,5 @@
+1,This is not a conversation
+1,Hitchikers in mirror may appear closer than they really are
+0,Gum and paperclips can fix anything
+0,Too much of anything can't be good, can it?
+0,Insert a positive lore message here...

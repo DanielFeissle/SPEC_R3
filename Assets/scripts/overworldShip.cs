@@ -34,7 +34,7 @@ public class overworldShip : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        diaProtect = false;
         randoValX = UnityEngine.Random.Range(-25, 25);
         randoValY = UnityEngine.Random.Range(-25, 25);
 
@@ -69,8 +69,18 @@ public class overworldShip : MonoBehaviour {
 
     private void LateUpdate()
     {
-
-        if (Input.GetButton("Fire1") && rb.velocity.magnitude<=2)
+        //2-20-20 control the cutscene speed
+        if (Input.GetButton("Fire1") && diaLOG==true)
+        {
+          //  Debug.Log("FAST SPEED");
+            diaTime = .15f;
+        }
+        else if (diaLOG==true)
+        {
+         //   Debug.Log("SLOW SPEED");
+            diaTime = .5f; //std time
+        }
+        if (Input.GetButton("Fire1") && rb.velocity.magnitude<=2 && isEnd==false &&diaLOG==false)
         {
             if (lineOut==false) //shoot the line out
             {
@@ -95,7 +105,7 @@ public class overworldShip : MonoBehaviour {
                 }
                
             }
-            else
+            else if (diaLOG==false)
             {
                 if (ani.GetCurrentAnimatorStateInfo(0).IsName("string") &&
 ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
@@ -306,17 +316,117 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
 
 
     }
- 
-    private void OnTriggerStay2D(Collider2D collision)
+
+    private int randomDiscuss()
+    {
+        int chardisc = UnityEngine.Random.Range(0, 100);
+        int chatTopic = UnityEngine.Random.Range(0, 100);
+        int charOnScreen = 0;
+        if (chardisc<50)
+        {
+            charOnScreen = 0;
+            GameObject VBurp = Instantiate(Resources.Load("dialog\\indy1")) as GameObject;
+            VBurp.name = "background_char";
+            VBurp.transform.position = new Vector3(GameObject.Find("Main Camera").transform.position.x, GameObject.Find("Main Camera").transform.position.y, 0);
+        }
+        else
+        {
+            charOnScreen = 1;
+            GameObject VBurp = Instantiate(Resources.Load("dialog\\wut")) as GameObject;
+            VBurp.name = "background_char";
+            VBurp.transform.position = new Vector3(GameObject.Find("Main Camera").transform.position.x, GameObject.Find("Main Camera").transform.position.y, 0);
+        }
+        return charOnScreen;
+    }
+
+  public  bool diaLOG = false;
+   public bool diaProtect = false;
+    public bool diaProtect2 = false;
+    float diaTime = .5f;
+    //2-23-20
+    //discusion system first! random bits of advice stored in  a text file by a random char on screen
+    IEnumerator DialogeOption()
+    {
+        diaLOG = true;
+        Debug.Log("ONLY ONCE");
+        GameObject VBurp = Instantiate(Resources.Load("dialog\\back1")) as GameObject;
+        VBurp.name = "background_dia";
+        VBurp.transform.position = new Vector3(GameObject.Find("Main Camera").transform.position.x, GameObject.Find("Main Camera").transform.position.y, 0);
+       int blaFun= randomDiscuss();
+        Debug.Log("The char from the main script is " + blaFun);
+     string fu=   this.GetComponent<Over_conver>().PullValue(blaFun);
+
+        GameObject uiAltiText = GameObject.Find("txt_GG");
+        Text delta1 = uiAltiText.GetComponent<Text>();
+
+        Debug.Log("Your statment is " + fu);
+        int ddd = fu.Length / 20; //get how many substrings to add togather per statment
+        ddd = Mathf.RoundToInt(ddd);
+       // ddd = 5;
+        int curProg = 0;
+        for (int i = 0; i < 20; i++)
+        {
+
+            curProg = curProg+i + ddd;
+            Debug.Log("THIS IS CURPROG --------------" + curProg);
+            if (curProg<fu.Length)
+            {
+                delta1.GetComponent<Text>().text = fu.Substring(0, curProg);
+            }
+            else //finish the statement, we are close enough
+            {
+                delta1.GetComponent<Text>().text = fu.Substring(0, fu.Length);
+            }
+          
+            if (i==1)
+            {
+                diaProtect2 = false;
+             
+            }
+            Debug.Log("CHANGED" + diaProtect2);
+            yield return new WaitForSeconds(diaTime);
+         //   if (diaLOG==false) //player escaped from discussion
+         //   {
+            //    break;
+        //    }
+
+            Debug.Log("CorENDTIME" + Time.time);
+        }
+        delta1.GetComponent<Text>().text = "";
+        cleanupInstDial();
+      
+    }
+    private void cleanupInstDial()
+    {
+        diaLOG = false;
+        diaProtect = false;
+        Destroy(GameObject.Find("background_dia"));
+        Destroy(GameObject.Find("background_char"));
+    }
+        private void OnTriggerStay2D(Collider2D collision)
     {
       
      
-        if (collision.CompareTag("station") && lineOut==true)
+        if (collision.CompareTag("station") && lineOut==true )
         {
-            Debug.Log("STATION!");
 
-            if (collision.name == "galJump" && isEnd == false)
+            // Debug.Log("STATION!");
+
+          // Debug.Log("STD CHECKER     DIALOG"+ diaLOG+ "DIALOG2"+diaProtect2);
+ /*           if (diaLOG == true && Input.GetButton("Fire1"))//  &&diaProtect2==false) //&& diaProtect == false
             {
+                Debug.Log("CLEANUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                diaLOG = false;
+                cleanupInstDial();
+                return;
+
+            }
+            */
+          
+            if (collision.name == "galJump" && isEnd == false )
+            {
+               
+
                 AudioSource.PlayClipAtPoint(LiftOff, new Vector3(transform.position.x, transform.position.y, 0.0f));
                 AudioSource.PlayClipAtPoint(LiftOff, new Vector3(transform.position.x, transform.position.y, 0.0f));
                 AudioSource.PlayClipAtPoint(LiftOff, new Vector3(transform.position.x, transform.position.y, 0.0f));
@@ -329,6 +439,26 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 StartCoroutine(MoverCameraRotateUp());
                 StartCoroutine(Example());
             }
+            else //it is the standard station
+            {
+                 if (collision.GetComponent<station_visit>().PlayerVisit==false) //can't continue to talk, wait some time before letting them back again!
+                {
+                    if (diaLOG == false && Input.GetButton("Fire1") && diaProtect == false)
+                    {
+
+                        diaProtect2 = true;
+                        diaProtect = true;
+                        StartCoroutine(DialogeOption());
+                        collision.GetComponent<station_visit>().PlayerVisit = true;
+                        return;
+                    }
+                }
+              
+                
+
+              
+            }
+         
         }
     }
 
@@ -406,8 +536,8 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 rb.velocity = rb.velocity.normalized * 8;
             }
             // Debug.Log(totspeed);
-            Debug.Log("------------------" + totspeed);
-            Debug.Log("==================" + rb.velocity.sqrMagnitude);
+  //          Debug.Log("------------------" + totspeed);
+  //          Debug.Log("==================" + rb.velocity.sqrMagnitude);
 
             if (rb.velocity.sqrMagnitude < 12 && engineCnt > 0 && lineOut==false)
             {//increase speed, ie faster getup 10-13-19

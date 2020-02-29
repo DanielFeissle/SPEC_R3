@@ -29,44 +29,83 @@ public class Shields : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
-
-      //  IntroIntial();
-
+        Debug.Log("wefwefwefwefEEEEEEEEEEEEEEEEEEEEEE"+this.gameObject.name);
+         IntroIntial();
+      
     }
-
+  
     private void IntroIntial()
     {
-        nextUsage777 = Time.time + delay777; //begin HP increase
-        rb = GetComponent<Rigidbody2D>();
-        m_Renderer = GetComponent<Renderer>();
-        cam = Camera.main;
-        nextUsage444 = Time.time + delay444; //it is on display
-
-        GameObject HPF_UI2 = Instantiate(Resources.Load("HP_UI") as GameObject);
-        HPF_UI2.name = "HP_UI";
-        HPF_UI2.transform.position = transform.position + (transform.up / 2);
-        //1-23-20 Load in the hp bars- always one up the total hp
-        if (SceneManager.GetActiveScene().name.ToString() == "stage_OverSpace-world-duh") //add in extra health
+        if (SceneManager.GetActiveScene().name.Contains("OverSpace-world-duh"))
         {
-            totHP = 7;
-            curHP = 7;
+            if (this.gameObject.name=="transportShip")
+            {
+                nextUsage777 = Time.time + delay777; //begin HP increase
+                rb = GetComponent<Rigidbody2D>();
+                m_Renderer = GetComponent<Renderer>();
+                cam = Camera.main;
+                nextUsage444 = Time.time + delay444; //it is on display
+
+                GameObject HPF_UI2 = Instantiate(Resources.Load("HP_UI") as GameObject);
+                HPF_UI2.name = "HP_UI";
+                HPF_UI2.transform.position = transform.position + (transform.up / 2);
+                //1-23-20 Load in the hp bars- always one up the total hp
+                if (SceneManager.GetActiveScene().name.ToString() == "stage_OverSpace-world-duh") //add in extra health
+                {
+                    totHP = 7;
+                    curHP = 7;
+                }
+                else
+                {
+                    totHP = 4;
+                    curHP = 4;
+                }
+                for (int i = 0; i < totHP; i++)
+                {
+                    //    GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar"), GameObject.Find("Canvas").transform) as GameObject;
+                    GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar") as GameObject);
+                    HPF_UI.name = "HP_Bar" + i;
+                    HPF_UI.transform.position = transform.position + (transform.up / 2);
+                }
+            }
+         
         }
         else
         {
-            totHP = 4;
-            curHP = 4;
+            nextUsage777 = Time.time + delay777; //begin HP increase
+            rb = GetComponent<Rigidbody2D>();
+            m_Renderer = GetComponent<Renderer>();
+            cam = Camera.main;
+            nextUsage444 = Time.time + delay444; //it is on display
+
+            GameObject HPF_UI2 = Instantiate(Resources.Load("HP_UI") as GameObject);
+            HPF_UI2.name = "HP_UI";
+            HPF_UI2.transform.position = transform.position + (transform.up / 2);
+            //1-23-20 Load in the hp bars- always one up the total hp
+            if (SceneManager.GetActiveScene().name.ToString() == "stage_OverSpace-world-duh") //add in extra health
+            {
+                totHP = 7;
+                curHP = 7;
+            }
+            else
+            {
+                totHP = 4;
+                curHP = 4;
+            }
+            for (int i = 0; i < totHP; i++)
+            {
+                //    GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar"), GameObject.Find("Canvas").transform) as GameObject;
+                GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar") as GameObject);
+                HPF_UI.name = "HP_Bar" + i;
+                HPF_UI.transform.position = transform.position + (transform.up / 2);
+            }
         }
-        for (int i = 0; i < totHP; i++)
-        {
-            //    GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar"), GameObject.Find("Canvas").transform) as GameObject;
-            GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar") as GameObject);
-            HPF_UI.name = "HP_Bar" + i;
-            HPF_UI.transform.position = transform.position + (transform.up / 2);
-        }
+          
     }
 
     public void startupPlan()
     {
+        /*
         rb = GetComponent<Rigidbody2D>();
         m_Renderer = GetComponent<Renderer>();
         cam = Camera.main;
@@ -93,6 +132,10 @@ public class Shields : MonoBehaviour {
             HPF_UI.name = "HP_Bar" + i;
             HPF_UI.transform.position = transform.position + (transform.up / 2);
         }
+         */
+        IntroIntial();
+
+
     }
 
     private void LateUpdate()
@@ -258,40 +301,91 @@ public class Shields : MonoBehaviour {
 
         if (herdam == 0)
         {
-            if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > 15 || this.rb.velocity.sqrMagnitude > 5)
-            {
-                Debug.Log("HIT FAST" + collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude);
-                Debug.Log("Player Hit FAST" + this.rb.velocity.sqrMagnitude);
-         
-                if (collision.gameObject.CompareTag("SpaceJunk"))
+            if (SceneManager.GetActiveScene().name.Contains("OverSpace-world-duh"))
+            { //use special Collision
+                //2-23-20 since this ship is built out of multiple components, we want to ignoere them so they don't count as  a collision ahead of time
+                if (!collision.gameObject.CompareTag("Player"))
                 {
-                    YeahDam();
+                    if (this.gameObject.GetComponent<overworldShip>().diaLOG == false) //we are not in a dialog mode, so let the objects damage
+                    {
+                        if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > 1 || this.rb.velocity.sqrMagnitude > 1)
+                        {
+                            //     Debug.Log("HIT FAST" + collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude);
+                            //    Debug.Log("Player Hit FAST" + this.rb.velocity.sqrMagnitude);
+
+                            if (collision.gameObject.CompareTag("SpaceJunk"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("ShipJunk"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("IndestShot"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("PlanRing"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("Damage"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("BOSS"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("ShipIndest"))
+                            {
+                                YeahDam();
+                            }
+                        }
+                    }
                 }
-                else if (collision.gameObject.CompareTag("ShipJunk"))
+
+             
+            }
+            else
+            { //use standard collision
+                if (collision.gameObject.CompareTag("SpaceJunk") || collision.gameObject.CompareTag("ShipJunk") || collision.gameObject.CompareTag("IndestShot") || collision.gameObject.CompareTag("PlanRing") || collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("BOSS") || collision.gameObject.CompareTag("ShipIndest"))
+                if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > 15 || this.rb.velocity.sqrMagnitude > 5)
                 {
-                    YeahDam();
-                }
-                else if (collision.gameObject.CompareTag("IndestShot"))
-                {
-                    YeahDam();
-                }
-                else if (collision.gameObject.CompareTag("PlanRing"))
-                {
-                    YeahDam();
-                }
-                else if (collision.gameObject.CompareTag("Damage"))
-                {
-                    YeahDam();
-                }
-                else if (collision.gameObject.CompareTag("BOSS"))
-                {
-                    YeahDam();
-                }
-                else if (collision.gameObject.CompareTag("ShipIndest"))
-                {
-                    YeahDam();
+                    Debug.Log("HIT FAST" + collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude);
+                    Debug.Log("Player Hit FAST" + this.rb.velocity.sqrMagnitude);
+
+                    if (collision.gameObject.CompareTag("SpaceJunk"))
+                    {
+                        YeahDam();
+                    }
+                    else if (collision.gameObject.CompareTag("ShipJunk"))
+                    {
+                        YeahDam();
+                    }
+                    else if (collision.gameObject.CompareTag("IndestShot"))
+                    {
+                        YeahDam();
+                    }
+                    else if (collision.gameObject.CompareTag("PlanRing"))
+                    {
+                        YeahDam();
+                    }
+                    else if (collision.gameObject.CompareTag("Damage"))
+                    {
+                        YeahDam();
+                    }
+                    else if (collision.gameObject.CompareTag("BOSS"))
+                    {
+                        YeahDam();
+                    }
+                    else if (collision.gameObject.CompareTag("ShipIndest"))
+                    {
+                        YeahDam();
+                    }
                 }
             }
+          
         }
 
 
