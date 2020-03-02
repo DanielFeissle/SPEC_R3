@@ -19,18 +19,26 @@ public class masterShipEnter : MonoBehaviour {
         ps = GetComponent<ParticleSystem>();
 
         pauseOperations = 0;
-
+        onlyCheckAtBegining = false;
 
     }
 
-
+    bool onlyCheckAtBegining = false;
 
     // Update is called once per frame
     void Update()
     {
         if (pauseOperations == 0 )//|| pauseOperations==2)
         {
-
+            //3-1-20 this finally fixes the player bumping around during the begining stage
+        if (introScene==true && onlyCheckAtBegining ==false)
+            {
+                GameObject.Find("PlayerShip").transform.position = GameObject.Find("transportShip").transform.position;
+            }
+        else
+            {
+                onlyCheckAtBegining = true;
+            }
       
         // transform.localPosition = transform.localPosition + new Vector3(0, .11f, 0);
         if (rb.velocity.magnitude < 2000) //max speed is this

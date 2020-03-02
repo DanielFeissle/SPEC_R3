@@ -36,7 +36,7 @@ public class Shields : MonoBehaviour {
   
     private void IntroIntial()
     {
-        if (SceneManager.GetActiveScene().name.Contains("OverSpace-world-duh"))
+        if (SceneManager.GetActiveScene().name==("OverSpace-world-duh"))
         {
             if (this.gameObject.name=="transportShip")
             {
@@ -72,33 +72,44 @@ public class Shields : MonoBehaviour {
         }
         else
         {
-            nextUsage777 = Time.time + delay777; //begin HP increase
-            rb = GetComponent<Rigidbody2D>();
-            m_Renderer = GetComponent<Renderer>();
-            cam = Camera.main;
-            nextUsage444 = Time.time + delay444; //it is on display
+            if (SceneManager.GetActiveScene().name.Contains("stage"))
+            {
 
-            GameObject HPF_UI2 = Instantiate(Resources.Load("HP_UI") as GameObject);
-            HPF_UI2.name = "HP_UI";
-            HPF_UI2.transform.position = transform.position + (transform.up / 2);
-            //1-23-20 Load in the hp bars- always one up the total hp
-            if (SceneManager.GetActiveScene().name.ToString() == "stage_OverSpace-world-duh") //add in extra health
-            {
-                totHP = 7;
-                curHP = 7;
+                nextUsage777 = Time.time + delay777; //begin HP increase
+                rb = GetComponent<Rigidbody2D>();
+                m_Renderer = GetComponent<Renderer>();
+                cam = Camera.main;
+                nextUsage444 = Time.time + delay444; //it is on display
+                if (!GameObject.Find("HP_UI")) //3-1-20checks before creating multiple repeat objects
+                {
+                    GameObject HPF_UI2 = Instantiate(Resources.Load("HP_UI") as GameObject);
+                    HPF_UI2.name = "HP_UI";
+                    HPF_UI2.transform.position = transform.position + (transform.up / 2);
+                }
+               
+                //1-23-20 Load in the hp bars- always one up the total hp
+                if (SceneManager.GetActiveScene().name.ToString() == "stage_OverSpace-world-duh") //add in extra health
+                {
+                    totHP = 7;
+                    curHP = 7;
+                }
+                else
+                {
+                    totHP = 4;
+                    curHP = 4;
+                }
+                for (int i = 0; i < totHP; i++)
+                {
+                    if (!GameObject.Find("HP_Bar" + i)) //3-1-20checks before creating multiple repeat objects
+                    {
+                        //    GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar"), GameObject.Find("Canvas").transform) as GameObject;
+                        GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar") as GameObject);
+                        HPF_UI.name = "HP_Bar" + i;
+                        HPF_UI.transform.position = transform.position + (transform.up / 2);
+                    }
+                }
             }
-            else
-            {
-                totHP = 4;
-                curHP = 4;
-            }
-            for (int i = 0; i < totHP; i++)
-            {
-                //    GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar"), GameObject.Find("Canvas").transform) as GameObject;
-                GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar") as GameObject);
-                HPF_UI.name = "HP_Bar" + i;
-                HPF_UI.transform.position = transform.position + (transform.up / 2);
-            }
+         
         }
           
     }
@@ -147,48 +158,51 @@ public class Shields : MonoBehaviour {
 
         if (Time.time > nextUsage555 && herdam == 1) //this is to track/keep the ui always on screen
         {
-            HPCnt = 0;
-            this.GetComponent<SpriteRenderer>().color = Color.white;
-            nextUsage555 = Time.time + delay555; //it is on display
-            herdam = 0;// only go for 2.5 secounds
-        //    nextUsage777 = Time.time + delay777*2; //begin HP increase
-
-            //curHP -911 is for handling the stupid start/awake that WILL not work 1-26-20
-            if (curHP == 910)
+            if (SceneManager.GetActiveScene().name.Contains("stage"))
             {
-                rb = GetComponent<Rigidbody2D>();
-                m_Renderer = GetComponent<Renderer>();
-                cam = Camera.main;
-                nextUsage444 = Time.time + delay444; //it is on display
 
-                GameObject HPF_UI2 = Instantiate(Resources.Load("HP_UI") as GameObject);
-                HPF_UI2.name = "HP_UI";
-                HPF_UI2.transform.position = transform.position + (transform.up / 2);
-                //1-23-20 Load in the hp bars- always one up the total hp
-                if (SceneManager.GetActiveScene().name.ToString() == "stage_OverSpace-world-duh") //add in extra health
-                {
-                    totHP = 7;
-                    curHP = 7;
-                }
-                else
-                {
-                    totHP = 4;
-                    curHP = 4;
-                }
-                for (int i = 0; i < totHP; i++)
-                {
-                    //    GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar"), GameObject.Find("Canvas").transform) as GameObject;
-                    GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar") as GameObject);
-                    HPF_UI.name = "HP_Bar" + i;
-                    HPF_UI.transform.position = transform.position + (transform.up / 2);
-                }
+                HPCnt = 0;
+                this.GetComponent<SpriteRenderer>().color = Color.white;
+                nextUsage555 = Time.time + delay555; //it is on display
+                herdam = 0;// only go for 2.5 secounds
+                           //    nextUsage777 = Time.time + delay777*2; //begin HP increase
 
-                Debug.Log("OnEnable called");
-                SceneManager.sceneLoaded += OnSceneLoaded;
+                //curHP -911 is for handling the stupid start/awake that WILL not work 1-26-20
+                if (curHP == 910)
+                {
+                    rb = GetComponent<Rigidbody2D>();
+                    m_Renderer = GetComponent<Renderer>();
+                    cam = Camera.main;
+                    nextUsage444 = Time.time + delay444; //it is on display
+
+                    GameObject HPF_UI2 = Instantiate(Resources.Load("HP_UI") as GameObject);
+                    HPF_UI2.name = "HP_UI";
+                    HPF_UI2.transform.position = transform.position + (transform.up / 2);
+                    //1-23-20 Load in the hp bars- always one up the total hp
+                    if (SceneManager.GetActiveScene().name.ToString() == "stage_OverSpace-world-duh") //add in extra health
+                    {
+                        totHP = 7;
+                        curHP = 7;
+                    }
+                    else
+                    {
+                        totHP = 4;
+                        curHP = 4;
+                    }
+                    for (int i = 0; i < totHP; i++)
+                    {
+                        //    GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar"), GameObject.Find("Canvas").transform) as GameObject;
+                        GameObject HPF_UI = Instantiate(Resources.Load("HP_Bar") as GameObject);
+                        HPF_UI.name = "HP_Bar" + i;
+                        HPF_UI.transform.position = transform.position + (transform.up / 2);
+                    }
+
+                    Debug.Log("OnEnable called");
+                    SceneManager.sceneLoaded += OnSceneLoaded;
+
+                }
 
             }
-
-
         }
     }
 
