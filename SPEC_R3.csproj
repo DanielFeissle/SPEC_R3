@@ -354,12 +354,15 @@
     <Compile Include="Assets\scripts\shipConstructor.cs" />
     <Compile Include="Assets\scripts\shipObjectHandle.cs" />
     <Compile Include="Assets\scripts\shotKoPoo.cs" />
+    <Compile Include="Assets\scripts\stage_conv_screen.cs" />
     <Compile Include="Assets\scripts\stage_convention.cs" />
+    <Compile Include="Assets\scripts\stage_convention_stage.cs" />
     <Compile Include="Assets\scripts\station_visit.cs" />
     <Compile Include="Assets\scripts\Story_masterControl.cs" />
     <Compile Include="Assets\scripts\textSortingLayer.cs" />
     <Compile Include="Assets\scripts\title_btn_galaxy.cs" />
     <Compile Include="Assets\scripts\TitleScreenButtons.cs" />
+    <Compile Include="Assets\scripts\tomatoeToss.cs" />
     <Compile Include="Assets\scripts\tprollSpawn.cs" />
     <Compile Include="Assets\scripts\TurdSpawn.cs" />
     <Compile Include="Assets\scripts\UI_Buttons\Pause_Quit.cs" />

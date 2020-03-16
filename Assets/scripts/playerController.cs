@@ -1035,23 +1035,27 @@ public class playerController : MonoBehaviour {
         masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
         if (introShip.introScene == false)
         {
-            // rb.AddRelativeForce(Vector3.up * 25 * Time.deltaTime * speed*-1);
-            if (colli == 10)
-            {
-                rb.velocity = new Vector2(-collision.relativeVelocity.x, -collision.relativeVelocity.y)*3;
-            }
+                if (!collision.gameObject.CompareTag("station"))
+                {
+                    // rb.AddRelativeForce(Vector3.up * 25 * Time.deltaTime * speed*-1);
+                    if (colli == 10)
+                    {
+                        rb.velocity = new Vector2(-collision.relativeVelocity.x, -collision.relativeVelocity.y) * 3;
+                    }
 
 
-            if (colli >11)
-            {
-                Debug.Log("player is stuck");
-                transform.position = new Vector3(transform.position.x + .3f, transform.position.y + .3f);
-            }
-            if (Time.time > nextUsage22) //delete otherwise
-            {
-                colli = colli + 1;
-                nextUsage22 = Time.time + delay2; //it is on display
-            }
+                    if (colli > 11)
+                    {
+                        Debug.Log("player is stuck");
+                        transform.position = new Vector3(transform.position.x + .3f, transform.position.y + .3f);
+                    }
+                    if (Time.time > nextUsage22) //delete otherwise
+                    {
+                        colli = colli + 1;
+                        nextUsage22 = Time.time + delay2; //it is on display
+                    }
+                }
+           
         }
         }
     }

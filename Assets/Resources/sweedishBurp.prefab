@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 61181444169859922}
   - component: {fileID: 50377352395725676}
   - component: {fileID: 82490171526388898}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: sweedishBurp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
