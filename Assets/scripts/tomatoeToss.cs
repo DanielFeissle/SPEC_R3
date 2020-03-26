@@ -23,7 +23,7 @@ public class tomatoeToss : MonoBehaviour {
             //Get the angle between the points
             float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
             this.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-            Debug.Log("THE ANGLE IS " + angle);
+        //    Debug.Log("THE ANGLE IS " + angle);
             ani = GetComponent<Animator>();
 
             //    rb.AddForce(Vector3.up * 100 * Time.deltaTime * 1400);
@@ -85,7 +85,7 @@ public class tomatoeToss : MonoBehaviour {
             //Get the angle between the points
             float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
             this.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-            Debug.Log("THE ANGLE IS " + angle);
+         //   Debug.Log("THE ANGLE IS " + angle);
             ani = GetComponent<Animator>();
             rb.AddRelativeForce(Vector3.left * 25 * Time.deltaTime * 1400);
         }

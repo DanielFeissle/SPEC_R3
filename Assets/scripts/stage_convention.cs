@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class stage_convention : MonoBehaviour {
     public Animator ani;
     float delay = 1.0f; //only half delay
     float nextUsage;
+    float delay2 = 0.25f; //only quat delay
+    float nextUsage2;
     bool stageStart = false;
+    AudioClip _audio7;
     int delayTimeStart;
     AudioClip _audio6;
     AudioClip _audio5;
@@ -17,6 +22,8 @@ public class stage_convention : MonoBehaviour {
     public bool packageLoad = false;
     System.Random blarg = new System.Random();
     System.Random randomDirection = new System.Random();
+    public int PublicAttitude = 50;
+    int stageTime = 45;
     // Use this for initialization
     void interiorShip(float moveX, float moveY, float width4)
     {
@@ -55,15 +62,21 @@ public class stage_convention : MonoBehaviour {
 
 
 
-
+    Vector2 arrPos;
 
 
     void Start () {
+       // GameObject.Find("transportShip").GetComponent<masterShipEnter>().enabled = false;
+        //    PublicAttitude = UnityEngine.Random.Range(15, 50);
+        PublicAttitude = 0;
+            arrPos = GameObject.Find("zz_Green").transform.position;
         cam = Camera.main;
+        stageTime = UnityEngine.Random.Range(5, 10);
         delayTimeStart = UnityEngine.Random.Range(4, 8);
         ani = this.GetComponent<Animator>();
         ani.speed = 100;
         nextUsage = Time.time + delay; //it is on display
+        nextUsage2 = Time.time + delay2; //it is on display
                                        //   ani.SetBool("ISBURP", false);
         tomatoeCnt = 0;
         //end copy
@@ -148,8 +161,8 @@ public class stage_convention : MonoBehaviour {
         }
 
         //next decide the total size of the ship
-        int shipX = UnityEngine.Random.Range(1, 4);
-        int shipY = UnityEngine.Random.Range(1, 4);
+        int shipX = UnityEngine.Random.Range(3, 4); //3-17-20 spec modified to always be uptop
+        int shipY = UnityEngine.Random.Range(1, 2);
         bool vertl = true;
         if (shipX > shipY)
         {
@@ -498,7 +511,7 @@ public class stage_convention : MonoBehaviour {
 
         //6-17-19 we want to add junk  
         //  ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
-        int herder = UnityEngine.Random.Range(10, 20); //we get the count of how many random objects we want to put in
+        int herder = UnityEngine.Random.Range(15, 30); //we get the count of how many random objects we want to put in
 
         for (int i = 0; i < herder; i++)
         {
@@ -702,9 +715,75 @@ public class stage_convention : MonoBehaviour {
     public Sprite mySprite2;
     public Sprite mySprite3;
     public Sprite mySprite4;
+    bool screwUpBegin = false;
+    int temptest = -5;
     void Update () {
+
         if (Time.time > nextUsage) //continue scrolling
         {
+          
+            if (stageStart==true)
+            {
+                GameObject uiAltiText = GameObject.Find("txt_TimeDown");
+                Text delta1 = uiAltiText.GetComponent<Text>();
+                delta1.text = "Finish: "+stageTime;
+
+                if (PublicAttitude > -100 && PublicAttitude < 100)
+                {//3-23-20 the public is always loosing interst in dis  over time..
+                 /*
+                 Debug.Log("Public att " + PublicAttitude);
+                 if (PublicAttitude < -94 && temptest < 0)
+                 {
+                     temptest = 5;
+                 }
+                 else if (PublicAttitude > 94 && temptest > 0)
+                 {
+                     temptest = -5;
+                 }
+                 */
+                 // PublicAttitude--;
+                 //  PublicAttitude = PublicAttitude + temptest;
+                    PublicAttitude = PublicAttitude - 5;
+                    GameObject.Find("zz_Green").transform.position = new Vector3((PublicAttitude / 17f) + arrPos.x, arrPos.y, 0);
+
+                    if (PublicAttitude<-25)
+                    {
+                        timeCnt=timeCnt+4; //double the tomatoe speed
+                    }
+                }
+                if (PublicAttitude<-99)
+                {
+                    PublicAttitude = -80;
+                }
+                else if (PublicAttitude>99)
+                {
+                    PublicAttitude = 80;
+                }
+                if (stageTime>0)
+                {
+                    stageTime--;
+                }
+              
+                if (stageTime<1)
+                {
+                    GameObject.Find("transportShip").transform.position = new Vector2(0, GameObject.Find("transportShip").transform.position.y);
+                    GameObject.Find("PlayerShip").GetComponent<playerController>().clearToLeave = true;
+                   // GameObject.Find("transportShip").GetComponent<masterShipEnter>().enabled = true;
+                    foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
+                    {
+                        if (go.gameObject.layer == 10) //that is the default, which is what I used for all gameobjects pretty much
+                        {
+                            if (go.CompareTag("wetfart"))
+                            {
+                                go.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                                go.GetComponent<Rigidbody2D>().gravityScale = 2;
+                                Debug.Log("END");
+                            }
+                        }
+                    }
+                }
+            }
+         
            
                     if (Time.time>delayTimeStart && stageStart==false)
             {
@@ -721,36 +800,23 @@ public class stage_convention : MonoBehaviour {
 
 
             timeCnt++;
-            if (timeCnt>timeScrewUp && tomatoeCnt<7)
+            if (timeCnt>timeScrewUp && tomatoeCnt<7 && stageTime>0)
             {
-                //layer 0 is  let shots through
-                //layer 8 is do not continue
-                //layer 10 is shot layer, do not change to at all
-                GameObject.Find("screenA").layer = 9;
-                if (UnityEngine.Random.Range(0,100)<50)
-                {
-                    //toss a tomatoe
-                    cam = Camera.main;
-                    Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
-                    Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
 
-                    GameObject PoopPEE = Instantiate(Resources.Load("tomatoed")) as GameObject;
-                    PoopPEE.name = "tomatoed";
-                 
-                    PoopPEE.transform.localScale = PoopPEE.transform.localScale / UnityEngine.Random.Range(2,4);
-                    PoopPEE.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), q.y - PoopPEE.GetComponent<SpriteRenderer>().bounds.max.y);
-                    tomatoeCnt++;
-                }
+                screwUpBegin = true;
+
+
+                tossTomatoe();
 
                 //3-12-20, this should make the screw up more apparent
                 foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
                 {
                     if (go.gameObject.layer == 0) //that is the default, which is what I used for all gameobjects pretty much
                     {
-                        if (go.CompareTag("SpaceJunk") || go.CompareTag("ShipLiquidWaste") || go.CompareTag("ShipJunk") || go.CompareTag("ShipIndest"))
+                        if (go.name.Contains("shipHull")) //  if (go.CompareTag("SpaceJunk") || go.CompareTag("ShipLiquidWaste") || go.CompareTag("ShipJunk") || go.CompareTag("ShipIndest"))
                         {
 
-                            if (UnityEngine.Random.Range(0, 100) < 95)
+                            if (UnityEngine.Random.Range(0, 100) < 99)
                             {
                                 _audio5 = Resources.Load<AudioClip>("_FX\\SFX\\alarm2");
                                 AudioSource.PlayClipAtPoint(_audio5, new Vector3(0.0f, 0.0f, 0.0f), 100);
@@ -772,7 +838,7 @@ public class stage_convention : MonoBehaviour {
                                 {
                                     go.gameObject.GetComponent<SpriteRenderer>().sprite = mySprite4;
                                 }
-
+                                go.gameObject.name = "Uh-oh";
                             }
 
                         }
@@ -796,8 +862,14 @@ public class stage_convention : MonoBehaviour {
             {
                 if (phase2Exit==false)
                 {
-                //    GameObject.Find("screenA").GetComponent<BoxCollider2D>().enabled = false;
+                    //help is on the way, must wait for additonal time before ship appears
 
+                    stageTime = stageTime+15;
+                    //    GameObject.Find("screenA").GetComponent<BoxCollider2D>().enabled = false;
+                    Destroy(GameObject.Find("arrow-new"));
+                    Destroy(GameObject.Find("arrow-2"));
+                    Destroy(GameObject.Find("arrow-3"));
+                    Destroy(GameObject.Find("arrow-fin"));
                     foreach (BoxCollider2D c in GameObject.Find("screenA").GetComponentsInChildren<BoxCollider2D>())
                     {
                         c.enabled = false;
@@ -820,15 +892,190 @@ public class stage_convention : MonoBehaviour {
                         }
                     }
                             }
+                //rapid tomatoe toss
+                if (UnityEngine.Random.Range(0,100)<75 && stageTime>0)
+                {
+                    tossTomatoe();
+                }
+               
             }
 
 
             nextUsage = Time.time + delay; //it is on display
         }
-     }
+       else  if (Time.time > nextUsage2 && screwUpBegin== true && tomatoeCnt < 7)
+        {
+
+            //3-18-20 alternator input system to ensure player has enough time do an input
+            if (alternatInput==false)
+            {
+                alternatInput = true;
+                whoopTime = 0;
+                if (GameObject.Find("arrow-3")) //if it exists
+                {
+                    Destroy(GameObject.Find("arrow-3"));
+                    //move this one to the left and rename it
+                    //  GameObject.Find("arrow-3").transform.position = GameObject.Find("screen3").transform.position;
+                    //  GameObject.Find("arrow-3").name = "arrow-fin";
+                }
+                if (GameObject.Find("arrow-2")) //if it exists
+                {
+
+                    //move this one to the left and rename it
+                    GameObject.Find("arrow-2").transform.position = GameObject.Find("screen3").transform.position;
+                    if (GameObject.Find("arrow-2").gameObject.GetComponent<SpriteRenderer>().sprite.name == "up")
+                    {
+                        curFix = 0;
+                    }
+                    else if (GameObject.Find("arrow-2").gameObject.GetComponent<SpriteRenderer>().sprite.name == "down")
+                    {
+                        curFix = 1;
+                    }
+                    else if (GameObject.Find("arrow-2").gameObject.GetComponent<SpriteRenderer>().sprite.name == "right")
+                    {
+                        curFix = 2;
+                    }
+                    else if (GameObject.Find("arrow-2").gameObject.GetComponent<SpriteRenderer>().sprite.name == "left")
+                    {
+                        curFix = 3;
+                    }
+                   // Debug.Log("The arrow value is " + curFix + " sprite is " + GameObject.Find("arrow-2").gameObject.GetComponent<SpriteRenderer>().sprite.name);
+                    GameObject.Find("arrow-2").name = "arrow-3";
+
+                }
+                if (GameObject.Find("arrow-new")) //if it exists
+                {
+                    //move this one to the left and rename it
+                    GameObject.Find("arrow-new").transform.position = GameObject.Find("screen2").transform.position;
+                    GameObject.Find("arrow-new").name = "arrow-2";
+                }
+                if (stageTime>0)
+                {
+                    int randoArrow = UnityEngine.Random.Range(0, 100);
+                    string locWut = "arrow\\up";
+                    if (randoArrow < 25)
+                    {
+                        locWut = "arrow\\up";
+                    }
+                    else if (randoArrow < 50)
+                    {
+                        locWut = "arrow\\down";
+                    }
+                    else if (randoArrow < 75)
+                    {
+                        locWut = "arrow\\left";
+                    }
+                    else
+                    {
+                        locWut = "arrow\\right";
+                    }
+                    GameObject Arrow = Instantiate(Resources.Load(locWut)) as GameObject;
+                    Arrow.name = "arrow-new";
+                    Arrow.transform.position = GameObject.Find("screen1").transform.position;
+                }
+               
+            }
+            else
+            {
+                alternatInput = false;
+                //this part will move arrows accross the screen randomly
+                moveVertical = Input.GetAxis("Vertical");
+                moveHorizantal = Input.GetAxis("Horizontal");
+             //   Debug.Log("POS VAQLUE " + moveHorizantal);
+                if (GameObject.Find("arrow-3")) //if it exists
+                {
+                    if (moveVertical > 0.55f && moveVertical > 0.15f)
+                    {
+                        if (curFix == 0)
+                        {
+                            autoFix();
+                        }
+                        else
+                        {
+                            mistakesWereMade();
+                        }
 
 
+                    }
+                    else if (moveVertical < 0.55f && moveVertical < -0.15f)
+                    {
+                        if (curFix == 1)
+                        {
+                            autoFix();
+                        }
+                        else
+                        {
+                            mistakesWereMade();
+                        }
+                    }
+                    else if (moveHorizantal > 0.55f && moveHorizantal > 0.15f)
+                    {
+                        if (curFix == 2)
+                        {
+                            autoFix();
+                        }
+                        else
+                        {
+                            mistakesWereMade();
+                        }
+                    }
+                    else if (moveHorizantal < 0.55f && moveHorizantal < -0.15f)
+                    {
+                        if (curFix == 3)
+                        {
+                            autoFix();
+                        }
+                        else
+                        {
+                            mistakesWereMade();
+                        }
+                    }
+                    else
+                    {
+                        //we missed it!
+                        mistakesWereMade();
+                    }
+                }
+                curFix = -1;
+                
+            }
+            nextUsage2 = Time.time + delay2 + whoopTime; //it is on display
+        }
+   
+                                         //   GameObject Arrow2 = Instantiate()
+                                         //  Object prefab = PrefabUtility.CreatePrefab(localPath, obj);
+                                         //  PrefabUtility.ReplacePrefab(obj, prefab, ReplacePrefabOptions.ConnectToPrefab);
+                                         //    PrefabUtility.RevertPrefabInstance(GameObject.Find("Uh-oh").gameObject);
 
+    }
+    bool alternatInput = false;
+    float whoopTime = 0;
+    int curFix = -4; //0-up,1-down,2-right,3-left
+    float moveVertical = 0;
+    float moveHorizantal = 0;
+
+
+    private void tossTomatoe()
+    {
+        //layer 0 is  let shots through
+        //layer 8 is do not continue
+        //layer 10 is shot layer, do not change to at all
+        GameObject.Find("screenA").layer = 9;
+        if (UnityEngine.Random.Range(0, 100) < 50)
+        {
+            //toss a tomatoe
+            cam = Camera.main;
+            Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
+            Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
+
+            GameObject PoopPEE = Instantiate(Resources.Load("tomatoed")) as GameObject;
+            PoopPEE.name = "tomatoed";
+
+            PoopPEE.transform.localScale = PoopPEE.transform.localScale / UnityEngine.Random.Range(2, 4);
+            PoopPEE.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), q.y - PoopPEE.GetComponent<SpriteRenderer>().bounds.max.y);
+            tomatoeCnt++;
+        }
+    }
 
     IEnumerator RotateScreenABit()
     {
@@ -843,14 +1090,61 @@ public class stage_convention : MonoBehaviour {
             //    Camera.main.transform.rotation = Quaternion.Euler(new Vector3(-91f, 0f, 0f));
 
             camPos.Rotate(0, 0, -50 * Time.deltaTime); //      Camera.main.transform.Rotate(0, 0, -10 * Time.deltaTime);
-            Debug.Log("RotLevel: " + camPos.GetComponent<Transform>().rotation.z);
+           // Debug.Log("RotLevel: " + camPos.GetComponent<Transform>().rotation.z);
         }
 
       
     }
+    private void mistakesWereMade()
+    {
+        if (PublicAttitude > -100 && PublicAttitude < 100)
+        {
+            PublicAttitude = PublicAttitude - 5;
+        }
+         
+        whoopTime = .25f;
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
+        AudioSource.PlayClipAtPoint(_audio7, new Vector3(0.0f, 0.0f, 0.0f), 100);
+    }
 
-
-
+    private void autoFix()
+    {
+        if (PublicAttitude > -100 && PublicAttitude < 100)
+        {
+            PublicAttitude = PublicAttitude + 20;
+        }
+         
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
+        AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        GameObject der = GameObject.Find("Uh-oh");
+        if (der != null)
+        {
+            Instantiate(Resources.Load("dertypShips\\shipHull"), der.transform.position, der.transform.rotation);
+            Destroy(der.gameObject);
+        }
+    }
 
 
     IEnumerator MoverScreenDown()

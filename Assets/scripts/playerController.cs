@@ -19,7 +19,7 @@ public class playerController : MonoBehaviour {
     float nextUsage2222;
     float delay222 = 2; //only half delay
   
-    bool clearToLeave = false;
+   public bool clearToLeave = false;
     float lerpTime = 0;
     public AudioClip exp5;
     public AudioClip exp4;

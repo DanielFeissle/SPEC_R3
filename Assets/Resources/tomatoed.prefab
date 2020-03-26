@@ -25,9 +25,10 @@ GameObject:
   - component: {fileID: 60482183962184750}
   - component: {fileID: 114584255943367776}
   - component: {fileID: 50662933155535816}
+  - component: {fileID: 114853449309678578}
   m_Layer: 10
   m_Name: tomatoed
-  m_TagString: Untagged
+  m_TagString: wetfart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,6 +220,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1cc70c28c312648a33eb6d400fd1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114853449309678578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1843480029522158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19d9757460bd31c41b911e767433458c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainChar: {fileID: 1351234675264854, guid: 89cb05d34939b234a8054d2319dcce66, type: 2}
 --- !u!212 &212808469770140816
 SpriteRenderer:
   m_ObjectHideFlags: 1

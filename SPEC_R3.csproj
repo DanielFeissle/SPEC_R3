@@ -301,6 +301,7 @@
     <Compile Include="Assets\scripts\BurpUp.cs" />
     <Compile Include="Assets\scripts\CameraController.cs" />
     <Compile Include="Assets\scripts\CountTurd.cs" />
+    <Compile Include="Assets\scripts\DestroyAfterDistance.cs" />
     <Compile Include="Assets\scripts\enemyBaderrang.cs" />
     <Compile Include="Assets\scripts\enemyBataboy.cs" />
     <Compile Include="Assets\scripts\enemyBoxGas.cs" />
@@ -340,6 +341,7 @@
     <Compile Include="Assets\scripts\PoopDest.cs" />
     <Compile Include="Assets\scripts\poosplosion.cs" />
     <Compile Include="Assets\scripts\realDeleteAfterPlainAniScript.cs" />
+    <Compile Include="Assets\scripts\ScaleFont.cs" />
     <Compile Include="Assets\scripts\scenes.cs" />
     <Compile Include="Assets\scripts\scenes_asteroid.cs" />
     <Compile Include="Assets\scripts\scenes_atmosphere.cs" />
@@ -360,6 +362,7 @@
     <Compile Include="Assets\scripts\station_visit.cs" />
     <Compile Include="Assets\scripts\Story_masterControl.cs" />
     <Compile Include="Assets\scripts\textSortingLayer.cs" />
+    <Compile Include="Assets\scripts\textSortUpOne.cs" />
     <Compile Include="Assets\scripts\title_btn_galaxy.cs" />
     <Compile Include="Assets\scripts\TitleScreenButtons.cs" />
     <Compile Include="Assets\scripts\tomatoeToss.cs" />
