@@ -72,14 +72,20 @@ public class playerController : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         m_Renderer = GetComponent<Renderer>();
         nextUsage = Time.time + delay; //it is on display
-      
-        GameObject shipan = GameObject.Find("transportDoorClosure(256x256)_0");
-        Animator shipAni9334 = shipan.GetComponent<Animator>();
-        shipAni9334.Rebind();
-        shipAni9334.enabled = false;
-        //  shipAni9334.Play("doorAniBlast");
-        random = UnityEngine.Random.Range(0.0f, 65535.0f);
-        random2 = UnityEngine.Random.Range(0.0f, 65535.0f);
+      try
+        {
+            GameObject shipan = GameObject.Find("transportDoorClosure(256x256)_0");
+            Animator shipAni9334 = shipan.GetComponent<Animator>();
+            shipAni9334.Rebind();
+            shipAni9334.enabled = false;
+            //  shipAni9334.Play("doorAniBlast");
+            random = UnityEngine.Random.Range(0.0f, 65535.0f);
+            random2 = UnityEngine.Random.Range(0.0f, 65535.0f);
+        }
+      catch
+        {
+            Debug.Log("Animation issue");
+        }
 
 
         GameObject blast = GameObject.Find("shipBlast");

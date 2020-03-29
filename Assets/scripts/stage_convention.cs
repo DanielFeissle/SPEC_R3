@@ -15,6 +15,7 @@ public class stage_convention : MonoBehaviour {
     int delayTimeStart;
     AudioClip _audio6;
     AudioClip _audio5;
+    AudioClip _audio8;
     int timeScrewUp = 44;
     int timeCnt = 0;
     int tomatoeCnt = 0;
@@ -71,7 +72,7 @@ public class stage_convention : MonoBehaviour {
         PublicAttitude = 0;
             arrPos = GameObject.Find("zz_Green").transform.position;
         cam = Camera.main;
-        stageTime = UnityEngine.Random.Range(5, 10);
+        stageTime = UnityEngine.Random.Range(30, 50);
         delayTimeStart = UnityEngine.Random.Range(4, 8);
         ani = this.GetComponent<Animator>();
         ani.speed = 100;
@@ -698,12 +699,10 @@ public class stage_convention : MonoBehaviour {
 
 
 
-
-
         //copy past
 
 
-     
+
     }
     bool phase2Exit = false;
     //3-11-20
@@ -766,21 +765,30 @@ public class stage_convention : MonoBehaviour {
               
                 if (stageTime<1)
                 {
-                    GameObject.Find("transportShip").transform.position = new Vector2(0, GameObject.Find("transportShip").transform.position.y);
-                    GameObject.Find("PlayerShip").GetComponent<playerController>().clearToLeave = true;
-                   // GameObject.Find("transportShip").GetComponent<masterShipEnter>().enabled = true;
-                    foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
+                    if (stageTime==0)
                     {
-                        if (go.gameObject.layer == 10) //that is the default, which is what I used for all gameobjects pretty much
+                        stageTime = -5; //only do this once
+                        StartCoroutine(MoveExitDown());
+                       
+                       // GameObject.Find("transportShip").transform.position = new Vector2(0, GameObject.Find("transportShip").transform.position.y);
+                        GameObject.Find("PlayerShip").GetComponent<playerController>().clearToLeave = true;
+                        // GameObject.Find("transportShip").GetComponent<masterShipEnter>().enabled = true;
+                        foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
                         {
-                            if (go.CompareTag("wetfart"))
+                            if (go.gameObject.layer == 10) //that is the default, which is what I used for all gameobjects pretty much
                             {
-                                go.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                                go.GetComponent<Rigidbody2D>().gravityScale = 2;
-                                Debug.Log("END");
+                                if (go.CompareTag("wetfart"))
+                                {
+                                    go.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                                    go.GetComponent<Rigidbody2D>().gravityScale = 2;
+                                    Debug.Log("END");
+                                }
                             }
                         }
+                        Destroy(GameObject.Find("stageHidden"));
+
                     }
+                  
                 }
             }
          
@@ -789,6 +797,8 @@ public class stage_convention : MonoBehaviour {
             {
                 timeScrewUp = UnityEngine.Random.Range(10, 20);
 
+
+                GameObject.Find("PlayerShip").transform.position = new Vector2(7, 0);
                 stageStart = true;
                 ani.speed = 0.64f;
                 ani.SetBool("StageStart", true);
@@ -804,9 +814,12 @@ public class stage_convention : MonoBehaviour {
             {
 
                 screwUpBegin = true;
-
-
-                tossTomatoe();
+                //3-29-20 only do this if the player is not keeping too well up with the arrow prompts
+                if (PublicAttitude<40)
+                {
+                    tossTomatoe();
+                }
+               
 
                 //3-12-20, this should make the screw up more apparent
                 foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
@@ -972,6 +985,60 @@ public class stage_convention : MonoBehaviour {
                     GameObject Arrow = Instantiate(Resources.Load(locWut)) as GameObject;
                     Arrow.name = "arrow-new";
                     Arrow.transform.position = GameObject.Find("screen1").transform.position;
+                    //3-29-20 sound effect system random print noises
+                    int randoPrint = UnityEngine.Random.Range(0, 100);
+                    if (randoPrint<20)
+                    {
+                        _audio8 = Resources.Load<AudioClip>("_FX\\SFX\\printer(individual)\\print1");
+                       
+                    }
+                   else if (randoPrint < 40)
+                    {
+                        _audio8 = Resources.Load<AudioClip>("_FX\\SFX\\printer(individual)\\print2");
+                       
+                    }
+                    else if (randoPrint < 60)
+                    {
+                        _audio8 = Resources.Load<AudioClip>("_FX\\SFX\\printer(individual)\\print3");
+                       
+                    }
+                    else if (randoPrint < 80)
+                    {
+                        _audio8 = Resources.Load<AudioClip>("_FX\\SFX\\printer(individual)\\print4");
+                        
+                    }
+                    else if (randoPrint < 100)
+                    {
+                        _audio8 = Resources.Load<AudioClip>("_FX\\SFX\\printer(individual)\\print5");
+                         
+                    }
+
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+
                 }
                
             }
@@ -1159,5 +1226,19 @@ public class stage_convention : MonoBehaviour {
           
         }
       
+    }
+
+    IEnumerator MoveExitDown()
+    {
+
+        GameObject ExitZone = GameObject.Find("transportShip");
+        Transform ExitPos = ExitZone.GetComponent<Transform>();
+        while (ExitPos.GetComponent<Transform>().position.y > 1.05f)
+        {
+            yield return new WaitForSeconds(0.01f);
+            ExitPos.position += new Vector3(0, -0.1f, 0);
+
+        }
+
     }
 }
