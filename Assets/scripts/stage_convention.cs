@@ -16,6 +16,7 @@ public class stage_convention : MonoBehaviour {
     AudioClip _audio6;
     AudioClip _audio5;
     AudioClip _audio8;
+    AudioClip _audio9;
     int timeScrewUp = 44;
     int timeCnt = 0;
     int tomatoeCnt = 0;
@@ -25,6 +26,9 @@ public class stage_convention : MonoBehaviour {
     System.Random randomDirection = new System.Random();
     public int PublicAttitude = 50;
     int stageTime = 45;
+
+    bool oppsAud1 = false;
+    bool oppsAud2 = false;
     // Use this for initialization
     void interiorShip(float moveX, float moveY, float width4)
     {
@@ -67,7 +71,23 @@ public class stage_convention : MonoBehaviour {
 
 
     void Start () {
-       // GameObject.Find("transportShip").GetComponent<masterShipEnter>().enabled = false;
+        _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\welcomeConvention");
+        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+
+        foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
+        {
+            if (go.gameObject.layer == 0) //stop animations
+            {
+                if (go.name==("bbb"))
+                {
+                    go.GetComponent<Animator>().speed = 0;
+                }
+            }
+        }
+
+        // GameObject.Find("transportShip").GetComponent<masterShipEnter>().enabled = false;
         //    PublicAttitude = UnityEngine.Random.Range(15, 50);
         PublicAttitude = 0;
             arrPos = GameObject.Find("zz_Green").transform.position;
@@ -768,6 +788,23 @@ public class stage_convention : MonoBehaviour {
                     if (stageTime==0)
                     {
                         stageTime = -5; //only do this once
+                        if (stageTime < 1 && tomatoeCnt < 7)
+                        {
+                            GameObject.Find("bottomCover").GetComponent<Renderer>().sortingOrder = 1000;
+
+                            foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
+                            {
+                                if (go.gameObject.layer == 0) //4-1-20 stop animations, player did good
+                                {
+                                    if (go.name == ("bbb"))
+                                    {
+                                        go.GetComponent<Animator>().speed = UnityEngine.Random.Range(0f, 0f);
+                                    }
+                                }
+                            }
+
+                        }
+                    
                         StartCoroutine(MoveExitDown());
                        
                        // GameObject.Find("transportShip").transform.position = new Vector2(0, GameObject.Find("transportShip").transform.position.y);
@@ -791,13 +828,36 @@ public class stage_convention : MonoBehaviour {
                   
                 }
             }
-         
+         if (stageStart==false)
+            {
+                if (Time.time>=3.0 &&Time.time<3.4f)
+                {
+                    _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\cool");
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                }
+                GameObject textFind1 = GameObject.Find("txt_spec");
+                  // Camera FoundCam = screenFind.GetComponent<Camera>();
+                    float t = Mathf.PingPong(Time.time, 2.0f) / 2.0f;
+                textFind1.GetComponent<TextMesh>().color = Color.LerpUnclamped(Color.red, Color.blue, t);
+
+                GameObject textFind2 = GameObject.Find("txt_spacehound");
+               //    Camera FoundCam = screenFind.GetComponent<Camera>();
+            float t2 = Mathf.PingPong(Time.time, 1.2f) / 1.2f;
+              textFind2.GetComponent<TextMesh>().color = Color.LerpUnclamped(Color.cyan, Color.green, t2);
+            }
            
                     if (Time.time>delayTimeStart && stageStart==false)
             {
+             
+
                 timeScrewUp = UnityEngine.Random.Range(10, 20);
 
-
+                GameObject textFind1 = GameObject.Find("txt_spec");
+                GameObject textFind2 = GameObject.Find("txt_spacehound");
+                GameObject.Destroy(textFind1);
+                GameObject.Destroy(textFind2);
                 GameObject.Find("PlayerShip").transform.position = new Vector2(7, 0);
                 stageStart = true;
                 ani.speed = 0.64f;
@@ -817,9 +877,45 @@ public class stage_convention : MonoBehaviour {
                 //3-29-20 only do this if the player is not keeping too well up with the arrow prompts
                 if (PublicAttitude<40)
                 {
+                    //4-1-20 put in angry audio here
+
+                    if (oppsAud1==false)
+                    {
+                        _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\4thwall");
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        oppsAud1 = true;
+                    }
+                   else if (oppsAud2==false)
+                    {
+                        _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\antFarmBug");
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        oppsAud2 = true;
+                    }
+
+
+
+                  
                     tossTomatoe();
                 }
-               
+
+                foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
+                {
+                    if (go.gameObject.layer == 0) //stop animations
+                    {
+                        if (go.name == ("bbb"))
+                        {
+                            _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\what");
+                            AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                            AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                            AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                            go.GetComponent<Animator>().speed = UnityEngine.Random.Range(0.05f,0.55f);
+                        }
+                    }
+                }
 
                 //3-12-20, this should make the screw up more apparent
                 foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
@@ -1025,19 +1121,7 @@ public class stage_convention : MonoBehaviour {
                     AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
                     AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
                     AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                    AudioSource.PlayClipAtPoint(_audio8, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                 
 
                 }
                
@@ -1108,7 +1192,13 @@ public class stage_convention : MonoBehaviour {
             }
             nextUsage2 = Time.time + delay2 + whoopTime; //it is on display
         }
-   
+   if (screwUpBegin==true && stageTime > 0 && tomatoeCnt < 7)
+        {
+            GameObject screenFind = GameObject.Find("screen2");
+        //    Camera FoundCam = screenFind.GetComponent<Camera>();
+            float t = Mathf.PingPong(Time.time, 2.0f) / 2.0f;
+            screenFind.GetComponent<SpriteRenderer>().color = Color.LerpUnclamped(Color.white, Color.red, t);
+        }
                                          //   GameObject Arrow2 = Instantiate()
                                          //  Object prefab = PrefabUtility.CreatePrefab(localPath, obj);
                                          //  PrefabUtility.ReplacePrefab(obj, prefab, ReplacePrefabOptions.ConnectToPrefab);
@@ -1171,18 +1261,15 @@ public class stage_convention : MonoBehaviour {
          
         whoopTime = .25f;
         _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
-        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
-        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
-        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
-        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
-        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
-        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
-        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
-        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
-        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
-        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
-        _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\buz_incorrect");
         AudioSource.PlayClipAtPoint(_audio7, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio7, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio7, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio7, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio7, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio7, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio7, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio7, new Vector3(0.0f, 0.0f, 0.0f), 100);
+
     }
 
     private void autoFix()
@@ -1193,18 +1280,17 @@ public class stage_convention : MonoBehaviour {
         }
          
         _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
-        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
-        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
-        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
-        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
-        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
-        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
-        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
-        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
-        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
-        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
-        _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
         AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+
         GameObject der = GameObject.Find("Uh-oh");
         if (der != null)
         {
@@ -1230,7 +1316,7 @@ public class stage_convention : MonoBehaviour {
 
     IEnumerator MoveExitDown()
     {
-
+      
         GameObject ExitZone = GameObject.Find("transportShip");
         Transform ExitPos = ExitZone.GetComponent<Transform>();
         while (ExitPos.GetComponent<Transform>().position.y > 1.05f)

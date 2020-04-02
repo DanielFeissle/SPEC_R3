@@ -359,20 +359,24 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
 
     private void sweedSpanw()
     {
-        GameObject VBurp = Instantiate(Resources.Load("sweedishBurp")) as GameObject;
+        if (UnityEngine.Random.Range(1, 100) <10 && m_Renderer.isVisible==true)
+        {
+
+       
+            GameObject VBurp = Instantiate(Resources.Load("sweedishBurp")) as GameObject;
         VBurp.name = "sweedishBurp";
         if (UnityEngine.Random.Range(1,100)<50)
         {
-            VBurp.transform.position = this.transform.position + new Vector3(m_Renderer.bounds.size.x / 2, this.transform.position.y);
+            VBurp.transform.position = this.transform.position + new Vector3(m_Renderer.bounds.size.x / 2, 0);
         }
         else
         {
             if (UnityEngine.Random.Range(1,100)<50)
             {
-                VBurp.transform.position = this.transform.position - new Vector3(m_Renderer.bounds.size.x / 2, this.transform.position.y); //m_Renderer.bounds.size.y / 2
+                VBurp.transform.position = this.transform.position - new Vector3(m_Renderer.bounds.size.x / 2, 0); //m_Renderer.bounds.size.y / 2
             }
             
         }
-      
+        }
     }
 }

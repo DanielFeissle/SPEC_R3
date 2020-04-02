@@ -11,6 +11,22 @@ public class bossStage : MonoBehaviour {
     // Use this for initialization
     void Start () {
         m_Renderer = GameObject.Find("transportShip").GetComponent<Renderer>();
+        int bossRando = UnityEngine.Random.Range(0, 100);
+        //3-31-20 spawn in a random boss
+        if (bossRando<50)
+        {
+            GameObject Boss = Instantiate(Resources.Load("boss\\CountTurd")) as GameObject;
+            Boss.name = "CountTurd";
+            Boss.transform.position = new Vector2(6.1f, 3.29f);
+        }
+        else if (bossRando<100)
+        {
+            GameObject Boss = Instantiate(Resources.Load("boss\\dad")) as GameObject;
+            Boss.name = "dad";
+            Boss.transform.position = new Vector2(-12.00f, 0.0f);
+        }
+     
+
     }
 	
 	// Update is called once per frame

@@ -17,6 +17,7 @@ public class arc_sceneSelector : MonoBehaviour {
         //5. nothing (how org... grab the item and leave...)
         //6. Large derilict ship hull (this ship itself, in a tight box)
         //7. Planet side
+        //8. Side scrolling escape to the right scene
         if (GameObject.Find("PlayerShip").GetComponent<playerController>().playMode == 0)
         {
             if (getNext < 25)
@@ -46,6 +47,10 @@ public class arc_sceneSelector : MonoBehaviour {
             else if (getNext < 175)
             {
                 SceneManager.LoadScene("stage_PlanetSide"); //this is sun ring stage, features experiments in shaders/coloring
+            }
+            else if (getNext < 200)
+            {
+                SceneManager.LoadScene("stage_PlanetSide"); //this is the clasical escape stage, everything blowing up!
             }
         }
         else

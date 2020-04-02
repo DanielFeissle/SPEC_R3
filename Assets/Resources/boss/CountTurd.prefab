@@ -232,9 +232,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ab5f509cd3576478d8945fef1c2cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HATurd: {fileID: 8300000, guid: 822e066a05004f74989eb793ecd31ad8, type: 3}
-  NXPhase: {fileID: 8300000, guid: 68fbe16187dc78245a35698773173f40, type: 3}
-  TurdPlayerDMG: {fileID: 8300000, guid: f7567dfedf021dd4ca705372b8f2d753, type: 3}
+  HATurd: {fileID: 8300000, guid: c367e870381329a4a93a7b58acd55214, type: 3}
+  NXPhase: {fileID: 8300000, guid: f697437bc00377d4e83ab6334cedcd99, type: 3}
+  TurdPlayerDMG: {fileID: 8300000, guid: 603efbbb38ebeb644842e73719191780, type: 3}
+  bossPhase: 0
 --- !u!212 &212000012164531394
 SpriteRenderer:
   m_ObjectHideFlags: 1
