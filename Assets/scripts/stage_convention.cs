@@ -25,7 +25,7 @@ public class stage_convention : MonoBehaviour {
     System.Random blarg = new System.Random();
     System.Random randomDirection = new System.Random();
     public int PublicAttitude = 50;
-    int stageTime = 45;
+   public int stageTime = 45;
 
     bool oppsAud1 = false;
     bool oppsAud2 = false;
@@ -850,9 +850,8 @@ public class stage_convention : MonoBehaviour {
            
                     if (Time.time>delayTimeStart && stageStart==false)
             {
-             
 
-                timeScrewUp = UnityEngine.Random.Range(10, 20);
+             
 
                 GameObject textFind1 = GameObject.Find("txt_spec");
                 GameObject textFind2 = GameObject.Find("txt_spacehound");
@@ -866,22 +865,44 @@ public class stage_convention : MonoBehaviour {
                 AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
             }
 
- 
+ if (Time.time>delayTimeStart+1 && Time.time<delayTimeStart + 2)
+            {
+                _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\designScheme");
+                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                timeScrewUp = UnityEngine.Random.Range(10, 20);
+            }
 
 
             timeCnt++;
             if (timeCnt>timeScrewUp && tomatoeCnt<7 && stageTime>0)
             {
-
+                if (stageTime== isDup-4)
+                {
+                    _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\4thwall");
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                }
                 screwUpBegin = true;
                 //3-29-20 only do this if the player is not keeping too well up with the arrow prompts
-                if (PublicAttitude<40)
+                if (PublicAttitude<50)
                 {
                     //4-1-20 put in angry audio here
-
+                    isDup = stageTime;
                     if (oppsAud1==false)
                     {
-                        _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\4thwall");
+                        _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\fixITjustInTime");
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
                         AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
                         AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
                         AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
@@ -893,6 +914,7 @@ public class stage_convention : MonoBehaviour {
                         AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
                         AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
                         AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                       
                         oppsAud2 = true;
                     }
 
@@ -908,11 +930,22 @@ public class stage_convention : MonoBehaviour {
                     {
                         if (go.name == ("bbb"))
                         {
-                            _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\what");
-                            AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                            AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                            AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
-                            go.GetComponent<Animator>().speed = UnityEngine.Random.Range(0.05f,0.55f);
+                            if (UnityEngine.Random.Range(1,100)<50)
+                            {
+                                _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\what");
+                                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                            }
+                            else
+                            {
+                                _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\longwhat");
+                                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                                AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                            }
+                          
+                            go.GetComponent<Animator>().speed = UnityEngine.Random.Range(1.05f,3.25f);
                         }
                     }
                 }
@@ -969,10 +1002,56 @@ public class stage_convention : MonoBehaviour {
             }
             else if (tomatoeCnt>=7)//begin the next phase
             {
+                if (stageTime>1)
+                {
+                    if (UnityEngine.Random.Range(1,100)<50)
+                    {
+                        _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\boo");
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    }
+                    else
+                    {
+                        _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\booooo");
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                        AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    }
+                  
+                }
+          
                 if (phase2Exit==false)
                 {
                     //help is on the way, must wait for additonal time before ship appears
-
+                    _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\stupid");
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
+                    AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
                     stageTime = stageTime+15;
                     //    GameObject.Find("screenA").GetComponent<BoxCollider2D>().enabled = false;
                     Destroy(GameObject.Find("arrow-new"));
@@ -997,12 +1076,18 @@ public class stage_convention : MonoBehaviour {
                             if (go.CompareTag("SpaceJunk") || go.CompareTag("ShipLiquidWaste") || go.CompareTag("ShipJunk") || go.CompareTag("ShipIndest"))
                             {
                                 go.GetComponent<Rigidbody2D>().gravityScale = 2;
+                                //We have a string holding a script name
+                                string ScriptName = "destroyScreenWrap";
+                                //We need to fetch the Type
+                                System.Type MyScriptType = System.Type.GetType(ScriptName + ",Assembly-CSharp");
+                                //Now that we have the Type we can use it to Add Component
+                                go.AddComponent(MyScriptType);
                             }
                         }
                     }
                             }
                 //rapid tomatoe toss
-                if (UnityEngine.Random.Range(0,100)<75 && stageTime>0)
+                if (UnityEngine.Random.Range(0,100)<95 && stageTime>0)
                 {
                     tossTomatoe();
                 }
@@ -1218,7 +1303,7 @@ public class stage_convention : MonoBehaviour {
         //layer 8 is do not continue
         //layer 10 is shot layer, do not change to at all
         GameObject.Find("screenA").layer = 9;
-        if (UnityEngine.Random.Range(0, 100) < 50)
+        if (UnityEngine.Random.Range(0, 100) < 70)
         {
             //toss a tomatoe
             cam = Camera.main;
@@ -1233,7 +1318,7 @@ public class stage_convention : MonoBehaviour {
             tomatoeCnt++;
         }
     }
-
+    int isDup = 0;
     IEnumerator RotateScreenABit()
     {
       

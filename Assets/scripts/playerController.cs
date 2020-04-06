@@ -49,7 +49,7 @@ public class playerController : MonoBehaviour {
     int playerHP = 3;
     // Use this for initialization
     void Start () {
-
+        playerStageDone = false;
         if (SceneManager.GetActiveScene().name== "stageIntro")
         {
             playMode = 0;
@@ -948,8 +948,8 @@ public class playerController : MonoBehaviour {
                      leftOpen = 0;
                     GameObject shipDash = GameObject.Find("transportShip_exvil");
                     GameObject shipan = GameObject.Find("transportDoorClosure(256x256)_0");
-                   
-                    Transform shipGonerelo = shipDash.GetComponent<Transform>();
+                    playerStageDone = true;
+                     Transform shipGonerelo = shipDash.GetComponent<Transform>();
                     Animator shipAni9334 = shipan.GetComponent<Animator>();
                     shipGonerelo.transform.position = blarg;
                     shipAni9334.Rebind();
@@ -969,6 +969,7 @@ public class playerController : MonoBehaviour {
         }
       
     }
+    public bool playerStageDone = false;
     //9-14-19
     int colli = 0;
     private void OnCollisionEnter2D(Collision2D collision)
