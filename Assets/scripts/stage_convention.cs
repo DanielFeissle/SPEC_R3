@@ -787,21 +787,24 @@ public class stage_convention : MonoBehaviour {
                 {
                     if (stageTime==0)
                     {
+                        //moved up because the end for both sections have been improved
+                        foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
+                        {
+                            if (go.gameObject.layer == 0) //4-1-20 stop animations, player did good
+                            {
+                                if (go.name == ("bbb"))
+                                {
+                                    go.GetComponent<Animator>().speed = UnityEngine.Random.Range(0f, 0f);
+                                }
+                            }
+                        }
+
                         stageTime = -5; //only do this once
                         if (stageTime < 1 && tomatoeCnt < 7)
                         {
                             GameObject.Find("bottomCover").GetComponent<Renderer>().sortingOrder = 1000;
 
-                            foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
-                            {
-                                if (go.gameObject.layer == 0) //4-1-20 stop animations, player did good
-                                {
-                                    if (go.name == ("bbb"))
-                                    {
-                                        go.GetComponent<Animator>().speed = UnityEngine.Random.Range(0f, 0f);
-                                    }
-                                }
-                            }
+                       
 
                         }
                     
@@ -1363,7 +1366,10 @@ public class stage_convention : MonoBehaviour {
         {
             PublicAttitude = PublicAttitude + 20;
         }
-         
+        //scoring system, YAY
+        GameObject MastCont = GameObject.Find("PlayerShip");
+        MasterController backEnd = MastCont.GetComponent<MasterController>();
+        backEnd.score = backEnd.score + 50;
         _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\buz_correct");
         AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
         AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);

@@ -18,7 +18,7 @@ public class scenes_atmosphere : MonoBehaviour {
             Random.Range(0f, .3f),
             Random.Range(0f, 1f)
         );
-        delay = blarg.Next(2, 5);
+       // delay = blarg.Next(2, 5);
         //  leColour.color = Color.gray;
         leColour.color = background;
 
@@ -44,7 +44,7 @@ public class scenes_atmosphere : MonoBehaviour {
             {
                 GameObject ExpDust = Instantiate(Resources.Load("AstMan2019")) as GameObject;
                 ExpDust.name = "AstMan2019";
-                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 0));
                 ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
                 ExpDust.GetComponent<Rigidbody2D>().gravityScale = .5f;
             }
@@ -52,7 +52,7 @@ public class scenes_atmosphere : MonoBehaviour {
             {
                 GameObject ExpDust = Instantiate(Resources.Load("Asteroid2017")) as GameObject;
                 ExpDust.name = "Asteroid2017";
-                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 0));
                 ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
                 ExpDust.GetComponent<Rigidbody2D>().gravityScale = .5f;
                   
@@ -61,7 +61,7 @@ public class scenes_atmosphere : MonoBehaviour {
             {
                 GameObject ExpDust = Instantiate(Resources.Load("blueWallJunk")) as GameObject;
                 ExpDust.name = "blueWallJunk";
-                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 0));
                 ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 2), UnityEngine.Random.Range(1, 2));
                 ExpDust.GetComponent<Rigidbody2D>().gravityScale = .5f;
             }
@@ -69,7 +69,7 @@ public class scenes_atmosphere : MonoBehaviour {
             {
                 GameObject ExpDust = Instantiate(Resources.Load("StdWall")) as GameObject;
                 ExpDust.name = "StdWall";
-                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
+                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 0));
                 ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 3), UnityEngine.Random.Range(1, 2));
                 ExpDust.GetComponent<Rigidbody2D>().gravityScale = .5f;
             }

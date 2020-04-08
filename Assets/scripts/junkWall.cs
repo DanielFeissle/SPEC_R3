@@ -50,7 +50,7 @@ public class junkWall : MonoBehaviour {
             {
                 ////debug.log("object is visible");
             }
-            else
+            else if (GameObject.Find("Camera").transform.position==(new Vector3(0,0,-10))) //4-7-20 we know standard scenes are always at 0,0
             {
                 AudioReset = true;
                 //   Debug.Log("CurVelocityX:" + rb.velocity.x);
@@ -102,7 +102,7 @@ public class junkWall : MonoBehaviour {
         }
         catch (Exception ex)
         {
-            Debug.Log(ex);
+         //   Debug.Log(ex);
         }
 
 

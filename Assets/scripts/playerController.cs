@@ -202,8 +202,19 @@ public class playerController : MonoBehaviour {
     private void LateUpdate()
     {
 
-     
+      //4-7-20 new inner collision detection method!
+      //will actually check if objects are inside of playership
+        GameObject otherColliders = Physics2D.OverlapBox(this.transform.position,this.transform.localScale,0).gameObject;
+        //    if (otherColliders.CompareTag("ShipIndest"))
 
+        if (!otherColliders.gameObject.CompareTag("station") && !otherColliders.gameObject.CompareTag("Player") && !otherColliders.gameObject.CompareTag("Finish"))
+        {
+
+            Debug.Log("$$$$$$$$$$$$$$$$$$$$$$$$" + otherColliders.name);
+            Debug.Log("player is stuck");
+            transform.position = new Vector3(transform.position.x + .3f, transform.position.y + .3f);
+        }
+      
 
 
     }
@@ -1045,16 +1056,16 @@ public class playerController : MonoBehaviour {
                 if (!collision.gameObject.CompareTag("station"))
                 {
                     // rb.AddRelativeForce(Vector3.up * 25 * Time.deltaTime * speed*-1);
-                    if (colli == 10)
-                    {
-                        rb.velocity = new Vector2(-collision.relativeVelocity.x, -collision.relativeVelocity.y) * 3;
-                    }
+             //       if (colli == 10)
+               //     {
+                 //       rb.velocity = new Vector2(-collision.relativeVelocity.x, -collision.relativeVelocity.y) * 3;
+                  //  }
 
 
                     if (colli > 11)
                     {
-                        Debug.Log("player is stuck");
-                        transform.position = new Vector3(transform.position.x + .3f, transform.position.y + .3f);
+                        Debug.Log("player is stuck old detection");
+                    //    transform.position = new Vector3(transform.position.x + .3f, transform.position.y + .3f);
                     }
                     if (Time.time > nextUsage22) //delete otherwise
                     {
