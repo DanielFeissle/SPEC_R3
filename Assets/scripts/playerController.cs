@@ -204,7 +204,7 @@ public class playerController : MonoBehaviour {
 
       //4-7-20 new inner collision detection method!
       //will actually check if objects are inside of playership
-        GameObject otherColliders = Physics2D.OverlapBox(this.transform.position,this.transform.localScale,0).gameObject;
+        GameObject otherColliders = Physics2D.OverlapBox(this.transform.position,new Vector2(.001f,.001f),0).gameObject;
         //    if (otherColliders.CompareTag("ShipIndest"))
 
         if (!otherColliders.gameObject.CompareTag("station") && !otherColliders.gameObject.CompareTag("Player") && !otherColliders.gameObject.CompareTag("Finish"))
@@ -1064,7 +1064,7 @@ public class playerController : MonoBehaviour {
 
                     if (colli > 11)
                     {
-                        Debug.Log("player is stuck old detection");
+                     //   Debug.Log("player is stuck old detection");
                     //    transform.position = new Vector3(transform.position.x + .3f, transform.position.y + .3f);
                     }
                     if (Time.time > nextUsage22) //delete otherwise

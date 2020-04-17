@@ -10,7 +10,7 @@ public class MasterController : MonoBehaviour {
     public long score = 0;
     public long hull = 1;
     public Text StageScore;
-
+    public int publicAttitude = -1; //4-8-20, only active in story mode, not arcade
     public Text StageLevel;
     // Use this for initialization
     void Start () {

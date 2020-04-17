@@ -521,6 +521,9 @@ public class Story_masterControl : MonoBehaviour
                     {
                         CameraRb.velocity = Vector2.zero;
                         CameraRb.constraints = RigidbodyConstraints2D.FreezeAll; //blame past dan for this, if camera does not move (11-24-19)
+                        //4-8-20 finally lock the camera back to the starting postion, bugs!
+                        cammy.transform.position = new Vector3(25.20006f, 0, -10);
+                      
                     }
 
                   
@@ -546,7 +549,7 @@ public class Story_masterControl : MonoBehaviour
                 Text delta1 = uiAltiText.GetComponent<Text>();
                 delta1.text = EndScene.Substring(0, locCnt);
             }
-        
+      
 
 
             nextUsage2 = Time.time + delay2; //it is on display

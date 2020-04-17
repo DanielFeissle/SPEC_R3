@@ -18,10 +18,10 @@ public class Shields : MonoBehaviour {
     float nextUsage444;
     float delay444 = 0.015f; //only quat delay
     float nextUsage555;
-    float delay555 = 2.5f; //only half delay
+    float delay555 = 3.5f; //only half delay
 
     float nextUsage777;
-   public float delay777 =1.5f; //this is the time for hp recharge, change this to current needs
+   public float delay777 =1.0f; //this is the time for hp recharge, change this to current needs
     int HPCnt = 0;
     private Camera cam;
     Vector3 lastPos = new Vector3(0, 0, 0);
@@ -364,8 +364,9 @@ public class Shields : MonoBehaviour {
             else
             { //use standard collision
                 if (collision.gameObject.CompareTag("SpaceJunk") || collision.gameObject.CompareTag("ShipJunk") || collision.gameObject.CompareTag("IndestShot") || collision.gameObject.CompareTag("PlanRing") || collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("BOSS") || collision.gameObject.CompareTag("ShipIndest"))
-                if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > 15 || this.rb.velocity.sqrMagnitude > 5)
-                {
+                    //      if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > 7 || this.rb.velocity.sqrMagnitude > 7)
+                    if (collision.relativeVelocity.magnitude > 5)
+                    {
                     Debug.Log("HIT FAST" + collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude);
                     Debug.Log("Player Hit FAST" + this.rb.velocity.sqrMagnitude);
 
@@ -408,34 +409,40 @@ public class Shields : MonoBehaviour {
    
     private void YeahDam()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        this.GetComponent<SpriteRenderer>().color = Color.green;
-        herdam = 1;
-        nextUsage555 = Time.time + delay555; //it is on display
-        if (curHP == 1)
+        if (Time.timeSinceLevelLoad>10) //4-8-20. ensure that we have ample time to give player control, do not deduct HP
         {
-            Debug.Log("DIED");
-            if (scene.name == "stageIntro")
-            {
-                      SceneManager.LoadScene("stage",LoadSceneMode.Single);
-                //      Application.LoadLevel("stage"); //this seems to be old but might work :)
-                curHP = 911;
-                nextUsage555 = Time.time + delay555; //gurantee that it will be in for the next scene
-            }
-            else
-            {
-                SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
-                //    Application.LoadLevel(Application.loadedLevel); //this seems to be old but might work :)
-                curHP = 911;
-                nextUsage555 = Time.time + delay555; //gurantee that it will be in for the next scene
-            }
+            Debug.Log("********************TIME"+Time.time);
 
-        }
-        if (curHP > 0)
-        {
+            Scene scene = SceneManager.GetActiveScene();
+            this.GetComponent<SpriteRenderer>().color = Color.green;
+            herdam = 1;
+            nextUsage555 = Time.time + delay555; //it is on display
+            if (curHP == 1)
+            {
+                Debug.Log("DIED");
+                if (scene.name == "stageIntro")
+                {
+                    SceneManager.LoadScene("stage", LoadSceneMode.Single);
+                    //      Application.LoadLevel("stage"); //this seems to be old but might work :)
+                    curHP = 911;
+                    nextUsage555 = Time.time + delay555; //gurantee that it will be in for the next scene
+                }
+                else
+                {
+                    SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
+                    //    Application.LoadLevel(Application.loadedLevel); //this seems to be old but might work :)
+                    curHP = 911;
+                    nextUsage555 = Time.time + delay555; //gurantee that it will be in for the next scene
+                }
 
-            curHP--;
+            }
+            if (curHP > 0)
+            {
+
+                curHP--;
+            }
         }
+     
 
     }
 }

@@ -296,10 +296,12 @@
     <Compile Include="Assets\scripts\aniNucDebrisClear.cs" />
     <Compile Include="Assets\scripts\arc_sceneSelector.cs" />
     <Compile Include="Assets\scripts\atmp_movement.cs" />
+    <Compile Include="Assets\scripts\backGround_ani.cs" />
     <Compile Include="Assets\scripts\boss\dadbot.cs" />
     <Compile Include="Assets\scripts\bossStage.cs" />
     <Compile Include="Assets\scripts\BurpUp.cs" />
     <Compile Include="Assets\scripts\CameraController.cs" />
+    <Compile Include="Assets\scripts\CamEscapeToRight.cs" />
     <Compile Include="Assets\scripts\convChecker.cs" />
     <Compile Include="Assets\scripts\CountTurd.cs" />
     <Compile Include="Assets\scripts\DestroyAfterDistance.cs" />

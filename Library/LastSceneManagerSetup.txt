@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/stage_atmosphere.unity
+- path: Assets/stage_ESCAPE.unity
   isLoaded: 1
   isActive: 1
