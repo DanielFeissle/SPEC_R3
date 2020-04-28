@@ -53,10 +53,14 @@ public class scenes_escape : MonoBehaviour {
         //first decide how many blocks to use
         int totBlocks = blarg.Next(30, 60);
 
-        GameObject IntialGround = Instantiate(Resources.Load("planetSide\\Ground")) as GameObject;
+        GameObject IntialGround = Instantiate(Resources.Load("planetSide\\zBaseGround")) as GameObject;
         IntialGround.name = "IntPlannet";
         IntialGround.transform.position = new Vector2(0, 0 - 1.15f);
 
+        //phases are defined as where the current phase ENDS
+        int basePhase1 = totBlocks-(totBlocks / 4); //start with the full base (not used)
+        int basePhase2 = basePhase1 - (basePhase1 / 4); //enter destruction mode
+        int basePhase3 = basePhase2 - (basePhase2 / 4); //space (ie nothing)
 
 
         var renderer2 = IntialGround.GetComponent<Renderer>(); //we always want the first object of the array ;/
@@ -78,7 +82,7 @@ public class scenes_escape : MonoBehaviour {
             //5-Rise
             int curTile = blarg.Next(6);
             string loadName = "IntialGround";
-            if (blarg.Next(100) < 60)
+            if (blarg.Next(100) < 60 && i > 1)
             {
                 if (naturalAScent == false)
                 {
@@ -97,38 +101,44 @@ public class scenes_escape : MonoBehaviour {
                 }
                 if (curTile == 0)
                 {
-                    loadName = "Ascent";
+                    loadName = "zBase_Ascent";
                     naturalAScent = true;
                 }
                 else if (curTile == 1)
                 {
-                    loadName = "Cliff";
+                    loadName = "zBase_CliffEdge";
                 }
                 else if (curTile == 2)
                 {
-                    loadName = "Descent";
+                    loadName = "zBase_Descent";
                 }
                 else if (curTile == 3)
                 {
-                    loadName = "Ground";
+                    loadName = "zBaseGround";
                     GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
                     RepeatGas.name = "RptGas(" + i + ")";
                     RepeatGas.transform.position = new Vector2(newPost, 0 - 3.15f);
                 }
                 else if (curTile == 4)
                 {
-                    loadName = "Mountains";
+                    loadName = "zBaseContainment";
                 }
                 else if (curTile == 5)
                 {
-                    loadName = "Rise";
+                    loadName = "zBasePlatue";
                 }
                 GameObject RepeatGround = Instantiate(Resources.Load("planetSide\\" + loadName + "")) as GameObject;
                 RepeatGround.name = "RptPlannet(" + i + ")";
                 RepeatGround.transform.position = new Vector2(newPost, 0 - 1.15f);
 
 
-
+                //4-27-20
+                //how to make zero gravity section (from explosions!)
+                if (i >= basePhase2)
+                {
+             Rigidbody2D fun=       RepeatGround.AddComponent<Rigidbody2D>();
+                    fun.gravityScale = 0;
+                }
 
 
 
@@ -141,21 +151,34 @@ public class scenes_escape : MonoBehaviour {
 
             else
             {
-                loadName = "Ground";
+                loadName = "zBaseGround";
                 GameObject RepeatGround = Instantiate(Resources.Load("planetSide\\" + loadName + "")) as GameObject;
                 RepeatGround.name = "RptPlannet(" + i + ")";
                 RepeatGround.transform.position = new Vector2(newPost, 0 - 1.15f);
                 oldPos = RepeatGround.transform.position.x;
                 Debug.Log("DRAWING MAP:" + i);
-
+                //4-27-20
+                //how to make zero gravity section (from explosions!)
+                if (i >= basePhase2)
+                {
+                    Rigidbody2D fun = RepeatGround.AddComponent<Rigidbody2D>();
+                    fun.gravityScale = 0;
+                }
                 if (blarg.Next(100) < 75) //create a cave
                 {
                     if (i < totBlocks - 8 && i > 5) //end zone buffer (no cave in landing zone for transport ship, and begining zone should be clear
                     {
-                        GameObject RepeatGas2 = Instantiate(Resources.Load("planetSide\\Cave")) as GameObject;
+                        GameObject RepeatGas2 = Instantiate(Resources.Load("planetSide\\zBaseTOp")) as GameObject;
                         RepeatGas2.name = "RptCave(" + i + ")";
                         RepeatGas2.transform.localScale = new Vector2(UnityEngine.Random.Range(.5f, 2.5f), 1);
                         RepeatGas2.transform.position = new Vector2(newPost, 0 + 2.5f);
+                        //4-27-20
+                        //how to make zero gravity section (from explosions!)
+                        if (i >= basePhase2)
+                        {
+                            Rigidbody2D fun = RepeatGas2.AddComponent<Rigidbody2D>();
+                            fun.gravityScale = 0;
+                        }
                     }
 
                 }
@@ -168,6 +191,30 @@ public class scenes_escape : MonoBehaviour {
                     RepeatGas.transform.position = new Vector2(newPost, 0 - 3.15f);
                 }
             }
+
+        
+
+
+            //Put the background here
+
+            Debug.Log("PHASE1 " + basePhase1);
+            Debug.Log("PHASE2 " + basePhase2);
+            Debug.Log("PHASE3 " + basePhase3);
+            Debug.Log("Total Tile " + totBlocks);
+              if (i<basePhase3)
+            {
+                GameObject RepeatGas = Instantiate(Resources.Load("back_baseStandard")) as GameObject;
+                RepeatGas.name = "BckTile(" + i + ")";
+                RepeatGas.transform.position = new Vector2(newPost, 0);
+            }
+            else if (i < basePhase2)
+            {
+                GameObject RepeatGas = Instantiate(Resources.Load("back_baseDestroy")) as GameObject;
+                RepeatGas.name = "BckTile(" + i + ")";
+                RepeatGas.transform.position = new Vector2(newPost, 0);
+            }
+
+
         }
 
 
@@ -249,11 +296,17 @@ public class scenes_escape : MonoBehaviour {
         GameObject playerFuel = GameObject.Find("PlayerShip");
         playerController pc1 = playerFuel.GetComponent<playerController>();
 
-
+      
 
         if (Time.time > nextUsage) //continue scrolling
         {
-
+            GameObject transportShip = GameObject.Find("transportShip");
+            masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
+            if (introShip.introScene==false)
+            {
+                transportShip.transform.position = new Vector2(transform.position.x, transform.position.y + 100); //4-20-20 push this up and away
+                playerFuel.GetComponent<ConstantForce2D>().force = new Vector2(85, 0);
+            }
             if (pc1.moveCount != 0)
             {
                 //subtract fuel
@@ -262,8 +315,7 @@ public class scenes_escape : MonoBehaviour {
             if (fuel < 0)
             {
                 delay = 0.1f; //lets speed this up eh?
-                GameObject transportShip = GameObject.Find("transportShip");
-                masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
+           
                 introShip.introScene = true;
                 fuel = 0;
                 //wait for if the player is off the screen

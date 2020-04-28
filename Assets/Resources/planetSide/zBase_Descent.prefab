@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4052284736716128}
   - component: {fileID: 212813043317600694}
   - component: {fileID: 60726632662978934}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: zBase_Descent
   m_TagString: Untagged
   m_Icon: {fileID: 0}

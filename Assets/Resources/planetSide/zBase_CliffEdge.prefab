@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4046478330651804}
   - component: {fileID: 212362431198106700}
   - component: {fileID: 60126775016745220}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: zBase_CliffEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

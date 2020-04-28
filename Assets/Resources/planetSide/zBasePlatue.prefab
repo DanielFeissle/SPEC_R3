@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4237636252592066}
   - component: {fileID: 212593459281779558}
   - component: {fileID: 60732330443537702}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: zBasePlatue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
