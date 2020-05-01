@@ -23,10 +23,16 @@ public class scenes_escape : MonoBehaviour {
     string fail = "You ran out of fuel.. Lets try this again!";
     bool redothisdu = false;
 
-
+    float xEndofScene = 555;
     // Use this for initialization
     void Start ()
     {
+        //4-28-20 add more power to movement for player
+        GameObject dershi = GameObject.Find("PlayerShip");
+        playerPowerMover fudg = dershi.AddComponent<playerPowerMover>(); //creates that amplifies movement, remove when done with the stage!
+     
+//end of additional script
+
         //get top left and bottom right screen position
         cam = Camera.main;
         Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
@@ -138,6 +144,7 @@ public class scenes_escape : MonoBehaviour {
                 {
              Rigidbody2D fun=       RepeatGround.AddComponent<Rigidbody2D>();
                     fun.gravityScale = 0;
+                    fun.mass = 117;
                 }
 
 
@@ -147,6 +154,7 @@ public class scenes_escape : MonoBehaviour {
                 oldPos = RepeatGround.transform.position.x;
                 Debug.Log("DRAWING MAP:" + i);
                 priorTile = curTile;
+                xEndofScene = RepeatGround.transform.position.x;
             }
 
             else
@@ -163,6 +171,7 @@ public class scenes_escape : MonoBehaviour {
                 {
                     Rigidbody2D fun = RepeatGround.AddComponent<Rigidbody2D>();
                     fun.gravityScale = 0;
+                    fun.mass = 117;
                 }
                 if (blarg.Next(100) < 75) //create a cave
                 {
@@ -178,6 +187,7 @@ public class scenes_escape : MonoBehaviour {
                         {
                             Rigidbody2D fun = RepeatGas2.AddComponent<Rigidbody2D>();
                             fun.gravityScale = 0;
+                            fun.mass = 117;
                         }
                     }
 
@@ -212,8 +222,28 @@ public class scenes_escape : MonoBehaviour {
                 GameObject RepeatGas = Instantiate(Resources.Load("back_baseDestroy")) as GameObject;
                 RepeatGas.name = "BckTile(" + i + ")";
                 RepeatGas.transform.position = new Vector2(newPost, 0);
-            }
 
+                
+                int randoExplod = UnityEngine.Random.Range(5, 10);
+                for (int qt=0;qt<randoExplod;qt++)
+                {
+                    GameObject RepeatGround33 = Instantiate(Resources.Load("CollisionExplosion")) as GameObject;
+                    RepeatGround33.name = "SysExplode(" + i +qt+ ")";
+                    RepeatGround33.transform.position = new Vector2(newPost+UnityEngine.Random.Range(-5,5), 0 - UnityEngine.Random.Range(-5,5));
+                }
+            
+            }
+              else
+            { //phase 3
+                int randoExplod = UnityEngine.Random.Range(5, 10);
+                for (int qt = 0; qt < randoExplod; qt++)
+                {
+                    GameObject RepeatGround33 = Instantiate(Resources.Load("CollisionExplosion")) as GameObject;
+                    RepeatGround33.name = "SysExplode(" + i + qt + ")";
+                    RepeatGround33.transform.position = new Vector2(newPost + UnityEngine.Random.Range(-5, 5), 0 - UnityEngine.Random.Range(-5, 5));
+                }
+            }
+           
 
         }
 
@@ -291,6 +321,15 @@ public class scenes_escape : MonoBehaviour {
 
 
     }
+
+    private void LateUpdate()
+    {
+        if (GameObject.Find("PlayerShip").transform.position.x > xEndofScene)
+        {
+            Destroy(GameObject.Find("PlayerShip").GetComponent<playerPowerMover>()); //remove the helping script
+            Application.LoadLevel(Application.loadedLevel); //load new level
+        }
+    }
     private void FixedUpdate()
     {
         GameObject playerFuel = GameObject.Find("PlayerShip");
@@ -352,6 +391,7 @@ public class scenes_escape : MonoBehaviour {
     void Update () {
         GameObject playerFuel = GameObject.Find("PlayerShip");
         playerController pc1 = playerFuel.GetComponent<playerController>();
+
 
         if (pc1.moveCount == -1000)
         {

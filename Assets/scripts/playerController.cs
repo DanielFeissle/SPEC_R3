@@ -42,7 +42,7 @@ public class playerController : MonoBehaviour {
     int engineCnt = 0;
 
     public int playMode = 0; //0 is arcade, 1 is overworld mode 
-
+    public float moveHorizantal;
     public int shipHitDetect=0; //0-nothing 1-something (no duh)---its actually boost, 2-turd is off screen
     private Camera cam;
     int TPGot = 0;
@@ -218,6 +218,7 @@ public class playerController : MonoBehaviour {
 
 
     }
+    public float moveVertical;
     private void FixedUpdate()
     {
 
@@ -257,14 +258,14 @@ public class playerController : MonoBehaviour {
         masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
         if (Time.time > 4 && introShip.introScene == false)
         {
-            float moveVertical = 0;
+              moveVertical = 0;
            // Debug.Log("Controller" + controlerUsed);
             if (controlerUsed == false)
             {
                 moveVertical = Input.GetAxis("Vertical");
             }
 
-            float moveHorizantal = Input.GetAxis("Horizontal");
+             moveHorizantal = Input.GetAxis("Horizontal");
 
             //if (Input.GetButtonDown("360_RightBumper"))
             float TriggerRight = Input.GetAxis("Cont_Trigger");
@@ -289,7 +290,7 @@ public class playerController : MonoBehaviour {
             float rotation = transform.rotation.z;
             if (rotation >= 0)
             {
-                rotation = rotation + Time.deltaTime;
+              //  rotation = rotation + Time.deltaTime;
             }
             //  transform.Rotate(new Vector3(0.0f, 0.0f, rotation));
 

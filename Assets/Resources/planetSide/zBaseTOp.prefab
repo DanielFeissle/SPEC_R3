@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4930642377306176}
   - component: {fileID: 212927248738193582}
-  - component: {fileID: 60078161536533546}
+  - component: {fileID: 60244958690586146}
   m_Layer: 11
   m_Name: zBaseTOp
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &60078161536533546
+--- !u!60 &60244958690586146
 PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -65,20 +65,21 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.49, y: 2.4199998}
+    - - {x: 2.19, y: 2.23}
       - {x: 2.56, y: 2.4299998}
       - {x: 2.56, y: 2.56}
       - {x: -2.56, y: 2.56}
-      - {x: -2.56, y: 2.3999999}
-      - {x: -2.55, y: 2.3799999}
-      - {x: -2.26, y: 2.21}
-      - {x: -2.18, y: 2.1699998}
+      - {x: -2.56, y: 2.3899999}
+      - {x: -2.55, y: 2.37}
       - {x: -1.87, y: 1.99}
-      - {x: -1.8, y: 1.9599999}
-      - {x: 1.68, y: 1.9599999}
-      - {x: 1.8, y: 2.02}
-      - {x: 2.07, y: 2.18}
-      - {x: 2.19, y: 2.23}
+      - {x: -1.81, y: 1.9599999}
+      - {x: -1.81, y: 0.35}
+      - {x: -1.8, y: 0.32}
+      - {x: -1.73, y: 0.26}
+      - {x: 1.61, y: 0.26}
+      - {x: 1.64, y: 0.26999998}
+      - {x: 1.7099999, y: 0.35}
+      - {x: 1.6999999, y: 1.9599999}
 --- !u!212 &212927248738193582
 SpriteRenderer:
   m_ObjectHideFlags: 1
