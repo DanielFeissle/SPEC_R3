@@ -321,6 +321,8 @@
     <Compile Include="Assets\scripts\enemyUSSPotatoe.cs" />
     <Compile Include="Assets\scripts\Exp2017.cs" />
     <Compile Include="Assets\scripts\ExplosionRandomlyPlayOnScreen.cs" />
+    <Compile Include="Assets\scripts\fireWall_ambientSFX.cs" />
+    <Compile Include="Assets\scripts\firewall_fireballs.cs" />
     <Compile Include="Assets\scripts\floorIsLava.cs" />
     <Compile Include="Assets\scripts\GalaxyPond.cs" />
     <Compile Include="Assets\scripts\galConstructor.cs" />
