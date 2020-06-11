@@ -60,6 +60,9 @@ public class fireWall_ambientSFX : MonoBehaviour {
             AudioSource.PlayClipAtPoint(_audio9, shipLoc, 100);
             AudioSource.PlayClipAtPoint(_audio9, shipLoc, 100);
             AudioSource.PlayClipAtPoint(_audio9, shipLoc, 100);
+            AudioSource.PlayClipAtPoint(_audio9, shipLoc, 100);
+
+
 
             //spawn fireballs here!
             randExp = UnityEngine.Random.Range(1, 4);
@@ -85,7 +88,7 @@ public class fireWall_ambientSFX : MonoBehaviour {
             FireBallObj.transform.position = new Vector2(this.transform.position.x, Random.Range(-4, 4)); //this script is attached to the firewall
             FireBallObj.GetComponent<Rigidbody2D>().AddForce(new Vector2(5500, 0));
 
-            nextUsage = Time.time + delay+UnityEngine.Random.Range(0.2f,2); //it is on display
+            nextUsage = Time.time + delay+UnityEngine.Random.Range(0.1f,0.4f); //it is on display
         }
         
 

@@ -35,6 +35,7 @@ TagManager:
   - info
   - Galaxy
   - station
+  - instaDeath
   layers:
   - Default
   - TransparentFX

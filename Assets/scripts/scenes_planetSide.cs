@@ -300,6 +300,13 @@ public class scenes_planetSide : MonoBehaviour {
         if (pc1.moveCount == -1000)
         {
             fuel = fuel + 25;
+            GameObject playerHP = GameObject.Find("PlayerShip").gameObject; //6-1-20, double function now- gas and health!
+            if (playerHP.GetComponent<Shields>().curHP < playerHP.GetComponent<Shields>().totHP)
+            {
+                playerHP.GetComponent<Shields>().nextUsage777 = Time.time; //get the interface updated as well
+                playerHP.GetComponent<Shields>().overrideWaitHP = true;
+            //      playerHP.GetComponent<Shields>().curHP++;
+            }
             //player is lucky, can move again!
             GameObject transportShip = GameObject.Find("transportShip");
             masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();

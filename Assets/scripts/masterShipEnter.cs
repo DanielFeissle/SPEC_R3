@@ -217,7 +217,11 @@ public class masterShipEnter : MonoBehaviour {
                                 {
                                     if (!collision.gameObject.CompareTag("station"))
                                     {
-                                        Destroy(collision.gameObject);
+                                        if (!collision.gameObject.CompareTag("instaDeath"))
+                                        {
+                                            Destroy(collision.gameObject);
+                                        }
+                                            
                                     }
                                 }
                                   

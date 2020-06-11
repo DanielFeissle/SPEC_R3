@@ -16,11 +16,12 @@ public class Shields : MonoBehaviour {
     public int curHP;
 
     float nextUsage444;
+    public bool overrideWaitHP = false;
     float delay444 = 0.015f; //only quat delay
-    float nextUsage555;
+    public float nextUsage555;
     float delay555 = 3.5f; //only half delay
 
-    float nextUsage777;
+   public float nextUsage777;
    public float delay777 =1.0f; //this is the time for hp recharge, change this to current needs
     int HPCnt = 0;
     private Camera cam;
@@ -72,9 +73,12 @@ public class Shields : MonoBehaviour {
         }
         else
         {
-            if (SceneManager.GetActiveScene().name.Contains("stage"))
+            if (SceneManager.GetActiveScene().name.Contains("stage") || overrideWaitHP==true) //this variable is only for player ship!! 6-1-20
             {
-
+                if (overrideWaitHP==true)
+                {
+                    overrideWaitHP = false;
+                }
                 nextUsage777 = Time.time + delay777; //begin HP increase
                 rb = GetComponent<Rigidbody2D>();
                 m_Renderer = GetComponent<Renderer>();
@@ -283,13 +287,17 @@ public class Shields : MonoBehaviour {
 
         }
 
-        if (Time.time > nextUsage777 && curHP < totHP) //this is to track/keep the ui always on screen
+        if ((Time.time > nextUsage777 && curHP < totHP)|| overrideWaitHP == true) //this is to track/keep the ui always on screen
         {
             HPCnt++;
 
-            if (HPCnt > 5)
+            if (HPCnt > 5 || overrideWaitHP == true)
             {
-                curHP++;
+                    if (overrideWaitHP == true)
+                    {
+                        overrideWaitHP = false;
+                    }
+                    curHP++;
 
                 GameObject HPF_UI3 = GameObject.Find("HP_Bar" + (curHP - 2)); //we are up 2, but only need to show the bottom one. Makes sense right... well we up by one but we want to go back one and then again to get the correct value
                 HPF_UI3.GetComponent<SpriteRenderer>().color = new Color(.5f, .5f, .5f, 1); //now it is present again
@@ -398,15 +406,28 @@ public class Shields : MonoBehaviour {
                     {
                         YeahDam();
                     }
-                }
+                     
+                    }
             }
           
         }
 
 
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+            if (collision.gameObject.CompareTag("instaDeath"))
+        {
+            YeahDam(); //making sure the player really dies :) 6-10-20
+            YeahDam();
+            YeahDam();
+            YeahDam();
+            YeahDam();
+            YeahDam();
+            YeahDam();
+        }
+    }
 
-   
     private void YeahDam()
     {
         if (Time.timeSinceLevelLoad>10) //4-8-20. ensure that we have ample time to give player control, do not deduct HP

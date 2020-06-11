@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class scenes_escape : MonoBehaviour {
@@ -120,10 +121,19 @@ public class scenes_escape : MonoBehaviour {
                 }
                 else if (curTile == 3)
                 {
-                    loadName = "zBaseGround";
-                    GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
-                    RepeatGas.name = "RptGas(" + i + ")";
-                    RepeatGas.transform.position = new Vector2(newPost, 0 - 3.15f);
+                    int harderGas = UnityEngine.Random.Range(0, 100);
+                    if (harderGas<50)
+                    {
+                        loadName = "zBaseGround";
+                        GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
+                        RepeatGas.name = "RptGas(" + i + ")";
+                        RepeatGas.transform.position = new Vector2(newPost, 0 - 3.15f);
+                    }
+                    else
+                    {
+                        loadName = "zBaseContainment";
+                    }
+                    
                 }
                 else if (curTile == 4)
                 {
@@ -136,11 +146,20 @@ public class scenes_escape : MonoBehaviour {
                 GameObject RepeatGround = Instantiate(Resources.Load("planetSide\\" + loadName + "")) as GameObject;
                 RepeatGround.name = "RptPlannet(" + i + ")";
                 RepeatGround.transform.position = new Vector2(newPost, 0 - 1.15f);
+                //6-3-20
+                //add in space junk for added fun
+                int tempRando = UnityEngine.Random.Range(0, 10);
+                for (int zz = 0; zz < tempRando; zz++)
+                {
+                    
+                    GameObject SpcJnk2 = Instantiate(Resources.Load("chair")) as GameObject;
+                    SpcJnk2.name = "spcjnk2(" + i + ")";
+                    SpcJnk2.transform.position = new Vector2(UnityEngine.Random.Range(newPost, newPost + 10), UnityEngine.Random.Range(q.y, p.y));
 
-
+                }
                 //4-27-20
                 //how to make zero gravity section (from explosions!)
-                if (i >= basePhase2)
+                    if (i >= basePhase2)
                 {
              Rigidbody2D fun=       RepeatGround.AddComponent<Rigidbody2D>();
                     fun.gravityScale = 0;
@@ -165,6 +184,17 @@ public class scenes_escape : MonoBehaviour {
                 RepeatGround.transform.position = new Vector2(newPost, 0 - 1.15f);
                 oldPos = RepeatGround.transform.position.x;
                 Debug.Log("DRAWING MAP:" + i);
+                //6-3-20
+                //add in space junk for added fun
+                int tempRando = UnityEngine.Random.Range(0, 10);
+                for (int zz = 0; zz < tempRando; zz++)
+                {
+                   
+                    GameObject SpcJnk2 = Instantiate(Resources.Load("chair")) as GameObject;
+                    SpcJnk2.name = "spcjnk2(" + i + ")";
+                    SpcJnk2.transform.position = new Vector2(UnityEngine.Random.Range(newPost, newPost + 10), UnityEngine.Random.Range(q.y, p.y));
+
+                }
                 //4-27-20
                 //how to make zero gravity section (from explosions!)
                 if (i >= basePhase2)
@@ -181,6 +211,16 @@ public class scenes_escape : MonoBehaviour {
                         RepeatGas2.name = "RptCave(" + i + ")";
                         RepeatGas2.transform.localScale = new Vector2(UnityEngine.Random.Range(.5f, 2.5f), 1);
                         RepeatGas2.transform.position = new Vector2(newPost, 0 + 2.5f);
+                        //6-3-20
+                        //add in space junk for added fun
+                        int tempRando2 = UnityEngine.Random.Range(0, 10);
+                        for (int zz = 0; zz < tempRando2; zz++)
+                        {
+                            GameObject SpcJnk = Instantiate(Resources.Load("Asteroid2017")) as GameObject;
+                            SpcJnk.name = "spcjnk(" + i + ")";
+                            SpcJnk.transform.position = new Vector2(UnityEngine.Random.Range(newPost, newPost+5), UnityEngine.Random.Range(q.y, p.y));
+
+                        }
                         //4-27-20
                         //how to make zero gravity section (from explosions!)
                         if (i >= basePhase2)
@@ -194,7 +234,7 @@ public class scenes_escape : MonoBehaviour {
                 }
                 priorTile = curTile;
 
-                if (blarg.Next(100) < 50)
+                if (blarg.Next(100) < 15)
                 {
                     GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
                     RepeatGas.name = "RptGas(" + i + ")";
@@ -216,6 +256,9 @@ public class scenes_escape : MonoBehaviour {
                 GameObject RepeatGas = Instantiate(Resources.Load("back_baseStandard")) as GameObject;
                 RepeatGas.name = "BckTile(" + i + ")";
                 RepeatGas.transform.position = new Vector2(newPost, 0);
+                GameObject Klaxon = Instantiate(Resources.Load("klaxon2020")) as GameObject; //finally add in the alarm 6-10-20
+                Klaxon.name = "Klaxon(" + i + ")";
+                Klaxon.transform.position = new Vector2(newPost, p.y);
             }
             else if (i < basePhase2)
             {
@@ -261,41 +304,7 @@ public class scenes_escape : MonoBehaviour {
         }
 
 
-        for (int i = 0; i < backEnd.level; i++)
-        {
-            int fundas = UnityEngine.Random.Range(0, 100);
-            if (fundas < 25)
-            {
-                GameObject ExpDust = Instantiate(Resources.Load("AstMan2019")) as GameObject;
-                ExpDust.name = "AstMan2019";
-                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
-                ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
-            }
-            else if (fundas < 50)
-            {
-                GameObject ExpDust = Instantiate(Resources.Load("Asteroid2017")) as GameObject;
-                ExpDust.name = "Asteroid2017";
-                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
-                ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
-            }
-            else if (fundas < 75)
-            {
-                GameObject ExpDust = Instantiate(Resources.Load("blueWallJunk")) as GameObject;
-                ExpDust.name = "blueWallJunk";
-                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
-                ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 2), UnityEngine.Random.Range(1, 2));
-            }
-            else if (fundas < 100)
-            {
-                GameObject ExpDust = Instantiate(Resources.Load("StdWall")) as GameObject;
-                ExpDust.name = "StdWall";
-                ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(-12, 12), UnityEngine.Random.Range(-8, 8));
-                ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 3), UnityEngine.Random.Range(1, 2));
-            }
 
-
-
-        }
         /*
         GameObject MastCont = GameObject.Find(gameObject.name);
         MasterController backEnd = MastCont.GetComponent<MasterController>();
@@ -327,7 +336,8 @@ public class scenes_escape : MonoBehaviour {
         if (GameObject.Find("PlayerShip").transform.position.x > xEndofScene)
         {
             Destroy(GameObject.Find("PlayerShip").GetComponent<playerPowerMover>()); //remove the helping script
-            Application.LoadLevel(Application.loadedLevel); //load new level
+            //Application.LoadLevel(Application.loadedLevel); //load new level
+            SceneManager.LoadScene("stage_OverSpace-world-duh", LoadSceneMode.Single);
         }
     }
     private void FixedUpdate()
@@ -396,6 +406,14 @@ public class scenes_escape : MonoBehaviour {
         if (pc1.moveCount == -1000)
         {
             fuel = fuel + 25;
+            GameObject playerHP = GameObject.Find("PlayerShip").gameObject; //6-1-20, double function now- gas and health!
+            if (playerHP.GetComponent<Shields>().curHP< playerHP.GetComponent<Shields>().totHP)
+            {
+                playerHP.GetComponent<Shields>().nextUsage777 = Time.time; //get the interface updated as well
+                playerHP.GetComponent<Shields>().overrideWaitHP = true;
+            //   playerHP.GetComponent<Shields>().curHP++;
+            }
+        
             //player is lucky, can move again!
             GameObject transportShip = GameObject.Find("transportShip");
             masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
