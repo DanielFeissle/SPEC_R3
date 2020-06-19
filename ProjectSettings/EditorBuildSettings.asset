@@ -44,3 +44,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/stage_PlainSpace.unity
     guid: 5e387e088a797aa43b19eeaacfb18571
+  - enabled: 1
+    path: Assets/Credits.unity
+    guid: d415e7b695e19174aa393bd9d4c10a21

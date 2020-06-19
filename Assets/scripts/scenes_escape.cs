@@ -122,7 +122,7 @@ public class scenes_escape : MonoBehaviour {
                 else if (curTile == 3)
                 {
                     int harderGas = UnityEngine.Random.Range(0, 100);
-                    if (harderGas<50)
+                    if (harderGas<10)
                     {
                         loadName = "zBaseGround";
                         GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
@@ -234,14 +234,14 @@ public class scenes_escape : MonoBehaviour {
                 }
                 priorTile = curTile;
 
-                if (blarg.Next(100) < 15)
+                if (blarg.Next(100) < 10)
                 {
                     GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
                     RepeatGas.name = "RptGas(" + i + ")";
                     RepeatGas.transform.position = new Vector2(newPost, 0 - 3.15f);
                 }
             }
-
+             
         
 
 
@@ -337,7 +337,7 @@ public class scenes_escape : MonoBehaviour {
         {
             Destroy(GameObject.Find("PlayerShip").GetComponent<playerPowerMover>()); //remove the helping script
             //Application.LoadLevel(Application.loadedLevel); //load new level
-            SceneManager.LoadScene("stage_OverSpace-world-duh", LoadSceneMode.Single);
+            SceneManager.LoadScene("Credits", LoadSceneMode.Single);
         }
     }
     private void FixedUpdate()
