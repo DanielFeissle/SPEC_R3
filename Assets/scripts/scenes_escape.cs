@@ -337,7 +337,8 @@ public class scenes_escape : MonoBehaviour {
         {
             Destroy(GameObject.Find("PlayerShip").GetComponent<playerPowerMover>()); //remove the helping script
             //Application.LoadLevel(Application.loadedLevel); //load new level
-            SceneManager.LoadScene("Credits", LoadSceneMode.Single);
+            //SceneManager.LoadScene("Credits", LoadSceneMode.Single);
+            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("Credits");
         }
     }
     private void FixedUpdate()

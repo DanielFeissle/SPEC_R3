@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 40ddf0ec512a55d49bbb7b357e5e9ea2
+timeCreated: 1592959504
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Franklin Gothic Demi
+  fontNames:
+  - Franklin Gothic Demi
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

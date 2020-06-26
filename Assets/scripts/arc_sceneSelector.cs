@@ -22,40 +22,49 @@ public class arc_sceneSelector : MonoBehaviour {
         {
             if (getNext < 25)
             {
-                SceneManager.LoadScene("stage"); //this is the first stage name
+              //  SceneManager.LoadScene("stage"); //this is the first stage name
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage");
             }
             else if (getNext < 50)
             {
-                SceneManager.LoadScene("stage_asteroids"); //this is asteroids stage, with 3 different asteroid functions
+              //  SceneManager.LoadScene("stage_asteroids"); //this is asteroids stage, with 3 different asteroid functions
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_asteroids");
             }
             else if (getNext < 75)
             {
-                SceneManager.LoadScene("stage_rings"); //this is sun ring stage, features experiments in shaders/coloring
+               // SceneManager.LoadScene("stage_rings"); //this is sun ring stage, features experiments in shaders/coloring
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_rings");
             }
             else if (getNext < 100)
             {
-                SceneManager.LoadScene("stage_atmosphere"); //this is sun ring stage, features experiments in shaders/coloring
+              //  SceneManager.LoadScene("stage_atmosphere"); //this is sun ring stage, features experiments in shaders/coloring
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_atmosphere");
             }
             else if (getNext < 125)
             {
-                SceneManager.LoadScene("stage_interShip"); //this is sun ring stage, features experiments in shaders/coloring
+              //  SceneManager.LoadScene("stage_interShip"); //this is sun ring stage, features experiments in shaders/coloring
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_interShip");
             }
             else if (getNext < 150)
             {
-                SceneManager.LoadScene("stage_PlainSpace"); //this is sun ring stage, features experiments in shaders/coloring
+                //SceneManager.LoadScene("stage_PlainSpace"); //this is sun ring stage, features experiments in shaders/coloring
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_PlainSpace");
             }
             else if (getNext < 175)
             {
-                SceneManager.LoadScene("stage_PlanetSide"); //this is sun ring stage, features experiments in shaders/coloring
+               // SceneManager.LoadScene("stage_PlanetSide"); //this is sun ring stage, features experiments in shaders/coloring
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_PlanetSide");
             }
             else if (getNext < 200)
             {
-                SceneManager.LoadScene("stage_PlanetSide"); //this is the clasical escape stage, everything blowing up!
+              //  SceneManager.LoadScene("stage_PlanetSide"); //this is the clasical escape stage, everything blowing up!
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_PlanetSide");
             }
         }
         else
         {
-            SceneManager.LoadScene("stage_OverSpace-world-duh"); //return back to overworld
+        //    SceneManager.LoadScene("stage_OverSpace-world-duh"); //return back to overworld
+            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_OverSpace-world-duh");
         }
        
 

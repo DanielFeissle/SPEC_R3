@@ -28,6 +28,8 @@ GameObject:
   - component: {fileID: 114260315790910178}
   - component: {fileID: 114797232368619606}
   - component: {fileID: 247008905416250724}
+  - component: {fileID: 114828942759857208}
+  - component: {fileID: 114597793848424006}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Player
@@ -148,11 +150,24 @@ MonoBehaviour:
   shipShift: {fileID: 8300000, guid: f7001c5630b4d744fb300d48756ff5b6, type: 3}
   suitCase: {fileID: 8300000, guid: f697437bc00377d4e83ab6334cedcd99, type: 3}
   playMode: 0
+  moveHorizantal: 0
   shipHitDetect: 0
   moveCount: 0
+  moveVertical: 0
   aWidth: 80
   aHeight: 60
   playerStageDone: 0
+--- !u!114 &114597793848424006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351234675264854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e1218c1cd6b08045bdcec57e2e15594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114797232368619606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,6 +180,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btn_pauser: 1
+--- !u!114 &114828942759857208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351234675264854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3892c3462994bd43a12f260705d36b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerMoney: 0
+  PlayerMoneyLeft: 0
+  PlayerMoneyRight: 0
+  PlayerMoneyUp: 0
+  PlayerMoneyShot: 0
+  moveHorizantal: 0
+  moveVertical: 0
 --- !u!114 &114898048221011050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,6 +211,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totHP: 911
   curHP: 911
+  overrideWaitHP: 0
+  nextUsage555: 0
+  nextUsage777: 0
   delay777: 1
 --- !u!212 &212649441706840268
 SpriteRenderer:

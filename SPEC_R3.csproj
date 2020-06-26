@@ -310,6 +310,7 @@
     <Compile Include="Assets\scripts\CamEscapeToRight.cs" />
     <Compile Include="Assets\scripts\convChecker.cs" />
     <Compile Include="Assets\scripts\CountTurd.cs" />
+    <Compile Include="Assets\scripts\cred_cam_distScroll.cs" />
     <Compile Include="Assets\scripts\DestroyAfterDistance.cs" />
     <Compile Include="Assets\scripts\destroyScreenWrap.cs" />
     <Compile Include="Assets\scripts\destructionStop.cs" />
@@ -334,6 +335,7 @@
     <Compile Include="Assets\scripts\IntroDemoControl.cs" />
     <Compile Include="Assets\scripts\IntroDestroyPoo.cs" />
     <Compile Include="Assets\scripts\junkWall.cs" />
+    <Compile Include="Assets\scripts\LevelHistory.cs" />
     <Compile Include="Assets\scripts\MasterController.cs" />
     <Compile Include="Assets\scripts\masterShipEnter.cs" />
     <Compile Include="Assets\scripts\mastObjMover.cs" />
@@ -345,6 +347,9 @@
     <Compile Include="Assets\scripts\Over_conver.cs" />
     <Compile Include="Assets\scripts\overworldJunkPlacer.cs" />
     <Compile Include="Assets\scripts\overworldShip.cs" />
+    <Compile Include="Assets\scripts\payer_return.cs" />
+    <Compile Include="Assets\scripts\payerControl.cs" />
+    <Compile Include="Assets\scripts\paySceneStarter.cs" />
     <Compile Include="Assets\scripts\Plain_deleteObjectAfterAni.cs" />
     <Compile Include="Assets\scripts\PlanetSide_CameraMove.cs" />
     <Compile Include="Assets\scripts\PlanetSide_scroll.cs" />

@@ -443,14 +443,18 @@ public class Shields : MonoBehaviour {
                 Debug.Log("DIED");
                 if (scene.name == "stageIntro")
                 {
-                    SceneManager.LoadScene("stage", LoadSceneMode.Single);
+                    // SceneManager.LoadScene("stage", LoadSceneMode.Single);
+                    //     GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage");
+                    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("PayPerControl");
                     //      Application.LoadLevel("stage"); //this seems to be old but might work :)
                     curHP = 911;
                     nextUsage555 = Time.time + delay555; //gurantee that it will be in for the next scene
                 }
                 else
                 {
-                    SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
+                    //SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
+                    //    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene(scene.name);
+                    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("PayPerControl");
                     //    Application.LoadLevel(Application.loadedLevel); //this seems to be old but might work :)
                     curHP = 911;
                     nextUsage555 = Time.time + delay555; //gurantee that it will be in for the next scene

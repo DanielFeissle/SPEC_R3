@@ -251,7 +251,8 @@ public class playerController : MonoBehaviour {
                     Rigidbody2D playerRigidBody = MastCont.GetComponent<Rigidbody2D>();
                     playerRigidBody.gravityScale = 0;
                 }
-            SceneManager.LoadScene("scenePicker_arc"); //reload stage
+                //   SceneManager.LoadScene("scenePicker_arc"); //reload stage
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("scenePicker_arc");
             nextUsage2 = Time.time + 2.0f; //it is on display
         }
         GameObject transportShip = GameObject.Find("transportShip");

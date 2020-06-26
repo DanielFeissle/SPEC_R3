@@ -89,7 +89,8 @@ public class TitleScreenButtons : MonoBehaviour {
         */
         //this is for the arcade mode
         Debug.Log("You have clicked the button!");
-        SceneManager.LoadScene("stageIntro");
+      //  SceneManager.LoadScene("stageIntro");
+        GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stageIntro");
 
     }
 }
