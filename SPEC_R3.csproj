@@ -311,6 +311,7 @@
     <Compile Include="Assets\scripts\convChecker.cs" />
     <Compile Include="Assets\scripts\CountTurd.cs" />
     <Compile Include="Assets\scripts\cred_cam_distScroll.cs" />
+    <Compile Include="Assets\scripts\CredShifter.cs" />
     <Compile Include="Assets\scripts\DestroyAfterDistance.cs" />
     <Compile Include="Assets\scripts\destroyScreenWrap.cs" />
     <Compile Include="Assets\scripts\destructionStop.cs" />

@@ -38,11 +38,9 @@ public class payerControl : MonoBehaviour {
     public float moveVertical;
     private void FixedUpdate()
     {
-        GameObject transportShip = GameObject.Find("transportShip");
-        masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
+       
 
-        if (introShip.introScene == false) //enable standard game rules
-        {
+     
 
       
 
@@ -51,11 +49,13 @@ public class payerControl : MonoBehaviour {
         sceneName = m_Scene.name;
         if (sceneName.Contains("stage"))
         {
+                GameObject transportShip = GameObject.Find("transportShip");
+                masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
+            if (introShip.introScene == false) //enable standard game rules
+            {
 
 
-         
-          
-            if (Time.time > 4 && introShip.introScene == false)
+                if (Time.time > 4 && introShip.introScene == false)
             {
                 moveVertical = 0;
                 // Debug.Log("Controller" + controlerUsed);
