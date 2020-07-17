@@ -312,7 +312,7 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             if (dadHP==-100)
             {
                 // SceneManager.LoadScene("stage_OverSpace-world-duh"); //this is the overworld
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_OverSpace-world-duh");
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Convention");
             }
 
         }

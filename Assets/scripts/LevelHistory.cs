@@ -43,6 +43,18 @@ public class LevelHistory : MonoBehaviour {
     }
 
 
+    public string GetPrevSceneName()
+    {
+        string returnValue = "";
+        if (sceneHistory.Count >= 2)  //Checking that we have actually switched scenes enough to go back to a previous scene
+        {
+         
+            sceneHistory.RemoveAt(sceneHistory.Count - 1);
+            returnValue= sceneHistory[sceneHistory.Count - 1].ToString();
+        }
+
+        return returnValue;
+    }
     // Update is called once per frame
     void Update () {
 		

@@ -285,41 +285,11 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         Camera.main.orthographic = true; //enmter 3d mode for fun effects and end of cutscene
         int getNext = randStage.Next(200);
         //do some other stuff but the end result is to load another level
-        if (getNext < 25)
-        {
-           // SceneManager.LoadScene("stage"); //this is the first stage name
-            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage");
-        }
-        else if (getNext < 50)
-        {
-           // SceneManager.LoadScene("stage_asteroids"); //this is asteroids stage, with 3 different asteroid functions
-            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_asteroids");
-        }
-        else if (getNext < 75)
-        {
-           // SceneManager.LoadScene("stage_rings"); //this is sun ring stage, features experiments in shaders/coloring
-            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_rings");
-        }
-        else if (getNext < 100)
-        {
-            //SceneManager.LoadScene("stage_atmosphere"); //this is sun ring stage, features experiments in shaders/coloring
-            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_atmosphere");
-        }
-        else if (getNext < 125)
-        {
-            //SceneManager.LoadScene("stage_interShip"); //this is sun ring stage, features experiments in shaders/coloring
-            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_interShip");
-        }
-        else if (getNext < 150)
-        {
-           // SceneManager.LoadScene("stage_PlainSpace"); //this is sun ring stage, features experiments in shaders/coloring
-            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_PlainSpace");
-        }
-        else if (getNext < 175)
-        {
-           // SceneManager.LoadScene("stage_PlanetSide"); //this is sun ring stage, features experiments in shaders/coloring
-            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_PlanetSide");
-        }
+
+           //7-15-20 load the boss fight next
+            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Bosses");
+
+
 
 
     }

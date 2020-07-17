@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 247008905416250724}
   - component: {fileID: 114828942759857208}
   - component: {fileID: 114597793848424006}
+  - component: {fileID: 114899640513281096}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Player
@@ -125,6 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 10
   score: 0
+  gameHighScore: 0
+  masterHighScore: 0
   hull: 1
   StageScore: {fileID: 0}
   publicAttitude: -1
@@ -149,6 +152,8 @@ MonoBehaviour:
   exp1: {fileID: 8300000, guid: 9956e20f55f0c9b4ab838cd315010e49, type: 3}
   shipShift: {fileID: 8300000, guid: f7001c5630b4d744fb300d48756ff5b6, type: 3}
   suitCase: {fileID: 8300000, guid: f697437bc00377d4e83ab6334cedcd99, type: 3}
+  stageDoneCnt: 0
+  stageDoneLastCnt: 0
   playMode: 0
   moveHorizantal: 0
   shipHitDetect: 0
@@ -215,6 +220,17 @@ MonoBehaviour:
   nextUsage555: 0
   nextUsage777: 0
   delay777: 1
+--- !u!114 &114899640513281096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351234675264854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a8ac5f25ba1ef4c92ba6fbe485d2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212649441706840268
 SpriteRenderer:
   m_ObjectHideFlags: 1

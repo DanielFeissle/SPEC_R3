@@ -12,20 +12,27 @@ public class bossStage : MonoBehaviour {
     void Start () {
         m_Renderer = GameObject.Find("transportShip").GetComponent<Renderer>();
         int bossRando = UnityEngine.Random.Range(0, 100);
+        bossRando = 99;
         //3-31-20 spawn in a random boss
-        if (bossRando<50)
+        if (bossRando<33)
         {
             GameObject Boss = Instantiate(Resources.Load("boss\\CountTurd")) as GameObject;
             Boss.name = "CountTurd";
             Boss.transform.position = new Vector2(6.1f, 3.29f);
         }
-        else if (bossRando<100)
+        else if (bossRando<66)
         {
             GameObject Boss = Instantiate(Resources.Load("boss\\dad")) as GameObject;
             Boss.name = "dad";
             Boss.transform.position = new Vector2(-12.00f, 0.0f);
         }
-     
+        else
+        {
+            GameObject Boss = Instantiate(Resources.Load("boss\\CoolTurd")) as GameObject;
+            Boss.name = "CoolTurd";
+            Boss.transform.position = new Vector2(-12.00f, 0.0f);
+        }
+
 
     }
 	

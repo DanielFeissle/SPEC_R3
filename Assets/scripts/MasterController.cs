@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 public class MasterController : MonoBehaviour {
 
     public int level = 0;
-    public long score = 0;
-    public long gameHighScore = 0; //this is the score per session, lost if not higher than the master high score
-    public long masterHighScore = 0; //7-6-20 this is  a score that will persist and be loaded 
+    public int score = 0;
+    public int gameHighScore = 0; //this is the score per session, lost if not higher than the master high score
+    public int masterHighScore = 0; //7-6-20 this is  a score that will persist and be loaded 
     public long hull = 1;
     public Text StageScore;
     public int publicAttitude = -1; //4-8-20, only active in story mode, not arcade
@@ -39,7 +39,10 @@ public class MasterController : MonoBehaviour {
         {
             StageScore.text = "Score: " + score;
             StageLevel.text = "Level: " + level;
-
+            if (score> 999999999) //going to int, plan for the worst case :) 7-16-20
+            {
+                score = 0;
+            }
             if (score > gameHighScore)
             {
                 gameHighScore = score;

@@ -40,7 +40,8 @@ public class playerController : MonoBehaviour {
     float random2;
     bool readyBoost = true;
     int engineCnt = 0;
-
+    public int stageDoneCnt = 0;
+    public int stageDoneLastCnt = 0;
     public int playMode = 0; //0 is arcade, 1 is overworld mode 
     public float moveHorizantal;
     public int shipHitDetect=0; //0-nothing 1-something (no duh)---its actually boost, 2-turd is off screen
@@ -962,6 +963,7 @@ public class playerController : MonoBehaviour {
                     GameObject shipDash = GameObject.Find("transportShip_exvil");
                     GameObject shipan = GameObject.Find("transportDoorClosure(256x256)_0");
                     playerStageDone = true;
+                    stageDoneCnt++;
                      Transform shipGonerelo = shipDash.GetComponent<Transform>();
                     Animator shipAni9334 = shipan.GetComponent<Animator>();
                     shipGonerelo.transform.position = blarg;

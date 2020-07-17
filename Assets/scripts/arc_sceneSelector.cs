@@ -58,7 +58,7 @@ public class arc_sceneSelector : MonoBehaviour {
             else if (getNext < 200)
             {
               //  SceneManager.LoadScene("stage_PlanetSide"); //this is the clasical escape stage, everything blowing up!
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_PlanetSide");
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_ESCAPE");
             }
         }
         else
