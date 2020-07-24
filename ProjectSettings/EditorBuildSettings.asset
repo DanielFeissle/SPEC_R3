@@ -50,3 +50,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/PayPerControl.unity
     guid: 0f2e9b88ce1a7194e8a1e71ae0f4eff8
+  - enabled: 1
+    path: Assets/stage_Convention.unity
+    guid: 455fe45efe390e247bb708bd09143181

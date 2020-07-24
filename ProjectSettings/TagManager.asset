@@ -36,6 +36,9 @@ TagManager:
   - Galaxy
   - station
   - instaDeath
+  - Boss
+  - CoolDam
+  - CoolerHelp
   layers:
   - Default
   - TransparentFX

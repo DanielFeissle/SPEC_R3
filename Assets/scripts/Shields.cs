@@ -363,6 +363,14 @@ public class Shields : MonoBehaviour {
                             {
                                 YeahDam();
                             }
+                            else if (collision.gameObject.CompareTag("CoolerHelp"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("CoolDam"))
+                            {
+                                YeahDam();
+                            }
                         }
                     }
                 }
@@ -371,9 +379,9 @@ public class Shields : MonoBehaviour {
             }
             else
             { //use standard collision
-                if (collision.gameObject.CompareTag("SpaceJunk") || collision.gameObject.CompareTag("ShipJunk") || collision.gameObject.CompareTag("IndestShot") || collision.gameObject.CompareTag("PlanRing") || collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("BOSS") || collision.gameObject.CompareTag("ShipIndest"))
+                if (collision.gameObject.CompareTag("SpaceJunk") || collision.gameObject.CompareTag("ShipJunk") || collision.gameObject.CompareTag("IndestShot") || collision.gameObject.CompareTag("PlanRing") || collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("BOSS") || collision.gameObject.CompareTag("ShipIndest") || collision.gameObject.CompareTag("CoolerHelp") || collision.gameObject.CompareTag("CoolDam"))
                     //      if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > 7 || this.rb.velocity.sqrMagnitude > 7)
-                    if (collision.relativeVelocity.magnitude > 5)
+                    if (collision.relativeVelocity.magnitude > 3)
                     {
                     Debug.Log("HIT FAST" + collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude);
                     Debug.Log("Player Hit FAST" + this.rb.velocity.sqrMagnitude);
@@ -406,7 +414,15 @@ public class Shields : MonoBehaviour {
                     {
                         YeahDam();
                     }
-                     
+                        else if (collision.gameObject.CompareTag("CoolerHelp"))
+                        {
+                            YeahDam();
+                        }
+                        else if (collision.gameObject.CompareTag("CoolDam"))
+                        {
+                            YeahDam();
+                        }
+
                     }
             }
           
@@ -438,6 +454,20 @@ public class Shields : MonoBehaviour {
             this.GetComponent<SpriteRenderer>().color = Color.green;
             herdam = 1;
             nextUsage555 = Time.time + delay555; //it is on display
+            //7-23-20 added some proper collision dust
+            string loadDat = "meta\\playerDamage1";
+            if (UnityEngine.Random.Range(0,100)<50)
+            {
+                loadDat = "meta\\playerDamage1";
+            }
+            else
+            {
+                loadDat = "meta\\playerDamage2";
+            }
+            GameObject DamageFX = Instantiate(Resources.Load(loadDat) as GameObject);
+            DamageFX.name = "DamageFX";
+            DamageFX.transform.position = this.transform.position;
+
             if (curHP == 1)
             {
                 Debug.Log("DIED");

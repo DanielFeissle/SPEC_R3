@@ -311,6 +311,8 @@
     <Compile Include="Assets\scripts\CameraController.cs" />
     <Compile Include="Assets\scripts\CamEscapeToRight.cs" />
     <Compile Include="Assets\scripts\convChecker.cs" />
+    <Compile Include="Assets\scripts\coolerLogic.cs" />
+    <Compile Include="Assets\scripts\coolTurdCoolerPlacer.cs" />
     <Compile Include="Assets\scripts\CountTurd.cs" />
     <Compile Include="Assets\scripts\cred_cam_distScroll.cs" />
     <Compile Include="Assets\scripts\CredShifter.cs" />
@@ -384,6 +386,7 @@
     <Compile Include="Assets\scripts\stage_conv_screen.cs" />
     <Compile Include="Assets\scripts\stage_convention.cs" />
     <Compile Include="Assets\scripts\stage_convention_stage.cs" />
+    <Compile Include="Assets\scripts\starman.cs" />
     <Compile Include="Assets\scripts\station_visit.cs" />
     <Compile Include="Assets\scripts\Story_masterControl.cs" />
     <Compile Include="Assets\scripts\systemScores.cs" />
