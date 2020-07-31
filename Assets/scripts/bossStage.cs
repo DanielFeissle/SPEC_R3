@@ -12,25 +12,55 @@ public class bossStage : MonoBehaviour {
     void Start () {
         m_Renderer = GameObject.Find("transportShip").GetComponent<Renderer>();
         int bossRando = UnityEngine.Random.Range(0, 100);
-        bossRando = 99;
-        //3-31-20 spawn in a random boss
-        if (bossRando<33)
+      //  bossRando = 99;
+        int overloadBoss = -1;
+        string getBoss = "dad";
+        for (int i=0;i<99;i++)
         {
-            GameObject Boss = Instantiate(Resources.Load("boss\\CountTurd")) as GameObject;
-            Boss.name = "CountTurd";
-            Boss.transform.position = new Vector2(6.1f, 3.29f);
+         if (GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i, 1] =="FIGHT")
+            {
+                overloadBoss = i;
+                getBoss = GameObject.Find("Player Ship").GetComponent<PlayerFightTracker>().bossTracker[i, 0];
+            }
         }
-        else if (bossRando<66)
+     if (overloadBoss==-1)
         {
-            GameObject Boss = Instantiate(Resources.Load("boss\\dad")) as GameObject;
-            Boss.name = "dad";
+            //3-31-20 spawn in a random boss
+            if (bossRando < 33)
+            {
+                GameObject Boss = Instantiate(Resources.Load("boss\\CountTurd")) as GameObject;
+                Boss.name = "CountTurd";
+                Boss.transform.position = new Vector2(6.1f, 3.29f);
+                getBoss = Boss.name;
+            }
+            else if (bossRando < 66)
+            {
+                GameObject Boss = Instantiate(Resources.Load("boss\\dad")) as GameObject;
+                Boss.name = "dad";
+                Boss.transform.position = new Vector2(-12.00f, 0.0f);
+                getBoss = Boss.name;
+            }
+            else
+            {
+                GameObject Boss = Instantiate(Resources.Load("boss\\CoolTurd")) as GameObject;
+                Boss.name = "CoolTurd";
+                Boss.transform.position = new Vector2(-12.00f, 0.0f);
+                getBoss = Boss.name;
+            }
+        }
+     else
+        {
+            GameObject Boss = Instantiate(Resources.Load("boss\\"+ getBoss)) as GameObject;
+            Boss.name = getBoss;
             Boss.transform.position = new Vector2(-12.00f, 0.0f);
         }
-        else
+        for (int i = 0; i < 99; i++)
         {
-            GameObject Boss = Instantiate(Resources.Load("boss\\CoolTurd")) as GameObject;
-            Boss.name = "CoolTurd";
-            Boss.transform.position = new Vector2(-12.00f, 0.0f);
+            if (GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i, 0] == getBoss)
+            {
+                overloadBoss = i;
+                GameObject.Find("Player Ship").GetComponent<PlayerFightTracker>().bossTracker[i, 1]="FIGHT";
+            }
         }
 
 

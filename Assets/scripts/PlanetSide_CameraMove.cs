@@ -129,59 +129,62 @@ public class PlanetSide_CameraMove : MonoBehaviour {
         }
 
 
-
-        if (Time.time > nextUsage2) //continue scrolling
+        if (atEnd==false) //7-28-20 hey look ma, i am being nice to senor player!
         {
-            cam = Camera.main;
-            Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
-            Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
-
-            int objectCount = GameObject.FindGameObjectsWithTag("SpaceJunk").Length;
-            Debug.Log("Objects on asteroid screen: " + objectCount);
-
-            if (objectCount < 1555)
+            if (Time.time > nextUsage2) //continue scrolling
             {
-                int fundas = UnityEngine.Random.Range(0, 100);
-                if (fundas < 25)
+                cam = Camera.main;
+                Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
+                Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
+
+                int objectCount = GameObject.FindGameObjectsWithTag("SpaceJunk").Length;
+                Debug.Log("Objects on asteroid screen: " + objectCount);
+
+                if (objectCount < 1555)
                 {
-                    GameObject ExpDust = Instantiate(Resources.Load("AstMan2019")) as GameObject;
-                    ExpDust.name = "AstMan2019";
-                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), UnityEngine.Random.Range(10,15));
-                    ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
-                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
-                }
-                else if (fundas < 50)
-                {
-                    GameObject ExpDust = Instantiate(Resources.Load("Asteroid2017")) as GameObject;
-                    ExpDust.name = "Asteroid2017";
-                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), UnityEngine.Random.Range(10,15));
-                    ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
-                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
+                    int fundas = UnityEngine.Random.Range(0, 100);
+                    if (fundas < 25)
+                    {
+                        GameObject ExpDust = Instantiate(Resources.Load("AstMan2019")) as GameObject;
+                        ExpDust.name = "AstMan2019";
+                        ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), UnityEngine.Random.Range(10, 15));
+                        ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
+                        ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
+                    }
+                    else if (fundas < 50)
+                    {
+                        GameObject ExpDust = Instantiate(Resources.Load("Asteroid2017")) as GameObject;
+                        ExpDust.name = "Asteroid2017";
+                        ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), UnityEngine.Random.Range(10, 15));
+                        ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 5), UnityEngine.Random.Range(1, 5));
+                        ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
+
+                    }
+                    else if (fundas < 75)
+                    {
+                        GameObject ExpDust = Instantiate(Resources.Load("blueWallJunk")) as GameObject;
+                        ExpDust.name = "blueWallJunk";
+                        ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), UnityEngine.Random.Range(10, 15));
+                        ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 2), UnityEngine.Random.Range(1, 2));
+                        ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
+                    }
+                    else if (fundas < 100)
+                    {
+                        GameObject ExpDust = Instantiate(Resources.Load("StdWall")) as GameObject;
+                        ExpDust.name = "StdWall";
+                        ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), UnityEngine.Random.Range(10, 15));
+                        ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 3), UnityEngine.Random.Range(1, 2));
+                        ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
+                    }
+
+                    //   GameObject AsteroidBelt = Instantiate(Resources.Load("atmp\\cloud2017")) as GameObject;
+                    //    AsteroidBelt.name = "Asteroid2019";
 
                 }
-                else if (fundas < 75)
-                {
-                    GameObject ExpDust = Instantiate(Resources.Load("blueWallJunk")) as GameObject;
-                    ExpDust.name = "blueWallJunk";
-                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), UnityEngine.Random.Range(10,15));
-                    ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 2), UnityEngine.Random.Range(1, 2));
-                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
-                }
-                else if (fundas < 100)
-                {
-                    GameObject ExpDust = Instantiate(Resources.Load("StdWall")) as GameObject;
-                    ExpDust.name = "StdWall";
-                    ExpDust.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), UnityEngine.Random.Range(10,15));
-                    ExpDust.transform.localScale = new Vector2(UnityEngine.Random.Range(1, 3), UnityEngine.Random.Range(1, 2));
-                    ExpDust.GetComponent<Rigidbody2D>().gravityScale = 2.5f;
-                }
-
-                //   GameObject AsteroidBelt = Instantiate(Resources.Load("atmp\\cloud2017")) as GameObject;
-                //    AsteroidBelt.name = "Asteroid2019";
-
+                nextUsage2 = Time.time + delay2; //it is on display
             }
-            nextUsage2 = Time.time + delay2; //it is on display
         }
+       
 
 
 

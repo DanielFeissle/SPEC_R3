@@ -345,6 +345,7 @@
     <Compile Include="Assets\scripts\MasterController.cs" />
     <Compile Include="Assets\scripts\masterShipEnter.cs" />
     <Compile Include="Assets\scripts\mastObjMover.cs" />
+    <Compile Include="Assets\scripts\MusicPlayer.cs" />
     <Compile Include="Assets\scripts\obj_falling.cs" />
     <Compile Include="Assets\scripts\obj_ringsMover.cs" />
     <Compile Include="Assets\scripts\objectMove.cs" />
@@ -363,6 +364,7 @@
     <Compile Include="Assets\scripts\PlanetSideTrash.cs" />
     <Compile Include="Assets\scripts\PlayerBulletMove.cs" />
     <Compile Include="Assets\scripts\playerController.cs" />
+    <Compile Include="Assets\scripts\PlayerFightTracker.cs" />
     <Compile Include="Assets\scripts\playerMenuController.cs" />
     <Compile Include="Assets\scripts\playerPowerMover.cs" />
     <Compile Include="Assets\scripts\PoopDest.cs" />

@@ -25,7 +25,7 @@ public class starman : MonoBehaviour {
 	void Update () {
         sphere.transform.localScale += scaleChange;
         sprite.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time * speed, max));
-        Debug.Log("Color is " + sprite.color);
+       // Debug.Log("Color is " + sprite.color);
       
         if (sphere.transform.localScale.x>77 && sprite.color.a<0.15f)
         {

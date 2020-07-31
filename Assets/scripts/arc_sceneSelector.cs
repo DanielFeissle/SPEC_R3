@@ -22,8 +22,8 @@ public class arc_sceneSelector : MonoBehaviour {
         {
             if (getNext < 25)
             {
-              //  SceneManager.LoadScene("stage"); //this is the first stage name
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage");
+              //  SceneManager.LoadScene("stage_DERSHIP"); //this is the first stage name
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_DERSHIP");
             }
             else if (getNext < 50)
             {

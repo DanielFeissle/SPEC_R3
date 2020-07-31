@@ -155,8 +155,10 @@ public class boss_coolturd : MonoBehaviour {
                 if (Time.time > nextUsage) //continue scrolling
                 {
                     int randoStars = UnityEngine.Random.Range(1, 3);
+                    ani.SetBool("ISMAGIC", true);
                     for (int i = 0; i < randoStars; i++)
                     {
+                      
                         GameObject picky = Instantiate(Resources.Load("star")) as GameObject;
                         picky.name = "starmon";
                         picky.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), UnityEngine.Random.Range(q.y, p.y));
@@ -196,7 +198,12 @@ public class boss_coolturd : MonoBehaviour {
             }
         }
 
-
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("CoolerManMagicHands") &&
+        ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            //we finished burp
+            ani.SetBool("ISMAGIC", false);
+        }
 
         if (ani.GetCurrentAnimatorStateInfo(0).IsName("CoolerDamage") &&
           ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
@@ -212,7 +219,14 @@ public class boss_coolturd : MonoBehaviour {
   ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             //we finished burp
-            
+
+            for (int i=0;i<99;i++)
+            {
+             if (GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i,0]==this.name)
+                {
+                    GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i, 1] = "DEAD";
+                }
+            }
             GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Convention");
 
 
@@ -223,11 +237,13 @@ public class boss_coolturd : MonoBehaviour {
     AudioClip _audio7;
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+        rb.AddForce(Vector3.right * 39444 * Time.deltaTime);
         if (collision.gameObject.CompareTag("PlayerShot"))
         {
             bossHP = bossHP - 2;
             ani.SetBool("ISDAMAGE", true);
-
+            rb.AddForce(Vector3.right * 39444 * Time.deltaTime);
             _audio7 = Resources.Load<AudioClip>("_FX\\SFX\\PlasticImpacty");
             AudioSource.PlayClipAtPoint(_audio7, this.transform.position, 100);
             AudioSource.PlayClipAtPoint(_audio7, this.transform.position, 100);

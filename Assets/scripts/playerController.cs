@@ -42,7 +42,8 @@ public class playerController : MonoBehaviour {
     int engineCnt = 0;
     public int stageDoneCnt = 0;
     public int stageDoneLastCnt = 0;
-    public int playMode = 0; //0 is arcade, 1 is overworld mode 
+    public int stageDoneRound = 0; //0, 1, 2 Escape seq //added 7-30-20
+    public int playMode = 1; //0 is arcade, 1 is overworld mode 
     public float moveHorizantal;
     public int shipHitDetect=0; //0-nothing 1-something (no duh)---its actually boost, 2-turd is off screen
     private Camera cam;
@@ -243,7 +244,7 @@ public class playerController : MonoBehaviour {
             GameObject resetthis = GameObject.Find("transportShip");
             Rigidbody2D respos = resetthis.GetComponent<Rigidbody2D>();
             respos.AddTorque(50);//(new Vector3(0.0f, 50000.0f,0.0f));
-            //   SceneManager.LoadScene("stage"); //reload stage
+            //   SceneManager.LoadScene("stage_DERSHIP"); //reload stage
             if (SceneManager.GetActiveScene().name== "stage_atmosphere" || SceneManager.GetActiveScene().name == "stage_PlanetSide")
                 {
                     //10-13-19 we want to return gravity to 0
@@ -253,8 +254,17 @@ public class playerController : MonoBehaviour {
                     playerRigidBody.gravityScale = 0;
                 }
                 //   SceneManager.LoadScene("scenePicker_arc"); //reload stage
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("scenePicker_arc");
-            nextUsage2 = Time.time + 2.0f; //it is on display
+                if (playMode==0)
+                {
+                    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("scenePicker_arc");
+                } else if (playMode==1)
+                {
+                    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_OverSpace-world-duh");
+                }
+               
+
+               
+                nextUsage2 = Time.time + 2.0f; //it is on display
         }
         GameObject transportShip = GameObject.Find("transportShip");
         masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
@@ -455,7 +465,7 @@ public class playerController : MonoBehaviour {
                             PoopPEE.transform.localScale = transform.localScale * 4;
                         }
                  
-                        if (TPGot==0) //we used the last one so reset the color 1-13-20
+                        if (TPGot==0 && SceneManager.GetActiveScene().name.Contains("stage_Bosses")) //we used the last one so reset the color 1-13-20 //7-30-20-added check to fix the inv frame disappearing
                         {
                             this.GetComponent<SpriteRenderer>().color = Color.white;
                         }

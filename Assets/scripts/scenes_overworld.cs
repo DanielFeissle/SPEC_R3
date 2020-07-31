@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class scenes_overworld : MonoBehaviour {
 
@@ -22,52 +22,85 @@ public class scenes_overworld : MonoBehaviour {
             if (priorScene== "stage_Convention") //rebaselined!
             {
                 GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneLastCnt = GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneCnt;
+                //added 7-30-20
+                GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneRound = GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneRound + 1;
+
             }
         }
       else
         {
-            int getNext = randStage.Next(200);
-            //NOPE, load random stage
-            if (getNext < 25)
+            if (GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneRound >= 2)
             {
-                //  SceneManager.LoadScene("stage"); //this is the first stage name
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage");
+                Debug.Log("##############################################################HEY THERE");
+                //load the escape seq
+            //    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_ESCAPE");
+                SceneManager.LoadScene("stage_ESCAPE");
+                Application.LoadLevel("stage_ESCAPE");
             }
-            else if (getNext < 50)
+            else
             {
-                //  SceneManager.LoadScene("stage_asteroids"); //this is asteroids stage, with 3 different asteroid functions
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_asteroids");
+                bool isUniq = false;
+                string tempName = "FFFF";
+                do
+                {
+                    // 7-29-20 redid this section again- add one more stage to complete the 9
+                    int getNext = randStage.Next(200);
+                    //NOPE, load random stage
+                    if (getNext < 25)
+                    {
+                        //  SceneManager.LoadScene("stage_DERSHIP"); //this is the first stage name
+                        tempName = "stage_DERSHIP";
+                    }
+                    else if (getNext < 50)
+                    {
+                        //  SceneManager.LoadScene("stage_asteroids"); //this is asteroids stage, with 3 different asteroid functions
+                        tempName = "stage_asteroids";
+                    }
+                    else if (getNext < 75)
+                    {
+                        // SceneManager.LoadScene("stage_rings"); //this is sun ring stage, features experiments in shaders/coloring
+                        tempName = "stage_rings";
+                    }
+                    else if (getNext < 100)
+                    {
+                        //  SceneManager.LoadScene("stage_atmosphere"); //this is sun ring stage, features experiments in shaders/coloring
+                        tempName = "stage_atmosphere";
+                    }
+                    else if (getNext < 125)
+                    {
+                        //  SceneManager.LoadScene("stage_interShip"); //this is sun ring stage, features experiments in shaders/coloring
+                        tempName = "stage_interShip";
+                    }
+                    else if (getNext < 150)
+                    {
+                        //SceneManager.LoadScene("stage_PlainSpace"); //this is sun ring stage, features experiments in shaders/coloring
+                        tempName = "stage_PlainSpace";
+                    }
+                    else if (getNext < 175)
+                    {
+                        // SceneManager.LoadScene("stage_PlanetSide"); //this is sun ring stage, features experiments in shaders/coloring
+                        tempName = "stage_PlanetSide";
+                    }
+                    else if (getNext < 200)
+                    {
+                        //  SceneManager.LoadScene("stage_PlanetSide"); //this is the clasical escape stage, everything blowing up!
+                        tempName = "stage_SPACED";
+                    }
+
+
+                    if (GameObject.Find("PlayerShip").GetComponent<MasterController>().sceneHistory.Contains(tempName))
+                    {
+                        isUniq = false;
+                    }
+                    else
+                    {
+                        isUniq = true;
+                    }
+
+                } while (isUniq == false);
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene(tempName);
             }
-            else if (getNext < 75)
-            {
-                // SceneManager.LoadScene("stage_rings"); //this is sun ring stage, features experiments in shaders/coloring
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_rings");
-            }
-            else if (getNext < 100)
-            {
-                //  SceneManager.LoadScene("stage_atmosphere"); //this is sun ring stage, features experiments in shaders/coloring
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_atmosphere");
-            }
-            else if (getNext < 125)
-            {
-                //  SceneManager.LoadScene("stage_interShip"); //this is sun ring stage, features experiments in shaders/coloring
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_interShip");
-            }
-            else if (getNext < 150)
-            {
-                //SceneManager.LoadScene("stage_PlainSpace"); //this is sun ring stage, features experiments in shaders/coloring
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_PlainSpace");
-            }
-            else if (getNext < 175)
-            {
-                // SceneManager.LoadScene("stage_PlanetSide"); //this is sun ring stage, features experiments in shaders/coloring
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_PlanetSide");
-            }
-            else if (getNext < 200)
-            {
-                //  SceneManager.LoadScene("stage_PlanetSide"); //this is the clasical escape stage, everything blowing up!
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_PlanetSide");
-            }
+           
         }
                                        //build the overworld
         for (int x=-25;x<25;x++)

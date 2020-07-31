@@ -474,7 +474,7 @@ public class Shields : MonoBehaviour {
                 if (scene.name == "stageIntro")
                 {
                     // SceneManager.LoadScene("stage", LoadSceneMode.Single);
-                    //     GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage");
+                    //     GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_DERSHIP");
                     GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("PayPerControl");
                     //      Application.LoadLevel("stage"); //this seems to be old but might work :)
                     curHP = 911;

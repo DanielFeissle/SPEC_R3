@@ -143,8 +143,16 @@ public class CountTurd : MonoBehaviour {
                 
                    else if (bossPhase==3 &&timeCounter==94)
                    {
-                       SceneManager.LoadScene("Stage3");
-                   }
+                        //  SceneManager.LoadScene("Stage3");
+                        for (int i = 0; i < 99; i++)
+                        {
+                            if (GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i, 0] == this.name)
+                            {
+                                GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i, 1] = "DEAD";
+                            }
+                        }
+                        GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Convention");
+                    }
 
 
 
