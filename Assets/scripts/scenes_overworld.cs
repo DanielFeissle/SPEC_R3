@@ -31,11 +31,10 @@ public class scenes_overworld : MonoBehaviour {
         {
             if (GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneRound >= 2)
             {
-                Debug.Log("##############################################################HEY THERE");
+                Debug.Log("##############################################################HEY THERE"+ GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneRound);
                 //load the escape seq
             //    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_ESCAPE");
                 SceneManager.LoadScene("stage_ESCAPE");
-                Application.LoadLevel("stage_ESCAPE");
             }
             else
             {
@@ -44,7 +43,7 @@ public class scenes_overworld : MonoBehaviour {
                 do
                 {
                     // 7-29-20 redid this section again- add one more stage to complete the 9
-                    int getNext = randStage.Next(200);
+                    int getNext = randStage.Next(225);
                     //NOPE, load random stage
                     if (getNext < 25)
                     {
@@ -86,15 +85,21 @@ public class scenes_overworld : MonoBehaviour {
                         //  SceneManager.LoadScene("stage_PlanetSide"); //this is the clasical escape stage, everything blowing up!
                         tempName = "stage_SPACED";
                     }
+                    else //8-6-20 there ya go 9 actual stages- wow, this is truely the last stage! 
+                    {
+                        tempName = "stage_BOMBARDMENT";
+                    }
 
 
-                    if (GameObject.Find("PlayerShip").GetComponent<MasterController>().sceneHistory.Contains(tempName))
+                    if (GameObject.Find("PlayerShip").GetComponent<MasterController>().sceneHistory_Stages.Contains(tempName))
                     {
                         isUniq = false;
+                        Debug.Log("This is NOT UNIQ");
                     }
                     else
                     {
                         isUniq = true;
+                        Debug.Log("This is OK-not in list before");
                     }
 
                 } while (isUniq == false);

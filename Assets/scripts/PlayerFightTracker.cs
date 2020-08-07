@@ -30,6 +30,7 @@ public class PlayerFightTracker : MonoBehaviour {
 
             cnt =cnt+1;
         }
+        Debug.Log("this is the leng"+bossTracker.Length);
     }
 
  

@@ -16,7 +16,7 @@ public class MasterController : MonoBehaviour {
     public Text StageLevel;
     Scene m_Scene;
     string sceneName;
-  public  string sceneHistory = ""; //7-29-20 added this to keep track of stages
+  public  string sceneHistory_Stages = ""; //7-29-20 added this to keep track of stages
     // Use this for initialization
     void Start () {
         GameObject dad5 = GameObject.Find("txtScore");
@@ -63,6 +63,6 @@ public class MasterController : MonoBehaviour {
 
         GameObject StgLevel = GameObject.Find("txtLvl");
         StageLevel = StgLevel.GetComponent<Text>();
-        sceneHistory = sceneHistory + SceneManager.GetActiveScene().name+"#";
+        sceneHistory_Stages = sceneHistory_Stages + SceneManager.GetActiveScene().name+"#";
     }
 }

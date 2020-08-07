@@ -256,9 +256,11 @@ public class playerController : MonoBehaviour {
                 //   SceneManager.LoadScene("scenePicker_arc"); //reload stage
                 if (playMode==0)
                 {
+                    Debug.Log("&&&&&&&&&&&&&&&&&&&&&&&&&Arcade mode");
                     GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("scenePicker_arc");
                 } else if (playMode==1)
                 {
+                    Debug.Log("&&&&&&&&&&&&&&&&&&&&&&&&&&&Overworld Story mode");
                     GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_OverSpace-world-duh");
                 }
                

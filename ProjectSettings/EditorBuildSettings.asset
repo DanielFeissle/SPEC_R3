@@ -59,3 +59,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/stage_ESCAPE.unity
     guid: e13386f2cc768aa4282b066c6208653e
+  - enabled: 1
+    path: Assets/stage_SPACED.unity
+    guid: 16ac5929e2be0d7438d95c55e0b39eeb
+  - enabled: 1
+    path: Assets/stage_BOMBARDMENT.unity
+    guid: bc3852a9f3c87024e8c2f58ce4315065

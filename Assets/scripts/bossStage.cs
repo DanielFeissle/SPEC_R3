@@ -20,7 +20,7 @@ public class bossStage : MonoBehaviour {
          if (GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i, 1] =="FIGHT")
             {
                 overloadBoss = i;
-                getBoss = GameObject.Find("Player Ship").GetComponent<PlayerFightTracker>().bossTracker[i, 0];
+                getBoss = GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i, 0];
             }
         }
      if (overloadBoss==-1)
@@ -50,6 +50,7 @@ public class bossStage : MonoBehaviour {
         }
      else
         {
+            Debug.Log("Reload existing boss fight");
             GameObject Boss = Instantiate(Resources.Load("boss\\"+ getBoss)) as GameObject;
             Boss.name = getBoss;
             Boss.transform.position = new Vector2(-12.00f, 0.0f);
@@ -59,7 +60,9 @@ public class bossStage : MonoBehaviour {
             if (GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i, 0] == getBoss)
             {
                 overloadBoss = i;
-                GameObject.Find("Player Ship").GetComponent<PlayerFightTracker>().bossTracker[i, 1]="FIGHT";
+                Debug.Log("THIS IS %%%%%%%%%%%%%%%%%" + i);
+                GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i, 1]="FIGHT";
+                Debug.Log("Fight value set to " + GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i,0]);
             }
         }
 

@@ -26,12 +26,15 @@ public class title_btn_galaxy : MonoBehaviour {
         {
             //load the final iteration
             GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneRound =2;
-            GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneLastCnt = 6;
+            GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneLastCnt = 9;
         }
         //this is for the overworld mode
         Debug.Log("You have clicked the button!2222");
+        GameObject.Find("PlayerShip").GetComponent<playerController>().playMode = 1;
         //    SceneManager.LoadScene("stage_OverSpace-world-duh");
-        SceneManager.LoadScene("stage_Convention");
+        //     SceneManager.LoadScene("stage_Convention");
+        GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_OverSpace-world-duh");
+
 
     }
 }

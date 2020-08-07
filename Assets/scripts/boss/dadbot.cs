@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class dadbot : MonoBehaviour {
 
     bool hitEdge = false; //this is for the bossto reset his descision randomizer
-    int dadHP = 3; //matching the org, 5 seemed like too much so I am dropping it down (because most of this stuff is random based)
+    int dadHP = 5; //matching the org, 5 is ok now! with the addition /change as of 8-6-20
     Renderer m_Renderer;
     private Rigidbody2D rb;
     public float speed;
@@ -345,6 +345,9 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
     {
         
     }
+    //this boss is too stupid-8-6-20
+    //going to add another method of taking damage
+    int playerBullDamage = 0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("TPDestroyer"))
@@ -362,6 +365,25 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             ani.SetBool("ISDAM", true);
             speed = speed + 100;
 
+        }
+        else if (collision.CompareTag("PlayerShot"))
+        {
+            playerBullDamage++;
+            if (playerBullDamage>15)
+            {
+                playerBullDamage = 0;
+
+                GameObject IntialGround = Instantiate(Resources.Load("poosplosion2019")) as GameObject;
+                IntialGround.name = "poosplosion2019";
+                IntialGround.transform.position = collision.transform.position;// new Vector2(UnityEngine.Random.Range(-8, -12), UnityEngine.Random.Range(-4, 4));
+
+
+                Destroy(collision.gameObject);
+                dadHP--;
+                ani.SetBool("ISDAM", true);
+                speed = speed + 100;
+
+            }
         }
     }
 

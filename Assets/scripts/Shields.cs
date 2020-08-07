@@ -379,52 +379,70 @@ public class Shields : MonoBehaviour {
             }
             else
             { //use standard collision
-                if (collision.gameObject.CompareTag("SpaceJunk") || collision.gameObject.CompareTag("ShipJunk") || collision.gameObject.CompareTag("IndestShot") || collision.gameObject.CompareTag("PlanRing") || collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("BOSS") || collision.gameObject.CompareTag("ShipIndest") || collision.gameObject.CompareTag("CoolerHelp") || collision.gameObject.CompareTag("CoolDam"))
-                    //      if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > 7 || this.rb.velocity.sqrMagnitude > 7)
-                    if (collision.relativeVelocity.magnitude > 3)
+                bool DamOnceOk = false;
+                if (SceneManager.GetActiveScene().name.Contains("stage_Bosses")) //deal damage if the player comes in contact
                     {
-                    Debug.Log("HIT FAST" + collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude);
-                    Debug.Log("Player Hit FAST" + this.rb.velocity.sqrMagnitude);
-
-                    if (collision.gameObject.CompareTag("SpaceJunk"))
+                    if (collision.gameObject.CompareTag("Damage"))
                     {
                         YeahDam();
-                    }
-                    else if (collision.gameObject.CompareTag("ShipJunk"))
-                    {
-                        YeahDam();
-                    }
-                    else if (collision.gameObject.CompareTag("IndestShot"))
-                    {
-                        YeahDam();
-                    }
-                    else if (collision.gameObject.CompareTag("PlanRing"))
-                    {
-                        YeahDam();
-                    }
-                    else if (collision.gameObject.CompareTag("Damage"))
-                    {
-                        YeahDam();
+                        DamOnceOk = true;
                     }
                     else if (collision.gameObject.CompareTag("BOSS"))
                     {
                         YeahDam();
+                        DamOnceOk = true;
                     }
-                    else if (collision.gameObject.CompareTag("ShipIndest"))
-                    {
-                        YeahDam();
-                    }
-                        else if (collision.gameObject.CompareTag("CoolerHelp"))
+                }
+               if (DamOnceOk==false)
+                {
+                    if (collision.gameObject.CompareTag("SpaceJunk") || collision.gameObject.CompareTag("ShipJunk") || collision.gameObject.CompareTag("IndestShot") || collision.gameObject.CompareTag("PlanRing") || collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("BOSS") || collision.gameObject.CompareTag("ShipIndest") || collision.gameObject.CompareTag("CoolerHelp") || collision.gameObject.CompareTag("CoolDam"))
+                        //      if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > 7 || this.rb.velocity.sqrMagnitude > 7)
+                        if (collision.relativeVelocity.magnitude > 3)
                         {
-                            YeahDam();
-                        }
-                        else if (collision.gameObject.CompareTag("CoolDam"))
-                        {
-                            YeahDam();
-                        }
+                            Debug.Log("HIT FAST" + collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude);
+                            Debug.Log("Player Hit FAST" + this.rb.velocity.sqrMagnitude);
 
-                    }
+                            if (collision.gameObject.CompareTag("SpaceJunk"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("ShipJunk"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("IndestShot"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("PlanRing"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("Damage"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("BOSS"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("ShipIndest"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("CoolerHelp"))
+                            {
+                                YeahDam();
+                            }
+                            else if (collision.gameObject.CompareTag("CoolDam"))
+                            {
+                                YeahDam();
+                            }
+
+                        }
+                }
             }
+
           
         }
 

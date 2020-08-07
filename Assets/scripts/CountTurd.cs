@@ -12,6 +12,7 @@ public class CountTurd : MonoBehaviour {
     int timeCounter=0;
     bool invincible = false; //used to prevent cheap deaths
     public int bossPhase = 0;
+    int finalDamHp = 3;
     int delCount = 0;
     Renderer m_Renderer;
     bool stageStart = false;
@@ -293,18 +294,23 @@ public class CountTurd : MonoBehaviour {
                  }
                  else if (bossPhase == 2)
                  {
-                     GameObject TalkHow = GameObject.Find("BossTalks");
-                     Transform How = TalkHow.GetComponent<Transform>();
-                     TextMesh MeshyTalk = TalkHow.GetComponent<TextMesh>();
-                     MeshyTalk.text = "NOOOO, you called my blufffffffffff \n you nut...";
-                     How.position = new Vector2(-5.0f, 0.0f);
+                    finalDamHp--; //this was added to this 3 year old script on 8-6-20
+                    if (finalDamHp<0)
+                    {
+                        GameObject TalkHow = GameObject.Find("BossTalks");
+                        Transform How = TalkHow.GetComponent<Transform>();
+                        TextMesh MeshyTalk = TalkHow.GetComponent<TextMesh>();
+                        MeshyTalk.text = "NOOOO, you called my blufffffffffff \n you nut...";
+                        How.position = new Vector2(-5.0f, 0.0f);
 
-                     timeCounter = 0;
-                     bossPhase = 3;
-                     Debug.Log("Stage3");
+                        timeCounter = 0;
+                        bossPhase = 3;
+                        Debug.Log("Stage3");
 
-                     //load next stage here
-                 }
+                        //load next stage here
+                    }
+
+                }
                  invincible = true;
              }
              else

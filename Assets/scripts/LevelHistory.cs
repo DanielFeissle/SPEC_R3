@@ -36,6 +36,7 @@ public class LevelHistory : MonoBehaviour {
         {
             returnValue = true;
             sceneHistory.RemoveAt(sceneHistory.Count - 1);
+            Debug.Log("Name of scene prior: " + sceneHistory[sceneHistory.Count - 1]);
             SceneManager.LoadScene(sceneHistory[sceneHistory.Count - 1]);
         }
 
