@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 50895419662086194}
   - component: {fileID: 60433923727691542}
   - component: {fileID: 114017141759287828}
+  - component: {fileID: 114628901715526126}
   m_Layer: 0
   m_Name: Asteroid2019
   m_TagString: SpaceJunk
@@ -145,6 +146,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whoosh1: {fileID: 8300000, guid: 2a1d5e7d47724944aaa5a2934423bb1d, type: 3}
+--- !u!114 &114628901715526126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1541865629095064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d6a320653092b748884a940af4573f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212714666500651608
 SpriteRenderer:
   m_ObjectHideFlags: 1

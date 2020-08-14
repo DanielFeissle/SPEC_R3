@@ -215,6 +215,7 @@ MonoBehaviour:
   StageScore: {fileID: 0}
   publicAttitude: -1
   StageLevel: {fileID: 0}
+  sceneHistory_Stages: 
 --- !u!114 &114441895021040460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -237,6 +238,7 @@ MonoBehaviour:
   suitCase: {fileID: 8300000, guid: f697437bc00377d4e83ab6334cedcd99, type: 3}
   stageDoneCnt: 0
   stageDoneLastCnt: 0
+  stageDoneRound: 0
   playMode: 0
   moveHorizantal: 0
   shipHitDetect: 0
@@ -370,7 +372,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 25
   m_Sprite: {fileID: 21300000, guid: 4ccf51f8516703d41a05da262096badb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

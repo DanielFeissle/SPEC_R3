@@ -316,6 +316,9 @@
     <Compile Include="Assets\scripts\CountTurd.cs" />
     <Compile Include="Assets\scripts\cred_cam_distScroll.cs" />
     <Compile Include="Assets\scripts\CredShifter.cs" />
+    <Compile Include="Assets\scripts\DanHand.cs" />
+    <Compile Include="Assets\scripts\DeactivateOnStart.cs" />
+    <Compile Include="Assets\scripts\DeactivateOppEffect.cs" />
     <Compile Include="Assets\scripts\deleteVerySpecificSPEC.cs" />
     <Compile Include="Assets\scripts\DestroyAfterDistance.cs" />
     <Compile Include="Assets\scripts\destroyScreenWrap.cs" />
@@ -328,6 +331,7 @@
     <Compile Include="Assets\scripts\enemyUSSPotatoe.cs" />
     <Compile Include="Assets\scripts\Exp2017.cs" />
     <Compile Include="Assets\scripts\ExplosionRandomlyPlayOnScreen.cs" />
+    <Compile Include="Assets\scripts\ExplosionTracker.cs" />
     <Compile Include="Assets\scripts\fireWall_ambientSFX.cs" />
     <Compile Include="Assets\scripts\firewall_fireballs.cs" />
     <Compile Include="Assets\scripts\floorIsLava.cs" />
@@ -351,6 +355,7 @@
     <Compile Include="Assets\scripts\obj_ringsMover.cs" />
     <Compile Include="Assets\scripts\objectMove.cs" />
     <Compile Include="Assets\scripts\objResourceNameHold.cs" />
+    <Compile Include="Assets\scripts\objTrackerAndKiller.cs" />
     <Compile Include="Assets\scripts\onScreenmassChanger.cs" />
     <Compile Include="Assets\scripts\Over_conver.cs" />
     <Compile Include="Assets\scripts\overworldJunkPlacer.cs" />
@@ -375,12 +380,14 @@
     <Compile Include="Assets\scripts\scenes.cs" />
     <Compile Include="Assets\scripts\scenes_asteroid.cs" />
     <Compile Include="Assets\scripts\scenes_atmosphere.cs" />
+    <Compile Include="Assets\scripts\scenes_bombardment.cs" />
     <Compile Include="Assets\scripts\scenes_escape.cs" />
     <Compile Include="Assets\scripts\scenes_interHull.cs" />
     <Compile Include="Assets\scripts\scenes_overworld.cs" />
     <Compile Include="Assets\scripts\scenes_plainSpace.cs" />
     <Compile Include="Assets\scripts\scenes_planetSide.cs" />
     <Compile Include="Assets\scripts\scenes_rings.cs" />
+    <Compile Include="Assets\scripts\scenes_SPACED.cs" />
     <Compile Include="Assets\scripts\screenWrapper.cs" />
     <Compile Include="Assets\scripts\Shields.cs" />
     <Compile Include="Assets\scripts\shipConstructor.cs" />

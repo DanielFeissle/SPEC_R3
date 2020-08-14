@@ -39,6 +39,7 @@ TagManager:
   - Boss
   - CoolDam
   - CoolerHelp
+  - explosion
   layers:
   - Default
   - TransparentFX

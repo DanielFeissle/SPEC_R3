@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212408958351756738}
   - component: {fileID: 50349871885958020}
   - component: {fileID: 60176019791883862}
+  - component: {fileID: 114862675638456364}
   m_Layer: 0
   m_Name: BeakerB
   m_TagString: Untagged
@@ -128,6 +129,17 @@ PolygonCollider2D:
       - {x: 1.86, y: -2.53}
       - {x: 1.9499999, y: -2.3799999}
       - {x: 2.22, y: -1.91}
+--- !u!114 &114862675638456364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1510909118555800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d6a320653092b748884a940af4573f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212408958351756738
 SpriteRenderer:
   m_ObjectHideFlags: 1
