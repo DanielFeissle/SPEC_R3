@@ -18,7 +18,7 @@ public class playerController : MonoBehaviour {
     float delay22 = 0.10f; //only half delay
     float nextUsage2222;
     float delay222 = 2; //only half delay
-  
+    public int difSettings = 0; //0 is normal 1 is easy 2 is mythic. added 8-20-20
    public bool clearToLeave = false;
     float lerpTime = 0;
     public AudioClip exp5;
@@ -410,7 +410,9 @@ public class playerController : MonoBehaviour {
             {
                 if (Time.time > nextUsage) //delete otherwise
                 {
-                    int randSFX = UnityEngine.Random.Range(1, 6);
+                        if (isPlayerCamping == false) //8-18-20 player is no longer allowed to shoot out of the ship!
+                        {
+                            int randSFX = UnityEngine.Random.Range(1, 6);
                     Debug.Log("Your random sfx" + randSFX);
                     if (randSFX == 1)
                     {
@@ -460,12 +462,14 @@ public class playerController : MonoBehaviour {
                         else
                         {
                         
-                            GameObject PoopPEE = Instantiate(Resources.Load("shot")) as GameObject;
-                            PoopPEE.name = "playerShot";
+                                GameObject PoopPEE = Instantiate(Resources.Load("shot")) as GameObject;
+                                PoopPEE.name = "playerShot";
 
-                            //PoopPEE.transform.position = transform.position + (new Vector3(0.25f, 0.0f));
-                            PoopPEE.transform.position = transform.position + (transform.up / 2);
-                            PoopPEE.transform.localScale = transform.localScale * 4;
+                                //PoopPEE.transform.position = transform.position + (new Vector3(0.25f, 0.0f));
+                                PoopPEE.transform.position = transform.position + (transform.up / 2);
+                                PoopPEE.transform.localScale = transform.localScale * 4;
+                            }
+                         
                         }
                  
                         if (TPGot==0 && SceneManager.GetActiveScene().name.Contains("stage_Bosses")) //we used the last one so reset the color 1-13-20 //7-30-20-added check to fix the inv frame disappearing
@@ -953,6 +957,7 @@ public class playerController : MonoBehaviour {
             }
             if (other.gameObject.CompareTag("Finish"))
             {
+                isPlayerCamping = true;
                 if (clearToLeave == true)
                 {
                     if (fireed==false)
@@ -998,6 +1003,7 @@ public class playerController : MonoBehaviour {
                     this.GetComponent<Rigidbody2D>().gravityScale = 0; //12-15-19- Gravity is now automatically reset after each exit stage to zero
                 }
             }
+           
             // Debug.Log("Object is no longer visible");
             //     Debug.Log("X:" + fartX + "Y:" + fartY);
             fartX = 0.0f;
@@ -1005,6 +1011,14 @@ public class playerController : MonoBehaviour {
         }
       
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Finish"))
+        {
+            isPlayerCamping = false;
+        }
+    }
+   public bool isPlayerCamping = false; //8-18-20 added in some cases the ship remains, we do not want the player to be able to fire out from the ship
     public bool playerStageDone = false;
     //9-14-19
     int colli = 0;

@@ -24,7 +24,7 @@ public class scenes_bombardment : MonoBehaviour {
             //  {
             GameObject fud5323 = Instantiate(Resources.Load("dertypShips\\case")) as GameObject;
             fud5323.name = "thePackage(" + 0 + "," + 0 + ")";
-            fud5323.transform.position = new Vector2(blarg.Next(-7, -3), blarg.Next(-3, 3));
+            fud5323.transform.position = new Vector2(blarg.Next(-8, 8), blarg.Next(-4, -2));
             packageLoad = true;
             //  }
         }
@@ -95,9 +95,19 @@ public class scenes_bombardment : MonoBehaviour {
 
         nextUsage = Time.time + delay; //it is on display
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+
+    private void LateUpdate()
+    {
+        Debug.Log("Current time is " + Time.time + "----THe wait time is:" + nextUsage);
+    }
+
+    // Update is called once per frame
+    void Update () {
+
+
+
+
+
+    }
 }

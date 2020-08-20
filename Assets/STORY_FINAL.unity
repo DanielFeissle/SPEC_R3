@@ -122,11 +122,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4423620804415480, guid: 70eb1f45d8544b54cb0702d7e2476595, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 18.345688
+      value: 121.9
       objectReference: {fileID: 0}
     - target: {fileID: 4423620804415480, guid: 70eb1f45d8544b54cb0702d7e2476595, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.438375
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4423620804415480, guid: 70eb1f45d8544b54cb0702d7e2476595, type: 2}
       propertyPath: m_LocalPosition.z
@@ -150,7 +150,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4423620804415480, guid: 70eb1f45d8544b54cb0702d7e2476595, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 70eb1f45d8544b54cb0702d7e2476595, type: 2}
@@ -166,6 +166,8 @@ GameObject:
   - component: {fileID: 1175585492}
   - component: {fileID: 1175585491}
   - component: {fileID: 1175585490}
+  - component: {fileID: 1175585495}
+  - component: {fileID: 1175585494}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -207,7 +209,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 82.85279
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -230,12 +232,35 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1175585489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -69.63, y: 82.67, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1175585494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1175585489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88eec2e4d1b857e4e91dbec6c2b8a560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1175585495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1175585489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654aa02f7ed71dc4baf818f2e268e373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetRatio: 1.7777778
 --- !u!1001 &1591137965
 Prefab:
   m_ObjectHideFlags: 0
@@ -245,11 +270,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4385627195356650, guid: 4cc183d42222f6845a7aa1a117f997fb, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 17.01
+      value: 120.564316
       objectReference: {fileID: 0}
     - target: {fileID: 4385627195356650, guid: 4cc183d42222f6845a7aa1a117f997fb, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.82
+      value: 0.31837463
       objectReference: {fileID: 0}
     - target: {fileID: 4385627195356650, guid: 4cc183d42222f6845a7aa1a117f997fb, type: 2}
       propertyPath: m_LocalPosition.z
@@ -273,7 +298,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4385627195356650, guid: 4cc183d42222f6845a7aa1a117f997fb, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4cc183d42222f6845a7aa1a117f997fb, type: 2}
@@ -360,11 +385,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4305938727671258, guid: e6d91b82f1f232a4db8a7035a5fc9b5d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 12.5979805
+      value: 116.1523
       objectReference: {fileID: 0}
     - target: {fileID: 4305938727671258, guid: e6d91b82f1f232a4db8a7035a5fc9b5d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.50884
+      value: 4.647215
       objectReference: {fileID: 0}
     - target: {fileID: 4305938727671258, guid: e6d91b82f1f232a4db8a7035a5fc9b5d, type: 2}
       propertyPath: m_LocalPosition.z

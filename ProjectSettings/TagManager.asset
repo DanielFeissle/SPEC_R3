@@ -40,6 +40,8 @@ TagManager:
   - CoolDam
   - CoolerHelp
   - explosion
+  - HolySurface
+  - HotAst
   layers:
   - Default
   - TransparentFX

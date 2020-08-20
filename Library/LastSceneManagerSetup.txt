@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/stage_BOMBARDMENT.unity
+- path: Assets/title.unity
   isLoaded: 1
   isActive: 1

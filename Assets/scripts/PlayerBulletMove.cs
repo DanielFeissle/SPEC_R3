@@ -191,6 +191,49 @@ public class PlayerBulletMove : MonoBehaviour {
                                 Destroy(PoopPEE2.gameObject); //to small to have on screen
                             }
                         }
+                       else if (GameObject.Find(collision.gameObject.name).CompareTag("HotAst")) //split it like a bloody madman
+                        {
+                            backEnd.score = backEnd.score + UnityEngine.Random.Range(25,75);
+                            System.Random blarg = new System.Random();
+
+                            GameObject ExpDust = Instantiate(Resources.Load("Exp2017")) as GameObject;
+                            ExpDust.name = "EXPLOSION";
+                            ExpDust.transform.position = collision.transform.position + collision.transform.right * 2;
+                            ExpDust.transform.localScale = collision.transform.localScale + collision.transform.right * 2;
+
+
+                            GameObject PoopPEE = Instantiate(Resources.Load(collision.gameObject.name)) as GameObject;
+                            GameObject PoopPEE2 = Instantiate(Resources.Load(collision.gameObject.name)) as GameObject;
+                            PoopPEE.name = collision.gameObject.name;
+                            PoopPEE2.name = collision.gameObject.name;
+                            Destroy(collision.gameObject);
+                            //PoopPEE.transform.position = transform.position + (new Vector3(0.25f, 0.0f));
+                            //    Debug.Log(PoopPEE.transform.localScale);
+                            PoopPEE.transform.position = collision.transform.position + transform.right * 2;
+                            PoopPEE2.transform.position = collision.transform.position - transform.right * 2;
+                            //   PoopPEE.transform.Rotate(0, 0, blarg.Next(100, 1000) * Time.deltaTime);
+                            // PoopPEE2.transform.Rotate(0, 0, -blarg.Next(100, 1000) * Time.deltaTime);
+                            Rigidbody2D rrb = PoopPEE.GetComponent<Rigidbody2D>();
+                            rrb.AddForce(transform.up * 250);
+                            Rigidbody2D rrb2 = PoopPEE2.GetComponent<Rigidbody2D>();
+                            rrb2.AddForce(-transform.up * 250);
+
+                            float turn = Input.GetAxis("Horizontal");
+                            rrb.AddTorque(blarg.Next(10, 100));
+                            rrb2.AddTorque(-blarg.Next(10, 100));
+                            //     Debug.Log(PoopPEE.transform.localScale);
+                            PoopPEE.transform.localScale = collision.transform.localScale / 2;
+                            PoopPEE2.transform.localScale = collision.transform.localScale / 2;
+                            //  Debug.Log(PoopPEE.transform.localScale);
+                            if ((PoopPEE.transform.localScale.x < .25f) && (PoopPEE.transform.localScale.y < .1f))
+                            {
+                                Destroy(PoopPEE.gameObject); //to small to have on screen
+                            }
+                            if ((PoopPEE2.transform.localScale.x < .25f) && (PoopPEE2.transform.localScale.y < .1f))
+                            {
+                                Destroy(PoopPEE2.gameObject); //to small to have on screen
+                            }
+                        }
                         else if (GameObject.Find(collision.gameObject.name).CompareTag("ShipJunk")) //split it more equally and with less velocity
                         {
                             backEnd.score = backEnd.score + 50;

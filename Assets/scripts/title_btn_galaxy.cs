@@ -33,7 +33,16 @@ public class title_btn_galaxy : MonoBehaviour {
         GameObject.Find("PlayerShip").GetComponent<playerController>().playMode = 1;
         //    SceneManager.LoadScene("stage_OverSpace-world-duh");
         //     SceneManager.LoadScene("stage_Convention");
-        GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_OverSpace-world-duh");
+        try
+        {
+            this.gameObject.GetComponent<DiffSettings>().btn_dif = 1;
+        }
+        catch
+        {
+
+        }
+      
+     //   GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_OverSpace-world-duh");
 
 
     }

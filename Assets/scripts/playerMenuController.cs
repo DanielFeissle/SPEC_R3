@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.SceneManagement;
 public class playerMenuController : MonoBehaviour {
 
 
@@ -22,6 +22,10 @@ public class playerMenuController : MonoBehaviour {
 
         //Handling the pause effects 8-25-19
         //thanks ss2 for doing the groundwork/research, but this time we will have a more extensive menu system
+        if (SceneManager.GetActiveScene().name.Contains("stage"))
+        {
+
+        
         if ((btn_pauser ==1|| Input.GetButtonUp("Fire3")) && Time.timeScale != 0 && FFF.hull > 0) //StartButton , not paused and not dead
         {
             btn_pauser = -1;
@@ -73,7 +77,7 @@ public class playerMenuController : MonoBehaviour {
             blaster.volume = 0.137f;
             Time.timeScale = 1;
         }
-
+        }
 
     }
 
