@@ -16,9 +16,17 @@ public class scenes_overworld : MonoBehaviour {
         {
             //load the overworld
             GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneLastCnt = GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneCnt;
+            if (GameObject.Find("PlayerShip").GetComponent<playerController>().difSettings > 0)
+            {
+                //   player is on another dif setting
+                //only Normal go to this stage,  
+                //    SceneManager.LoadScene("stageIntro");
+                //player WILL ALWAYS GO TO THE BOSS FIGHT- no escaping that 8-25-20!!
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Bosses");
+            }
             //7-15-20 after this player goes to the boss/convention there adds 2 more values, so after convention rebaseline this
             //the convention stage is special, it DOES not exist in arcade mode
-         string priorScene=   GameObject.Find("PlayerShip").GetComponent<LevelHistory>().GetPrevSceneName();
+            string priorScene=   GameObject.Find("PlayerShip").GetComponent<LevelHistory>().GetPrevSceneName();
             if (priorScene== "stage_Convention") //rebaselined!
             {
                 GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneLastCnt = GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneCnt;
@@ -103,6 +111,9 @@ public class scenes_overworld : MonoBehaviour {
                     }
 
                 } while (isUniq == false);
+
+
+
                 GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene(tempName);
             }
            

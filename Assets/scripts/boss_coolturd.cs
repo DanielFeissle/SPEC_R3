@@ -227,7 +227,16 @@ public class boss_coolturd : MonoBehaviour {
                     GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i, 1] = "DEAD";
                 }
             }
-            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Convention");
+            //8-25-20 standardized this section for playmode in boss land
+            if (GameObject.Find("PlayerShip").GetComponent<playerController>().playMode==1) //Playmode 1: player is in story mode -- Playmode 0: player is in arcade mode
+            {
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Convention");
+            }
+            else if (GameObject.Find("PlayerShip").GetComponent<playerController>().playMode == 0)
+            {
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("scenePicker_arc");
+            }
+           
 
 
         }
@@ -235,6 +244,7 @@ public class boss_coolturd : MonoBehaviour {
 
     }
     AudioClip _audio7;
+    AudioClip _audio8;
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -251,6 +261,22 @@ public class boss_coolturd : MonoBehaviour {
             AudioSource.PlayClipAtPoint(_audio7, this.transform.position, 100);
             AudioSource.PlayClipAtPoint(_audio7, this.transform.position, 100);
             AudioSource.PlayClipAtPoint(_audio7, this.transform.position, 100);
+            //added below as a potential response to shots fired 8-25-20
+            if (UnityEngine.Random.Range(0,100)<35)
+            {
+                GameObject picky = Instantiate(Resources.Load("wetfart")) as GameObject;
+                picky.name = "wetfart";
+                picky.transform.position = new Vector2(this.transform.position.x, this.transform.position.y - 5.0f);
+                _audio8 = Resources.Load<AudioClip>("_FX\\SFX\\HAHA");
+                AudioSource.PlayClipAtPoint(_audio8, this.transform.position, 100);
+                AudioSource.PlayClipAtPoint(_audio8, this.transform.position, 100);
+                AudioSource.PlayClipAtPoint(_audio8, this.transform.position, 100);
+                AudioSource.PlayClipAtPoint(_audio8, this.transform.position, 100);
+                AudioSource.PlayClipAtPoint(_audio8, this.transform.position, 100);
+                AudioSource.PlayClipAtPoint(_audio8, this.transform.position, 100);
+                
+            }
+           
         }
 
     }

@@ -39,11 +39,23 @@ public class DiffSettings : MonoBehaviour {
             btn_mythic.transform.localPosition = new Vector2(50, -75.0f); ////this sets the prefab to the canvas (this is for menu objects), which will control the location
             EventSystem.current.firstSelectedGameObject = btn_mythic;
 
+            GameObject txt_mythic = Instantiate(Resources.Load("menu\\dificulty\\txt_description")) as GameObject;
+            txt_mythic.name = "txt_mythic";
+            txt_mythic.GetComponent<Text>().text = "Only Normal stages";
+            txt_mythic.transform.SetParent(getCand.transform, false);
+            txt_mythic.transform.localPosition = new Vector2(-125, -95.0f);
+
             GameObject btn_easy = Instantiate(Resources.Load("menu\\dificulty\\btn_Easy")) as GameObject;
             btn_easy.name = "btn_Easy";
             btn_easy.transform.SetParent(getCand.transform, false);
             btn_easy.transform.localPosition = new Vector2(50, 0.0f); ////this sets the prefab to the canvas (this is for menu objects), which will control the location
             EventSystem.current.SetSelectedGameObject(btn_easy.gameObject); // Highlight the button
+
+            GameObject txt_easy = Instantiate(Resources.Load("menu\\dificulty\\txt_description")) as GameObject;
+            txt_easy.name = "txt_easy";
+            txt_easy.GetComponent<Text>().text = "Normal stages + Convention ";
+            txt_easy.transform.SetParent(getCand.transform, false);
+            txt_easy.transform.localPosition = new Vector2(-125, -20.0f);
 
             //btn_normal
             GameObject btn_normal = Instantiate(Resources.Load("menu\\dificulty\\btn_normal")) as GameObject;
@@ -52,12 +64,21 @@ public class DiffSettings : MonoBehaviour {
             btn_normal.transform.localPosition = new Vector2(50, 75.0f); ////this sets the prefab to the canvas (this is for menu objects), which will control the location
             EventSystem.current.SetSelectedGameObject(btn_normal.gameObject); // Highlight the button
 
+            GameObject txt_normal = Instantiate(Resources.Load("menu\\dificulty\\txt_description")) as GameObject;
+            txt_normal.name = "txt_normal";
+            txt_normal.GetComponent<Text>().text = "Normal stages + Convention + Overworld exploration";
+            txt_normal.transform.SetParent(getCand.transform, false);
+            txt_normal.transform.localPosition = new Vector2(-125, 55.0f);
+
             btn_normal.GetComponent<Button>().Select();
 
             GameObject txt_Pause = Instantiate(Resources.Load("menu\\dificulty\\txt_DifSetTitle")) as GameObject;
             txt_Pause.name = "txt_DifSetTitle";
             txt_Pause.transform.SetParent(getCand.transform, false);
             txt_Pause.transform.localPosition = new Vector2(125, 150.0f); ////this sets the prefab to the canvas (this is for menu objects), which will control the location
+
+
+
 
 
             GameObject ddd = GameObject.Find("shipBlast");
@@ -121,6 +142,12 @@ public class DiffSettings : MonoBehaviour {
         Destroy(txt_DifSetTitle);
         GameObject img_blocker = GameObject.Find("img_blocker");
         Destroy(img_blocker);
+        GameObject txt_normal = GameObject.Find("txt_normal");
+        Destroy(txt_normal);
+        GameObject txt_easy = GameObject.Find("txt_easy");
+        Destroy(txt_easy);
+        GameObject txt_mythic = GameObject.Find("txt_mythic");
+        Destroy(txt_mythic);
         GameObject.Find("txt_game").GetComponent<Button>().interactable = true;
         GameObject.Find("txt_arcade").GetComponent<Button>().interactable = true;
         GameObject.Find("txt_instructions").GetComponent<Button>().interactable = true;

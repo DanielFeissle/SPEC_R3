@@ -7,7 +7,7 @@ public class arc_sceneSelector : MonoBehaviour {
     System.Random randStage = new System.Random();
     // Use this for initialization
     void Start() {
-        int getNext = randStage.Next(250);
+        int getNext = randStage.Next(275);
         //this is used for the score attack/arcade mode
         //plan is for four different enemy stages. they are as follows:
         //1. Derlictr space ship
@@ -66,10 +66,14 @@ public class arc_sceneSelector : MonoBehaviour {
                 GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_SPACED");
                
             }
-            else //8-6-20 there ya go 9 actual stages- wow, this is truely the last stage! 
+            else if (getNext < 250) //8-6-20 there ya go 9 actual stages- wow, this is truely the last stage! 
             {
                 GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_BOMBARDMENT");
            
+            }
+            else //8-25-20-boom bosses is now a random arcade encounter
+            {
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Bosses");
             }
         }
         else

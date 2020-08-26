@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class stage_convention : MonoBehaviour {
@@ -70,6 +71,14 @@ public class stage_convention : MonoBehaviour {
 
 
     void Start () {
+
+        if (GameObject.Find("PlayerShip").GetComponent<playerController>().difSettings>1)
+        {
+            //8-24-20 player is on another dif setting
+            //only Normal and Easy go to this stage,  
+           //    SceneManager.LoadScene("stageIntro");
+         GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_OverSpace-world-duh");
+        }
         _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\welcomeConvention");
         AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
         AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
@@ -901,7 +910,7 @@ public class stage_convention : MonoBehaviour {
                     isDup = stageTime;
                     if (oppsAud1==false)
                     {
-                        _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\fixITjustInTime");
+                        _audio9 = Resources.Load<AudioClip>("_FX\\SFX\\nar\\convention\\FIX_itMadly");
                         AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
                         AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);
                         AudioSource.PlayClipAtPoint(_audio9, new Vector3(0.0f, 0.0f, 0.0f), 100);

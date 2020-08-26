@@ -319,7 +319,15 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                         GameObject.Find("PlayerShip").GetComponent<PlayerFightTracker>().bossTracker[i, 1] = "DEAD";
                     }
                 }
-                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Convention");
+                //8-25-20 standardized this section for playmode in boss land
+                if (GameObject.Find("PlayerShip").GetComponent<playerController>().playMode == 1) //Playmode 1: player is in story mode -- Playmode 0: player is in arcade mode
+                {
+                    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Convention");
+                }
+                else if (GameObject.Find("PlayerShip").GetComponent<playerController>().playMode == 0)
+                {
+                    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("scenePicker_arc");
+                }
             }
 
         }
