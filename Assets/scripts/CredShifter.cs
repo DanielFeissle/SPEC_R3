@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CredShifter : MonoBehaviour {
     float nextUsage;
-    float delay = 0.501f; //only half delay
+    float delay = 0.251f; //only half delay
     FileInfo[] info;
    int cnt=0;
     Renderer m_Renderer;
@@ -25,7 +25,7 @@ public class CredShifter : MonoBehaviour {
             string[] SpecFinale = f.ToString().Split('\\');
             string SpecVal = SpecFinale[SpecFinale.Length-1];
             SpecVal = SpecVal.Split('.')[0];
-            Debug.Log("This is: " + SpecVal);
+         //   Debug.Log("This is: " + SpecVal);
             //  Sprite fun=  LoadNewSprite("sprites\\" + SpecVal + ".png");
        
             /*   try

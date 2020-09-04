@@ -317,6 +317,7 @@
     <Compile Include="Assets\scripts\coolTurdCoolerPlacer.cs" />
     <Compile Include="Assets\scripts\CountTurd.cs" />
     <Compile Include="Assets\scripts\cred_cam_distScroll.cs" />
+    <Compile Include="Assets\scripts\credits_controller.cs" />
     <Compile Include="Assets\scripts\CredShifter.cs" />
     <Compile Include="Assets\scripts\DanHand.cs" />
     <Compile Include="Assets\scripts\DeactivateOnStart.cs" />
@@ -381,6 +382,7 @@
     <Compile Include="Assets\scripts\playerPowerMover.cs" />
     <Compile Include="Assets\scripts\PoopDest.cs" />
     <Compile Include="Assets\scripts\poosplosion.cs" />
+    <Compile Include="Assets\scripts\RandomExplosionsOnScreen.cs" />
     <Compile Include="Assets\scripts\realDeleteAfterPlainAniScript.cs" />
     <Compile Include="Assets\scripts\ScaleFont.cs" />
     <Compile Include="Assets\scripts\scenes.cs" />
