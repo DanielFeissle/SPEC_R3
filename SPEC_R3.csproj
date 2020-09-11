@@ -356,6 +356,8 @@
     <Compile Include="Assets\scripts\MasterController.cs" />
     <Compile Include="Assets\scripts\masterShipEnter.cs" />
     <Compile Include="Assets\scripts\mastObjMover.cs" />
+    <Compile Include="Assets\scripts\moneyFade.cs" />
+    <Compile Include="Assets\scripts\MovPhys.cs" />
     <Compile Include="Assets\scripts\MusicPlayer.cs" />
     <Compile Include="Assets\scripts\obj_falling.cs" />
     <Compile Include="Assets\scripts\obj_ringsMover.cs" />
@@ -367,6 +369,7 @@
     <Compile Include="Assets\scripts\Over_conver.cs" />
     <Compile Include="Assets\scripts\overworldJunkPlacer.cs" />
     <Compile Include="Assets\scripts\overworldShip.cs" />
+    <Compile Include="Assets\scripts\PathFollower.cs" />
     <Compile Include="Assets\scripts\payer_return.cs" />
     <Compile Include="Assets\scripts\payerControl.cs" />
     <Compile Include="Assets\scripts\paySceneStarter.cs" />
