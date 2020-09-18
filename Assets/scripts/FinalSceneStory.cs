@@ -9,13 +9,24 @@ public class FinalSceneStory : MonoBehaviour {
     float delay = 0.501f; //only half delay
     int delayCount = 0;
     private Camera cam;
+    AudioClip _audio6;
+    Vector3 deskPos = new Vector3(0,0,0);
     // Use this for initialization
     void Start () {
         StartCoroutine(MoveCamIn());
         nextUsage = Time.time + delay; //it is on display
         cam = Camera.main;
+        //        AudioSource.PlayClipAtPoint(_audio6, new Vector3(0.0f, 0.0f, 0.0f), 100);
+        _audio6 = Resources.Load<AudioClip>("_FX\\BMX\\OutroBMX_edit");
+        AudioSource.PlayClipAtPoint(_audio6, GameObject.Find("Main Audio").transform.position, 100);
+        AudioSource.PlayClipAtPoint(_audio6, GameObject.Find("Main Audio").transform.position, 100);
+        AudioSource.PlayClipAtPoint(_audio6, GameObject.Find("Main Audio").transform.position, 100);
+        AudioSource.PlayClipAtPoint(_audio6, GameObject.Find("Main Audio").transform.position, 100);
+        AudioSource.PlayClipAtPoint(_audio6, GameObject.Find("Main Audio").transform.position, 100);
+        AudioSource.PlayClipAtPoint(_audio6, GameObject.Find("Main Audio").transform.position, 100);
+
     }
-	
+    bool audioPlayOnce = false;
 	// Update is called once per frame
 	void Update () {
         cam = Camera.main;
@@ -27,13 +38,22 @@ public class FinalSceneStory : MonoBehaviour {
 
         if (Time.time > nextUsage && closeoutCount == 1) //delete otherwise
         {
+            if (delayCount==0)
+            {
+              
+            }
             delayCount++;
-
             nextUsage = Time.time + delay; //it is on display
         }
 
         if (Time.time > nextUsage && closeoutCount == 2) //delete otherwise
         {
+            if (delayCount==0)
+            {
+                _audio6 = Resources.Load<AudioClip>("_FX\\BMX\\outro1_edit");
+                AudioSource.PlayClipAtPoint(_audio6, GameObject.Find("Main Audio").transform.position, 100);
+
+            }
             delayCount++;
             int randoForo = UnityEngine.Random.Range(7, 14);
             for (int i=0; i< randoForo;i++)
@@ -67,6 +87,12 @@ public class FinalSceneStory : MonoBehaviour {
         {
             if (Time.time > nextUsage) //delete otherwise
             {
+                if (delayCount==0)
+                {
+                    _audio6 = Resources.Load<AudioClip>("_FX\\BMX\\outro2_raw");
+                    AudioSource.PlayClipAtPoint(_audio6, GameObject.Find("Main Audio").transform.position, 100);
+
+                }
                 delayCount++;
                
                 nextUsage = Time.time + delay; //it is on display
@@ -76,6 +102,9 @@ public class FinalSceneStory : MonoBehaviour {
             delay = 4.2f;
             if (delayCount==1)
             {
+                GameObject.Find("cigar").GetComponent<SpriteRenderer>().sortingOrder = 1;
+           
+                GameObject.Find("doggyTyper").GetComponent<Animator>().speed = 0; //stop type
                 GameObject.Find("perpWalkCountTurd").GetComponent<PathFollower>().enabled = true;
             }
            else if (delayCount == 2)
@@ -85,6 +114,14 @@ public class FinalSceneStory : MonoBehaviour {
             }
             else if (delayCount == 3)
             {
+                GameObject.Find("cigar").GetComponent<Rigidbody2D>().AddForce(Vector2.right * -50);
+                if (audioPlayOnce==false)
+                {
+                    audioPlayOnce = true;
+                    _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\Breather");
+                    AudioSource.PlayClipAtPoint(_audio6, GameObject.Find("Main Audio").transform.position, 100);
+                }
+             
                 GameObject.Find("perpWalkCoolTurd").GetComponent<PathFollower>().enabled = false;
                 GameObject.Find("perpWalkmajDir").GetComponent<PathFollower>().enabled = true;
 
@@ -93,16 +130,25 @@ public class FinalSceneStory : MonoBehaviour {
             {
                 GameObject.Find("perpWalkmajDir").GetComponent<PathFollower>().enabled = false;
                 GameObject.Find("perpWalkdad").GetComponent<PathFollower>().enabled = true;
+                GameObject.Find("FadeOut").GetComponent<Animator>().SetBool("ISFADE", true);
+
             }
             else if (delayCount==5)
             {
 
-
+                deskPos = GameObject.Find("Desk").transform.position;
                 delayCount = 0;
                 GameObject.Find("perpWalkdad").GetComponent<PathFollower>().enabled = false;
                 closeoutCount = 4;
                 Destroy(GameObject.Find("FinalScene_classic - HALF"));
-                GameObject.Find("doggyTyper").GetComponent<Animator>().speed = 0; //stop type
+                GameObject.Find("Desk").GetComponent<Rigidbody2D>().AddForce(Vector2.right * -30000);
+                GameObject.Find("Desk").GetComponent<Rigidbody2D>().AddForce(Vector2.up * 100000);
+                GameObject.Find("Desk").GetComponent<Rigidbody2D>().gravityScale = 2;
+                GameObject.Find("Desk").GetComponent<PolygonCollider2D>().enabled = true;
+                GameObject.Find("IndyYoungerLeftRightStandUp").GetComponent<SpriteRenderer>().sortingOrder = 5;
+                GameObject.Find("doggyTyper").GetComponent<SpriteRenderer>().sortingOrder = -80;
+                _audio6 = Resources.Load<AudioClip>("_FX\\SFX\\deskHit");
+                AudioSource.PlayClipAtPoint(_audio6, GameObject.Find("Main Audio").transform.position, 100);
             }
         }
 
@@ -118,10 +164,12 @@ public class FinalSceneStory : MonoBehaviour {
 
             if (delayCount>1)
             {
+                //GameObject.Find("cigar").transform.position = new Vector3(500, 500);
                 closeoutCount = 5;
-                GameObject.Find("indyNappy").transform.position = GameObject.Find("Desk").transform.position+(new Vector3(0,2,0));
+                GameObject.Find("indyNappy").transform.position = deskPos + (new Vector3(0,2,0));
                 GameObject.Find("doggyTyper").transform.position = new Vector3(500, 500);
-                
+                GameObject.Find("IndyYoungerLeftRightStandUp").transform.position = new Vector3(500, 500);
+
             }
         }
 

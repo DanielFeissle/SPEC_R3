@@ -65,3 +65,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/stage_BOMBARDMENT.unity
     guid: bc3852a9f3c87024e8c2f58ce4315065
+  - enabled: 1
+    path: Assets/STORY_Inter.unity
+    guid: 4ff5a39a3fad28c4ea51ebe846082486
+  - enabled: 1
+    path: Assets/extras.unity
+    guid: 1214b05ddd520fa4887d4dcd36ce211e

@@ -301,6 +301,7 @@
     <Compile Include="Assets\ex.cs" />
     <Compile Include="Assets\scripts\aniNucDebrisClear.cs" />
     <Compile Include="Assets\scripts\aniPlayOnScreenOnly.cs" />
+    <Compile Include="Assets\scripts\AntiStucker.cs" />
     <Compile Include="Assets\scripts\arc_sceneSelector.cs" />
     <Compile Include="Assets\scripts\atmp_movement.cs" />
     <Compile Include="Assets\scripts\AudioSourcePlayer.cs" />
@@ -336,7 +337,10 @@
     <Compile Include="Assets\scripts\Exp2017.cs" />
     <Compile Include="Assets\scripts\ExplosionRandomlyPlayOnScreen.cs" />
     <Compile Include="Assets\scripts\ExplosionTracker.cs" />
+    <Compile Include="Assets\scripts\ExtrasStageButtonSpawner.cs" />
+    <Compile Include="Assets\scripts\FadeScreenSet.cs" />
     <Compile Include="Assets\scripts\FallAstBehaviour.cs" />
+    <Compile Include="Assets\scripts\FinalMovieAniChange.cs" />
     <Compile Include="Assets\scripts\FinalSceneStory.cs" />
     <Compile Include="Assets\scripts\fireWall_ambientSFX.cs" />
     <Compile Include="Assets\scripts\firewall_fireballs.cs" />
@@ -387,6 +391,8 @@
     <Compile Include="Assets\scripts\poosplosion.cs" />
     <Compile Include="Assets\scripts\RandomExplosionsOnScreen.cs" />
     <Compile Include="Assets\scripts\realDeleteAfterPlainAniScript.cs" />
+    <Compile Include="Assets\scripts\realGenericButton.cs" />
+    <Compile Include="Assets\scripts\realGenericButtonListner.cs" />
     <Compile Include="Assets\scripts\ScaleFont.cs" />
     <Compile Include="Assets\scripts\scenes.cs" />
     <Compile Include="Assets\scripts\scenes_asteroid.cs" />
@@ -400,6 +406,7 @@
     <Compile Include="Assets\scripts\scenes_rings.cs" />
     <Compile Include="Assets\scripts\scenes_SPACED.cs" />
     <Compile Include="Assets\scripts\screenWrapper.cs" />
+    <Compile Include="Assets\scripts\SFX_ImpactSound.cs" />
     <Compile Include="Assets\scripts\Shields.cs" />
     <Compile Include="Assets\scripts\shipConstructor.cs" />
     <Compile Include="Assets\scripts\shipObjectHandle.cs" />

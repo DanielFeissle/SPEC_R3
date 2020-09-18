@@ -15,7 +15,7 @@ public class Story_masterControl : MonoBehaviour
     public int IndyWhat = 0;
     int sceneShake = 1;
     bool coRun = false;
-    string EndScene = "Now you go, off to live demo spec_r3~spacehound ";//of space echo~presents space hound as a live demo to the local galaxy sectors";
+    string EndScene = "Now you go, off to live demo spec_r3~spacehound and capture those who poopified the game demo";//of space echo~presents space hound as a live demo to the local galaxy sectors";
     public int locCnt = 0;
     AudioClip _audio6;
     // Use this for initialization
@@ -455,7 +455,7 @@ public class Story_masterControl : MonoBehaviour
                     Transform txtTrans = sh55.GetComponent<Transform>();
                     TextMesh txtText = sh55.GetComponent<TextMesh>();
                     txtTrans.transform.position = new Vector2(22f, -1.5f);
-                    txtText.text = "begone";
+                    txtText.text = "and bring back the instigators- they will be dealt with";
                     RandBark();
                     StartCoroutine(MoverCameraNorth()); //move to ship
                      scenePhasee = 7;
@@ -543,7 +543,7 @@ public class Story_masterControl : MonoBehaviour
             if (sceneCounter>63 && sceneCounter<75 &&  locCnt < EndScene.Length)
             {
                 delay2 = UnityEngine.Random.Range(0.15f, 0.25f);
-                locCnt++;
+                locCnt=locCnt+3;
                 //the case is gone, retry stage-
                 GameObject uiAltiText = GameObject.Find("txt_explain");
                 Text delta1 = uiAltiText.GetComponent<Text>();
