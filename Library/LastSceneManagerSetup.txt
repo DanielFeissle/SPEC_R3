@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/extras.unity
+- path: Assets/stage_interShip.unity
   isLoaded: 1
   isActive: 1
