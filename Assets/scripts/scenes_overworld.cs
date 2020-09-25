@@ -109,6 +109,13 @@ public class scenes_overworld : MonoBehaviour {
                         isUniq = true;
                         Debug.Log("This is OK-not in list before");
                     }
+                    int countFX = 0;
+                    while (countFX < GameObject.Find("PlayerShip").GetComponent<MasterController>().sceneHistory_Stages.Length && GameObject.Find("PlayerShip").GetComponent<MasterController>().sceneHistory_Stages[countFX] == '#') countFX++;
+                    if (countFX>8)
+                    {
+                        isUniq = true;
+                        //9-24-20 : new fix to move to the final stage, hopefully less confusing than what is above
+                    }
 
                 } while (isUniq == false);
 

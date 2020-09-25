@@ -299,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ex.cs" />
+    <Compile Include="Assets\scripts\about_controller.cs" />
     <Compile Include="Assets\scripts\aniNucDebrisClear.cs" />
     <Compile Include="Assets\scripts\aniPlayOnScreenOnly.cs" />
     <Compile Include="Assets\scripts\AntiStucker.cs" />
@@ -422,7 +423,9 @@
     <Compile Include="Assets\scripts\tankController.cs" />
     <Compile Include="Assets\scripts\textSortingLayer.cs" />
     <Compile Include="Assets\scripts\textSortUpOne.cs" />
+    <Compile Include="Assets\scripts\title_about_button.cs" />
     <Compile Include="Assets\scripts\title_btn_galaxy.cs" />
+    <Compile Include="Assets\scripts\Title_extras.cs" />
     <Compile Include="Assets\scripts\TitleScreenButtons.cs" />
     <Compile Include="Assets\scripts\titleScreenController.cs" />
     <Compile Include="Assets\scripts\tomatoeToss.cs" />

@@ -11,13 +11,14 @@ public class BOMBARD_SceneUpdate : MonoBehaviour {
         delay = 0.5f; //only half delay
         nextUsage = 0;
         GameObject.Find("PlayerShip").GetComponent<playerController>().isPlayerCamping = true;
+        GameObject.Find("PlayerShip").transform.position = GameObject.Find("ExitZone").transform.position;
     }
+
     bool dothisReappearOnce = false;
     bool introGone = false;
-    // Update is called once per frame
-    void Update () {
- 
-        if (GameObject.Find("PlayerShip").GetComponent<playerController>().isPlayerCamping == false && GameObject.Find("transportShip").gameObject.transform.localScale.x >= 0 && introGone==false)
+    private void LateUpdate()
+    {
+        if (GameObject.Find("PlayerShip").GetComponent<playerController>().isPlayerCamping == false && GameObject.Find("transportShip").gameObject.transform.localScale.x >= 0 && introGone == false)
         {
             //player has left the ship, shrink it!
             GameObject.Find("transportShip").gameObject.transform.localScale -= new Vector3(0.0025f, 0.0025f, 0);
@@ -26,6 +27,11 @@ public class BOMBARD_SceneUpdate : MonoBehaviour {
                 introGone = true;
             }
         }
+    }
+    // Update is called once per frame
+    void Update () {
+ 
+
         if (GameObject.Find("PlayerShip").GetComponent<playerController>().clearToLeave == true && dothisReappearOnce == false)
         {
     //        Debug.Log("PACKAGE GOT SHIP REAPPEAR!" + GameObject.Find("transportShip").gameObject.transform.localScale.x);

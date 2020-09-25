@@ -71,3 +71,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/extras.unity
     guid: 1214b05ddd520fa4887d4dcd36ce211e
+  - enabled: 1
+    path: Assets/about.unity
+    guid: f58346ab40e0b4644ad773ce72d59a84

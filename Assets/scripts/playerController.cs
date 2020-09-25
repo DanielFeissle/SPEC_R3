@@ -43,7 +43,7 @@ public class playerController : MonoBehaviour {
     public int stageDoneCnt = 0;
     public int stageDoneLastCnt = 0;
     public int stageDoneRound = 0; //0, 1, 2 Escape seq //added 7-30-20
-    public int playMode = 1; //0 is arcade, 1 is overworld mode 
+    public int playMode = 1; //0 is arcade, 1 is overworld mode , 2 is stage select
     public float moveHorizantal;
     public int shipHitDetect=0; //0-nothing 1-something (no duh)---its actually boost, 2-turd is off screen
     private Camera cam;
@@ -264,9 +264,15 @@ public class playerController : MonoBehaviour {
                     Debug.Log("&&&&&&&&&&&&&&&&&&&&&&&&&&&Overworld Story mode");
                     GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_OverSpace-world-duh");
                 }
-               
+                else if (playMode == 2)
+                {
+                    Debug.Log("&&&&&&&&&&&&&&&&&&&&&&&&&&&Stage select mode");
+                    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("extras");
+                }
 
-               
+
+
+
                 nextUsage2 = Time.time + 2.0f; //it is on display
         }
         GameObject transportShip = GameObject.Find("transportShip");
