@@ -48,6 +48,15 @@ public class scenes_overworld : MonoBehaviour {
             {
                 bool isUniq = false;
                 string tempName = "FFFF";
+                bool stageDERSHIP = false;
+                bool stageAST = false;
+                bool stageRINGS = false;
+                bool stageATMO = false;
+                bool stageINTER = false;
+                bool stagePLAIN = false;
+                bool stagePLANET = false;
+                bool stageSPACED = false;
+                bool stageBOMBARD = false;
                 do
                 {
                     // 7-29-20 redid this section again- add one more stage to complete the 9
@@ -57,45 +66,54 @@ public class scenes_overworld : MonoBehaviour {
                     {
                         //  SceneManager.LoadScene("stage_DERSHIP"); //this is the first stage name
                         tempName = "stage_DERSHIP";
+                        stageDERSHIP = true;
                     }
                     else if (getNext < 50)
                     {
                         //  SceneManager.LoadScene("stage_asteroids"); //this is asteroids stage, with 3 different asteroid functions
                         tempName = "stage_asteroids";
+                        stageAST = true;
                     }
                     else if (getNext < 75)
                     {
                         // SceneManager.LoadScene("stage_rings"); //this is sun ring stage, features experiments in shaders/coloring
                         tempName = "stage_rings";
+                        stageRINGS = true;
                     }
                     else if (getNext < 100)
                     {
                         //  SceneManager.LoadScene("stage_atmosphere"); //this is sun ring stage, features experiments in shaders/coloring
                         tempName = "stage_atmosphere";
+                        stageATMO = true;
                     }
                     else if (getNext < 125)
                     {
                         //  SceneManager.LoadScene("stage_interShip"); //this is sun ring stage, features experiments in shaders/coloring
                         tempName = "stage_interShip";
+                        stageINTER = true;
                     }
                     else if (getNext < 150)
                     {
                         //SceneManager.LoadScene("stage_PlainSpace"); //this is sun ring stage, features experiments in shaders/coloring
                         tempName = "stage_PlainSpace";
+                        stagePLAIN = true;
                     }
                     else if (getNext < 175)
                     {
                         // SceneManager.LoadScene("stage_PlanetSide"); //this is sun ring stage, features experiments in shaders/coloring
                         tempName = "stage_PlanetSide";
+                        stagePLANET = true;
                     }
                     else if (getNext < 200)
                     {
                         //  SceneManager.LoadScene("stage_PlanetSide"); //this is the clasical escape stage, everything blowing up!
                         tempName = "stage_SPACED";
+                        stageSPACED = true;
                     }
                     else //8-6-20 there ya go 9 actual stages- wow, this is truely the last stage! 
                     {
                         tempName = "stage_BOMBARDMENT";
+                        stageBOMBARD = true;
                     }
 
 
@@ -109,13 +127,22 @@ public class scenes_overworld : MonoBehaviour {
                         isUniq = true;
                         Debug.Log("This is OK-not in list before");
                     }
-                    int countFX = 0;
-                    while (countFX < GameObject.Find("PlayerShip").GetComponent<MasterController>().sceneHistory_Stages.Length && GameObject.Find("PlayerShip").GetComponent<MasterController>().sceneHistory_Stages[countFX] == '#') countFX++;
-                    if (countFX>8)
+
+                    //sometimes best to brute force it when this close to the end :) 9-26-20
+                    if (((stageDERSHIP == true) && (stageAST == true) && (stageRINGS == true) && (stageATMO == true) && (stageINTER == true) && (stagePLAIN == true) && (stagePLANET == true) && (stageSPACED == true) && (stageBOMBARD == true)))
                     {
                         isUniq = true;
-                        //9-24-20 : new fix to move to the final stage, hopefully less confusing than what is above
+                          tempName = "stage_ESCAPE";
                     }
+                    //  int countFX = 0;
+                    //  while (countFX < GameObject.Find("PlayerShip").GetComponent<MasterController>().sceneHistory_Stages.Length && GameObject.Find("PlayerShip").GetComponent<MasterController>().sceneHistory_Stages[countFX] == '#') countFX++;
+                    //  Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!THE COUNT FX is " + countFX);
+                    //   if (countFX>1)
+                    //   {
+                    //    isUniq = true;
+                    //    tempName = "stage_ESCAPE";
+                    //9-24-20 : new fix to move to the final stage, hopefully less confusing than what is above
+                    //   }
 
                 } while (isUniq == false);
 
