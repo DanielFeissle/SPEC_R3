@@ -161,6 +161,11 @@ public class CountTurd : MonoBehaviour {
                         {
                             GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("scenePicker_arc");
                         }
+                        else if (GameObject.Find("PlayerShip").GetComponent<playerController>().playMode == 2)
+                        {
+                            Debug.Log("&&&&&&&&&&&&&&&&&&&&&&&&&&&Stage select mode");
+                            GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("extras");
+                        }
                     }
 
 

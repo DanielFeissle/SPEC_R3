@@ -371,6 +371,10 @@ public class Shields : MonoBehaviour {
                             {
                                 YeahDam();
                             }
+                            else if (collision.gameObject.CompareTag("Girder"))
+                            {
+                                YeahDam();
+                            }
                         }
                     }
                 }
@@ -395,7 +399,8 @@ public class Shields : MonoBehaviour {
                 }
                if (DamOnceOk==false)
                 {
-                    if (collision.gameObject.CompareTag("SpaceJunk") || collision.gameObject.CompareTag("ShipJunk") || collision.gameObject.CompareTag("IndestShot") || collision.gameObject.CompareTag("PlanRing") || collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("BOSS") || collision.gameObject.CompareTag("ShipIndest") || collision.gameObject.CompareTag("CoolerHelp") || collision.gameObject.CompareTag("CoolDam") || collision.gameObject.CompareTag("HolySurface"))
+                    if (collision.gameObject.CompareTag("SpaceJunk") || collision.gameObject.CompareTag("ShipJunk") || collision.gameObject.CompareTag("IndestShot") || collision.gameObject.CompareTag("PlanRing") || collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("BOSS") || collision.gameObject.CompareTag("ShipIndest") || collision.gameObject.CompareTag("CoolerHelp") || collision.gameObject.CompareTag("CoolDam") || collision.gameObject.CompareTag("HolySurface") || collision.gameObject.CompareTag("Girder"))
+                    {
                         //      if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > 7 || this.rb.velocity.sqrMagnitude > 7)
                         if (collision.relativeVelocity.magnitude > 3)
                         {
@@ -443,7 +448,13 @@ public class Shields : MonoBehaviour {
                                 YeahDam();
                             }
 
+
                         }
+                        if (collision.gameObject.CompareTag("Girder")) //10-1-20; girder is a special tag- 
+                        {
+                            YeahDam();
+                        }
+                    }
                 }
             }
 

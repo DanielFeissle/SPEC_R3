@@ -17,13 +17,13 @@ public class scenes_escape : MonoBehaviour {
 
     float delay = 0.5f; //only half delay
     float nextUsage;
-    int fuel = 100;
+    int fuel = 150;
     private Camera cam;
 
     int locCnt = 0;
     string fail = "You ran out of fuel.. Lets try this again!";
     bool redothisdu = false;
-
+    float xTransitionScene = 333;
     float xEndofScene = 555;
     // Use this for initialization
     void Start ()
@@ -44,7 +44,7 @@ public class scenes_escape : MonoBehaviour {
         Rigidbody2D playerRigidBody = MastCont.GetComponent<Rigidbody2D>();
         playerRigidBody.gravityScale = .11f;
 
-        fuel = 100;
+        fuel = 150;
         locCnt = 0;
         float[] posXarr = new float[3];
         float[] posYarr = new float[3];
@@ -66,7 +66,7 @@ public class scenes_escape : MonoBehaviour {
 
         //phases are defined as where the current phase ENDS
         int basePhase1 = totBlocks-(totBlocks / 4); //start with the full base (not used)
-        int basePhase2 = basePhase1 - (basePhase1 / 4); //enter destruction mode
+      int  basePhase2 = basePhase1 - (basePhase1 / 4); //enter destruction mode
         int basePhase3 = basePhase2 - (basePhase2 / 4); //space (ie nothing)
 
 
@@ -125,9 +125,9 @@ public class scenes_escape : MonoBehaviour {
                     if (harderGas<10)
                     {
                         loadName = "zBaseGround";
-                        GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
-                        RepeatGas.name = "RptGas(" + i + ")";
-                        RepeatGas.transform.position = new Vector2(newPost, 0 - 3.15f);
+                    //    GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
+                      //  RepeatGas.name = "RptGas(" + i + ")";
+                     //   RepeatGas.transform.position = new Vector2(newPost, 0 - 3.15f);
                     }
                     else
                     {
@@ -145,23 +145,27 @@ public class scenes_escape : MonoBehaviour {
                 }
                 GameObject RepeatGround = Instantiate(Resources.Load("planetSide\\" + loadName + "")) as GameObject;
                 RepeatGround.name = "RptPlannet(" + i + ")";
+                RepeatGround.tag = "Girder";
                 RepeatGround.transform.position = new Vector2(newPost, 0 - 1.15f);
-                //6-3-20
-                //add in space junk for added fun
-                int tempRando = UnityEngine.Random.Range(0, 10);
-                for (int zz = 0; zz < tempRando; zz++)
+                if (loadName == "zBase_Descent" || loadName == "zBase_Ascent" || loadName == "zBase_CliffEdge")
                 {
-                    
-                    GameObject SpcJnk2 = Instantiate(Resources.Load("chair")) as GameObject;
-                    SpcJnk2.name = "spcjnk2(" + i + ")";
-                    SpcJnk2.transform.position = new Vector2(UnityEngine.Random.Range(newPost, newPost + 10), UnityEngine.Random.Range(q.y, p.y));
-
+                    //  RepeatGround.transform.localScale = RepeatGround.transform.localScale * 2; // 10-1-20 make the player jump around , forcefully!
+                    RepeatGround.transform.localScale += new Vector3(0, .75f, 0);
+                    RepeatGround.transform.position = new Vector2(RepeatGround.transform.position.x, RepeatGround.transform.position.y +1.87f);
                 }
+
+                //   RepeatGround.AddComponent<sideScrollerCleaner>(); //9-30-20 this script cleans up after it has left the screen
+                //   RepeatGround.GetComponent<sideScrollerCleaner>().DeleteOnTouch = GameObject.Find("WestTrigger1");
+
                 //4-27-20
                 //how to make zero gravity section (from explosions!)
-                    if (i >= basePhase2)
+                if (i >= basePhase2)
                 {
              Rigidbody2D fun=       RepeatGround.AddComponent<Rigidbody2D>();
+                    fun.angularDrag = 500;
+                    fun.drag = 1000;
+                    
+                    fun.gravityScale = 0;
                     fun.gravityScale = 0;
                     fun.mass = 117;
                 }
@@ -182,24 +186,19 @@ public class scenes_escape : MonoBehaviour {
                 GameObject RepeatGround = Instantiate(Resources.Load("planetSide\\" + loadName + "")) as GameObject;
                 RepeatGround.name = "RptPlannet(" + i + ")";
                 RepeatGround.transform.position = new Vector2(newPost, 0 - 1.15f);
+              //  RepeatGround.AddComponent<sideScrollerCleaner>(); //9-30-20 this script cleans up after it has left the screen
+              //  RepeatGround.GetComponent<sideScrollerCleaner>().DeleteOnTouch = GameObject.Find("WestTrigger1");
                 oldPos = RepeatGround.transform.position.x;
                 Debug.Log("DRAWING MAP:" + i);
-                //6-3-20
-                //add in space junk for added fun
-                int tempRando = UnityEngine.Random.Range(0, 10);
-                for (int zz = 0; zz < tempRando; zz++)
-                {
-                   
-                    GameObject SpcJnk2 = Instantiate(Resources.Load("chair")) as GameObject;
-                    SpcJnk2.name = "spcjnk2(" + i + ")";
-                    SpcJnk2.transform.position = new Vector2(UnityEngine.Random.Range(newPost, newPost + 10), UnityEngine.Random.Range(q.y, p.y));
-
-                }
+              
                 //4-27-20
                 //how to make zero gravity section (from explosions!)
                 if (i >= basePhase2)
                 {
                     Rigidbody2D fun = RepeatGround.AddComponent<Rigidbody2D>();
+                    fun.drag = 1000;
+                    fun.angularDrag = 500;
+                    fun.gravityScale = 0;
                     fun.gravityScale = 0;
                     fun.mass = 117;
                 }
@@ -211,21 +210,24 @@ public class scenes_escape : MonoBehaviour {
                         RepeatGas2.name = "RptCave(" + i + ")";
                         RepeatGas2.transform.localScale = new Vector2(UnityEngine.Random.Range(.5f, 2.5f), 1);
                         RepeatGas2.transform.position = new Vector2(newPost, 0 + 2.5f);
+                        RepeatGas2.tag = "Girder";
                         //6-3-20
                         //add in space junk for added fun
-                        int tempRando2 = UnityEngine.Random.Range(0, 10);
-                        for (int zz = 0; zz < tempRando2; zz++)
-                        {
-                            GameObject SpcJnk = Instantiate(Resources.Load("Asteroid2017")) as GameObject;
-                            SpcJnk.name = "spcjnk(" + i + ")";
-                            SpcJnk.transform.position = new Vector2(UnityEngine.Random.Range(newPost, newPost+5), UnityEngine.Random.Range(q.y, p.y));
+                        /*      int tempRando2 = UnityEngine.Random.Range(0, 10);
+                              for (int zz = 0; zz < tempRando2; zz++)
+                              {
+                                  GameObject SpcJnk = Instantiate(Resources.Load("Asteroid2017")) as GameObject;
+                                  SpcJnk.name = "spcjnk(" + i + ")";
+                                  SpcJnk.transform.position = new Vector2(UnityEngine.Random.Range(newPost, newPost+5), UnityEngine.Random.Range(q.y, p.y));
 
-                        }
+                              } */
                         //4-27-20
                         //how to make zero gravity section (from explosions!)
                         if (i >= basePhase2)
                         {
                             Rigidbody2D fun = RepeatGas2.AddComponent<Rigidbody2D>();
+                            fun.drag = 1000;
+                            fun.angularDrag = 500;
                             fun.gravityScale = 0;
                             fun.mass = 117;
                         }
@@ -236,9 +238,12 @@ public class scenes_escape : MonoBehaviour {
 
                 if (blarg.Next(100) < 10)
                 {
-                    GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
-                    RepeatGas.name = "RptGas(" + i + ")";
-                    RepeatGas.transform.position = new Vector2(newPost, 0 - 3.15f);
+                //    GameObject RepeatGas = Instantiate(Resources.Load("planetSide\\planetSideGas")) as GameObject;
+                //    RepeatGas.name = "RptGas(" + i + ")";
+                //    RepeatGas.transform.position = new Vector2(newPost, 0 - 3.15f);
+
+             //       RepeatGas.AddComponent<sideScrollerCleaner>(); //9-30-20 this script cleans up after it has left the screen
+             //       RepeatGas.GetComponent<sideScrollerCleaner>().DeleteOnTouch = GameObject.Find("WestTrigger1");
                 }
             }
              
@@ -259,31 +264,43 @@ public class scenes_escape : MonoBehaviour {
                 GameObject Klaxon = Instantiate(Resources.Load("klaxon2020")) as GameObject; //finally add in the alarm 6-10-20
                 Klaxon.name = "Klaxon(" + i + ")";
                 Klaxon.transform.position = new Vector2(newPost, p.y);
+               // Klaxon.AddComponent<sideScrollerCleaner>(); //9-30-20 this script cleans up after it has left the screen
+              //  Klaxon.GetComponent<sideScrollerCleaner>().DeleteOnTouch = GameObject.Find("WestTrigger1");
             }
             else if (i < basePhase2)
             {
+             
                 GameObject RepeatGas = Instantiate(Resources.Load("back_baseDestroy")) as GameObject;
                 RepeatGas.name = "BckTile(" + i + ")";
                 RepeatGas.transform.position = new Vector2(newPost, 0);
+                if (xTransitionScene==333)
+                {
+                    xTransitionScene = RepeatGas.transform.position.x;
+                }
 
-                
-                int randoExplod = UnityEngine.Random.Range(5, 10);
+             // RepeatGas.AddComponent<sideScrollerCleaner>(); //9-30-20 this script cleans up after it has left the screen
+             //  RepeatGas.GetComponent<sideScrollerCleaner>().DeleteOnTouch = GameObject.Find("WestTrigger1");
+
+             int randoExplod = UnityEngine.Random.Range(5, 7);
                 for (int qt=0;qt<randoExplod;qt++)
                 {
                     GameObject RepeatGround33 = Instantiate(Resources.Load("CollisionExplosion")) as GameObject;
                     RepeatGround33.name = "SysExplode(" + i +qt+ ")";
                     RepeatGround33.transform.position = new Vector2(newPost+UnityEngine.Random.Range(-5,5), 0 - UnityEngine.Random.Range(-5,5));
+                    RepeatGround33.AddComponent<DestrFallingObj>(); //addded 9-30-20 - for a more interactive final escape seq
                 }
             
             }
               else
             { //phase 3
-                int randoExplod = UnityEngine.Random.Range(5, 10);
+                int randoExplod = UnityEngine.Random.Range(5, 7);
                 for (int qt = 0; qt < randoExplod; qt++)
                 {
+                    
                     GameObject RepeatGround33 = Instantiate(Resources.Load("CollisionExplosion")) as GameObject;
                     RepeatGround33.name = "SysExplode(" + i + qt + ")";
                     RepeatGround33.transform.position = new Vector2(newPost + UnityEngine.Random.Range(-5, 5), 0 - UnityEngine.Random.Range(-5, 5));
+                    RepeatGround33.AddComponent<DestrFallingObj>(); //addded 9-30-20 - for a more interactive final escape seq
                 }
             }
            
@@ -298,7 +315,7 @@ public class scenes_escape : MonoBehaviour {
             //  {
             GameObject fud5323 = Instantiate(Resources.Load("dertypShips\\case")) as GameObject;
             fud5323.name = "thePackage(" + 0 + "," + 0 + ")";
-            fud5323.transform.position = new Vector2(newPost + 20, blarg.Next(0, 3));
+            fud5323.transform.position = new Vector2(newPost +70, blarg.Next(0, 3));
             packageLoad = true;
             //  }
         }
@@ -333,7 +350,7 @@ public class scenes_escape : MonoBehaviour {
 
     private void LateUpdate()
     {
-        if (GameObject.Find("PlayerShip").transform.position.x > xEndofScene)
+        if (GameObject.Find("PlayerShip").transform.position.x > xEndofScene+40)
         {
             Destroy(GameObject.Find("PlayerShip").GetComponent<playerPowerMover>()); //remove the helping script
             //Application.LoadLevel(Application.loadedLevel); //load new level
@@ -350,6 +367,24 @@ public class scenes_escape : MonoBehaviour {
 
         if (Time.time > nextUsage) //continue scrolling
         {
+
+if (UnityEngine.Random.Range(0,100)<75)
+            {
+                int numberOfTaggedObjects = GameObject.FindGameObjectsWithTag("Girder").Length;
+                if (numberOfTaggedObjects < 1) // wee only want 3 on screen at a given time
+                {
+
+                    if (this.transform.position.x< xTransitionScene)
+                    {
+                        GameObject FallingGerter = Instantiate(Resources.Load("convention\\girder")) as GameObject;
+                        FallingGerter.name = "FallingGerter";
+                        FallingGerter.transform.position = new Vector2(this.transform.position.x + 7, 5);
+                    }
+                 
+                }
+                   
+            }
+
             GameObject transportShip = GameObject.Find("transportShip");
             masterShipEnter introShip = transportShip.GetComponent<masterShipEnter>();
             if (introShip.introScene==false)

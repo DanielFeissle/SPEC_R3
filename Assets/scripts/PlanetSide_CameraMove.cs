@@ -115,6 +115,7 @@ public class PlanetSide_CameraMove : MonoBehaviour {
         }
      
     }
+    public int OnScreenCount = 1555;
     private void FixedUpdate()
     {
         if (Time.time > nextUsage && clearToMove==1) //continue scrolling
@@ -140,7 +141,7 @@ public class PlanetSide_CameraMove : MonoBehaviour {
                 int objectCount = GameObject.FindGameObjectsWithTag("SpaceJunk").Length;
                 Debug.Log("Objects on asteroid screen: " + objectCount);
 
-                if (objectCount < 1555)
+                if (objectCount < OnScreenCount)
                 {
                     int fundas = UnityEngine.Random.Range(0, 100);
                     if (fundas < 25)

@@ -30,6 +30,12 @@ public class MusicPlayer : MonoBehaviour {
             audioSource.clip = otherClip;
             audioSource.Play();
         }
+        else if (SceneManager.GetActiveScene().name.Contains("ESCAPE"))
+        {
+            otherClip = Resources.Load<AudioClip>("_FX\\BMX\\escape_bm");
+            audioSource.clip = otherClip;
+            audioSource.Play();
+        }
 
     }
 
@@ -47,6 +53,12 @@ public class MusicPlayer : MonoBehaviour {
         {
             wasNonStage = true;
             otherClip = Resources.Load<AudioClip>("_FX\\BMX\\Eric Brosius - 11 - Command 2_boss");
+            audioSource.clip = otherClip;
+            audioSource.Play();
+        }
+        else if (SceneManager.GetActiveScene().name.Contains("ESCAPE"))
+        {
+            otherClip = Resources.Load<AudioClip>("_FX\\BMX\\escape_bm");
             audioSource.clip = otherClip;
             audioSource.Play();
         }

@@ -109,7 +109,14 @@ public class ExtrasStageButtonSpawner : MonoBehaviour {
                 Destroy(GameObject.Find("PlayerShip")); //we DO NOT WANT MULTIPLES
                 SceneManager.LoadScene("title"); 
             }
-                if (sceneIndex<0)
+            else if (GameObject.Find("img_preview").GetComponent<realGenericButtonListner>().buttonScreeen == 5)
+            {
+                GameObject.Find("PlayerShip").GetComponent<playerController>().playMode = 2;
+                GameObject.Find("PlayerShip").GetComponent<MasterController>().score = 0;
+                GameObject.Find("PlayerShip").GetComponent<MasterController>().level = 10;
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Bosses");
+            }
+            if (sceneIndex<0)
             {
                 sceneIndex = 8;
             }

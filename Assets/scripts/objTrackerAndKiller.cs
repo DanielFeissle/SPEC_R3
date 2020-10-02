@@ -9,8 +9,8 @@ public class objTrackerAndKiller : MonoBehaviour {
         //the goal is to check only when a new explosion is being created, if there are more than a set amount of EXPLOS on screen then destroy this new one
         //basically i thought explosions were causing it, nope... to many new gameobjects (ie spacejunk)
         int numberOfTaggedObjects = GameObject.FindGameObjectsWithTag("SpaceJunk").Length;
-        Debug.Log("NUMBER OF Space Debris ON SCREEN: " + numberOfTaggedObjects);
-        if (numberOfTaggedObjects > 150)
+      //  Debug.Log("NUMBER OF Space Debris ON SCREEN: " + numberOfTaggedObjects);
+        if (numberOfTaggedObjects > 120)
         {
             Destroy(this.gameObject);
         }

@@ -326,7 +326,9 @@
     <Compile Include="Assets\scripts\DeactivateOnStart.cs" />
     <Compile Include="Assets\scripts\DeactivateOppEffect.cs" />
     <Compile Include="Assets\scripts\deleteVerySpecificSPEC.cs" />
+    <Compile Include="Assets\scripts\DestrFallingObj.cs" />
     <Compile Include="Assets\scripts\DestroyAfterDistance.cs" />
+    <Compile Include="Assets\scripts\DestroyAfterStartTime.cs" />
     <Compile Include="Assets\scripts\destroyScreenWrap.cs" />
     <Compile Include="Assets\scripts\destructionStop.cs" />
     <Compile Include="Assets\scripts\DiffSettings.cs" />
@@ -413,6 +415,8 @@
     <Compile Include="Assets\scripts\shipConstructor.cs" />
     <Compile Include="Assets\scripts\shipObjectHandle.cs" />
     <Compile Include="Assets\scripts\shotKoPoo.cs" />
+    <Compile Include="Assets\scripts\sideScrollerCleaner.cs" />
+    <Compile Include="Assets\scripts\SpecificDestroyDoNotUseOutsideOfSPECbecauseUnityIsbeingstupidrightnow.cs" />
     <Compile Include="Assets\scripts\stage_conv_screen.cs" />
     <Compile Include="Assets\scripts\stage_convention.cs" />
     <Compile Include="Assets\scripts\stage_convention_stage.cs" />

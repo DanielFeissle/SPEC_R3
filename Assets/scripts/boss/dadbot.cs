@@ -328,6 +328,11 @@ ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                 {
                     GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("scenePicker_arc");
                 }
+                else if (GameObject.Find("PlayerShip").GetComponent<playerController>().playMode == 2)
+                {
+                    Debug.Log("&&&&&&&&&&&&&&&&&&&&&&&&&&&Stage select mode");
+                    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("extras");
+                }
             }
 
         }

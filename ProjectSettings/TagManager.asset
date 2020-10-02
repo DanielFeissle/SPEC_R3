@@ -42,6 +42,8 @@ TagManager:
   - explosion
   - HolySurface
   - HotAst
+  - PlayerSOI
+  - Girder
   layers:
   - Default
   - TransparentFX

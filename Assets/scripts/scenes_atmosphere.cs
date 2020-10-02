@@ -122,7 +122,7 @@ public class scenes_atmosphere : MonoBehaviour {
         if (Time.time > nextUsage) //continue scrolling
         {
             int objectCount = GameObject.FindGameObjectsWithTag("SpaceJunk").Length;
-            Debug.Log("Objects on asteroid screen: " + objectCount);
+       //     Debug.Log("Objects on asteroid screen: " + objectCount);
 
             if (objectCount < 1555)
             {

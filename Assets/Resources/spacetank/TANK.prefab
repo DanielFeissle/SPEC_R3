@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4322368319724296}
   - component: {fileID: 212282587881446680}
   - component: {fileID: 114531727531656772}
+  - component: {fileID: 50977868741663920}
   m_Layer: 0
   m_Name: TANK
   m_TagString: Untagged
@@ -101,6 +102,26 @@ Transform:
   m_Father: {fileID: 4322368319724296}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50977868741663920
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189315713294692}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 200
+  m_LinearDrag: 500
+  m_AngularDrag: 50
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &114531727531656772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,6 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d933033c17e8a24e82813db5c5278f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 50
+  moveVertical: 25
+  moveHorizantal: 25
 --- !u!212 &212158571689803546
 SpriteRenderer:
   m_ObjectHideFlags: 1
