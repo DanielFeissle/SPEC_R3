@@ -47,7 +47,7 @@ public class titleScreenController : MonoBehaviour {
 		if (GameObject.Find("PlayerShip").GetComponent<playerController>().difSettings>=0)
         {
             //load the game
-
+            PlayerPrefs.SetInt("LocalScore", 0); //10-7-20 this resets the session score to zero , also START OF ADVENTURE GAME HERE
             GameObject ddd = GameObject.Find("shipBlast");
             AudioSource blaster = ddd.GetComponent<AudioSource>();
             blaster.volume = 0.137f;

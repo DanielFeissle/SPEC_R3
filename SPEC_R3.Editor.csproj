@@ -309,6 +309,7 @@
     <Compile Include="Assets\Editor\PlayerPrefsEditor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\IO\SCENES.txt" />
     <None Include="Assets\Resources\Shaders\CustomSwapTwo.shader" />
     <None Include="Assets\Resources\Shaders\StdLight.shader" />
     <None Include="Assets\Resources\meta\dia.txt" />

@@ -325,6 +325,7 @@
     <Compile Include="Assets\scripts\DanHand.cs" />
     <Compile Include="Assets\scripts\DeactivateOnStart.cs" />
     <Compile Include="Assets\scripts\DeactivateOppEffect.cs" />
+    <Compile Include="Assets\scripts\debug_loader.cs" />
     <Compile Include="Assets\scripts\deleteVerySpecificSPEC.cs" />
     <Compile Include="Assets\scripts\DestrFallingObj.cs" />
     <Compile Include="Assets\scripts\DestroyAfterDistance.cs" />
@@ -361,6 +362,7 @@
     <Compile Include="Assets\scripts\IntroDestroyPoo.cs" />
     <Compile Include="Assets\scripts\junkWall.cs" />
     <Compile Include="Assets\scripts\LevelHistory.cs" />
+    <Compile Include="Assets\scripts\LoadScoresStart.cs" />
     <Compile Include="Assets\scripts\MasterController.cs" />
     <Compile Include="Assets\scripts\masterShipEnter.cs" />
     <Compile Include="Assets\scripts\mastObjMover.cs" />
@@ -442,6 +444,7 @@
     <Compile Include="Assets\scripts\VertMinusCameraFOV.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\IO\SCENES.txt" />
     <None Include="Assets\Resources\Shaders\CustomSwapTwo.shader" />
     <None Include="Assets\Resources\Shaders\StdLight.shader" />
     <None Include="Assets\Resources\meta\dia.txt" />

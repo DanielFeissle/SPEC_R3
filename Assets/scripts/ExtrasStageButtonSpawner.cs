@@ -12,7 +12,8 @@ public class ExtrasStageButtonSpawner : MonoBehaviour {
                          // Use this for initialization
     void Start () {
         nextUsage = Time.time + delay; //it is on display
-       
+       // GameObject.Find("PlayerShip").GetComponent<AudioSource>().enabled = false;
+        GameObject.Find("PlayerShip").GetComponent<AudioSource>().Stop();
     }
     private void Awake()
     {
@@ -54,6 +55,7 @@ public class ExtrasStageButtonSpawner : MonoBehaviour {
                 GameObject.Find("PlayerShip").GetComponent<playerController>().playMode = 2;
                 GameObject.Find("PlayerShip").GetComponent<MasterController>().score = 0;
                 GameObject.Find("PlayerShip").GetComponent<MasterController>().level = 10;
+               // GameObject.Find("PlayerShip").GetComponent<AudioSource>().enabled = true;
                 if (sceneIndex==0)
                 {
                     GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_Asteroids");

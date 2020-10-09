@@ -12,6 +12,8 @@ public class paySceneStarter : MonoBehaviour {
     public Text PlayerMoneyShot;
     // Use this for initialization
     void Start () {
+        GameObject.Find("PlayerShip").GetComponent<AudioSource>().Stop(); //stop player music
+
         this.gameObject.GetComponent<AudioSource>().time = UnityEngine.Random.Range(0,45); //7-6-20 how to set the start position of audio
         GameObject dad5 = GameObject.Find("txt_totalPrice");
         txt_playerMoneyTotal = dad5.GetComponent<Text>();

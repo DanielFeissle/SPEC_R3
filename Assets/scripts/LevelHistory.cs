@@ -34,10 +34,28 @@ public class LevelHistory : MonoBehaviour {
         bool returnValue = false;
         if (sceneHistory.Count >= 2)  //Checking that we have actually switched scenes enough to go back to a previous scene
         {
+            //note 10--6-20 easy dif, this solves the death issue, but normal dif appears to have been fine- further testing is needed on difs
             returnValue = true;
-            sceneHistory.RemoveAt(sceneHistory.Count - 1);
-            Debug.Log("Name of scene prior: " + sceneHistory[sceneHistory.Count - 1]);
-            SceneManager.LoadScene(sceneHistory[sceneHistory.Count - 1]);
+            //sceneHistory.RemoveAt(sceneHistory.Count - 1);
+
+
+           for (int i=sceneHistory.Count-1;i>0;i--)
+            {
+                if (sceneHistory[i] == SceneManager.GetActiveScene().name)
+                {
+                    sceneHistory.RemoveAt(i);
+                    Debug.Log("DO NOT LOAD THIS STAGE AGAIN");
+                }
+
+            }
+            
+                
+                Debug.Log("Name of scene prior: " + sceneHistory[sceneHistory.Count-1]);
+                SceneManager.LoadScene(sceneHistory[sceneHistory.Count-1]);
+                
+            
+
+
         }
 
         return returnValue;
@@ -49,9 +67,33 @@ public class LevelHistory : MonoBehaviour {
         string returnValue = "";
         if (sceneHistory.Count >= 2)  //Checking that we have actually switched scenes enough to go back to a previous scene
         {
-         
-            sceneHistory.RemoveAt(sceneHistory.Count - 1);
-            returnValue= sceneHistory[sceneHistory.Count - 1].ToString();
+
+            for (int i = sceneHistory.Count - 1; i > 0; i--)
+            {
+                if (sceneHistory[i] == SceneManager.GetActiveScene().name)
+                {
+                    sceneHistory.RemoveAt(i);
+                    Debug.Log("DO NOT LOAD THIS STAGE AGAIN");
+                }
+
+            }
+
+
+            returnValue = sceneHistory[sceneHistory.Count-1].ToString();
+           
+
+
+            /*
+                            if (sceneHistory[sceneHistory.Count - 2] == SceneManager.GetActiveScene().name)
+                        {
+                            returnValue = sceneHistory[sceneHistory.Count - 1].ToString();
+                        }
+                        else
+                        {
+                            returnValue = sceneHistory[sceneHistory.Count - 2].ToString();
+                        }
+                            // sceneHistory.RemoveAt(sceneHistory.Count - 1);
+                           */
         }
 
         return returnValue;

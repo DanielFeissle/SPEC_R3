@@ -10,9 +10,15 @@ public class scenes_overworld : MonoBehaviour {
     System.Random randStage = new System.Random();
     // Use this for initialization
     void Start () {
-      //7-15-20
-      //this stage will only show right before the convention stage
-      if (GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneCnt== GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneLastCnt+3)
+        //always write the scores for the session to the pref value 10-7-20
+          PlayerPrefs.SetInt("LocalScore", GameObject.Find("PlayerShip").GetComponent<MasterController>().score);
+        PlayerPrefs.SetInt("gameHighScore", GameObject.Find("PlayerShip").GetComponent<MasterController>().gameHighScore); //gameHighScore
+        PlayerPrefs.SetInt("MasterScore", GameObject.Find("PlayerShip").GetComponent<MasterController>().masterHighScore);
+        //10-6-20 Always reset gravity scale back to zero during overworld loading transition (this is for the bug caused by intership stage)
+        GameObject.Find("PlayerShip").GetComponent<Rigidbody2D>().gravityScale = 0;
+        //7-15-20
+        //this stage will only show right before the convention stage
+        if (GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneCnt== GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneLastCnt+3)
         {
             //load the overworld
             GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneLastCnt = GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneCnt;
@@ -41,8 +47,8 @@ public class scenes_overworld : MonoBehaviour {
             {
                 Debug.Log("##############################################################HEY THERE"+ GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneRound);
                 //load the escape seq
-            //    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_ESCAPE");
-                SceneManager.LoadScene("stage_ESCAPE");
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_ESCAPE");
+             //   SceneManager.LoadScene("stage_ESCAPE");
             }
             else
             {

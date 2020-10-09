@@ -22,7 +22,9 @@ public class systemScores : MonoBehaviour {
 
     void OnApplicationQuit()
     {
-        PlayerPrefs.SetInt("LocalScore", this.GetComponent<MasterController>().gameHighScore);
+        //  PlayerPrefs.SetInt("LocalScore", this.GetComponent<MasterController>().gameHighScore);
+        PlayerPrefs.SetInt("LocalScore",0); //10-7-20 Session scores will get lost, only keep 
+        PlayerPrefs.SetInt("gameHighScore", 0); //gameHighScore
         PlayerPrefs.SetInt("MasterScore", this.GetComponent<MasterController>().masterHighScore);
     }
 
