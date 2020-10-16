@@ -18,6 +18,12 @@ public class about_controller : MonoBehaviour {
             scrollbar.onValueChanged.AddListener(onScroll);
             EventSystem.current.firstSelectedGameObject = GameObject.Find("Scrollbar");
         }
+
+       int gameFinished = PlayerPrefs.GetInt("GameFinished");
+        if (gameFinished==111) //10-12-20 just putting this in
+        {
+            GameObject.Find("Hallway1(512x512)").GetComponent<SpriteRenderer>().sortingOrder = -22;
+        }
     }
     private void onScroll(float value)
     {
@@ -30,7 +36,7 @@ public class about_controller : MonoBehaviour {
     void Update () {
         if (Input.GetButton("Fire2"))
         {
-            GameObject.Find("Hallway1(512x512)").GetComponent<SpriteRenderer>().sortingOrder = -22;
+           // GameObject.Find("Hallway1(512x512)").GetComponent<SpriteRenderer>().sortingOrder = -22;
         }
 
 		if (Input.GetButton("Fire3"))

@@ -21,13 +21,21 @@ public class title_btn_galaxy : MonoBehaviour {
 
     void TaskOnClick()
     {
-      string debugText= GameObject.Find("txt_debugCommand").GetComponent<InputField>().text;
-        if (debugText=="2")
+        try
         {
-            //load the final iteration
-            GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneRound =2;
-            GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneLastCnt = 9;
+            string debugText = GameObject.Find("txt_debugCommand").GetComponent<InputField>().text;
+            if (debugText == "2")
+            {
+                //load the final iteration
+                GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneRound = 2;
+                GameObject.Find("PlayerShip").GetComponent<playerController>().stageDoneLastCnt = 9;
+            }
         }
+        catch
+        {
+            Debug.Log("Old Command warning");
+        }
+
         //this is for the overworld mode
         Debug.Log("You have clicked the button!2222");
         GameObject.Find("PlayerShip").GetComponent<playerController>().playMode = 1;

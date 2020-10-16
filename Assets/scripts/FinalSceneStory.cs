@@ -27,8 +27,24 @@ public class FinalSceneStory : MonoBehaviour {
 
     }
     bool audioPlayOnce = false;
-	// Update is called once per frame
-	void Update () {
+    int skipCred = 0;
+    // Update is called once per frame
+    void Update () {
+
+        if (Input.GetButton("Fire3"))
+        {
+            skipCred++;
+        }
+        else
+        {
+            skipCred = 0; //reset the credSkip Button
+        }
+        if (skipCred > 50)
+        {
+            SceneManager.LoadScene("title");
+        }
+
+
         cam = Camera.main;
         Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
         Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right

@@ -210,7 +210,7 @@ public class playerController : MonoBehaviour {
         //    if (otherColliders.CompareTag("ShipIndest"))
         if (SceneManager.GetActiveScene().name != "stage_SPACED") //8-12-20, ignore only for a special stage, i know this is not really that good... buuuutttttt time
         {
-            if (!otherColliders.gameObject.CompareTag("station") && !otherColliders.gameObject.CompareTag("Player") && !otherColliders.gameObject.CompareTag("Finish"))
+            if (!otherColliders.gameObject.CompareTag("station") && !otherColliders.gameObject.CompareTag("Player") && !otherColliders.gameObject.CompareTag("Finish") && !otherColliders.gameObject.CompareTag("ShipLiquidWaste") && !otherColliders.gameObject.CompareTag("Cloud"))
             {
 
                 Debug.Log("$$$$$$$$$$$$$$$$$$$$$$$$" + otherColliders.name);

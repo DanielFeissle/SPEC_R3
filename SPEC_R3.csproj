@@ -353,6 +353,7 @@
     <Compile Include="Assets\scripts\GalaxyPond.cs" />
     <Compile Include="Assets\scripts\galConstructor.cs" />
     <Compile Include="Assets\scripts\GalFishing.cs" />
+    <Compile Include="Assets\scripts\hand_placer.cs" />
     <Compile Include="Assets\scripts\hotdogMover.cs" />
     <Compile Include="Assets\scripts\HullMove.cs" />
     <Compile Include="Assets\scripts\infoMover.cs" />
@@ -367,6 +368,7 @@
     <Compile Include="Assets\scripts\masterShipEnter.cs" />
     <Compile Include="Assets\scripts\mastObjMover.cs" />
     <Compile Include="Assets\scripts\moneyFade.cs" />
+    <Compile Include="Assets\scripts\monitor_deletion.cs" />
     <Compile Include="Assets\scripts\MovPhys.cs" />
     <Compile Include="Assets\scripts\MusicPlayer.cs" />
     <Compile Include="Assets\scripts\obj_falling.cs" />
@@ -424,6 +426,7 @@
     <Compile Include="Assets\scripts\stage_convention_stage.cs" />
     <Compile Include="Assets\scripts\starman.cs" />
     <Compile Include="Assets\scripts\station_visit.cs" />
+    <Compile Include="Assets\scripts\story_INTERDemo.cs" />
     <Compile Include="Assets\scripts\Story_masterControl.cs" />
     <Compile Include="Assets\scripts\systemScores.cs" />
     <Compile Include="Assets\scripts\tankController.cs" />

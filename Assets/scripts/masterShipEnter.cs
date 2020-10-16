@@ -221,7 +221,24 @@ public class masterShipEnter : MonoBehaviour {
                                         {
                                             if (!collision.gameObject.CompareTag("instaDeath"))
                                             {
-                                                Destroy(collision.gameObject);
+                                                if (!collision.gameObject.CompareTag("ObjSouth"))
+                                                {
+                                                    if (!collision.gameObject.CompareTag("ObjEast"))
+                                                    {
+                                                        if (!collision.gameObject.CompareTag("ObjNorth"))
+                                                        {
+                                                            if (!collision.gameObject.CompareTag("ObjWest"))
+                                                            {
+                                                                if (!collision.gameObject.CompareTag("PlayerSOI"))
+                                                                {
+                                                                    Destroy(collision.gameObject);
+                                                                }
+                                                                  
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                   
                                             }
                                         }
                                         

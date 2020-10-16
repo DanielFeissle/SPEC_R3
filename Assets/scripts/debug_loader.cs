@@ -9,12 +9,15 @@ using UnityEngine.UI;
 
 public class debug_loader : MonoBehaviour {
     public Button yourButton;
+    public Sprite indy;
+    public Sprite boring;
     // Use this for initialization
     void Start () {
         yourButton = this.gameObject.GetComponent<Button>();
        //10-8-20 very rough begining of a debug control system to let better set vars and navigate from the main menu
         Button btn = yourButton.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
+        GameObject.Find("txt_debugOutput").GetComponent<InputField>().text = "indOSy: 2020 \nDebug menu";
     }
     void TaskOnClick()
     {
@@ -40,7 +43,15 @@ public class debug_loader : MonoBehaviour {
         if (actionPhase == "load") //first part of the command is to load, what scene though
         {
             Debug.Log("Attempt to load");
-            SceneManager.LoadScene(verbPhase);
+            try
+            {
+                SceneManager.LoadScene(verbPhase);
+            }
+            catch
+            {
+                GameObject.Find("txt_debugOutput").GetComponent<InputField>().text = "The scene "+verbPhase +"does not exist";
+            }
+          
         }
         else if (actionPhase == "help")
         {
@@ -79,11 +90,34 @@ public class debug_loader : MonoBehaviour {
         else if (actionPhase == "set")
         {
             //set any user variable here
-
+            GameObject.Find("txt_debugOutput").GetComponent<InputField>().text = "Nope nothing. but... try saying hello";
+        }
+        else if (actionPhase == "hello")
+        {
+            //set any user variable here
+            GameObject.Find("txt_debugOutput").GetComponent<InputField>().text = "Hi How are you doing! you found my secret room. almost done as of 10-12-20";
+        }
+        else if (actionPhase == "thankyou")
+        {
+            //set any user variable here
+            GameObject.Find("txt_debugOutput").GetComponent<InputField>().text = "your welcome! and thank you too!";
+        }
+        else if (actionPhase == "indy")
+        {
+            //set any user variable here
+            GameObject.Find("txt_debugOutput").GetComponent<Image>().sprite = indy;
+        GameObject.Find("txt_debugOutput").GetComponent<InputField>().text = "cookie please";
+        }
+        else if (actionPhase == "poop")
+        {
+            //set any user variable here
+            GameObject.Find("txt_debugOutput").GetComponent<InputField>().text = "what are you, a little poddy mouth. ima takin da hiroad fu dis un! .......\n\n\n\n you pooper";
         }
         else if (actionPhase == "clear")
         {
+            GameObject.Find("txt_debugOutput").GetComponent<Image>().sprite = boring;
             GameObject.Find("txt_debugOutput").GetComponent<InputField>().text = "";
+            GameObject.Find("txt_debugOutput").GetComponent<InputField>().text = "indOSy: 2020 \nDebug menu";
         }
         //    GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stageIntro");
 

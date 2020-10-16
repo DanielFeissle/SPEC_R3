@@ -21,19 +21,23 @@ public class credits_controller : MonoBehaviour {
             GameObject playership = GameObject.Find("PlayerShip");
             PlayerPrefs.SetInt("LocalScore", playership.GetComponent<MasterController>().gameHighScore);
             PlayerPrefs.SetInt("MasterScore", playership.GetComponent<MasterController>().masterHighScore);
+            int curVal = PlayerPrefs.GetInt("GameFinished");
             if (playership.GetComponent<playerController>().difSettings == 0)
             {
                 //Normal
-                PlayerPrefs.SetInt("GameFinished", 111);
+                if (curVal < 117)
+                    PlayerPrefs.SetInt("GameFinished", 111);
             }
             else if (playership.GetComponent<playerController>().difSettings == 1)
             {
                 //Easy
-                PlayerPrefs.SetInt("GameFinished", 11);
+                if (curVal < 12)
+                    PlayerPrefs.SetInt("GameFinished", 11);
             }
             else
             {
                 //Mythic
+                if (curVal<3)
                 PlayerPrefs.SetInt("GameFinished", 2);
             }
             Destroy(GameObject.Find("PlayerShip"));

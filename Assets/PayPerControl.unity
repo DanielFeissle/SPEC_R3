@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yourButton: {fileID: 0}
+  m_Font: {fileID: 12800000, guid: 360152b470811bd4b9df20126fe1ccfa, type: 3}
 --- !u!1 &49814064
 GameObject:
   m_ObjectHideFlags: 0
