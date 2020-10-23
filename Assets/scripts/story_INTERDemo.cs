@@ -365,6 +365,10 @@ public class story_INTERDemo : MonoBehaviour {
 
     IEnumerator RocketLaunch()
     {
+        //we are launching outside! not in
+        GameObject.Find("FinalScene_classic - HALF").transform.position = new Vector2(777, 777);
+        GameObject.Find("FinalScene_classic").transform.position = new Vector2(777, 777);
+
         GameObject IndyMove = GameObject.Find("PlayerShip");
 
 

@@ -48,10 +48,31 @@ public class titleScreenController : MonoBehaviour {
 
 
     }
+    int skipStoryLoop = 0;
     private Camera cam;
     // Update is called once per frame
     void Update () {
-		if (GameObject.Find("PlayerShip").GetComponent<playerController>().difSettings>=0)
+
+        if (Input.GetButton("Fire3"))
+        {
+            skipStoryLoop++;
+        }
+        else
+        {
+            skipStoryLoop = 0; //reset the credSkip Button
+        }
+        if (skipStoryLoop > 50)
+        {
+            Debug.Log("App Quit if possible");
+            Application.Quit();
+        }
+       
+
+
+
+
+
+        if (GameObject.Find("PlayerShip").GetComponent<playerController>().difSettings>=0)
         {
             //load the game
             PlayerPrefs.SetInt("LocalScore", 0); //10-7-20 this resets the session score to zero , also START OF ADVENTURE GAME HERE
