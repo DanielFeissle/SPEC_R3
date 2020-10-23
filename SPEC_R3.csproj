@@ -326,6 +326,7 @@
     <Compile Include="Assets\scripts\DeactivateOnStart.cs" />
     <Compile Include="Assets\scripts\DeactivateOppEffect.cs" />
     <Compile Include="Assets\scripts\debug_loader.cs" />
+    <Compile Include="Assets\scripts\DeleteEverything.cs" />
     <Compile Include="Assets\scripts\deleteVerySpecificSPEC.cs" />
     <Compile Include="Assets\scripts\DestrFallingObj.cs" />
     <Compile Include="Assets\scripts\DestroyAfterDistance.cs" />
@@ -359,6 +360,7 @@
     <Compile Include="Assets\scripts\infoMover.cs" />
     <Compile Include="Assets\scripts\innerHullMover.cs" />
     <Compile Include="Assets\scripts\insultText.cs" />
+    <Compile Include="Assets\scripts\InterPooSt.cs" />
     <Compile Include="Assets\scripts\IntroDemoControl.cs" />
     <Compile Include="Assets\scripts\IntroDestroyPoo.cs" />
     <Compile Include="Assets\scripts\junkWall.cs" />
@@ -401,6 +403,7 @@
     <Compile Include="Assets\scripts\realDeleteAfterPlainAniScript.cs" />
     <Compile Include="Assets\scripts\realGenericButton.cs" />
     <Compile Include="Assets\scripts\realGenericButtonListner.cs" />
+    <Compile Include="Assets\scripts\SameNameDelete.cs" />
     <Compile Include="Assets\scripts\ScaleFont.cs" />
     <Compile Include="Assets\scripts\scenes.cs" />
     <Compile Include="Assets\scripts\scenes_asteroid.cs" />
@@ -439,6 +442,7 @@
     <Compile Include="Assets\scripts\titleScreenController.cs" />
     <Compile Include="Assets\scripts\tomatoeToss.cs" />
     <Compile Include="Assets\scripts\tprollSpawn.cs" />
+    <Compile Include="Assets\scripts\TriggerBounce.cs" />
     <Compile Include="Assets\scripts\TurdSpawn.cs" />
     <Compile Include="Assets\scripts\UI_Buttons\GenericButtonController.cs" />
     <Compile Include="Assets\scripts\UI_Buttons\Pause_Quit.cs" />

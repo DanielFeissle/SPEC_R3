@@ -539,70 +539,8 @@ public class hand_placer : MonoBehaviour {
         int usspotetoe = 0;
         int enemyApperanceChance = UnityEngine.Random.Range(0, 15);
         int howmanyenemies = UnityEngine.Random.Range(1, 15); //we will only let 12 different aggressive enemies be on screen at a given time in addition to the asteroids/stuff
-        if (enemyApperanceChance > (15 / 2)) //+5
-        {
-            //boom you got random enemies spawning in
-            for (int i = 0; i < howmanyenemies; i++)
-            {
-                GameObject smrtEnemy;
-                int randEnemyType = UnityEngine.Random.Range(0, 100);
-                if (randEnemyType < 33 && usspotetoe < 1)
-                {
-                    usspotetoe++;
-                    smrtEnemy = Instantiate(Resources.Load("kusspottetoe")) as GameObject;
-                    smrtEnemy.name = "usspoteto_0";
-                    smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
-                    smrtEnemy.transform.position = new Vector2(0, 0);
-                }
-                else if (randEnemyType < 66 && baderang < 4)
-                {
-                    baderang++;
-                    smrtEnemy = Instantiate(Resources.Load("faterang")) as GameObject;
-                    smrtEnemy.name = "dertypShips\\baderang";
-                    smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
-                    smrtEnemy.transform.position = new Vector2(0, 0);
-                }
-                else
-                {
-                    nutdud++;
-                    smrtEnemy = Instantiate(Resources.Load("dud")) as GameObject;
-                    smrtEnemy.name = "dertypShips\\dud";
-                    smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
-                    smrtEnemy.transform.position = new Vector2(0, 0);
-                }
-
-
-                Vector3 spawnPoint = smrtEnemy.transform.position;
-                //    var hitColliders = Physics.OverlapSphere(spawnPoint, 1);//1 is purely chosen arbitrarly
-                // var hitf = Physics2D.OverlapArea(spawnPoint, 2.0f);
-
-                // Find all colliders that overlap
-                PolygonCollider2D myCollider = smrtEnemy.GetComponent<PolygonCollider2D>();
-                Collider2D[] otherColliders = Physics2D.OverlapAreaAll(myCollider.bounds.min, myCollider.bounds.max);
-
-                // Check for any colliders that are on top
-                bool isUnderneath = false;
-                //  foreach (var otherCollider in otherColliders)
-                //{
-
-                if (otherColliders.Length > 1) //    if (otherCollider.transform.position.z < smrtEnemy.transform.position.z)
-                {
-                    isUnderneath = true;
-                    while ((isUnderneath)) //You have someone with a collider here
-                    {
-                        smrtEnemy.transform.position = new Vector2(UnityEngine.Random.Range(GameObject.Find("WestTrigger").transform.position.x, GameObject.Find("EastTrigger").transform.position.x), UnityEngine.Random.Range(GameObject.Find("SouthTrigger").transform.position.y, GameObject.Find("NorthTrigger").transform.position.y));
-                        if (otherColliders.Length > 1)//  if (otherCollider.transform.position.z < smrtEnemy.transform.position.z)
-                        {
-                            isUnderneath = false;
-                        }
-                    }
-                    //   break;
-                }
-
-            }
-
-
-        }
+     
+        
     }
 
 
@@ -688,8 +626,11 @@ public class hand_placer : MonoBehaviour {
 
         rb.velocity = Vector2.zero;
         placePhase = 2;
-        
-       
+
+
+
+         
+
         StartCoroutine(HandMoveRight());
     }
 
@@ -720,7 +661,16 @@ public class hand_placer : MonoBehaviour {
 
         rb.velocity = Vector2.zero;
         placePhase = 4;
-       
+        cam = Camera.main;
+        p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
+        q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
+
+        GameObject shipbehind344 = Instantiate(Resources.Load("convention\\IndySult")) as GameObject;
+        var renderer344 = shipbehind344.GetComponent<Renderer>();
+        float width344 = renderer344.bounds.size.x;
+        float height344 = renderer344.bounds.size.y;
+        shipbehind344.name = "IndyPoooo";
+        shipbehind344.transform.position = new Vector2(UnityEngine.Random.Range(p.x, q.x), UnityEngine.Random.Range(q.y, p.y));
         StartCoroutine(HandMoveLeft2());
        
     }
@@ -747,6 +697,7 @@ public class hand_placer : MonoBehaviour {
                 AudioSource.PlayClipAtPoint(exp1, new Vector3(transform.position.x, transform.position.y, 0.0f));
                 AudioSource.PlayClipAtPoint(exp1, new Vector3(transform.position.x, transform.position.y, 0.0f));
                 spawnPhase3();
+                GameObject.Find("Main Camera").GetComponent<story_INTERDemo>().storyPhase = 2;
             }
         }
 

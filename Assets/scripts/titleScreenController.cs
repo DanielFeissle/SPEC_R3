@@ -1,12 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class titleScreenController : MonoBehaviour {
     float nextUsage;
     float delay = 0.1f; //only half delay
+
+    float nextUsage1;
+    float delay1 = 1; //one sec for the count up till the demo/story timer
+  public  int demoCounter = 0;
+    int randoDemoTime = 45;
                         // Use this for initialization
     void Start () {
+        randoDemoTime = UnityEngine.Random.Range(77, 117);
         //8-20-20
         //an easier way to reset values if player is returning to this screen
         GameObject.Find("PlayerShip").GetComponent<playerController>().difSettings = -1;
@@ -33,7 +40,7 @@ public class titleScreenController : MonoBehaviour {
         }
         //anything else above is standard and we do not want to include it
 
-
+        nextUsage1 = Time.time + delay1; //it is on display
 
         nextUsage = Time.time + delay; //it is on display
 
@@ -54,9 +61,23 @@ public class titleScreenController : MonoBehaviour {
             Time.timeScale = 1;
             GameObject.Find("PlayerShip").GetComponent<LevelHistory>().LoadScene("stage_OverSpace-world-duh");
         }
-
-
-        if (Time.time > nextUsage) //delete otherwise
+        if (Input.anyKey)
+        {
+            //reset the delay
+            Debug.Log("TIMER RESET");
+            demoCounter = 0;
+        }
+        if (Time.time > nextUsage1) //delete otherwise
+        {
+            demoCounter++;
+            nextUsage1 = Time.time + delay1; //it is on display
+        }
+        if (demoCounter>randoDemoTime)
+        {
+            GameObject.Destroy(GameObject.Find("PlayerShip")); //10-22-20 we do not want the player ship interfering with this stage
+            SceneManager.LoadScene("STORY_Inter");
+        }
+            if (Time.time > nextUsage) //delete otherwise
         {
 
 
