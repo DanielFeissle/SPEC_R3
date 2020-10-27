@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class paySceneStarter : MonoBehaviour {
@@ -13,7 +14,7 @@ public class paySceneStarter : MonoBehaviour {
     // Use this for initialization
     void Start () {
         GameObject.Find("PlayerShip").GetComponent<AudioSource>().Stop(); //stop player music
-
+        GameObject.Find("btn_return").GetComponent<Button>().Select();
         this.gameObject.GetComponent<AudioSource>().time = UnityEngine.Random.Range(0,45); //7-6-20 how to set the start position of audio
         GameObject dad5 = GameObject.Find("txt_totalPrice");
         txt_playerMoneyTotal = dad5.GetComponent<Text>();
@@ -46,4 +47,34 @@ public class paySceneStarter : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    private void LateUpdate()
+    {
+        if (Input.GetButton("Fire3"))
+        {
+            if (GameObject.Find("ini_text").GetComponent<Text>().text == "moneyisnotneededhere")
+            {
+                GameObject.Find("PlayerShip").GetComponent<payerControl>().PlayerMoneyShot = 0.00f;
+                GameObject.Find("PlayerShip").GetComponent<payerControl>().PlayerMoneyLeft = 0.00f;
+                GameObject.Find("PlayerShip").GetComponent<payerControl>().PlayerMoneyRight = 0.00f;
+                GameObject.Find("PlayerShip").GetComponent<payerControl>().PlayerMoneyUp = 0.00f;
+
+                GameObject.Find("PlayerShip").GetComponent<payerControl>().PlayerMoney = 0.00f;
+
+
+                Debug.Log("reset!!!");
+            }
+            // SceneManager.LoadScene("stage_OverSpace-world-duh");
+            if (GameObject.Find("PlayerShip").GetComponent<playerController>().playMode == 0)
+            {
+
+                Destroy(GameObject.Find("PlayerShip"));
+                SceneManager.LoadScene("title");
+            }
+            else
+            {
+                GameObject.Find("PlayerShip").GetComponent<LevelHistory>().PreviousScene();
+            }
+        }
+    }
 }

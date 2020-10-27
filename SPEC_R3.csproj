@@ -322,6 +322,7 @@
     <Compile Include="Assets\scripts\cred_cam_distScroll.cs" />
     <Compile Include="Assets\scripts\credits_controller.cs" />
     <Compile Include="Assets\scripts\CredShifter.cs" />
+    <Compile Include="Assets\scripts\credShifterTwo.cs" />
     <Compile Include="Assets\scripts\DanHand.cs" />
     <Compile Include="Assets\scripts\DeactivateOnStart.cs" />
     <Compile Include="Assets\scripts\DeactivateOppEffect.cs" />

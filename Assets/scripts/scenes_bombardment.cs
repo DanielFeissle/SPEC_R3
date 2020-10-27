@@ -42,7 +42,8 @@ public class scenes_bombardment : MonoBehaviour {
 
         Vector3 p = cam.ScreenToWorldPoint(new Vector3(0, cam.pixelHeight, cam.nearClipPlane)); //top left
         Vector3 q = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, 0, cam.nearClipPlane)); //bottom right
-        transform.position = new Vector2((p.x + q.x) / 2, (q.y + p.y) / 2);
+        //10-26-20-how did this get put in here in the first place...
+    //    transform.position = new Vector2((p.x + q.x) / 2, (q.y + p.y) / 2);
         float pointerX = p.x;
         float pointerY = q.y;//(p.y-q.y)/2;
         float ySize = .5f;

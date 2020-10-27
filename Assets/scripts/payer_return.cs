@@ -97,6 +97,11 @@ public class payer_return : MonoBehaviour {
 
             Debug.Log("reset!!!");
         }
+     else if (GameObject.Find("ini_text").GetComponent<Text>().text == "daniel5.25")
+        {
+            PlayerPrefs.SetInt("GameFinished", 111); //10-26-20- how to bypass for testing purposes
+            Debug.Log("max power");
+        }
         // SceneManager.LoadScene("stage_OverSpace-world-duh");
         if (GameObject.Find("PlayerShip").GetComponent<playerController>().playMode == 0)
         {
