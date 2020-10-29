@@ -1,4 +1,4 @@
-WebGL
+WindowsStandalone
 SceneListBegin?
 Assets/STORY.unity
 Assets/title.unity
@@ -246,6 +246,7 @@ a0b6f6bc885f73fff934a5049879ba7c Assembly-CSharp.dll:.objectMove
 245c6cab5053cbc78fb81987def6dd41 Assembly-CSharp.dll:.Title_extras
 1104a97f26aa96216ca67b827f468621 Assembly-CSharp.dll:.about_controller
 c99e68a2bf2af249f3b5584cad7d438b Assembly-CSharp.dll:.scenes_rings
+74b5dbedaf82e0449c7638a1e6a1894e Assembly-CSharp.dll:.credShifterTwo
 41bdfaed088d44c5ea0c5f4a8a1e9faa Assembly-CSharp.dll:.DiffSettings
 869e5abc2271c3b618904edff22e38ef Assembly-CSharp-firstpass.dll:UnityStandardAssets.Effects.ExplosionFireAndDebris
 22e943c71384b1652a570ad9ba4f64f2 Assembly-CSharp.dll:.scenes_plainSpace
@@ -349,4 +350,3 @@ a57e8bd7aae5aba2985d2071877b96b0 Assembly-CSharp.dll:.paySceneStarter
 568787243ee45046fe4436152861d15c Assembly-CSharp.dll:.oneoffDeleteThisdude
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.textSortingLayer
 0f3d4bb7128a287827d041c696039525 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.AutoMobileShaderSwitch
-74b5dbedaf82e0449c7638a1e6a1894e Assembly-CSharp.dll:.credShifterTwo
